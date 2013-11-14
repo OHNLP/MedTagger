@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <implementationName>org.ohnlp.medtagger.ml.cc.MLCasConsumer</implementationName>
+  <processingResourceMetaData>
+    <name>org.ohnlp.medtagger.ml.ccs.MLCasConsumer</name>
+    <description>Writes the CAS to XMI format</description>
+    <version>1.0</version>
+    <vendor>The Apache Software Foundation</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>OutputDirectory</name>
+        <description>Directory where the XMI files will be written</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>LeftWindow</name>
+        <type>Integer</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>RightWindow</name>
+        <type>Integer</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+       <configurationParameter>
+        <name>TaskType</name>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>OutputDirectory</name>
+        <value>
+          <string>testdata/medtaggermltest/input</string>
+        </value>
+      </nameValuePair>
+        <nameValuePair>
+        <name>TaskType</name>
+        <value>
+          <string>share</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>LeftWindow</name>
+        <value>
+          <integer>2</integer>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>RightWindow</name>
+        <value>
+          <integer>2</integer>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription>
+      <imports>
+        <import name="org.ohnlp.medtagger.ml.types.MedTaggerMLTypes"/>
+        </imports>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">org.ohnlp.typesystem.type.structured.Document</type>
+        </inputs>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>false</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </processingResourceMetaData>
+  <resourceManagerConfiguration/>
+</casConsumerDescription>

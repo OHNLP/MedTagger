@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>org.ohnlp.medtagger.ae.AhoCorasickLookupAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>org.ohnlp.medtagger.aes.MedTaggerLookupAE</name>
+    <description/>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters/>
+    <configurationParameterSettings/>
+    <typeSystemDescription>
+      <imports>
+        <import name="org.ohnlp.medtagger.types.MedTaggerTypes"/>
+       </imports>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">org.apache.ctakes.typesystem.type.syntax.BaseToken</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">org.ohnlp.medtagger.type.ConceptMention</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  
+  <externalResourceDependencies>
+    <externalResourceDependency>
+      <key>dict</key>
+      <description>binds to the UMLS normalized dictionary</description>
+      <optional>false</optional>
+    </externalResourceDependency>
+    <externalResourceDependency>
+      <key>stop</key>
+      <description>stop words that need to be removed from the annotation</description>
+      <optional>false</optional>
+    </externalResourceDependency>
+    <externalResourceDependency>
+      <key>abbr</key>
+      <description>standard abbreviations that should not to be removed from the annotation</description>
+      <optional>false</optional>
+    </externalResourceDependency>
+    <externalResourceDependency>
+      <key>lvg_dict</key>
+      <description>dictionary for lvg lookup</description>
+      <optional>false</optional>
+    </externalResourceDependency>
+    <externalResourceDependency>
+      <key>openclass</key>
+      <description>file containing the list of open class words</description>
+      <optional>false</optional>
+    </externalResourceDependency>
+  </externalResourceDependencies>
+	<resourceManagerConfiguration/>
+</analysisEngineDescription>

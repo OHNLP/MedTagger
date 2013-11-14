@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.    
+-->
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+	<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+	<primitive>false</primitive>
+
+	<delegateAnalysisEngineSpecifiers>
+		<delegateAnalysisEngine key="SentenceDetectorAE">
+			<import name="org.ohnlp.opennlp.desc.aes.SentenceDetectorAE"/>
+		</delegateAnalysisEngine>
+
+		<delegateAnalysisEngine key="TokenizerAE">
+			<import name="org.ohnlp.opennlp.desc.aes.TokenizerAE"/>
+		</delegateAnalysisEngine>
+
+		<delegateAnalysisEngine key="PosTaggerAE">
+			<import name="org.ohnlp.opennlp.desc.aes.PosTaggerAE"/>
+		</delegateAnalysisEngine>
+
+		<delegateAnalysisEngine key="ChunkerAE">
+			<import name="org.ohnlp.opennlp.desc.aes.ChunkerAE"/>
+		</delegateAnalysisEngine>
+
+		</delegateAnalysisEngineSpecifiers>
+
+	<analysisEngineMetaData>
+		<name>OpenNLPTAE</name>
+		<description/>
+		<version>${pom.version}</version>
+		<vendor>Apache Software Foundation</vendor>
+		<configurationParameters searchStrategy="language_fallback"/>
+		<configurationParameterSettings/>
+		<flowConstraints>
+			<fixedFlow>
+				<node>SentenceDetectorAE</node>
+				<node>TokenizerAE</node>
+				<node>PosTaggerAE</node>
+				<node>ChunkerAE</node>
+				</fixedFlow>
+		</flowConstraints>
+		<typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+			<capability>
+				<inputs/>
+				<outputs/>
+				<languagesSupported>
+					<language>en</language>
+				</languagesSupported>
+			</capability>
+		</capabilities>
+		<operationalProperties>
+			<modifiesCas>true</modifiesCas>
+			<multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+			<outputsNewCASes>false</outputsNewCASes>
+		</operationalProperties>
+	</analysisEngineMetaData>
+
+	<resourceManagerConfiguration>
+
+		<externalResources>
+			
+
+			<externalResource>
+				<name>TokenModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/models-1.5/en-token.bin</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.tokenize.TokenizerModelResourceImpl</implementationName>
+			</externalResource>
+			
+			<externalResource>
+				<name>SentenceModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/mayomodels/sd-med-model.zip/fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.sentdetect.SentenceModelResourceImpl</implementationName>
+			</externalResource>
+		
+			<externalResource>
+				<name>PosModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/mayomodels/mayo-pos.zip</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.postag.POSModelResourceImpl</implementationName>
+			</externalResource>
+			
+			<externalResource>
+				<name>ChunkerModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/mayomodels/chunk-model.claims-1.5.zip</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.chunker.ChunkerModelResourceImpl</implementationName>
+			</externalResource>
+		</externalResources>
+		<externalResourceBindings>
+			<externalResourceBinding>
+				<key>SentenceDetectorAE/opennlp.uima.ModelName</key>
+				<resourceName>SentenceModel</resourceName>
+			</externalResourceBinding>
+			<externalResourceBinding>
+				<key>TokenizerAE/opennlp.uima.ModelName</key>
+				<resourceName>TokenModel</resourceName>
+			</externalResourceBinding>
+					<externalResourceBinding>
+				<key>PosTaggerAE/opennlp.uima.ModelName</key>
+				<resourceName>PosModel</resourceName>
+			</externalResourceBinding>
+			<externalResourceBinding>
+				<key>ChunkerAE/opennlp.uima.ModelName</key>
+				<resourceName>ChunkerModel</resourceName>
+			</externalResourceBinding>
+		</externalResourceBindings>
+
+	</resourceManagerConfiguration>
+</analysisEngineDescription>

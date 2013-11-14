@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright: (c) 2013   Mayo Foundation for Medical Education and 
+ * Research (MFMER). All rights reserved. MAYO, MAYO CLINIC, and the
+ * triple-shield Mayo logo are trademarks and service marks of MFMER.
+ *
+ * Except as contained in the copyright notice above, or as used to identify 
+ * MFMER as the author of this software, the trade names, trademarks, service
+ * marks, or product names of the copyright holder shall not be used in
+ * advertising, promotion or otherwise in connection with this software without
+ * prior written authorization of the copyright holder.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and 
+ * limitations under the License. 
+ */
+
+-->
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+ <name>org.ohnlp.medtagger.types.MedTaggerTypes</name>
+   <description>MedTagger type system</description> 
+  <version>1.0</version> 
+  <vendor>Mayo - NLP</vendor> 
+ <imports>
+  <import name="org.ohnlp.types.TypeSystem"/> 
+  </imports>
+ <types>
+ <typeDescription>
+  <name>org.ohnlp.medtagger.type.ConceptMention</name> 
+  <description>Concept mention stands for concepts detected by the NLP system</description> 
+  <supertypeName>uima.tcas.Annotation</supertypeName> 
+ <features> 
+ <featureDescription>
+  <name>detectionMethod</name> 
+  <description>There are multiple approaches to detect concept mentions including: dictionary lookup, 
+  machine learning approaches trained using different training corpus 
+  (i2b2 2010 Concept Mention, or SHARE 2013 concept mention corpus).</description>
+  <rangeTypeName>uima.cas.String</rangeTypeName> 
+  </featureDescription>
+<featureDescription>
+  <name>normTarget</name> 
+  <description>This corresponds to the preferred names of the corresponding concepts. Currently, 
+  it is chosen as the most popular synonyms appearing in the clinical corpora.</description>
+  <rangeTypeName>uima.cas.String</rangeTypeName> 
+  </featureDescription>
+<featureDescription>
+  <name>Certainty</name> 
+  <description>This refers to the certainty context. The definition is consistent with  
+  Context: see http://orbit.nlm.nih.gov/resource/context</description>
+  <rangeTypeName>uima.cas.String</rangeTypeName> 
+  </featureDescription>
+<featureDescription>
+  <name>semGroup</name> 
+  <description>Semantic groups of the corresponding concepts. 
+  Adapted from SemGroup defined in the UMLS. See: http://semanticnetwork.nlm.nih.gov/SemGroups/</description>
+  <rangeTypeName>uima.cas.String</rangeTypeName> 
+  </featureDescription> 
+  <featureDescription>
+  <name>status</name> 
+  <description>This refers to the status context. The definition is consist with  
+  Context: see http://orbit.nlm.nih.gov/resource/context</description>
+  <rangeTypeName>uima.cas.String</rangeTypeName>
+  </featureDescription>
+
+<featureDescription>
+  <name>sentence</name> 
+  <description>The sentence containing the concept mention</description> 
+  <rangeTypeName>org.ohnlp.typesystem.type.textspan.Sentence</rangeTypeName> 
+  </featureDescription>
+<featureDescription>
+  <name>experiencer</name> 
+  <description>This refers to the status context. The definition is consist with  
+  Context: see http://orbit.nlm.nih.gov/resource/context</description>
+  <rangeTypeName>uima.cas.String</rangeTypeName> 
+  </featureDescription>
+  </features>
+  </typeDescription>
+<typeDescription>
+  <name>org.ohnlp.medtagger.type.DictContext</name> 
+  <description>Stores the original entry of the dictionary</description> 
+  <supertypeName>uima.tcas.Annotation</supertypeName> 
+<features>
+<featureDescription>
+  <name>entry</name> 
+  <description>This contains the original dictionary entry</description> 
+  <rangeTypeName>uima.cas.String</rangeTypeName> 
+  </featureDescription>
+  </features>
+  </typeDescription>
+  <typeDescription>
+  <name>org.ohnlp.medtagger.type.Context</name> 
+  <description>Stores the context matches</description> 
+  <supertypeName>uima.tcas.Annotation</supertypeName> 
+<features>
+<featureDescription>
+  <name>position</name> 
+  <description>Locate before or after or a termination of a context or pseudo of the concept mention (POST, PRE, BOTH, TERMIN, PSEUDO)</description> 
+  <rangeTypeName>uima.cas.String</rangeTypeName> 
+  </featureDescription>
+  <featureDescription>
+  <name>contextType</name> 
+  <description>the type of the context words (neg, hist, hypo, poss, exp, hypoexp)</description> 
+  <rangeTypeName>uima.cas.String</rangeTypeName> 
+  </featureDescription>
+  </features>
+  </typeDescription>
+  </types>
+ </typeSystemDescription>

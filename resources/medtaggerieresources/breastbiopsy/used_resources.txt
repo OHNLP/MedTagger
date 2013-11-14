@@ -1,0 +1,2 @@
+./rules/resources_rules_matchrules.txt
+./used_resources.txt

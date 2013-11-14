@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>org.ohnlp.medtagger.ml.ae.CRFAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>org.ohnlp.medtagger.ml.aes.CRFAnnotatorAE</name>
+    <description>Apply CRF Annotators</description>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>CRFSuiteHome</name>
+        <description>CRF Suite Home</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>CRFModel</name>
+        <description>CRF Model</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>LeftWindow</name>
+        <type>Integer</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>RightWindow</name>
+        <type>Integer</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>CRFModel</name>
+        <value>
+          <string>H:/workspace/icTAKES/test.model</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>LeftWindow</name>
+        <value>
+          <integer>2</integer>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>RightWindow</name>
+        <value>
+          <integer>2</integer>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>CRFSuiteHome</name>
+        <value>
+          <string>H:/workspace/icTAKES/resources/medtaggermlresources/machinelearning/crfsuite</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription>
+      <imports>
+        <import name="org.ohnlp.medtagger.ml.types.MedTaggerMLTypes"/>
+      </imports>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">uima.tcas.DocumentAnnotation</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">org.ohnlp.medtagger.type.ConceptMention</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>

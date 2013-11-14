@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation> 
+  <primitive>true</primitive> 
+  <annotatorImplementationName>org.ohnlp.medtagger.ml.ae.I2B2Tokenizer</annotatorImplementationName> 
+ <analysisEngineMetaData>
+  <name>org.ohnlp.medtagger.ml.aes.i2b2TokenizerAE</name> 
+  <description>the token for i2b2 dataset. The begin and end spans are UIMA standard. for i2b2 begin and end spans use i2b2Begin and i2b2End respectively the reamining features are i2b2 standards.</description> 
+  <version>1.0</version> 
+  <vendor /> 
+  <configurationParameters /> 
+  <configurationParameterSettings /> 
+ <typeSystemDescription>
+ <imports>
+  <import name="org.ohnlp.medtagger.ml.types.MedTaggerMLTypes" /> 
+  </imports>
+  </typeSystemDescription>
+  <typePriorities /> 
+  <fsIndexCollection /> 
+<capabilities>
+ <capability>
+ <inputs>
+  <type allAnnotatorFeatures="true">uima.tcas.DocumentAnnotation</type> 
+  </inputs>
+ <outputs>
+  <type allAnnotatorFeatures="true">org.ohnlp.medtagger.ml.type.i2b2Token</type> 
+  </outputs>
+  <languagesSupported /> 
+  </capability>
+  </capabilities>
+ <operationalProperties>
+  <modifiesCas>true</modifiesCas> 
+  <multipleDeploymentAllowed>true</multipleDeploymentAllowed> 
+  <outputsNewCASes>false</outputsNewCASes> 
+  </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration /> 
+  </analysisEngineDescription>

@@ -1,0 +1,21 @@
+HHCLINIC	HHCLINIC	HHCLINIC
+HHrimsdate	HHrimsdate	HHrimsdate
+HHresultno	HHresultno	HHresultno
+HHsubtype	HHsubtype	HHsubtype
+HHaccession	HHaccession	HHaccession
+HHbirth_dt	HHbirth_dt	HHbirth_dt
+HHgender	HHgender	HHgender
+HHstatus	HHstatus	HHstatus
+HHsecure	HHsecure	HHsecure
+HHtestcode	HHtestcode	HHtestcode
+HHdoctor	HHdoctor	HHdoctor
+Exam	Exam	Exam
+Indications	Indication	Indication
+Original Report	OriginalReport	OriginalReport
+ORDate	ORDate	ORDate
+Ind	Ind_code	Ind_code
+Diag	Diag_code	Diag_code
+Finding	Finding	Finding
+Assessment	Assessment	Assessment
+Diagnosis	Diagnosis	Diagnosis
+Impression	Impression	Impression

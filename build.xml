@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="." name="Package MedTagger">
+      <target name=".">
+        <mkdir dir="bin"/>
+        <path id="_medtagger.cp">
+            <pathelement location="lib/uimaj-tools-2.4.0.jar"/>
+            <pathelement location="lib/uimaj-core-2.4.0.jar"/>
+            <pathelement location="lib/uimaj-cpe-2.4.0.jar"/>
+            <pathelement location="lib/uimaj-document-annotation-2.4.0.jar"/>
+            <pathelement location="lib/opennlp-tools-1.5.3.jar"/>
+            <pathelement location="lib/opennlp-uima-1.5.3.jar"/>
+            <pathelement location="lib/opennlp-maxent-3.0.3.jar"/>
+            <pathelement location="lib/commons-io-1.4.jar"/>
+            <pathelement location="lib/commons-lang-2.4.jar"/>
+            <pathelement location="lib/commons-logging-1.1.1.jar"/>
+            <pathelement location="lib/commons-lang3-3.0.1.jar"/>
+            <pathelement location="lib/log4j-1.2.16.jar"/>
+        </path>
+
+        <javac destdir="bin" debug="true">
+            <src path="autosrc" />
+            <src path="javasrc" />
+            <classpath refid="_medtagger.cp" />
+        </javac>
+
+        <jar destfile="MedTagger-1.0.jar">
+            <fileset dir="bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/commons-io-1.4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/commons-lang-2.4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/commons-lang3-3.0.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/commons-logging-1.1.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/log4j-1.2.16.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/uimaj-adapter-vinci-2.4.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/uimaj-core-2.4.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/uimaj-cpe-2.4.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/uimaj-document-annotation-2.4.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/uimaj-tools-2.4.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/opennlp-maxent-3.0.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/opennlp-tools-1.5.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/opennlp-uima-1.5.3.jar"/>
+        </jar>
+    </target>
+</project>

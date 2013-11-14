@@ -1,0 +1,10 @@
+./norm/resources_norm_normDISOdesc.txt
+./regexp/resources_regexp_reANAT.txt
+./regexp/resources_regexp_reANATdesc.txt
+./regexp/resources_regexp_reANATAbbr.txt
+./regexp/resources_regexp_reDISO.txt
+./regexp/resources_regexp_reDISOdesc.txt
+./regexp/resources_regexp_reDISOAbbr.txt
+./regexp/resources_regexp_reDISOAlone.txt
+./rules/resources_rules_matchrules.txt
+./used_resources.txt

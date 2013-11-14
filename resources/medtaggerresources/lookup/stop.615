@@ -1,0 +1,638 @@
+##########################################################################
+# Copyright: (c) 2013   Mayo Foundation for Medical Education and 
+# Research (MFMER). All rights reserved. MAYO, MAYO CLINIC, and the
+# triple-shield Mayo logo are trademarks and service marks of MFMER.
+#
+# Except as contained in the copyright notice above, or as used to identify 
+# MFMER as the author of this software, the trade names, trademarks, service
+# marks, or product names of the copyright holder shall not be used in
+# advertising, promotion or otherwise in connection with this software without
+# prior written authorization of the copyright holder.
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+# http://www.apache.org/licenses/LICENSE-2.0 
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and 
+# limitations under the License. 
+################################################################################
+38434437	patient|LIVB;ANAT;CONC
+18601179	not|GENE;CONC
+16650248	history|FIND;OCCU;CONC
+14667600	time|FIND;CONC
+10923371	daily|CONC
+9534581	well|DISO;CONC
+8864165	history of|FIND;CONC
+8627382	date|FIND;OBJC;CONC;DRUG
+8288472	day|CONC
+6979944	year|CONC
+6377145	today|DRUG;CONC
+6137185	mouth|FIND;ANAT
+6096504	two|CONC
+6029839	plan|FIND;DISO;CONC
+5960057	is a|CONC
+5767160	disease|DISO
+5712247	tablet|CHEM;CONC
+5659254	back|FIND;CONC;ANAT
+5557061	see|FIND;CONC
+5546378	by mouth|CONC
+5437569	evaluation|PROC;CONC
+5421902	medication|PHYS;PROC;DRUG
+5123211	general|CONC
+4871249	therapy|FIND;PROC;CONC
+4797018	old|CONC
+4766500	rate|FIND;CONC
+4642374	clinic|ORGA;CONC
+4588262	status|CONC
+4490587	treatment|PROC;CONC
+4323054	medical|LIVB;CONC
+4318253	continue|CONC
+4142412	mrs|DISO;GENE;PROC;CONC
+4101220	examination|PROC
+4072072	over|CONC
+3949274	physician|LIVB;PHYS
+3905351	care|FIND;CONC
+3896659	date time|CONC
+3896418	mm hg|CONC
+3881551	three|CONC
+3880033	post|OBJC;CONC
+3827125	use|FIND;CONC
+3823432	current|PHEN;CONC
+3737160	mayo|GEOG;LIVB
+3688868	home|ORGA;CONC
+3673588	note|CONC
+3608944	week|CONC
+3539919	significant|CONC
+3467901	does not|FIND
+3443222	pm|CHEM;GEOG;GENE;DISO;DRUG;CONC
+3435703	follow up|FIND;PROC;CONC
+3432668	mild|FIND;CONC
+3431112	exam|PROC
+3413971	family|LIVB;CONC
+3405721	had a|CONC
+3395288	very|CONC
+3395202	problem|FIND;PROC;CONC
+3386639	clear|CONC
+3373254	then|CONC
+3317698	present|CONC
+3282888	physical|FIND;PROC;CONC
+3207490	review|CONC
+3187801	call|FIND;GENE;CONC
+3187095	upper|CONC
+3092839	has a|CONC
+3067401	visit|FIND;CONC
+2985155	patient has|CONC
+2904191	level|GEOG;DRUG;CONC
+2878944	evidence|CONC
+2821154	now|CONC
+2693547	ago|GEOG;GENE
+2684948	type|FIND;GENE;PHYS;PROC;CONC
+2603978	status post|CONC
+2578632	diagnosis|FIND;PHYS;PROC;CONC
+2542802	recent|CONC
+2470531	evidence of|CONC
+2452355	as needed|CONC
+2427679	currently|CONC
+2353567	area|GEOG;LIVB;ACTI;CONC
+2332825	prior|FIND;CONC
+2310409	approximately|CONC
+2283486	report|PROC;CONC
+2241045	total|CONC
+2236663	need|CONC
+2227422	non|CONC
+2203822	test|FIND;PROC;CONC
+2195983	range|CONC
+2180360	return|CONC
+2178956	position|PROC;CONC
+2171518	min|CONC
+2152759	assessment|FIND;PROC;CONC
+2151272	four|CONC
+2149929	small|CONC
+2131633	due|CONC
+2129321	twice|CONC
+2124317	health|ORGA;LIVB;CONC
+2118377	mother|LIVB;CONC
+2108340	have a|CONC
+2099395	impression|FIND;CONC
+2049965	primary|PROC;CONC
+2011848	take|FIND;CONC
+1949532	able|FIND
+1943740	new|CONC
+1939592	side|CONC
+1917358	hospital|ORGA;CONC
+1915732	work|FIND;CONC
+1890112	previous|CONC
+1882796	possible|CONC
+1874759	due to|CONC
+1847605	next|FIND;CONC
+1830254	change|CONC
+1819842	cell|GENE;DEVI;OBJC;ANAT;CONC
+1791917	secondary|DISO;CONC
+1780952	morning|CONC
+1720161	get|CHEM;PROC
+1710990	point|CONC
+1701085	night|CONC
+1693135	did not|FIND
+1689053	six|CONC
+1676435	month|CONC
+1645752	information|CONC
+1644633	geographic|CONC
+1640397	site|ANAT;CONC
+1617075	in the past|CONC
+1583885	function|FIND;CONC
+1581040	likely|CONC
+1566539	prescription|PHYS;PROC;CONC
+1565046	medical history|FIND;CONC
+1560934	lb av|CONC
+1531570	still|DISO
+1515514	page|PROC;CONC
+1503204	management|FIND;PROC
+1499045	department|ORGA;CONC
+1498410	nurse|FIND;LIVB;OCCU;PROC
+1496771	family history|FIND;CONC
+1487950	think|FIND;DISO
+1484868	room|CONC
+1474497	detail|CONC
+1466334	recently|CONC
+1465577	no evidence of|CONC
+1454811	first|CONC
+1454182	part|CONC
+1425944	contact|FIND;LIVB;CONC
+1416904	control|LIVB;OBJC;PHEN;DRUG;CONC
+1397265	long|FIND;CONC
+1392141	education|FIND;OCCU;PROC;CONC
+1388702	laboratory|ORGA;PHYS;PROC;CONC
+1375791	program|DRUG;CONC
+1374607	prior to|CONC
+1374169	start|OBJC;CONC
+1325625	body|LIVB;CONC;ANAT
+1320342	check|FIND
+1317129	repeat|CONC
+1300104	past medical history|FIND
+1297614	illness|FIND
+1296782	additional|CONC
+1295089	consultation|PROC;CONC
+1292603	grade|CONC
+1288903	documentation|PROC;CONC
+1284887	study|OBJC;PROC;CONC
+1282243	review of|CONC
+1265932	consistent|CONC
+1256679	name|FIND;DISO;LIVB;PHYS;CONC
+1244259	active|PROC;DRUG;CONC
+1224725	syndrome|FIND;DISO
+1219484	general history|FIND
+1216576	phone|OBJC;CONC
+1209057	author|LIVB
+1203287	do not|FIND
+1188057	count|FIND;CONC
+1172800	consistent with|CONC
+1153776	felt|FIND
+1150050	apparent|CONC
+1145303	strength|CONC
+1142423	medicine|DRUG;OCCU
+1126274	complaint|FIND
+1123873	patient problem|FIND
+1121676	twice daily|CONC
+1109511	course|CONC
+1108381	service|FIND;PROC;OBJC
+1098099	help|CONC
+1097224	appropriate|CONC
+1089688	monitor|CHEM;LIVB;OBJC;DEVI;PROC
+1084145	prn|GENE;CONC
+1083510	mg dl|CONC
+1075214	self|CONC
+1074356	negative for|CONC
+1064950	activity|FIND;CONC
+1054755	yes|FIND;GENE;CONC
+1051820	record|FIND;CONC
+1049808	system|DEVI;OBJC;CONC
+1046274	source|FIND;CONC
+1043738	indication|CONC
+1034451	clinical|CONC
+1028280	recommend|CONC
+1028155	feel|FIND
+1009844	five|CONC
+1002175	up to|CONC
+995465	april|GENE
+992649	size|CONC
+990972	hour|CONC
+984552	bmi|PHYS;PROC
+982345	capsule|CHEM;ANAT;CONC
+981996	page 4|GENE
+967946	use of|CONC
+956132	summary|PHYS;CONC
+952491	show|CONC
+950277	made|CONC
+948349	second|CONC
+943953	state|ORGA;GEOG;CONC
+933997	consider|CONC
+927529	addition|CONC
+918824	satisfactory|CONC
+902909	free|CONC
+899874	end|DRUG;GENE;CONC
+895155	review of systems|PHYS;PROC
+891051	kg m2 m2|CONC
+891051	kg m2|CONC
+890381	sent|FIND;CONC
+889432	in_i in_i|CONC
+887192	bsa|FIND;CHEM;ORGA;PHYS
+886600	bed|DISO;OBJC;CONC
+877410	doctor|LIVB;CONC
+875147	nurse documentation|PROC
+872391	make|CONC
+864855	pathology|OCCU;DISO;LIVB;PROC;CONC
+860212	chief complaint|FIND
+852391	yesterday|CONC
+845932	lab|FIND;ORGA;CHEM;GENE;LIVB
+844252	basis|DRUG;CONC
+839634	most recent|CONC
+836717	goal|PHYS;CONC
+829038	patient had|CONC
+829031	saw|OBJC;DEVI
+827421	maintenance|FIND
+827203	treated with|PROC
+824000	patient education|LIVB;PROC
+814448	admission|PROC
+811635	protocol|PROC;CONC
+807544	learn|FIND;PROC
+803016	history of present illness|FIND;PHYS
+794655	treatment plan|CONC
+793775	available|CONC
+791698	place|FIND;CONC
+786609	mcg|CONC
+785716	was a|CONC
+782510	same|CHEM;CONC
+781883	apparently|CONC
+779767	episode|CONC
+774066	region|GEOG;GENE;CONC
+770856	associated with|CONC
+770416	wall|OBJC;CONC
+770157	discussion|FIND;PROC
+764317	no history of|CONC
+760087	obtain|FIND;CONC
+758627	specific|CONC
+758038	final|CONC
+754306	unknown|FIND;LIVB;DRUG;CONC
+752633	be a|CONC
+750954	result|FIND;CONC
+750814	copy|FIND;ACTI;OBJC
+745530	case|DEVI;CONC
+744543	content|FIND;CONC
+744510	social history|FIND;PHYS
+744133	tomorrow|CONC;DRUG
+743046	probably|CONC
+730011	reason|FIND;CONC
+719722	telephone|PHYS;OBJC;DEVI;CONC
+709070	stage|PHYS;CONC
+706635	monday|CONC
+706579	center|FIND;CONC
+706422	overall|CONC
+701166	change in|CONC
+694251	unable|FIND
+688591	primary care|ORGA;LIVB;PROC;CONC
+687017	amount|CONC
+680578	two times|CONC
+679130	reactive|CONC
+673901	contrast|PROC;CONC
+668636	outpatient|LIVB;CONC
+664493	group|ORGA;LIVB;CONC
+660034	greater than|CONC
+659091	family history of|FIND
+657622	patient states|FIND
+656793	mmol|CONC
+656490	response|FIND;CONC
+656208	condition|FIND;CONC
+655364	current medications|FIND
+648930	bit|CHEM;GENE;DRUG;CONC
+648875	mmol l|CONC
+647741	fact|GENE
+641695	unit|OBJC;DEVI;CONC
+637284	future|CONC
+636515	twice a day|DRUG;CONC
+634352	benefit|CONC
+633622	order|FIND;PHEN;CONC
+632516	score|CONC
+616069	return to|CONC
+611324	less than|CONC
+600222	request|CONC
+597763	initially|CONC
+595807	even|CONC
+593069	in the morning|CONC
+590028	friday|CONC
+585243	equal|CONC
+582564	know|CONC
+580083	needed for|CONC
+575973	followed by|CONC
+564696	frequency|CONC
+561942	rule|CONC
+561780	as directed|CONC
+557799	suggest|CONC
+551973	concern|CONC
+543518	as needed for|CONC
+541954	potential|CONC
+538069	minute|CONC
+532314	cause|CONC
+527816	weekly|CONC
+522547	episodes of|CONC
+521881	list|CONC
+517781	below|CONC
+516710	possibly|CONC
+514822	term|CONC
+511941	progress|CONC
+511263	initial|CONC
+511034	entry|CONC
+502948	evaluate|CONC
+501647	spent|CONC
+500873	density|CONC
+499418	ongoing|CONC
+497272	adequate|CONC
+493491	etiology|CONC
+488311	sensory|CONC
+483833	trans|CONC
+483809	wednesday|CONC
+482309	every day|CONC
+474456	tuesday|CONC
+473112	refer|CONC
+472705	comment|CONC
+466223	open|CONC
+466073	aspect|CONC
+462160	began|CONC
+461262	thursday|CONC
+461245	data|CONC
+458937	major|CONC
+457005	patient reports|CONC
+445316	per week|CONC
+439881	degree|CONC
+439098	consent|CONC
+434612	lot|CONC
+429464	except for|CONC
+429382	24 hours|CONC
+427938	changes in|CONC
+427557	pattern|CONC
+409497	situation|CONC
+409082	episode of|CONC
+390419	suspect|CONC
+389927	afternoon|CONC
+382325	via|CONC
+378799	eight|CONC
+378763	reason for|CONC
+378674	average|CONC
+377580	nature|CONC
+374997	difficulty with|CONC
+373073	iii|CONC
+370787	need for|CONC
+370389	access|CONC
+370371	not seen|CONC
+368174	require|CONC
+365340	diameter|CONC
+363126	different|CONC
+362893	third|CONC
+362497	refer to|CONC
+359462	similar|CONC
+354392	direct|CONC
+353762	begin|CONC
+348370	sometimes|CONC
+348075	subsequent|CONC
+344712	far|CONC
+342945	portion|CONC
+341181	referred by|CONC
+339084	three times a day|CONC
+339053	effect|CONC
+338692	lost|CONC
+336262	receive|CONC
+335286	fraction|CONC
+335208	24 hour|CONC
+330706	message|CONC
+330606	frequent|CONC
+329815	long term|CONC
+327321	onset of|CONC
+326362	recommendation|CONC
+324260	suggestive|CONC
+322771	g dl|CONC
+321010	seven|CONC
+320653	remain|CONC
+320278	interval|CONC
+319797	arrange|CONC
+316906	exception|CONC
+312643	2 weeks|CONC
+310208	risk of|CONC
+309753	mmhg|CONC
+309444	suggestive of|CONC
+306349	late|CONC
+303999	30 minutes|CONC
+302830	view|CONC
+300020	reviewed by|CONC
+299520	suspicious|CONC
+299444	forward|CONC
+296203	annual|CONC
+291909	value|CONC
+290944	gram|CONC
+290266	part of|CONC
+289495	normal range|CONC
+288043	special|CONC
+287622	factor|CONC
+287476	evidence for|CONC
+285382	involvement|CONC
+281513	to the left|CONC
+280417	cycle|CONC
+280352	patent|CONC
+277861	easily|CONC
+277432	referred to|CONC
+274893	occupational|CONC
+273418	slow|CONC
+272922	reveal|CONC
+271721	rapid|CONC
+271456	differential|CONC
+270189	per minute|CONC
+268058	etc|CONC
+266512	standard|CONC
+264492	main|CONC
+262309	icd 9|CONC
+261665	tid|CONC
+260098	facility|CONC
+259819	in addition to|CONC
+259474	icd 9 cm|CONC
+258487	criteria|CONC
+257200	south|CONC
+256589	close|CONC
+255092	mg capsule|CONC
+253394	financial|CONC
+251822	gain|CONC
+251807	approach|CONC
+251072	care of|CONC
+250667	having a|CONC
+249363	performed by|CONC
+248855	technique|CONC
+247419	10 days|CONC
+245853	often|CONC
+244642	quality|CONC
+243227	moderately|CONC
+243196	slowly|CONC
+241375	6 hours|CONC
+239188	been a|CONC
+236879	immediately|CONC
+236443	meq|CONC
+234891	summer|CONC
+232698	reduce|CONC
+231095	always|CONC
+231038	relationship|CONC
+230552	insurance|CONC
+230319	mode|CONC
+230122	per protocol|CONC
+228590	bring|CONC
+227005	urgency|CONC
+225873	surface|CONC
+225284	modified by|CONC
+222410	output|CONC
+221297	3 months|CONC
+219295	presence of|CONC
+217445	past history|CONC
+216139	collection|CONC
+215704	ratio|CONC
+212163	sq|CONC
+210829	qhs|CONC
+210696	question of|CONC
+209130	resume|CONC
+206485	capacity|CONC
+202436	phone number|CONC
+201658	15 minutes|CONC
+201394	numerous|CONC
+200212	five days|CONC
+197605	yearly|CONC
+197143	intensity|CONC
+194917	lack|CONC
+194803	mostly|CONC
+193464	monthly|CONC
+192753	resolution|CONC
+192256	fair|CONC
+192157	inspection|CONC
+190454	weekend|CONC
+190012	3 days|CONC
+189304	original|CONC
+189186	4 hours|CONC
+187234	medical record number|CONC
+184879	5 days|CONC
+183288	saturday|CONC
+182898	not use|CONC
+182614	saint|CONC
+182585	x10 9 l|CONC
+182394	description|CONC
+182323	every other day|CONC
+180110	interpretation|CONC
+177001	returned to|CONC
+176044	presently|CONC
+175433	effective|CONC
+174839	phase|CONC
+173110	outcome|CONC
+172900	risks benefits|CONC
+171337	days week|CONC
+170384	questionable|CONC
+170259	sunday|CONC
+170036	remote|CONC
+170010	immediate|CONC
+169284	wait|CONC
+169090	informed consent|CONC
+168644	applicable|CONC
+167984	resolve|CONC
+166897	dimension|CONC
+166089	complicated by|CONC
+165274	3 weeks|CONC
+164736	quiet|CONC
+164622	point in time|CONC
+164578	north|CONC
+164502	fourth|CONC
+164184	constant|CONC
+163941	in 2|CONC
+163615	four times a day|CONC
+163079	no evidence for|CONC
+162943	miss|CONC
+162928	lose|CONC
+162905	in 3|CONC
+162537	unusual|CONC
+162047	additional information|CONC
+162038	not see|CONC
+161859	completion|CONC
+161742	risks and benefits|CONC
+159170	health status|CONC
+159170	distance|CONC
+158014	regional|CONC
+158000	neg|CONC
+157514	arise|CONC
+155599	laboratory data|CONC
+154495	returns to|CONC
+152819	initiate|CONC
+150816	fifth|CONC
+148918	comprehensive|CONC
+147444	effects of|CONC
+146467	level 3|CONC
+146360	definite|CONC
+145871	participate|CONC
+144942	educational|CONC
+144455	series|CONC
+144130	unlikely|CONC
+143664	20 minutes|CONC
+142526	not available|CONC
+142180	text|CONC
+142026	e mail|CONC
+141720	together|CONC
+141615	explanation|CONC
+141209	live|CONC
+141121	gme|CONC
+140792	defer|CONC
+140465	4 weeks|CONC
+140375	date range|CONC
+139068	update|CONC
+138803	presentation|CONC
+138206	7 days|CONC
+136195	on room air|CONC
+136113	times per week|CONC
+134049	behind|CONC
+133873	successful|CONC
+133447	each day|CONC
+132670	confirm|CONC
+132605	2 days|CONC
+132225	12 hours|CONC
+131485	whole|CONC
+130957	chance|CONC
+130622	ten days|CONC
+129203	every 4 hours|CONC
+128499	acceptable|CONC
+127978	serial|CONC
+127722	four times daily|CONC
+127671	not know|CONC
+127032	directly|CONC
+126415	10 minutes|CONC
+125603	treated for|CONC
+124970	nine|CONC
+124825	suite|CONC
+124594	international|CONC
+124078	times per day|CONC
+123844	essential|CONC
+122147	48 hours|CONC
+121894	compatible|CONC
+121397	4 days|CONC
+120486	describe|CONC
+118938	limit|CONC
+117646	east|CONC
+117551	every 6 hours|CONC
+117508	2 months|CONC
+117433	route|CONC
+116952	environment|CONC
+116819	compatible with|CONC
+116789	explain|CONC
+116764	mean|CONC
+116611	alternative|CONC
+116223	may be a|CONC
+116140	a 24|CONC
+115656	every morning|CONC
+114945	participation|CONC
+112996	used for|CONC
+112983	method|CONC
+112907	restart|CONC
+112883	raise|CONC
+112652	kind|CONC

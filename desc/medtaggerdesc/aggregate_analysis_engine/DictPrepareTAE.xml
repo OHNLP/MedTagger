@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>false</primitive>
+  <delegateAnalysisEngineSpecifiers>
+      <delegateAnalysisEngine key="LvgLookupAE">
+      <import name="org.ohnlp.medtagger.aes.LvgLookupAE"/>
+      </delegateAnalysisEngine>
+      <delegateAnalysisEngine key="TokenizerAE">
+      <import name="org.ohnlp.opennlp.aes.TokenizerAE"/>
+    </delegateAnalysisEngine>
+      <delegateAnalysisEngine key="SentenceDetectorAE">
+      <import name="org.ohnlp.opennlp.aes.SentenceDetectorAE"/>
+    </delegateAnalysisEngine>
+   <delegateAnalysisEngine key="Open2OHTokenizerAE">
+      <import name="org.ohnlp.medtagger.aes.Open2OHTokenizerAE"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="PosTaggerAE">
+      <import name="org.ohnlp.opennlp.aes.PosTaggerAE"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+  <analysisEngineMetaData>
+    <name>DictPrepareTAE</name>
+    <description>The aggregate engine for preparing the dictionary for normalized dictionary lookup in the UMLS</description>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters searchStrategy="language_fallback"/>
+    <configurationParameterSettings/>
+    <flowConstraints>
+      <fixedFlow>
+        <node>SentenceDetectorAE</node>
+        <node>TokenizerAE</node>
+        <node>PosTaggerAE</node>
+        <node>Open2OHTokenizerAE</node>
+        <node>LvgLookupAE</node>
+      </fixedFlow>
+    </flowConstraints>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration>
+    <externalResources>
+       <externalResource>
+        <name>lvg_dict</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>file:medtaggerresources/lvg/LRAGR_2011AB</fileUrl>
+        </fileResourceSpecifier>
+      </externalResource>
+      <externalResource>
+        <name>openclass</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>file:medtaggerresources/lvg/openclasswords4dictprepare.txt</fileUrl>
+        </fileResourceSpecifier>
+      </externalResource>
+      <externalResource>
+				<name>SentenceModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/models-1.5/en-sent.bin</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.sentdetect.SentenceModelResourceImpl</implementationName>
+			</externalResource>
+			<externalResource>
+				<name>TokenModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/models-1.5/en-token.bin</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.tokenize.TokenizerModelResourceImpl</implementationName>
+			</externalResource>
+			<externalResource>
+				<name>PosModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/mayomodels/mayo-pos.zip</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.postag.POSModelResourceImpl</implementationName>
+			</externalResource>
+	
+	
+      
+    </externalResources>
+    <externalResourceBindings>
+    		<externalResourceBinding>
+				<key>PosTaggerAE/opennlp.uima.ModelName</key>
+				<resourceName>PosModel</resourceName>
+			</externalResourceBinding>
+    <externalResourceBinding>
+				<key>SentenceDetectorAE/opennlp.uima.ModelName</key>
+				<resourceName>SentenceModel</resourceName>
+			</externalResourceBinding>
+			<externalResourceBinding>
+				<key>TokenizerAE/opennlp.uima.ModelName</key>
+				<resourceName>TokenModel</resourceName>
+			</externalResourceBinding>
+      <externalResourceBinding>
+        <key>LvgLookupAE/lvg_dict</key>
+        <resourceName>lvg_dict</resourceName>
+      </externalResourceBinding>
+      <externalResourceBinding>
+        <key>LvgLookupAE/openclass</key>
+        <resourceName>openclass</resourceName>
+      </externalResourceBinding>
+    </externalResourceBindings>
+  </resourceManagerConfiguration>
+</analysisEngineDescription>

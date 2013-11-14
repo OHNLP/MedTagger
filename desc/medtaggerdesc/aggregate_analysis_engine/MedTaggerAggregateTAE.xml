@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>false</primitive>
+  <delegateAnalysisEngineSpecifiers>
+    <delegateAnalysisEngine key="LvgLookupAE">
+      <import name="org.ohnlp.medtagger.aes.LvgLookupAE"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="ChunkerAE">
+      <import name="org.ohnlp.opennlp.aes.ChunkerAE"/>
+    </delegateAnalysisEngine>
+   <delegateAnalysisEngine key="TokenizerAE">
+      <import name="org.ohnlp.opennlp.aes.TokenizerAE"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="MedTaggerLookupAE">
+      <import name="org.ohnlp.medtagger.aes.MedTaggerLookupAE"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="SentenceDetectorAE">
+      <import name="org.ohnlp.opennlp.aes.SentenceDetectorAE"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="RuleContextAE">
+      <import name="org.ohnlp.medtagger.aes.RuleContextAE"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="RuleSectionAE">
+      <import name="org.ohnlp.medtagger.aes.RuleSectionAE"/>
+    </delegateAnalysisEngine>
+     <delegateAnalysisEngine key="POSTaggerAE">
+      <import name="org.ohnlp.opennlp.aes.POSTaggerAE"/>
+    </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="LineSentenceDetectorAE">
+      <import name="org.ohnlp.medtagger.aes.LineSentenceDetectorAE"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+  
+  <analysisEngineMetaData>
+    <name>MedTaggerAggregateTAE</name>
+    <description>Aggregate engine for dictionary lookup-based tagging</description>
+    <version>1.0</version>
+    <vendor/>
+  	
+    
+	
+    <configurationParameters searchStrategy="language_fallback"/>
+    <configurationParameterSettings/>
+    <flowConstraints>
+      <fixedFlow>
+          <node>SentenceDetectorAE</node>
+         <node>TokenizerAE</node>
+      <node>POSTaggerAE</node>
+        <node>LineSentenceDetectorAE</node>
+        <node>LvgLookupAE</node>
+        <node>RuleSectionAE</node>
+        <node>MedTaggerLookupAE</node>
+        <node>RuleContextAE</node>
+      </fixedFlow>
+    </flowConstraints>
+    <typePriorities>
+    <priorityList>
+    <type>org.ohnlp.typesystem.type.textspan.Segment</type>
+    <type>org.ohnlp.typesystem.type.textspan.Sentence</type>
+    <type>org.ohnlp.typesystem.type.syntax.BaseToken</type>
+    </priorityList>
+    </typePriorities>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+ 
+  	<resourceManagerConfiguration>
+		<externalResources>
+			<externalResource>
+				<name>TokenModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/models-1.5/en-token.bin</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.tokenize.TokenizerModelResourceImpl</implementationName>
+			</externalResource>
+			
+			<externalResource>
+				<name>SentenceModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/models-1.5/en-sent.bin</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.sentdetect.SentenceModelResourceImpl</implementationName>
+			</externalResource>
+		
+			<externalResource>
+				<name>PosModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/mayomodels/mayo-pos.zip</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.postag.POSModelResourceImpl</implementationName>
+			</externalResource>
+			
+			<externalResource>
+				<name>ChunkerModel</name>
+				<description/>
+        <fileResourceSpecifier>
+					<fileUrl>file:opennlpresources/mayomodels/chunk-model.claims-1.5.zip</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>opennlp.uima.chunker.ChunkerModelResourceImpl</implementationName>
+			</externalResource>
+			
+			   <externalResource>
+        <name>lvg_dict</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>file:medtaggerresources/lvg/LRAGR_2011AB</fileUrl>
+        </fileResourceSpecifier>
+      </externalResource>
+      
+      <externalResource>
+        <name>section_map</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>file:medtaggerresources/sectag/SecTag.section.txt</fileUrl>
+        </fileResourceSpecifier>
+      </externalResource>
+      
+      <externalResource>
+        <name>openclass</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>file:medtaggerresources/lvg/openclasswords.txt</fileUrl>
+        </fileResourceSpecifier>
+      </externalResource>
+      
+			<externalResource>
+        <name>dict</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>file:medtaggerresources/lookup/MedTagger.lookup.dict</fileUrl>
+        </fileResourceSpecifier>
+      </externalResource>
+      
+      <externalResource>
+        <name>abbr</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>file:medtaggerresources/lookup/MedTagger.abbr</fileUrl>
+        </fileResourceSpecifier>
+      </externalResource>
+      
+      <externalResource>
+        <name>stop</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>file:medtaggerresources/lookup/stop.615</fileUrl>
+        </fileResourceSpecifier>
+      </externalResource>
+      
+			<externalResource>
+        <name>context_file</name>
+        <description>Specify the context rules</description>
+        <fileResourceSpecifier>
+          <fileUrl>file:medtaggerresources/context/contextRule.txt</fileUrl>
+        </fileResourceSpecifier>
+      </externalResource>
+
+		</externalResources>
+		<externalResourceBindings>
+		<externalResourceBinding>
+				<key>RuleContextAE/context_file</key>
+				<resourceName>context_file</resourceName>
+			</externalResourceBinding>
+			
+			<externalResourceBinding>
+				<key>RuleSectionAE/section_map</key>
+				<resourceName>section_map</resourceName>
+			</externalResourceBinding>
+
+		<externalResourceBinding>
+				<key>SentenceDetectorAE/opennlp.uima.ModelName</key>
+				<resourceName>SentenceModel</resourceName>
+			</externalResourceBinding>
+
+			<externalResourceBinding>
+				<key>TokenizerAE/opennlp.uima.ModelName</key>
+				<resourceName>TokenModel</resourceName>
+			</externalResourceBinding>
+
+					<externalResourceBinding>
+				<key>POSTaggerAE/opennlp.uima.ModelName</key>
+				<resourceName>PosModel</resourceName>
+			</externalResourceBinding>
+
+			<externalResourceBinding>
+				<key>ChunkerAE/opennlp.uima.ModelName</key>
+				<resourceName>ChunkerModel</resourceName>
+			</externalResourceBinding>
+			
+			<externalResourceBinding>
+				<key>MedTaggerLookupAE/stop</key>
+				<resourceName>stop</resourceName>
+			</externalResourceBinding>
+
+			<externalResourceBinding>
+				<key>MedTaggerLookupAE/dict</key>
+				<resourceName>dict</resourceName>
+			</externalResourceBinding>
+
+			<externalResourceBinding>
+				<key>MedTaggerLookupAE/lvg_dict</key>
+				<resourceName>lvg_dict</resourceName>
+			</externalResourceBinding>
+
+					<externalResourceBinding>
+				<key>RuleSectionAE/lvg_dict</key>
+				<resourceName>lvg_dict</resourceName>
+			</externalResourceBinding>
+			<externalResourceBinding>
+				<key>RuleSectionAE/openclass</key>
+				<resourceName>openclass</resourceName>
+			</externalResourceBinding>
+
+			<externalResourceBinding>
+		
+				<key>LvgLookupAE/lvg_dict</key>
+				<resourceName>lvg_dict</resourceName>
+			</externalResourceBinding>
+			
+				<externalResourceBinding>
+				<key>LvgLookupAE/openclass</key>
+				<resourceName>openclass</resourceName>
+			</externalResourceBinding>
+		
+			<externalResourceBinding>
+				<key>MedTaggerLookupAE/abbr</key>
+				<resourceName>abbr</resourceName>
+			</externalResourceBinding>
+			
+			<externalResourceBinding>
+				<key>MedTaggerLookupAE/openclass</key>
+				<resourceName>openclass</resourceName>
+			</externalResourceBinding>
+			</externalResourceBindings>
+		
+
+	</resourceManagerConfiguration>
+</analysisEngineDescription>
