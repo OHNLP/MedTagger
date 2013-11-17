@@ -8,7 +8,7 @@
                 <nameValuePair>
                     <name>InputDirectory</name>
                     <value>
-                        <string>R:\Dept\HongfangLiu\SHARE-CLEF</string>
+                        <string>SHARE-CLEF</string>
                     </value>
                 </nameValuePair>
             </configurationParameterSettings>
@@ -42,7 +42,7 @@
                 <nameValuePair>
                     <name>OutputDirectory</name>
                     <value>
-                        <string>testdata\medtaggermltest\output</string>
+                        <string>testdata/medtaggermltest/output</string>
                     </value>
                 </nameValuePair>
                 <nameValuePair>

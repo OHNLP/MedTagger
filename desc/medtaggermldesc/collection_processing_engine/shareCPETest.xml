@@ -8,7 +8,7 @@
                 <nameValuePair>
                     <name>InputDirectory</name>
                     <value>
-                        <string>R:\Dept\projects\Text\ShareClef2013\Task1TestSet</string>
+                        <string>ShareClef2013/Task1TestSet</string>
                     </value>
                 </nameValuePair>
             </configurationParameterSettings>
@@ -42,7 +42,7 @@
                 <nameValuePair>
                     <name>OutputDirectory</name>
                     <value>
-                        <string>testdata\medtaggermltest\test1output</string>
+                        <string>testdata/medtaggermltest/test1output</string>
                     </value>
                 </nameValuePair>
                 <nameValuePair>
