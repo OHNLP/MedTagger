@@ -1,0 +1,3 @@
+CM	text="Heart failure"	start="29"	end="42"	certainty="1"	status="1"	norm="Heart failure"	section="chief_complaint_5.26"	sentence="History of Heart failure."
+CM	text="Heart failure"	start="66"	end="79"	certainty="1"	status="0"	norm="Heart failure"	section="discharge_diagnosis_5.22.45"	sentence="Heart failure."
+M	text="Ejection Fraction 35"	start="87"	end="107"	norm="EF:35"	rule="ef_r0a"	sentence="Ejection Fraction 35%.
