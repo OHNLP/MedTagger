@@ -9,7 +9,7 @@
                 <nameValuePair>
                     <name>InputDirectory</name>
                     <value>
-                        <string>/MedTagger/testdata/medtaggerietest/pad/input</string>
+                        <string>testdata/medtaggerietest/pad/input</string>
                     </value>
                 </nameValuePair>
             </configurationParameterSettings>
@@ -43,7 +43,7 @@
                 <nameValuePair>
                     <name>OutputDir</name>
                     <value>
-                        <string>/MedTagger/testdata/medtaggerietest/pad/output</string>
+                        <string>testdata/medtaggerietest/pad/output</string>
                     </value>
                 </nameValuePair>
             </configurationParameterSettings>
