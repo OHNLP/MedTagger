@@ -9,7 +9,7 @@
                 <nameValuePair>
                     <name>InputDirectory</name>
                     <value>
-                        <string>/MedTagger/testdata/medtaggermltest/i2b2traintest/input</string>
+                        <string>testdata/medtaggermltest/i2b2traintest/input</string>
                     </value>
                 </nameValuePair>
             </configurationParameterSettings>
