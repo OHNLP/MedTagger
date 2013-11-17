@@ -1,0 +1,4 @@
+c="protein" 2:6 2:6||t="test"
+c="vancomycin" 4:3 4:3||t="treatment"
+c="colonoscopy" 5:0 5:0||t="test"
+c="lower abdominal pain" 7:4 7:6||t="problem"
