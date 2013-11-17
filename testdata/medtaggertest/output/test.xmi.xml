@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><xmi:XMI xmlns:textspan="http:///org/ohnlp/typesystem/type/textspan.ecore" xmlns:cas="http:///uima/cas.ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:structured="http:///org/ohnlp/typesystem/type/structured.ecore" xmlns:type="http:///org/ohnlp/medtagger/type.ecore" xmlns:tcas="http:///uima/tcas.ecore" xmlns:syntax="http:///org/ohnlp/typesystem/type/syntax.ecore" xmlns:refsem="http:///org/ohnlp/typesystem/type/refsem.ecore" xmlns:util="http:///org/ohnlp/typesystem/type/util.ecore" xmlns:textsem="http:///org/ohnlp/typesystem/type/textsem.ecore" xmlns:relation="http:///org/ohnlp/typesystem/type/relation.ecore" xmi:version="2.0">
+    <cas:NULL xmi:id="0"/>
+    <cas:Sofa xmi:id="6" sofaNum="1" sofaID="_InitialView" mimeType="text" sofaString="20168:&#13;&#10;#8 Hx of VTE&#13;&#10;&#13;&#10;20113:&#13;&#10;#1 Atrial fibrillation with RVR&#13;&#10;&#13;&#10;20112:&#13;&#10;His cellulitis has resolved with aggressive antibiotic therapy.&#13;&#10;#2 Peristomal Cellulitis; resolving&#9;&#9;&#13;&#10;"/>
+    <tcas:DocumentAnnotation xmi:id="1" sofa="6" begin="0" end="179" language="en"/>
+    <textspan:Sentence xmi:id="759" sofa="6" begin="0" end="6" id="DocBegin:0" segment="861"/>
+    <textspan:Sentence xmi:id="765" sofa="6" begin="7" end="7" id="DocBegin:1" segment="861"/>
+    <textspan:Sentence xmi:id="771" sofa="6" begin="8" end="20" id="DocBegin:2" segment="861"/>
+    <textspan:Sentence xmi:id="777" sofa="6" begin="21" end="21" id="DocBegin:3" segment="861"/>
+    <textspan:Sentence xmi:id="783" sofa="6" begin="22" end="22" id="DocBegin:4" segment="861"/>
+    <textspan:Sentence xmi:id="789" sofa="6" begin="23" end="23" id="DocBegin:5" segment="861"/>
+    <textspan:Sentence xmi:id="795" sofa="6" begin="24" end="30" id="DocBegin:6" segment="861"/>
+    <textspan:Sentence xmi:id="801" sofa="6" begin="31" end="31" id="DocBegin:7" segment="861"/>
+    <textspan:Sentence xmi:id="807" sofa="6" begin="32" end="63" id="DocBegin:8" segment="861"/>
+    <textspan:Sentence xmi:id="813" sofa="6" begin="64" end="64" id="DocBegin:9" segment="861"/>
+    <textspan:Sentence xmi:id="819" sofa="6" begin="65" end="65" id="DocBegin:10" segment="861"/>
+    <textspan:Sentence xmi:id="825" sofa="6" begin="66" end="66" id="DocBegin:11" segment="861"/>
+    <textspan:Sentence xmi:id="831" sofa="6" begin="67" end="73" id="DocBegin:12" segment="861"/>
+    <textspan:Sentence xmi:id="837" sofa="6" begin="74" end="74" id="DocBegin:13" segment="861"/>
+    <textspan:Sentence xmi:id="843" sofa="6" begin="75" end="138" id="DocBegin:14" segment="861"/>
+    <textspan:Sentence xmi:id="849" sofa="6" begin="140" end="177" id="DocBegin:15" segment="861"/>
+    <textspan:Sentence xmi:id="855" sofa="6" begin="178" end="178" id="DocBegin:16" segment="861"/>
+    <syntax:NewlineToken xmi:id="281" sofa="6" begin="6" end="7" tokenNumber="0"/>
+    <syntax:NewlineToken xmi:id="289" sofa="6" begin="7" end="8" tokenNumber="1"/>
+    <syntax:NewlineToken xmi:id="297" sofa="6" begin="20" end="21" tokenNumber="2"/>
+    <syntax:NewlineToken xmi:id="305" sofa="6" begin="21" end="22" tokenNumber="3"/>
+    <syntax:NewlineToken xmi:id="313" sofa="6" begin="22" end="23" tokenNumber="4"/>
+    <syntax:NewlineToken xmi:id="321" sofa="6" begin="23" end="24" tokenNumber="5"/>
+    <syntax:NewlineToken xmi:id="329" sofa="6" begin="30" end="31" tokenNumber="6"/>
+    <syntax:NewlineToken xmi:id="337" sofa="6" begin="31" end="32" tokenNumber="7"/>
+    <syntax:NewlineToken xmi:id="345" sofa="6" begin="63" end="64" tokenNumber="8"/>
+    <syntax:NewlineToken xmi:id="353" sofa="6" begin="64" end="65" tokenNumber="9"/>
+    <syntax:NewlineToken xmi:id="361" sofa="6" begin="65" end="66" tokenNumber="10"/>
+    <syntax:NewlineToken xmi:id="369" sofa="6" begin="66" end="67" tokenNumber="11"/>
+    <syntax:NewlineToken xmi:id="377" sofa="6" begin="73" end="74" tokenNumber="12"/>
+    <syntax:NewlineToken xmi:id="385" sofa="6" begin="74" end="75" tokenNumber="13"/>
+    <syntax:NewlineToken xmi:id="393" sofa="6" begin="138" end="139" tokenNumber="14"/>
+    <syntax:NewlineToken xmi:id="401" sofa="6" begin="139" end="140" tokenNumber="15"/>
+    <syntax:NewlineToken xmi:id="409" sofa="6" begin="177" end="178" tokenNumber="16"/>
+    <syntax:NewlineToken xmi:id="417" sofa="6" begin="178" end="179" tokenNumber="17"/>
+    <syntax:NumToken xmi:id="425" sofa="6" begin="0" end="5" tokenNumber="18" partOfSpeech="CD" numType="0"/>
+    <syntax:NumToken xmi:id="450" sofa="6" begin="9" end="10" tokenNumber="21" partOfSpeech="CD" numType="0"/>
+    <syntax:NumToken xmi:id="495" sofa="6" begin="24" end="29" tokenNumber="25" partOfSpeech="CD" numType="0"/>
+    <syntax:NumToken xmi:id="520" sofa="6" begin="33" end="34" tokenNumber="28" partOfSpeech="LS" numType="0"/>
+    <syntax:NumToken xmi:id="577" sofa="6" begin="67" end="72" tokenNumber="33" partOfSpeech="CD" numType="0"/>
+    <syntax:NumToken xmi:id="706" sofa="6" begin="141" end="142" tokenNumber="45" partOfSpeech="LS" numType="0"/>
+    <syntax:PunctuationToken xmi:id="434" sofa="6" begin="5" end="6" tokenNumber="19" partOfSpeech=":"/>
+    <syntax:PunctuationToken xmi:id="442" sofa="6" begin="8" end="9" tokenNumber="20" partOfSpeech="NN"/>
+    <syntax:PunctuationToken xmi:id="504" sofa="6" begin="29" end="30" tokenNumber="26" partOfSpeech=":"/>
+    <syntax:PunctuationToken xmi:id="512" sofa="6" begin="32" end="33" tokenNumber="27" partOfSpeech="NN"/>
+    <syntax:PunctuationToken xmi:id="586" sofa="6" begin="72" end="73" tokenNumber="34" partOfSpeech=":"/>
+    <syntax:PunctuationToken xmi:id="690" sofa="6" begin="137" end="138" tokenNumber="43" partOfSpeech="."/>
+    <syntax:PunctuationToken xmi:id="698" sofa="6" begin="140" end="141" tokenNumber="44" partOfSpeech="NN"/>
+    <syntax:PunctuationToken xmi:id="739" sofa="6" begin="164" end="165" tokenNumber="48" partOfSpeech=","/>
+    <syntax:WordToken xmi:id="459" sofa="6" begin="11" end="13" tokenNumber="22" partOfSpeech="NN" capitalization="3" numPosition="0" canonicalForm="hx"/>
+    <syntax:WordToken xmi:id="471" sofa="6" begin="14" end="16" tokenNumber="23" partOfSpeech="IN" capitalization="1" numPosition="0"/>
+    <syntax:WordToken xmi:id="483" sofa="6" begin="17" end="20" tokenNumber="24" partOfSpeech="NN" capitalization="4" numPosition="0" canonicalForm="vte"/>
+    <syntax:WordToken xmi:id="529" sofa="6" begin="35" end="41" tokenNumber="29" partOfSpeech="JJ" capitalization="3" numPosition="0" canonicalForm="atrial"/>
+    <syntax:WordToken xmi:id="541" sofa="6" begin="42" end="54" tokenNumber="30" partOfSpeech="NN" capitalization="1" numPosition="0" canonicalForm="fibrillation"/>
+    <syntax:WordToken xmi:id="553" sofa="6" begin="55" end="59" tokenNumber="31" partOfSpeech="IN" capitalization="1" numPosition="0"/>
+    <syntax:WordToken xmi:id="565" sofa="6" begin="60" end="63" tokenNumber="32" partOfSpeech="NN" capitalization="4" numPosition="0" canonicalForm="rvr"/>
+    <syntax:WordToken xmi:id="594" sofa="6" begin="75" end="78" tokenNumber="35" partOfSpeech="PRP$" capitalization="3" numPosition="0"/>
+    <syntax:WordToken xmi:id="606" sofa="6" begin="79" end="89" tokenNumber="36" partOfSpeech="NN" capitalization="1" numPosition="0" canonicalForm="cellulitis"/>
+    <syntax:WordToken xmi:id="618" sofa="6" begin="90" end="93" tokenNumber="37" partOfSpeech="VBZ" capitalization="1" numPosition="0"/>
+    <syntax:WordToken xmi:id="630" sofa="6" begin="94" end="102" tokenNumber="38" partOfSpeech="VBN" capitalization="1" numPosition="0" canonicalForm="resolve"/>
+    <syntax:WordToken xmi:id="642" sofa="6" begin="103" end="107" tokenNumber="39" partOfSpeech="IN" capitalization="1" numPosition="0"/>
+    <syntax:WordToken xmi:id="654" sofa="6" begin="108" end="118" tokenNumber="40" partOfSpeech="JJ" capitalization="1" numPosition="0" canonicalForm="aggressive"/>
+    <syntax:WordToken xmi:id="666" sofa="6" begin="119" end="129" tokenNumber="41" partOfSpeech="JJ" capitalization="1" numPosition="0" canonicalForm="antibiotic"/>
+    <syntax:WordToken xmi:id="678" sofa="6" begin="130" end="137" tokenNumber="42" partOfSpeech="NN" capitalization="1" numPosition="0" canonicalForm="therapy"/>
+    <syntax:WordToken xmi:id="715" sofa="6" begin="143" end="153" tokenNumber="46" partOfSpeech="JJ" capitalization="3" numPosition="0" canonicalForm="peristomal"/>
+    <syntax:WordToken xmi:id="727" sofa="6" begin="154" end="164" tokenNumber="47" partOfSpeech="NN" capitalization="3" numPosition="0" canonicalForm="cellulitis"/>
+    <syntax:WordToken xmi:id="747" sofa="6" begin="166" end="175" tokenNumber="49" partOfSpeech="VBG" capitalization="1" numPosition="0" canonicalForm="resolve"/>
+    <textspan:Segment xmi:id="861" sofa="6" begin="0" end="178" id="DocBegin" value="DocBegin"/>
+    <type:ConceptMention xmi:id="867" sofa="6" begin="17" end="20" detectionMethod="DictionaryLookup" normTarget="venous thromboembolism" Certainty="Positive" semGroup="DISO" status="HistoryOf" sentence="771" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="878" sofa="6" begin="17" end="20" detectionMethod="DictionaryLookup" normTarget="venous thromboembolic disease" Certainty="Positive" semGroup="DISO" status="HistoryOf" sentence="771" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="889" sofa="6" begin="35" end="54" detectionMethod="DictionaryLookup" normTarget="atrial fibrillation" Certainty="Positive" semGroup="FIND" status="Present" sentence="807" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="900" sofa="6" begin="35" end="54" detectionMethod="DictionaryLookup" normTarget="atrial fibrillation" Certainty="Positive" semGroup="DISO" status="Present" sentence="807" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="911" sofa="6" begin="60" end="63" detectionMethod="DictionaryLookup" normTarget="rapid ventricular response" Certainty="Positive" semGroup="DISO" status="Present" sentence="807" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="922" sofa="6" begin="79" end="89" detectionMethod="DictionaryLookup" normTarget="cellulitis" Certainty="Positive" semGroup="DISO" status="Present" sentence="843" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="933" sofa="6" begin="79" end="89" detectionMethod="DictionaryLookup" normTarget="cellulitis" Certainty="Positive" semGroup="FIND" status="Present" sentence="843" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="944" sofa="6" begin="108" end="118" detectionMethod="DictionaryLookup" normTarget="aggressive" Certainty="Negated" semGroup="DISO" status="Present" sentence="843" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="955" sofa="6" begin="119" end="137" detectionMethod="DictionaryLookup" normTarget="antibiotic therapy" Certainty="Negated" semGroup="PROC" status="Present" sentence="843" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="966" sofa="6" begin="154" end="164" detectionMethod="DictionaryLookup" normTarget="cellulitis" Certainty="Positive" semGroup="DISO" status="Present" sentence="849" experiencer="Patient"/>
+    <type:ConceptMention xmi:id="977" sofa="6" begin="154" end="164" detectionMethod="DictionaryLookup" normTarget="cellulitis" Certainty="Positive" semGroup="FIND" status="Present" sentence="849" experiencer="Patient"/>
+    <cas:View sofa="6" members="1 759 765 771 777 783 789 795 801 807 813 819 825 831 837 843 849 855 281 289 297 305 313 321 329 337 345 353 361 369 377 385 393 401 409 417 425 450 495 520 577 706 434 442 504 512 586 690 698 739 459 471 483 529 541 553 565 594 606 618 630 642 654 666 678 715 727 747 861 867 878 889 900 911 922 933 944 955 966 977"/>
+</xmi:XMI>

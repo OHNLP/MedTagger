@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><CAS version="2">
+    <uima.cas.Sofa _indexed="0" _id="6" sofaNum="1" sofaID="_InitialView" mimeType="text" sofaString="20168:&#13;&#10;#8 Hx of VTE&#13;&#10;&#13;&#10;20113:&#13;&#10;#1 Atrial fibrillation with RVR&#13;&#10;&#13;&#10;20112:&#13;&#10;His cellulitis has resolved with aggressive antibiotic therapy.&#13;&#10;#2 Peristomal Cellulitis; resolving&#9;&#9;&#13;&#10;"/>
+    <uima.tcas.DocumentAnnotation _indexed="1" _id="1" _ref_sofa="6" begin="0" end="179" language="en"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="759" _ref_sofa="6" begin="0" end="6" id="DocBegin:0" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="765" _ref_sofa="6" begin="7" end="7" id="DocBegin:1" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="771" _ref_sofa="6" begin="8" end="20" id="DocBegin:2" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="777" _ref_sofa="6" begin="21" end="21" id="DocBegin:3" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="783" _ref_sofa="6" begin="22" end="22" id="DocBegin:4" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="789" _ref_sofa="6" begin="23" end="23" id="DocBegin:5" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="795" _ref_sofa="6" begin="24" end="30" id="DocBegin:6" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="801" _ref_sofa="6" begin="31" end="31" id="DocBegin:7" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="807" _ref_sofa="6" begin="32" end="63" id="DocBegin:8" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="813" _ref_sofa="6" begin="64" end="64" id="DocBegin:9" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="819" _ref_sofa="6" begin="65" end="65" id="DocBegin:10" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="825" _ref_sofa="6" begin="66" end="66" id="DocBegin:11" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="831" _ref_sofa="6" begin="67" end="73" id="DocBegin:12" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="837" _ref_sofa="6" begin="74" end="74" id="DocBegin:13" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="843" _ref_sofa="6" begin="75" end="138" id="DocBegin:14" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="849" _ref_sofa="6" begin="140" end="177" id="DocBegin:15" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.textspan.Sentence _indexed="1" _id="855" _ref_sofa="6" begin="178" end="178" id="DocBegin:16" _ref_segment="861"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="281" _ref_sofa="6" begin="6" end="7" tokenNumber="0"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="289" _ref_sofa="6" begin="7" end="8" tokenNumber="1"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="297" _ref_sofa="6" begin="20" end="21" tokenNumber="2"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="305" _ref_sofa="6" begin="21" end="22" tokenNumber="3"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="313" _ref_sofa="6" begin="22" end="23" tokenNumber="4"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="321" _ref_sofa="6" begin="23" end="24" tokenNumber="5"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="329" _ref_sofa="6" begin="30" end="31" tokenNumber="6"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="337" _ref_sofa="6" begin="31" end="32" tokenNumber="7"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="345" _ref_sofa="6" begin="63" end="64" tokenNumber="8"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="353" _ref_sofa="6" begin="64" end="65" tokenNumber="9"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="361" _ref_sofa="6" begin="65" end="66" tokenNumber="10"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="369" _ref_sofa="6" begin="66" end="67" tokenNumber="11"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="377" _ref_sofa="6" begin="73" end="74" tokenNumber="12"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="385" _ref_sofa="6" begin="74" end="75" tokenNumber="13"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="393" _ref_sofa="6" begin="138" end="139" tokenNumber="14"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="401" _ref_sofa="6" begin="139" end="140" tokenNumber="15"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="409" _ref_sofa="6" begin="177" end="178" tokenNumber="16"/>
+    <org.ohnlp.typesystem.type.syntax.NewlineToken _indexed="1" _id="417" _ref_sofa="6" begin="178" end="179" tokenNumber="17"/>
+    <org.ohnlp.typesystem.type.syntax.NumToken _indexed="1" _id="425" _ref_sofa="6" begin="0" end="5" tokenNumber="18" partOfSpeech="CD" numType="0"/>
+    <org.ohnlp.typesystem.type.syntax.NumToken _indexed="1" _id="450" _ref_sofa="6" begin="9" end="10" tokenNumber="21" partOfSpeech="CD" numType="0"/>
+    <org.ohnlp.typesystem.type.syntax.NumToken _indexed="1" _id="495" _ref_sofa="6" begin="24" end="29" tokenNumber="25" partOfSpeech="CD" numType="0"/>
+    <org.ohnlp.typesystem.type.syntax.NumToken _indexed="1" _id="520" _ref_sofa="6" begin="33" end="34" tokenNumber="28" partOfSpeech="LS" numType="0"/>
+    <org.ohnlp.typesystem.type.syntax.NumToken _indexed="1" _id="577" _ref_sofa="6" begin="67" end="72" tokenNumber="33" partOfSpeech="CD" numType="0"/>
+    <org.ohnlp.typesystem.type.syntax.NumToken _indexed="1" _id="706" _ref_sofa="6" begin="141" end="142" tokenNumber="45" partOfSpeech="LS" numType="0"/>
+    <org.ohnlp.typesystem.type.syntax.PunctuationToken _indexed="1" _id="434" _ref_sofa="6" begin="5" end="6" tokenNumber="19" partOfSpeech=":"/>
+    <org.ohnlp.typesystem.type.syntax.PunctuationToken _indexed="1" _id="442" _ref_sofa="6" begin="8" end="9" tokenNumber="20" partOfSpeech="NN"/>
+    <org.ohnlp.typesystem.type.syntax.PunctuationToken _indexed="1" _id="504" _ref_sofa="6" begin="29" end="30" tokenNumber="26" partOfSpeech=":"/>
+    <org.ohnlp.typesystem.type.syntax.PunctuationToken _indexed="1" _id="512" _ref_sofa="6" begin="32" end="33" tokenNumber="27" partOfSpeech="NN"/>
+    <org.ohnlp.typesystem.type.syntax.PunctuationToken _indexed="1" _id="586" _ref_sofa="6" begin="72" end="73" tokenNumber="34" partOfSpeech=":"/>
+    <org.ohnlp.typesystem.type.syntax.PunctuationToken _indexed="1" _id="690" _ref_sofa="6" begin="137" end="138" tokenNumber="43" partOfSpeech="."/>
+    <org.ohnlp.typesystem.type.syntax.PunctuationToken _indexed="1" _id="698" _ref_sofa="6" begin="140" end="141" tokenNumber="44" partOfSpeech="NN"/>
+    <org.ohnlp.typesystem.type.syntax.PunctuationToken _indexed="1" _id="739" _ref_sofa="6" begin="164" end="165" tokenNumber="48" partOfSpeech=","/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="459" _ref_sofa="6" begin="11" end="13" tokenNumber="22" partOfSpeech="NN" capitalization="3" numPosition="0" canonicalForm="hx"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="471" _ref_sofa="6" begin="14" end="16" tokenNumber="23" partOfSpeech="IN" capitalization="1" numPosition="0"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="483" _ref_sofa="6" begin="17" end="20" tokenNumber="24" partOfSpeech="NN" capitalization="4" numPosition="0" canonicalForm="vte"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="529" _ref_sofa="6" begin="35" end="41" tokenNumber="29" partOfSpeech="JJ" capitalization="3" numPosition="0" canonicalForm="atrial"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="541" _ref_sofa="6" begin="42" end="54" tokenNumber="30" partOfSpeech="NN" capitalization="1" numPosition="0" canonicalForm="fibrillation"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="553" _ref_sofa="6" begin="55" end="59" tokenNumber="31" partOfSpeech="IN" capitalization="1" numPosition="0"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="565" _ref_sofa="6" begin="60" end="63" tokenNumber="32" partOfSpeech="NN" capitalization="4" numPosition="0" canonicalForm="rvr"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="594" _ref_sofa="6" begin="75" end="78" tokenNumber="35" partOfSpeech="PRP$" capitalization="3" numPosition="0"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="606" _ref_sofa="6" begin="79" end="89" tokenNumber="36" partOfSpeech="NN" capitalization="1" numPosition="0" canonicalForm="cellulitis"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="618" _ref_sofa="6" begin="90" end="93" tokenNumber="37" partOfSpeech="VBZ" capitalization="1" numPosition="0"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="630" _ref_sofa="6" begin="94" end="102" tokenNumber="38" partOfSpeech="VBN" capitalization="1" numPosition="0" canonicalForm="resolve"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="642" _ref_sofa="6" begin="103" end="107" tokenNumber="39" partOfSpeech="IN" capitalization="1" numPosition="0"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="654" _ref_sofa="6" begin="108" end="118" tokenNumber="40" partOfSpeech="JJ" capitalization="1" numPosition="0" canonicalForm="aggressive"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="666" _ref_sofa="6" begin="119" end="129" tokenNumber="41" partOfSpeech="JJ" capitalization="1" numPosition="0" canonicalForm="antibiotic"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="678" _ref_sofa="6" begin="130" end="137" tokenNumber="42" partOfSpeech="NN" capitalization="1" numPosition="0" canonicalForm="therapy"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="715" _ref_sofa="6" begin="143" end="153" tokenNumber="46" partOfSpeech="JJ" capitalization="3" numPosition="0" canonicalForm="peristomal"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="727" _ref_sofa="6" begin="154" end="164" tokenNumber="47" partOfSpeech="NN" capitalization="3" numPosition="0" canonicalForm="cellulitis"/>
+    <org.ohnlp.typesystem.type.syntax.WordToken _indexed="1" _id="747" _ref_sofa="6" begin="166" end="175" tokenNumber="49" partOfSpeech="VBG" capitalization="1" numPosition="0" canonicalForm="resolve"/>
+    <org.ohnlp.typesystem.type.textspan.Segment _indexed="1" _id="861" _ref_sofa="6" begin="0" end="178" id="DocBegin" value="DocBegin"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="867" _ref_sofa="6" begin="17" end="20" detectionMethod="DictionaryLookup" normTarget="venous thromboembolism" Certainty="Positive" semGroup="DISO" status="HistoryOf" _ref_sentence="771" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="878" _ref_sofa="6" begin="17" end="20" detectionMethod="DictionaryLookup" normTarget="venous thromboembolic disease" Certainty="Positive" semGroup="DISO" status="HistoryOf" _ref_sentence="771" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="889" _ref_sofa="6" begin="35" end="54" detectionMethod="DictionaryLookup" normTarget="atrial fibrillation" Certainty="Positive" semGroup="FIND" status="Present" _ref_sentence="807" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="900" _ref_sofa="6" begin="35" end="54" detectionMethod="DictionaryLookup" normTarget="atrial fibrillation" Certainty="Positive" semGroup="DISO" status="Present" _ref_sentence="807" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="911" _ref_sofa="6" begin="60" end="63" detectionMethod="DictionaryLookup" normTarget="rapid ventricular response" Certainty="Positive" semGroup="DISO" status="Present" _ref_sentence="807" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="922" _ref_sofa="6" begin="79" end="89" detectionMethod="DictionaryLookup" normTarget="cellulitis" Certainty="Positive" semGroup="DISO" status="Present" _ref_sentence="843" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="933" _ref_sofa="6" begin="79" end="89" detectionMethod="DictionaryLookup" normTarget="cellulitis" Certainty="Positive" semGroup="FIND" status="Present" _ref_sentence="843" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="944" _ref_sofa="6" begin="108" end="118" detectionMethod="DictionaryLookup" normTarget="aggressive" Certainty="Negated" semGroup="DISO" status="Present" _ref_sentence="843" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="955" _ref_sofa="6" begin="119" end="137" detectionMethod="DictionaryLookup" normTarget="antibiotic therapy" Certainty="Negated" semGroup="PROC" status="Present" _ref_sentence="843" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="966" _ref_sofa="6" begin="154" end="164" detectionMethod="DictionaryLookup" normTarget="cellulitis" Certainty="Positive" semGroup="DISO" status="Present" _ref_sentence="849" experiencer="Patient"/>
+    <org.ohnlp.medtagger.type.ConceptMention _indexed="1" _id="977" _ref_sofa="6" begin="154" end="164" detectionMethod="DictionaryLookup" normTarget="cellulitis" Certainty="Positive" semGroup="FIND" status="Present" _ref_sentence="849" experiencer="Patient"/>
+</CAS>
