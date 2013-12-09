@@ -91,15 +91,16 @@ public class ResourceUtilManager {
 			String resourcefile=RESOURCEDIR+"/used_resources.txt";
 			Scanner sc = new Scanner(new File(resourcefile));
 	 		while (sc.hasNextLine()) {
-			String line = sc.nextLine();
-			Pattern paResource = Pattern.compile("\\./"+resourceType+"/resources_"+resourceType+"_"+"(.*?)\\.txt");
-			for (Object r : findMatches(paResource, line)){
-					MatchResult ro=(MatchResult) r;
-					String foundResource  = ro.group(1);
-					String pathToResource = RESOURCEDIR+"/"+resourceType+"/resources_"+resourceType+"_"+foundResource+".txt";
-					hmResources.put(foundResource, pathToResource);
-				}
-			}
+	 			String line = sc.nextLine();
+	 			Pattern paResource = Pattern.compile("\\./"+resourceType+"/resources_"+resourceType+"_"+"(.*?)\\.txt");
+	 			for (Object r : findMatches(paResource, line)){
+	 				MatchResult ro=(MatchResult) r;
+	 				String foundResource  = ro.group(1);
+	 				String pathToResource = RESOURCEDIR+"/"+resourceType+"/resources_"+resourceType+"_"+foundResource+".txt";
+	 				hmResources.put(foundResource, pathToResource);
+	 			}
+	 		}
+	 		sc.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			iv_logger.warn("Failed to read a resource from used_resources.txt.");
@@ -193,7 +194,8 @@ public class ResourceUtilManager {
 						}
 					}
 				}
-			}						
+			}			
+			sc.close();
 			}
 		}catch (IOException e) {
 			e.printStackTrace();
