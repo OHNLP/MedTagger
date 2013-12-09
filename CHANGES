@@ -1,0 +1,10 @@
+
+Fixes included in MedTagger-1.0.1:
+
+#115 Update MedTagger release to 1.0.1
+#114 Fix capitalization error of POSTaggerAE (was PosTaggerAE) in MedTagger descriptors
+#113 Scanner left open
+#112 Open2OHTokenizer LineSentenceDetector not checking for zero length in splits
+
+
+https://sourceforge.net/p/ohnlp/bugs/

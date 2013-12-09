@@ -32,12 +32,12 @@ and run runMedTaggerCVD.bat (runMedTaggerCVD.sh) or runMedTaggerCPE.bat (runMedT
  which will test processable analysis engines and collection processing engines.
 
 In Windows:
->java -Xms512M -Xmx2000M -cp resources;desc;descsrc;MedTagger-1.0.jar org.apache.uima.tools.cvd.CVD
->java -Xms512M -Xmx2000M -cp resources;desc;descsrc;MedTagger-1.0.jar org.apache.uima.tools.cpm.CpmFrame
+>java -Xms512M -Xmx2000M -cp resources;desc;descsrc;MedTagger-1.0.1.jar org.apache.uima.tools.cvd.CVD
+>java -Xms512M -Xmx2000M -cp resources;desc;descsrc;MedTagger-1.0.1.jar org.apache.uima.tools.cpm.CpmFrame
  
 In Unix/Linux:
->java -Xms512M -Xmx2000M -cp resources:desc:descsrc:MedTagger-1.0.jar org.apache.uima.tools.cvd.CVD
->java -Xms512M -Xmx2000M -cp resources:desc:descsrc:MedTagger-1.0.jar org.apache.uima.tools.cpm.CpmFrame
+>java -Xms512M -Xmx2000M -cp resources:desc:descsrc:MedTagger-1.0.1.jar org.apache.uima.tools.cvd.CVD
+>java -Xms512M -Xmx2000M -cp resources:desc:descsrc:MedTagger-1.0.1.jar org.apache.uima.tools.cpm.CpmFrame
 
 It will fire up UIMA Cas Visual Debugger (CVD) or the collection processing engine (CPE) GUI. 
 

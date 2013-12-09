@@ -23,7 +23,7 @@
             <classpath refid="_medtagger.cp" />
         </javac>
 
-        <jar destfile="MedTagger-1.0.jar">
+        <jar destfile="MedTagger-1.0.1.jar">
             <fileset dir="bin"/>
             <zipfileset excludes="META-INF/*.SF" src="lib/commons-io-1.4.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="lib/commons-lang-2.4.jar"/>
