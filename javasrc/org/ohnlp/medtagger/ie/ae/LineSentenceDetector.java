@@ -57,8 +57,7 @@ public class LineSentenceDetector  extends JCasAnnotator_ImplBase {
 	public void process(JCas jCas) throws AnalysisEngineProcessException {
 		JFSIndexRepository indexes = jCas.getJFSIndexRepository();
 		
-		Iterator<?> btItr = indexes.getAnnotationIndex(BaseToken.type)
-				.iterator();
+		Iterator<?> btItr = indexes.getAnnotationIndex(BaseToken.type).iterator();
 		Iterator<?> sentItr = indexes.getAnnotationIndex(Sentence.type).iterator();
 		String docText=jCas.getDocumentText();
 		char[] charArray=docText.toCharArray(); 
@@ -73,7 +72,7 @@ public class LineSentenceDetector  extends JCasAnnotator_ImplBase {
 		while (sentItr.hasNext()) {
 			   Sentence sent= (Sentence) sentItr.next();
 			   sentList.add(sent);				
-			}
+		}
 		
 		int sentIndex=1;
 		Sentence csent=sentList.get(0);
@@ -97,7 +96,7 @@ public class LineSentenceDetector  extends JCasAnnotator_ImplBase {
 		int btsize=btList.size();
 		BaseToken pbt=null;
 		for(int i=0; i<btsize; i++){
-			 BaseToken bt=(BaseToken) btList.get(i);
+			  BaseToken bt=(BaseToken) btList.get(i);
 			  if(bt.getEnd()-bt.getBegin()==1){
 				 char ch=charArray[bt.getBegin()];
 				 if(!Character.isLetterOrDigit(ch)){
@@ -134,10 +133,10 @@ public class LineSentenceDetector  extends JCasAnnotator_ImplBase {
 				 // DVT/PE or H/O
 				 String[] splits=tokenText.split("(/|-|\\.)");
 				 if(splits.length==1){
-				 WordToken wToken=new WordToken(jCas, bt.getBegin(), bt.getEnd());
-				 wToken.setPartOfSpeech(bt.getPartOfSpeech());
-				 wToken.setCapitalization(getCapitalization(bt.getCoveredText()));
-				 newbtList.add(wToken);
+					 WordToken wToken=new WordToken(jCas, bt.getBegin(), bt.getEnd());
+					 wToken.setPartOfSpeech(bt.getPartOfSpeech());
+					 wToken.setCapitalization(getCapitalization(bt.getCoveredText()));
+					 newbtList.add(wToken);
 				 }
 				 else{
 					 int pos=bt.getBegin();
@@ -148,6 +147,7 @@ public class LineSentenceDetector  extends JCasAnnotator_ImplBase {
 							 newbtList.add(pToken);
 				             pos+=1;
 						 }
+						 if(splits[j].length()==0) continue;
 						 WordToken wToken=new WordToken(jCas,pos,pos+splits[j].length()); 
 						 wToken.setPartOfSpeech(bt.getPartOfSpeech());
 						 wToken.setCapitalization(getCapitalization(splits[j]));
@@ -158,7 +158,7 @@ public class LineSentenceDetector  extends JCasAnnotator_ImplBase {
 				 }
 			 }
 			 pbt=bt;
-bt.removeFromIndexes();
+			 bt.removeFromIndexes();
 		}
 		
 		for(int i=0; i<newbtList.size(); i++){
@@ -178,7 +178,7 @@ bt.removeFromIndexes();
 	 * @param token
 	 * @param tokenText
 	 */
- public static int getCapitalization(String tokenText) {
+	public static int getCapitalization(String tokenText) {
 		// true = upper case, false = lower case
 		boolean[] uppercaseMask = new boolean[tokenText.length()];
 		boolean isAllUppercase = true;

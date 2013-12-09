@@ -139,7 +139,7 @@ public class LineSentenceDetector  extends JCasAnnotator_ImplBase {
 							 if(splits[j].equals("E")) continue;
 							 splits[j]=splits[j].substring(0,splits[j].length()-1);
 						 }
-						 
+						 if(splits[j].length()==0) continue;
 						 WordToken wToken=new WordToken(jCas,pos,pos+splits[j].length()); 
 						 wToken.setPartOfSpeech(bt.getPartOfSpeech());
 						 wToken.setCapitalization(getCapitalization(splits[j]));
