@@ -17,7 +17,7 @@
             <pathelement location="lib/log4j-1.2.16.jar"/>
         </path>
 
-        <javac destdir="bin" debug="true">
+        <javac destdir="bin" debug="true" includeantruntime="false">
             <src path="autosrc" />
             <src path="javasrc" />
             <classpath refid="_medtagger.cp" />
