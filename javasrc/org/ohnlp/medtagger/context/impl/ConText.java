@@ -116,7 +116,7 @@ public class ConText {
 		Scanner sc = new Scanner(new File(contextFile));
 		while (sc.hasNextLine()) {
 			String line = sc.nextLine();
-			   if(line.startsWith("#")) continue;
+			if(line.startsWith("#")) continue;
 	
 			if (!(line.startsWith("//"))) {
 				String[] tmp=line.split("~\\|~");
@@ -168,6 +168,8 @@ public class ConText {
 			
 		}
 		}
+		
+		sc.close();
 		
 		if (regex_PSEUDO.length()>0)
 			regexPseudo = Pattern.compile(regex_PSEUDO.substring(2));
