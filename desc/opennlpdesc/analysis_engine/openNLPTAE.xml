@@ -24,19 +24,19 @@
 
 	<delegateAnalysisEngineSpecifiers>
 		<delegateAnalysisEngine key="SentenceDetectorAE">
-			<import name="org.ohnlp.opennlp.desc.aes.SentenceDetectorAE"/>
+			<import name="org.ohnlp.opennlp.aes.SentenceDetectorAE"/>
 		</delegateAnalysisEngine>
 
 		<delegateAnalysisEngine key="TokenizerAE">
-			<import name="org.ohnlp.opennlp.desc.aes.TokenizerAE"/>
+			<import name="org.ohnlp.opennlp.aes.TokenizerAE"/>
 		</delegateAnalysisEngine>
 
 		<delegateAnalysisEngine key="POSTaggerAE">
-			<import name="org.ohnlp.opennlp.desc.aes.POSTaggerAE"/>
+			<import name="org.ohnlp.opennlp.aes.POSTaggerAE"/>
 		</delegateAnalysisEngine>
 
 		<delegateAnalysisEngine key="ChunkerAE">
-			<import name="org.ohnlp.opennlp.desc.aes.ChunkerAE"/>
+			<import name="org.ohnlp.opennlp.aes.ChunkerAE"/>
 		</delegateAnalysisEngine>
 
 		</delegateAnalysisEngineSpecifiers>
@@ -92,7 +92,7 @@
 				<name>SentenceModel</name>
 				<description/>
         <fileResourceSpecifier>
-					<fileUrl>file:opennlpresources/mayomodels/sd-med-model.zip/fileUrl>
+					<fileUrl>file:opennlpresources/mayomodels/sd-med-model.zip</fileUrl>
 				</fileResourceSpecifier>
 				<implementationName>opennlp.uima.sentdetect.SentenceModelResourceImpl</implementationName>
 			</externalResource>
