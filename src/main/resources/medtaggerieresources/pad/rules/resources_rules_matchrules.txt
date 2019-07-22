@@ -1,0 +1,9 @@
+//PAD ANATOMIC
+RULENAME="cm_r0a",REGEXP="\b(%reANATdesc )?(%reANAT )(artery|arteries|systems?|origin|trunks?|veins?)?\b",LOCATION="NA",NORM="ANAT:group(4)"
+RULENAME="cm_r1a",REGEXP="\b(%reDISOdesc )?(%reDISO)\b",LOCATION="NA",NORM="DISO:%normDISOdesc(group(2))_group(4)"
+RULENAME="cm_r2a",REGEXP="\b(one[ -]vessel run-?off|single vessel run-?off)\b",LOCATION="NA",NORM="DISO:ALONE_group(1)"
+RULENAME="cm_r4a",REGEXP="\b(no flow|not demonstrate flow|severe narrowing|moderate narrowing)\b",LOCATION="NA",NORM="DISO:POSITIVE_group(1)"
+RULENAME="cm_r5a",REGEXP="\b(near|extensive|complete)?(%reANATdesc )?(%reANAT )?(occluded|occludes|occlusion|occlusive)\b",LOCATION="NA",NORM="DISO:ALONE_Occlusion"
+RULENAME="cm_r6a",REGEXP="\b%reDISOAbbr\b",LOCATION="UC",NORM="DISO:group(1)"
+RULENAME="cm_r7a",REGEXP="\b%reANATAbbr\b",LOCATION="UC",NORM="ANAT:group(1)"
+RULENAME="cm_r8a",REGEXP="\b%reDISOAlone\b",LOCATION="NA",NORM="DISO:ALONE_group(1)"

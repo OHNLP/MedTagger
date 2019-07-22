@@ -1,0 +1,19 @@
+extensive	POSITIVE
+complete	POSITIVE
+large	POSITIVE
+moderate	POSITIVE
+moderate focal	POSITIVE
+multi-?focus	POSITIVE
+multifocus	POSITIVE
+multi focus	POSITIVE
+severe	POSITIVE
+significant	POSITIVE
+highgrade	POSITIVE
+high grade	POSITIVE
+high-grade	POSITIVE
+diffuse	PROBABLE
+small amount of	PROBABLE
+some	PROBABLE
+mild	PROBABLE
+minimal	NO
+

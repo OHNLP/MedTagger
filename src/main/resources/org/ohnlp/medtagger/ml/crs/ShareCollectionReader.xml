@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<collectionReaderDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation> 
+  <implementationName>org.ohnlp.medtagger.ml.cr.ShareCollectionReader</implementationName> 
+ <processingResourceMetaData>
+  <name>org.ohnlp.medtagger.ml.crs.ShareCollectionReader</name> 
+  <description>Reads files from the filesystem. This CollectionReader may be used with or without a CAS Initializer. If a CAS Initializer is supplied, it will be passed an InputStream to the file and must populate the CAS from that InputStream. If no CAS Initializer is supplied, this CollectionReader will read the file itself and set treat the entire contents of the file as the document to be inserted into the CAS.</description> 
+  <version>1.0</version> 
+  <vendor>The Apache Software Foundation</vendor> 
+ <configurationParameters searchStrategy="language_fallback">
+ <configurationParameter>
+  <name>InputDirectory</name> 
+  <description>Directory containing input files</description> 
+  <type>String</type> 
+  <multiValued>false</multiValued> 
+  <mandatory>true</mandatory> 
+  </configurationParameter>
+ <configurationParameter>
+  <name>Encoding</name> 
+  <description>Character encoding for the documents. If not specified, the default system encoding will be used. Note that this parameter only applies if there is no CAS Initializer provided; otherwise, it is the CAS Initializer's responsibility to deal with character encoding issues.</description> 
+  <type>String</type> 
+  <multiValued>false</multiValued> 
+  <mandatory>false</mandatory> 
+  </configurationParameter>
+ <configurationParameter>
+  <name>Language</name> 
+  <description>ISO language code for the documents</description> 
+  <type>String</type> 
+  <multiValued>false</multiValued> 
+  <mandatory>false</mandatory> 
+  </configurationParameter>
+ <configurationParameter>
+  <name>BrowseSubdirectories</name> 
+  <description>True means include files of subdirectories, recursively, of the input directory.</description> 
+  <type>Boolean</type> 
+  <multiValued>false</multiValued> 
+  <mandatory>false</mandatory> 
+  </configurationParameter>
+  </configurationParameters>
+ <configurationParameterSettings>
+ <nameValuePair>
+  <name>InputDirectory</name> 
+ <value>
+  <string>testdata/medtaggermltest/share/input</string> 
+  </value>
+  </nameValuePair>
+ <nameValuePair>
+  <name>BrowseSubdirectories</name> 
+ <value>
+  <boolean>false</boolean> 
+  </value>
+  </nameValuePair>
+ <nameValuePair>
+  <name>Language</name> 
+<value>
+  <string>en</string> 
+  </value>
+  </nameValuePair>
+  </configurationParameterSettings>
+<typeSystemDescription>
+ <imports>
+   <import name="org.ohnlp.medtagger.ml.types.MedTaggerMLTypes" /> 
+  </imports>
+  </typeSystemDescription>
+  <typePriorities /> 
+  <fsIndexCollection /> 
+<capabilities>
+<capability>
+  <inputs /> 
+<outputs>
+  <type allAnnotatorFeatures="true">org.ohnlp.typesystem.type.structured.Document</type> 
+  </outputs>
+  <languagesSupported /> 
+  </capability>
+  </capabilities>
+<operationalProperties>
+  <modifiesCas>true</modifiesCas> 
+  <multipleDeploymentAllowed>false</multipleDeploymentAllowed> 
+  <outputsNewCASes>true</outputsNewCASes> 
+  </operationalProperties>
+  </processingResourceMetaData>
+  <resourceManagerConfiguration /> 
+  </collectionReaderDescription>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><cpeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <collectionReader>
+        <collectionIterator>
+            <descriptor>
+                <import location="../collection_reader/shareCR.xml"/>
+            </descriptor>
+            <configurationParameterSettings>
+                <nameValuePair>
+                    <name>InputDirectory</name>
+                    <value>
+                        <string>SHARE-CLEF</string>
+                    </value>
+                </nameValuePair>
+            </configurationParameterSettings>
+        </collectionIterator>
+    </collectionReader>
+    <casProcessors casPoolSize="3" processingUnitThreadCount="1">
+        <casProcessor deployment="integrated" name="shareAggregateTAE">
+            <descriptor>
+                <import location="../analysis_engine/shareAggregateAE.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+        </casProcessor>
+        <casProcessor deployment="integrated" name="Xmi Writer CAS Consumer">
+            <descriptor>
+                <import location="../cas_consumer/shareCC.xml"/>
+            </descriptor>
+            <deploymentParameters/>
+            <errorHandling>
+                <errorRateThreshold action="terminate" value="0/1000"/>
+                <maxConsecutiveRestarts action="terminate" value="30"/>
+                <timeout max="100000" default="-1"/>
+            </errorHandling>
+            <checkpoint batch="10000" time="1000ms"/>
+            <configurationParameterSettings>
+                <nameValuePair>
+                    <name>OutputDirectory</name>
+                    <value>
+                        <string>testdata/medtaggermltest/output</string>
+                    </value>
+                </nameValuePair>
+                <nameValuePair>
+                    <name>LeftWindow</name>
+                    <value>
+                        <integer>0</integer>
+                    </value>
+                </nameValuePair>
+                <nameValuePair>
+                    <name>RightWindow</name>
+                    <value>
+                        <integer>0</integer>
+                    </value>
+                </nameValuePair>
+            </configurationParameterSettings>
+        </casProcessor>
+    </casProcessors>
+    <cpeConfig>
+        <numToProcess>-1</numToProcess>
+        <deployAs>immediate</deployAs>
+        <checkpoint batch="0" time="300000ms"/>
+        <timerImpl/>
+    </cpeConfig>
+</cpeDescription>

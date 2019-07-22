@@ -1,0 +1,11 @@
+left
+right
+lower
+upper
+anterior
+posterior
+external
+internal
+common
+distal
+proximal

@@ -1,0 +1,459 @@
+none current~|~post~|~neg
+no current~|~post~|~neg
+hx~|~pre~|~hist
+deny~|~pre~|~neg
+no ?:~|~pre~|~neg
+\(no~|~pre~|~neg
+\S+\-\-no~|~pre~|~neg
+don't sound like~|~pre~|~neg
+doesn't sound like~|~pre~|~neg
+\-? all of which(\s+\S+){0,3} (denies|denied)~|~post~|~neg
+denies any of the following symptoms:~|~pre~|~neg
+denies, however,~|~pre~|~neg
+denies any (associated|significant)~|~pre~|~neg
+precaution for~|~pre~|~poss
+resection of~|~pre~|~hist
+debridement of~|~pre~|~hist
+indication for~|~pre~|~hist
+admitted for~|~pre~|~hist
+likely~|~pre~|~poss 
+did deny~|~pre~|~neg
+no source (of|for)~|~pre~|~poss
+did not show much (of|for)~|~pre~|~poss
+no definite findings? (for|of)~|~pre~|~poss
+am concerned about~|~pre~|~poss
+would~|~pre~|~poss
+could have~|~pre~|~poss
+may have~|~pre~|~poss
+raises? the question (of|for)~|~pre~|~poss
+highly unlikely~|~pre~|~poss
+did not show any~|~pre~|~neg
+do not show any~|~pre~|~neg
+does not show any~|~pre~|~neg
+suspicious (for|of)~|~pre~|~poss
+suspicion (for|of)~|~pre~|~poss
+a question (of|for)~|~pre~|~poss
+without evidence (of|for)~|~pre~|~neg
+without signs? (of|for)~|~pre~|~neg
+did not demonstrate~|~pre~|~neg 
+suggests~|~pre~|~poss
+neg (of|for)~|~pre~|~neg
+whether~|~pre~|~hypo
+sounds? (more )?like~|~pre~|~poss
+looks? (more )?like~|~pre~|~poss
+likely~|~post~|~poss
+will have~|~pre~|~hypo
+may be~|~pre~|~poss
+for excluding~|~pre~|~poss
+potentially represent~|~pre~|~poss
+possibility (of|for)~|~pre~|~poss
+should symptoms suggesting~|~pre~|~poss
+look for~|~pre~|~hypo
+no evidences? (of|for)~|~pre~|~neg
+no signs? (of|for)~|~pre~|~neg
+high(-| )risk that (she|the patient|he) is at for~|~pre~|~poss
+risks? (of|for)~|~pre~|~poss
+status post~|~pre~|~hist
+status-post~|~pre~|~hist
+s/p~|~pre~|~hist
+at high-risk (of|for)~|~pre~|~poss 
+at-risk (of|for)~|~pre~|~poss
+at risk (of|for)~|~pre~|~poss 
+re-?assess~|~pre~|~hypo
+assess~|~pre~|~hypo
+prior~|~pre~|~hist
+pmh (of|for)~|~pre~|~hist
+concern~|~pre~|~poss
+concerning~|~pre~|~poss
+is concerned~|~post~|~poss
+is concerned (of|for)~|~pre~|~poss
+a concern (of|for)~|~pre~|~poss
+is possible~|~post~|~poss
+is probable~|~post~|~poss
+is potentional~|~post~|~poss
+no overt clinical signs? (of|for)~|~pre~|~neg 
+monitor (of|for)~|~pre~|~hypo
+no source (of|for)~|~pre~|~neg
+(was|is) ruled out (of|for)~|~pre~|~neg
+no evidence (of|for)~|~pre~|~neg
+(was|is) negative (of|for)~|~pre~|~neg
+probable~|~pre~|~poss
+possible~|~pre~|~poss
+potential~|~pre~|~poss
+probable (of|for)~|~pre~|~poss
+possible (of|for)~|~pre~|~poss
+potential (of|for)~|~pre~|~poss
+negative~|~pre~|~neg
+is possible~|~post~|~poss
+is probable~|~post~|~poss
+is negative~|~post~|~neg
+was possible~|~post~|~poss
+was probable~|~post~|~poss
+was negative~|~post~|~negcp c
+: ?no~|~post~|~neg
+: ?none~|~post~|~neg
+asymptomatic~|~pre~|~neg
+//Hongfang added end
+absence (of|for)~|~pre~|~neg
+adequate to rule her out~|~pre~|~neg
+adequate to rule him out~|~pre~|~neg
+adequate to rule out~|~pre~|~neg
+adequate to rule the patient out~|~pre~|~neg
+although~|~termin~|~neg
+any other~|~pre~|~neg
+apart from~|~termin~|~neg
+are ruled out~|~post~|~neg
+as a cause (of|for)~|~termin~|~neg
+as a etiology for~|~termin~|~neg
+as a etiology of~|~termin~|~neg
+as a reason for~|~termin~|~neg
+as a reason of~|~termin~|~neg
+as a secondary cause for~|~termin~|~neg
+as a secondary cause of~|~termin~|~neg
+as a secondary etiology for~|~termin~|~neg
+as a secondary etiology of~|~termin~|~neg
+as a secondary origin for~|~termin~|~neg
+as a secondary origin of~|~termin~|~neg
+as a secondary reason for~|~termin~|~neg
+as a secondary reason of~|~termin~|~neg
+as a secondary source for~|~termin~|~neg
+as a secondary source of~|~termin~|~neg
+as a source for~|~termin~|~neg
+as a source of~|~termin~|~neg
+as a cause for~|~termin~|~neg
+as a cause of~|~termin~|~neg
+as an etiology for~|~termin~|~neg
+as an etiology of~|~termin~|~neg
+as an origin for~|~termin~|~neg
+as an origin of~|~termin~|~neg
+as a reason for~|~termin~|~neg
+as a reason of~|~termin~|~neg
+as a secondary cause for~|~termin~|~neg
+as a secondary cause of~|~termin~|~neg
+as a secondary etiology for~|~termin~|~neg
+as a secondary etiology of~|~termin~|~neg
+as a secondary origin for~|~termin~|~neg
+as a secondary origin of~|~termin~|~neg
+as a secondary reason for~|~termin~|~neg
+as a secondary reason of~|~termin~|~neg
+as a secondary source for~|~termin~|~neg
+as a secondary source of~|~termin~|~neg
+as a source for~|~termin~|~neg
+as a source of~|~termin~|~neg
+as has~|~termin~|~neg
+as needed~|~pre~|~hypo
+as the cause for~|~termin~|~neg
+as the cause of~|~termin~|~neg
+as the etiology for~|~termin~|~neg
+as the etiology of~|~termin~|~neg
+as the origin for~|~termin~|~neg
+as the origin of~|~termin~|~neg
+as the reason for~|~termin~|~neg
+as the reason of~|~termin~|~neg
+as the secondary cause for~|~termin~|~neg
+as the secondary cause of~|~termin~|~neg
+as the secondary etiology for~|~termin~|~neg
+as the secondary etiology of~|~termin~|~neg
+as the secondary origin for~|~termin~|~neg
+as the secondary origin of~|~termin~|~neg
+as the secondary reason for~|~termin~|~neg
+as the secondary reason of~|~termin~|~neg
+as the secondary source for~|~termin~|~neg
+as the secondary source of~|~termin~|~neg
+as the source for~|~termin~|~neg
+as the source of~|~termin~|~neg
+as well as any~|~pre~|~neg
+aside from~|~termin~|~neg
+aunt~|~pre~|~exp
+aunt's~|~pre~|~exp
+be ruled out~|~post~|~poss
+be ruled out for~|~pre~|~poss
+because~|~termin~|~hypo
+being ruled out~|~post~|~poss
+brother~|~pre~|~exp
+brother's~|~pre~|~exp
+but~|~termin~|~neg
+can be ruled out~|~post~|~neg
+can be ruled out for~|~pre~|~neg
+can rule her out~|~pre~|~neg
+can rule her out against~|~pre~|~neg
+can rule her out for~|~pre~|~neg
+can rule him out~|~pre~|~neg
+can rule him out against~|~pre~|~neg
+can rule him out for~|~pre~|~neg
+can rule out~|~pre~|~neg
+can rule out against~|~pre~|~neg
+can rule out for~|~pre~|~neg
+can rule the patient out~|~pre~|~neg
+can rule the patinet out against~|~pre~|~neg
+can rule the patinet out for~|~pre~|~neg
+cannot~|~pre~|~neg
+cause for~|~termin~|~neg
+cause of~|~termin~|~neg
+causes for~|~termin~|~neg
+causes of~|~termin~|~neg
+checked for~|~pre~|~neg
+clear of~|~pre~|~neg
+come back for~|~pre~|~hypo
+come back to~|~pre~|~hypo
+complains~|~termin~|~histexp
+could be ruled out~|~post~|~poss
+//could be~|~both~|~poss
+could be ruled out for~|~pre~|~poss
+currently~|~termin~|~histexp
+dad~|~pre~|~exp
+dad's~|~pre~|~exp
+declined~|~pre~|~neg
+declines~|~pre~|~neg
+denied~|~pre~|~neg
+denies~|~pre~|~neg
+denying~|~pre~|~neg
+did not rule out~|~post~|~poss
+did rule her out~|~pre~|~neg
+did rule her out against~|~pre~|~neg
+did rule her out for~|~pre~|~neg
+did rule him out~|~pre~|~neg
+did rule him out against~|~pre~|~neg
+did rule him out for~|~pre~|~neg
+did rule out~|~pre~|~neg
+did rule out against~|~pre~|~neg
+did rule out for~|~pre~|~neg
+did rule the patient out~|~pre~|~neg
+did rule the patient out against~|~pre~|~neg
+did rule the patient out for~|~pre~|~neg
+doesn't look like~|~pre~|~neg
+ed~|~termin~|~hist
+emergency department~|~termin~|~hist
+etiology for~|~termin~|~neg
+etiology of~|~termin~|~neg
+evaluate for~|~pre~|~neg
+except~|~termin~|~neg
+fails to reveal~|~pre~|~neg
+family~|~pre~|~exp
+fam hx~|~pre~|~exp
+father~|~pre~|~exp
+father's~|~pre~|~exp
+free~|~post~|~neg
+free of~|~pre~|~neg
+gram negative~|~pseudo~|~neg
+grandfather~|~pre~|~exp
+grandfather's~|~pre~|~exp
+grandmother~|~pre~|~exp
+grandmother's~|~pre~|~exp
+has been negative~|~post~|~neg
+has been ruled out~|~post~|~neg
+have been ruled out~|~post~|~neg
+her~|~termin~|~hypoexp
+his~|~termin~|~hypoexp
+hx of~|~pre~|~hist
+h/o~|~pre~|~hist
+status-?post~|~pre~|~hist
+status post~|~pre~|~hist
+years? ago~|~pre~|~hist
+years? ago~|~post~|~hist
+has had~|~pre~|~hist
+ho~|~pre~|~hist
+history~|~pre~|~hist
+history and~|~pseudo~|~hist
+history and examination~|~pseudo~|~hist
+history and physical~|~pseudo~|~hist
+history for~|~pseudo~|~hist
+history of chief complaint~|~pseudo~|~hist
+history of present illness~|~pseudo~|~hist
+history taking~|~pseudo~|~hist
+history, physical\~|~pseudo~|~hist
+however~|~termin~|~neg
+if~|~pre~|~hypo
+if negative~|~pseudo~|~hypo
+inconsistent with~|~pre~|~neg
+is not~|~pre~|~neg
+is ruled out~|~post~|~neg
+is to be ruled out~|~post~|~poss
+is to be ruled out for~|~pre~|~poss
+isn't~|~pre~|~neg
+lack of~|~pre~|~neg
+lacked~|~pre~|~neg
+may be ruled out~|~post~|~poss
+may be ruled out for~|~pre~|~poss
+might be ruled out~|~post~|~poss
+might be ruled out for~|~pre~|~poss
+mom~|~pre~|~exp
+mom's~|~pre~|~exp
+mother~|~pre~|~exp
+mother's~|~pre~|~exp
+must be ruled out~|~post~|~poss
+must be ruled out for~|~pre~|~poss
+negative for~|~pre~|~neg
+never developed~|~pre~|~neg
+never had~|~pre~|~neg
+nevertheless~|~termin~|~neg
+no~|~pre~|~neg
+no abnormal~|~pre~|~neg
+no cause of~|~pre~|~neg
+no change~|~pseudo~|~neg
+no complaints of~|~pre~|~neg
+no definite change~|~pseudo~|~neg
+no evidence~|~pre~|~neg
+no evidence to suggest~|~pre~|~neg
+no findings of~|~pre~|~neg
+no findings to indicate~|~pre~|~neg
+no history of~|~pre~|~neg
+no increase~|~pseudo~|~neg
+no interval change~|~pseudo~|~neg
+no longer present~|~post~|~neg
+no mammographic evidence of~|~pre~|~neg
+no new~|~pre~|~neg
+no new evidence~|~pre~|~neg
+no other evidence~|~pre~|~neg
+no radiographic evidence of~|~pre~|~neg
+no sign of~|~pre~|~neg
+no significant~|~pre~|~neg
+no significant change~|~pseudo~|~neg
+no significant interval change~|~pseudo~|~neg
+no signs of~|~pre~|~neg
+no suggestion of~|~pre~|~neg
+no suspicious~|~pre~|~neg
+no suspicious change~|~pseudo~|~neg
+non diagnostic~|~post~|~neg
+not~|~pre~|~neg
+not appear~|~pre~|~neg
+not appreciate~|~pre~|~neg
+not associated with~|~pre~|~neg
+not been ruled out~|~post~|~poss
+not cause~|~pseudo~|~neg
+not certain if~|~pseudo~|~neg
+not certain whether~|~pseudo~|~neg
+not complain of~|~pre~|~neg
+not demonstrate~|~pre~|~neg
+not drain~|~pseudo~|~neg
+not exhibit~|~pre~|~neg
+not extend~|~pseudo~|~neg
+not feel~|~pre~|~neg
+not had~|~pre~|~neg
+not have~|~pre~|~neg
+not have evidence of~|~pre~|~neg
+not know of~|~pre~|~neg
+not known to have~|~pre~|~neg
+not necessarily~|~pseudo~|~neg
+not on~|~pseudo~|~neg
+not only~|~pseudo~|~neg
+not reveal~|~pre~|~neg
+not ruled out~|~post~|~poss
+not see~|~pre~|~neg
+not to be~|~pre~|~neg
+noted~|~termin~|~histexp
+now resolved~|~post~|~neg
+origin for~|~termin~|~neg
+origin of~|~termin~|~neg
+origins for~|~termin~|~neg
+origins of~|~termin~|~neg
+other possibilities of~|~termin~|~neg
+ought to be ruled out~|~post~|~poss
+ought to be ruled out for~|~pre~|~poss
+past history~|~pre~|~hist
+past medical history~|~pre~|~hist
+patient~|~termin~|~hypoexp
+patient was not~|~pre~|~neg
+patient's~|~termin~|~hypoexp
+poor history~|~pseudo~|~hist
+presenting~|~termin~|~histexp
+presents~|~termin~|~histexp
+previous~|~one~|~hist
+prophylaxis~|~post~|~neg
+r/o~|~pre~|~neg
+rather than~|~pre~|~neg
+reason for~|~termin~|~neg
+reason of~|~termin~|~neg
+reasons for~|~termin~|~neg
+reasons of~|~termin~|~neg
+reported~|~termin~|~histexp
+reports~|~termin~|~histexp
+resolved~|~pre~|~neg
+return~|~pre~|~hypo
+ro~|~pre~|~neg
+rule her out~|~pre~|~neg
+rule her out for~|~pre~|~neg
+rule him out~|~pre~|~neg
+rule him out for~|~pre~|~neg
+rule out~|~pre~|~neg
+rule out for~|~pre~|~neg
+rule the patient out~|~pre~|~neg
+rule the patinet out for~|~pre~|~neg
+ruled her out~|~pre~|~neg
+ruled her out against~|~pre~|~neg
+ruled her out for~|~pre~|~neg
+ruled him out~|~pre~|~neg
+ruled him out against~|~pre~|~neg
+ruled him out for~|~pre~|~neg
+ruled out~|~pre~|~neg
+ruled out against~|~pre~|~neg
+ruled out for~|~pre~|~neg
+ruled the patient out~|~pre~|~neg
+ruled the patient out against~|~pre~|~neg
+ruled the patient out for~|~pre~|~neg
+rules her out~|~pre~|~neg
+rules her out for~|~pre~|~neg
+rules him out~|~pre~|~neg
+rules him out for~|~pre~|~neg
+rules out~|~pre~|~neg
+rules out for~|~pre~|~neg
+rules the patient out~|~pre~|~neg
+rules the patient out for~|~pre~|~neg
+secondary~|~termin~|~neg
+secondary to~|~termin~|~neg
+should be ruled out~|~post~|~neg
+should be ruled out for~|~pre~|~neg
+should he~|~pre~|~hypo
+should she~|~pre~|~hypo
+should the patient~|~pre~|~hypo
+should there~|~pre~|~hypo
+since~|~termin~|~hypo
+sister~|~pre~|~exp
+sister's~|~pre~|~exp
+social history~|~pseudo~|~hist
+source for~|~termin~|~neg
+source of~|~termin~|~neg
+sources for~|~termin~|~neg
+sources of~|~termin~|~neg
+states~|~termin~|~histexp
+still~|~termin~|~neg
+sudden onset of~|~pseudo~|~hist
+sufficient to rule her out~|~pre~|~neg
+sufficient to rule her out against~|~pre~|~neg
+sufficient to rule her out for~|~pre~|~neg
+sufficient to rule him out~|~pre~|~neg
+sufficient to rule him out against~|~pre~|~neg
+sufficient to rule him out for~|~pre~|~neg
+sufficient to rule out~|~pre~|~neg
+sufficient to rule out against~|~pre~|~neg
+sufficient to rule out for~|~pre~|~neg
+sufficient to rule the patient out~|~pre~|~neg
+sufficient to rule the patient out against~|~pre~|~neg
+sufficient to rule the patient out for~|~pre~|~neg
+test for~|~pre~|~neg
+though~|~termin~|~neg
+to exclude~|~pre~|~neg
+today~|~termin~|~histexp
+trigger event for~|~termin~|~neg
+uncle~|~pre~|~exp
+uncle's~|~pre~|~exp
+unlikely~|~post~|~neg
+unremarkable for~|~pre~|~neg
+was found~|~termin~|~histexp
+was negative~|~post~|~neg
+was not~|~pre~|~neg
+was ruled out~|~post~|~neg
+wasn't~|~pre~|~neg
+what must be ruled out is~|~pre~|~poss
+which~|~termin~|~exp
+who~|~termin~|~hypoexp
+will be ruled out~|~post~|~poss
+will be ruled out for~|~pre~|~poss
+with no~|~pre~|~neg
+without~|~pre~|~neg
+without any evidence of~|~pre~|~neg
+without difficulty~|~pseudo~|~neg
+without evidence~|~pre~|~neg
+without indication of~|~pre~|~neg
+without sign of~|~pre~|~neg
+yet~|~termin~|~neg
