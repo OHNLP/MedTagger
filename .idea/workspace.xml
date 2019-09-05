@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe1e156a-785b-43c0-b9dd-93d4a3a1bed6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/SimpleCliPipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/SimpleCliPipeline.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -32,15 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/SimpleCliPipeline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="77" column="22" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#5808#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="90">
+              <caret line="38" column="40" lean-forward="true" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -57,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1075">
-              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="-493">
+              <caret line="90" column="22" selection-start-line="90" selection-start-column="22" selection-end-line="90" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -127,11 +122,11 @@
         <option value="$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/collection_processing_engine/MedTaggerIECPE.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/aggregate_analysis_engine/MedTaggerIEAggregateTAE.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/util/ResourceUtilManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/cc/IETabDelimitedWriter.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/SimpleCliPipeline.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java" />
       </list>
     </option>
   </component>
@@ -339,12 +334,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567117921906</updated>
-      <workItem from="1567117923839" duration="28912000" />
+      <workItem from="1567117923839" duration="29075000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28912000" />
+    <option name="totallyTimeSpent" value="29075000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="23" width="1920" height="1177" extended-state="0" />
@@ -744,16 +739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1075">
-          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
@@ -766,10 +751,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/SimpleCliPipeline.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="77" column="22" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
+        <state relative-caret-position="90">
+          <caret line="38" column="40" lean-forward="true" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-493">
+          <caret line="90" column="22" selection-start-line="90" selection-start-column="22" selection-end-line="90" selection-end-column="22" />
           <folding>
-            <element signature="e#0#5808#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>

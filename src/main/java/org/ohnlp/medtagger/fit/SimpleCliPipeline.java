@@ -5,37 +5,28 @@
 
 package org.ohnlp.medtagger.fit;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
 import me.tongfei.progressbar.ProgressBar;
 import org.apache.uima.UIMAException;
 import org.apache.uima.UIMAFramework;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.internal.ResourceManagerFactory;
-import org.apache.uima.fit.pipeline.JCasIterable;
-import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.LifeCycleUtil;
-import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.Resource;
-import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceManager;
-import org.apache.uima.resource.metadata.ResourceMetaData;
 import org.apache.uima.util.CasCreationUtils;
-import org.apache.uima.util.Progress;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Properties;
 
 /**
- * Duplicate with SimplePipeline from UIMA fit, to allow CLI callbacks
+ *  Duplicate with SimplePipeline from UIMA-fit, to allow CLI callbacks for progress bar
  *  The original class is final thus cannot be extended
  *
  */
