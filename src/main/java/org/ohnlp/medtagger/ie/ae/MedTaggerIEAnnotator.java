@@ -2,19 +2,19 @@
  * Copyright: (c)  2013  Mayo Foundation for Medical Education and 
  *  Research (MFMER). All rights reserved. MAYO, MAYO CLINIC, and the
  *  triple-shield Mayo logo are trademarks and service marks of MFMER.
- *  
+ *
  *  Except as contained in the copyright notice above, or as used to identify 
  *  MFMER as the author of this software, the trade names, trademarks, service
  *  marks, or product names of the copyright holder shall not be used in
  *  advertising, promotion or otherwise in connection with this software without
  *  prior written authorization of the copyright holder.
- *   
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- *   
+ *
  *  http://www.apache.org/licenses/LICENSE-2.0 
- *   
+ *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,25 +39,27 @@ import org.apache.log4j.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.JFSIndexRepository;
+import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import org.ohnlp.medtagger.ie.type.Match;
 import org.ohnlp.medtagger.type.ConceptMention;
 import org.ohnlp.medtagger.ie.util.ResourceUtilManager;
+import org.ohnlp.typesystem.type.structured.Document;
 import org.ohnlp.typesystem.type.textspan.Sentence;
 
 /**
  * MedTaggerIEAnnotator extracts information based on specified patterns
- * 
+ *
  * @author Hongfang Liu
- * 
+ *
  * Sunghwan Sohn added
- * 	1)choose the longest (deleteInsideMatch()) 
- * 	2)delete duplicates (I don't think this has been implemented)
- * 	3)REMOVE functionality (remove matches with NORM=REMOVE) 
- * 	4)EXCLUSION functionality (exclude matches if its sentence contains a certain pattern)
- * 
+ * 	1)choose the longest (deleteInsideMatch())
+ * 	2)REMOVE functionality (remove matches with NORM=REMOVE)
+ * 	3)EXCLUSION functionality (exclude matches if its sentence contains a certain pattern)
+ *
  */
 public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 
@@ -65,11 +67,17 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 	// default resource directory
 	private String resource_dir = "medtaggerieresources";
 
+	private String removeAllSub = "removeAllSubsumed";
+
+	//if true, remove all subsumed matches regardless of Norm
+	//if false, remove subsumed matches for the same Norm when using deleteInsideMatch()
+	private Boolean deleteAllInsideMatch;
+
 	// lowercase will transform the sentence to lower case for pattern matching
 	private Boolean lowerCase = true;
 	//private Boolean hyphen2space = false;
 	private Boolean punct2space = false;
-	
+
 	private Logger iv_logger = Logger.getLogger(getClass().getName());
 
 	public ResourceUtilManager rum;
@@ -80,33 +88,49 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 		resource_dir = (String) aContext
 				.getConfigParameterValue(PARAM_RESOURCE_DIR);
 		rum = new ResourceUtilManager(resource_dir);
+		deleteAllInsideMatch = (Boolean) aContext
+				.getConfigParameterValue(removeAllSub);
 	}
 
-	public void process(JCas jcas) {	 	
+	public void process(JCas jcas) {
+		//-----To print out docname
+//		JFSIndexRepository indexes = jcas.getJFSIndexRepository();
+//		FSIterator<TOP> docIterator = indexes.getAllIndexedFS(Document.type);
+//
+//		if (docIterator.hasNext()) {
+//			Document docAnn = (Document) docIterator.next();
+//			String fileLoc =docAnn.getFileLoc();
+//			String[] f = fileLoc.split("/");
+//			String docName = f[f.length-1];
+//			System.out.println("---"+docName+" processing in MedTaggerIEAnnotator---");
+//		}
+		//-----
+
 		FSIterator<? extends Annotation> senIter = jcas.getAnnotationIndex(Sentence.type).iterator();
 
 		while (senIter.hasNext()) {
 			Sentence sen = (Sentence) senIter.next();
 			findMatch(rum.getHmRulePattern(), rum.getHmRuleNormalization(),
 					rum.getHmRuleLocation(), sen, jcas);
-			deleteInsideMatch(jcas); 
+			deleteInsideMatch(jcas, deleteAllInsideMatch); //should be before removeInvalidMatch??
 			removeInvalidMatch(jcas);
+			removeExclusion(jcas);
 		}
 	}
 
 	public void findMatch(HashMap<Pattern, String> hmPattern,
-			HashMap<String, String> hmNormalization,
-			HashMap<String, String> hmLocation, Sentence sen, JCas jcas) {
+						  HashMap<String, String> hmNormalization,
+						  HashMap<String, String> hmLocation, Sentence sen, JCas jcas) {
 		String senstr = sen.getCoveredText();
 		if (lowerCase)
 			senstr = senstr.toLowerCase();
-        
-		//test for CRS 
+
+		//test for CRS
 //		if(hyphen2space)
-//			senstr = senstr.replaceAll("-", " ");		
+//			senstr = senstr.replaceAll("-", " ");
 		if(punct2space)
 			senstr = senstr.replaceAll("[~`!.;\\-+_/,'\"]", " "); //don't use : (exclusion - dvt:)
-		
+
 		String matchRule = null;
 		String matchNorm = null;
 
@@ -144,7 +168,7 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 					if (matchRule.startsWith("cm_")) {
 						ConceptMention neAnnot = new ConceptMention(jcas,
 								matchStart + sen.getBegin(), matchEnd
-										+ sen.getBegin());
+								+ sen.getBegin());
 						neAnnot.setNormTarget(matchNorm);
 						neAnnot.setDetectionMethod("Matched");
 						if (matchNorm.indexOf(":") >= 0) {
@@ -172,7 +196,7 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 		Pattern paNorm = Pattern
 				.compile("%([A-Za-z0-9]+?)\\(group\\(([0-9]+)\\)\\)");
 		Pattern paGroup = Pattern.compile("group\\(([0-9]+)\\)");
-		while ((tonormalize.matches(".*?%[A-Z]+%.*?")) || (tonormalize.contains("group"))) { 
+		while ((tonormalize.matches(".*?%[A-Z]+%.*?")) || (tonormalize.contains("group"))) {
 			for (Object lmr : ResourceUtilManager.findMatches(paNorm,
 					tonormalize)) {
 				MatchResult mr = (MatchResult) lmr;
@@ -235,26 +259,32 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 		normalized = tonormalize;
 		return normalized;
 	}
-	
+
 	/**
 	 * remove Match or ConceptMention (semG="Matched") inside of the others
 	 * but does not remove duplication here
-	 * NORM must be same or longer span's NORM must be REMOVE
-	 * 
+	 * if anyNorm is false, NORM must be same or longer span's NORM must be REMOVE
+	 * if anyNorm is true, remove any inside will be removed (updated Apr-10-2014)
+	 *
 	 * eg1) he has chest pain.
 	 * eg2) he has minor chest pain.
 	 * RULENAME="r1",REGEXP="\bchest pain\b",LOCATION="NA",NORM="HF"
+	 * RULENAME="r2",REGEXP="\bminor chest pain\b",LOCATION="NA",NORM="HF"
+	 * <- eg1 "chest pain" eg2 "minor chest pain" will be extracted
+	 *    but eg2 "chest pain" won't be extracted
+	 *
+	 * RULENAME="r1",REGEXP="\bchest pain\b",LOCATION="NA",NORM="HF"
 	 * RULENAME="r1_remove",REGEXP="\bminor chest pain\b",LOCATION="NA",NORM="REMOVE"
-	 * <- eg1 "chest pain" will be caught but eg2 "minor chest pain" won't be caught
-	 * 
+	 * <- only eg1 "chest pain" will be extracted
+	 *
 	 * @param jcas
 	 */
 	@SuppressWarnings("rawtypes")
-	public void deleteInsideMatch(JCas jcas) {
-		//for Match type 
+	public void deleteInsideMatch(JCas jcas, Boolean anyNorm) {
+		//for Match type
 		Set<Match> toRemove = new HashSet<Match>();
 		FSIterator matIter1 = jcas.getAnnotationIndex(Match.type).iterator();
-		
+
 		while(matIter1.hasNext()) {
 			Match mat1 = (Match) matIter1.next();
 			FSIterator matIter2 = jcas.getAnnotationIndex(Match.type).iterator();
@@ -263,44 +293,46 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 				if( (mat2.getBegin()>mat1.getBegin() && mat2.getEnd()<mat1.getEnd())
 						|| (mat2.getBegin()>=mat1.getBegin() && mat2.getEnd()<mat1.getEnd())
 						|| (mat2.getBegin()>mat1.getBegin() && mat2.getEnd()<=mat1.getEnd()))
-					if(mat1.getValue().equals(mat2.getValue()) 
+					if( anyNorm
+							|| mat1.getValue().equals(mat2.getValue())
 							|| mat1.getValue().equals("REMOVE")) {
-						toRemove.add(mat2);		
-						}
+						toRemove.add(mat2);
+					}
 			}
 		}
-		
-		for(Match m : toRemove) 
-			m.removeFromIndexes();		
-		
-			Set<ConceptMention> toCMRemove = new HashSet<ConceptMention>();
-		
+
+		for(Match m : toRemove)
+			m.removeFromIndexes();
+
+		Set<ConceptMention> toCMRemove = new HashSet<ConceptMention>();
+
 		FSIterator matIter = jcas.getAnnotationIndex(Match.type).iterator();
-		Set<Match> remvMatch = new HashSet<Match>();	
+		Set<Match> remvMatch = new HashSet<Match>();
 		while(matIter.hasNext()) {
 			Match mat = (Match) matIter.next();
 			if(mat.getValue().equals("REMOVE")) {
 				remvMatch.add(mat);
 			}
 		}
-		
+
 		FSIterator cmIter1 = jcas.getAnnotationIndex(ConceptMention.type).iterator();
 		while(cmIter1.hasNext()) {
 			ConceptMention cm1 = (ConceptMention) cmIter1.next();
 			if(!cm1.getDetectionMethod().equals("Matched")) continue;
-			
+
 			//ConceptMention vs. ConceptMention to remove subsumed ConceptMention
 			FSIterator cmIter2 = jcas.getAnnotationIndex(ConceptMention.type).iterator();
 			while(cmIter2.hasNext()) {
-				ConceptMention cm2 = (ConceptMention) cmIter2.next();	
+				ConceptMention cm2 = (ConceptMention) cmIter2.next();
 				if(!cm2.getDetectionMethod().equals("Matched")) continue;
 				if( (cm2.getBegin()>cm1.getBegin() && cm2.getEnd()<cm1.getEnd())
 						|| (cm2.getBegin()>=cm1.getBegin() && cm2.getEnd()<cm1.getEnd())
 						|| (cm2.getBegin()>cm1.getBegin() && cm2.getEnd()<=cm1.getEnd()))
-					if(cm1.getNormTarget().equals(cm2.getNormTarget()))
-						toCMRemove.add(cm2);					
+					if(anyNorm
+							|| cm1.getNormTarget().equals(cm2.getNormTarget()))
+						toCMRemove.add(cm2);
 			}
-			
+
 			//ConceptMention vs. Match (NORM=REMOVE) to remove subsumed ConceptMention
 			for(Match m : remvMatch) {
 				if( (cm1.getBegin()>m.getBegin() && cm1.getEnd()<m.getEnd())
@@ -309,11 +341,11 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 					toCMRemove.add(cm1);
 			}
 		}
-		
-		for(ConceptMention m : toCMRemove) 
+
+		for(ConceptMention m : toCMRemove)
 			m.removeFromIndexes();
 	}
-	
+
 	/**
 	 * Remove the case that has NORM=REMOVE
 	 * @param jcas
@@ -322,70 +354,71 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 	public void removeInvalidMatch(JCas jcas) {
 		Set<Match> toRemove = new HashSet<Match>();
 		FSIterator matIter = jcas.getAnnotationIndex(Match.type).iterator();
-		
+
 		while(matIter.hasNext()) {
 			Match mat = (Match) matIter.next();
 			if(mat.getValue().equals("REMOVE"))
 				toRemove.add(mat);
 		}
-		
-		for(Match m : toRemove) 
+
+		for(Match m : toRemove)
 			m.removeFromIndexes();
 	}
-	
+
 	/**
-	 * Remove the previous Match or ConceptMention (getDetectionMethod()="Matched") 
-	 * if it is subsumed by the sentence that contains match found by 
+	 * Remove the previous Match or ConceptMention (getDetectionMethod()="Matched")
+	 * if it is subsumed by the sentence that contains match found by
 	 * the rule that has NORM=EXCLUSION_previousNORM
 	 * (if previousNORM=*, apply to all NORM values)
-	 * 
-	 * eg) 
+	 *
+	 * eg)
 	 * He has chest pain due to cough.
-	 * 
+	 *
 	 * RULENAME="cm_r1a",REGEXP="\bchest pain\b",LOCATION="NA",NORM="HF"
 	 * RULENAME="hf_exclude",REGEXP="\bcough\b",LOCATION="NA",NORM="EXCLUSION_HF"
-	 * 
+	 *
 	 * -> Though "chest pain" is captured by cm_r1a, it will be removed because
-	 * hf_exclude's NORM="EXCLUSION_HF" and the sentence of "cough" also contains 
-	 * "chest pain" 
-	 * 
+	 * hf_exclude's NORM="EXCLUSION_HF" and the sentence of "cough" also contains
+	 * "chest pain"
+	 *
 	 * @param jcas
 	 */
 	@SuppressWarnings("rawtypes")
 	public void removeExclusion(JCas jcas) {
 		//key=NORM, val=List of begin of NORM's sentence|end NORM's sentence
-		Map<String,List<String>> exclusion = new HashMap<String,List<String>>(); 
+		Map<String,List<String>> exclusion = new HashMap<String,List<String>>();
 		FSIterator matIter = jcas.getAnnotationIndex(Match.type).iterator();
-		
+
 		Set<Match> excToRemove = new HashSet<Match>();
 		while(matIter.hasNext()) {
-			Match mat = (Match) matIter.next();		
+			Match mat = (Match) matIter.next();
 			if(mat.getValue().startsWith("EXCLUSION_")) {
-				String norm = mat.getValue().split("_")[1];
+				//String norm = mat.getValue().split("_")[1];
+				String norm = mat.getValue().substring(10); //modified Aug-7-2015
 				String span =  mat.getSentence().getBegin()+"|"+ mat.getSentence().getEnd();
-				
-				List<String> spans = exclusion.get(norm);				
+
+				List<String> spans = exclusion.get(norm);
 				if(spans==null)
 					spans = new ArrayList<String>();
 				spans.add(span);
 				exclusion.put(norm, spans);
-				
+
 				excToRemove.add(mat);
 			}
 		}
 
 		//remove exclusion match itself
-		for(Match m : excToRemove) 
+		for(Match m : excToRemove)
 			m.removeFromIndexes();
-		
+
 		Set<Match> matchToRemove = new HashSet<Match>();
 		matIter = jcas.getAnnotationIndex(Match.type).iterator();
 		while(matIter.hasNext()) {
 			Match mat = (Match) matIter.next();
-			String norm = mat.getValue();			
+			String norm = mat.getValue();
 			List<String> spans = exclusion.get(norm);
-			
-			if(spans!=null || 
+
+			if(spans!=null ||
 					((spans=exclusion.get("*"))!=null)) {
 				for(String s : spans) {
 					String[] toks = s.split("\\|");
@@ -397,23 +430,23 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 							|| (mat.getBegin()>begin && mat.getEnd()<=end)) {
 						matchToRemove.add(mat);
 						break;
-					}				
+					}
 				}
 			}
 		}
-		
+
 		//remove match subsumed by exclusion 
-		for(Match m : matchToRemove) 
+		for(Match m : matchToRemove)
 			m.removeFromIndexes();
-		
+
 		Set<ConceptMention> cmToRemove = new HashSet<ConceptMention>();
 		FSIterator cmIter = jcas.getAnnotationIndex(ConceptMention.type).iterator();
 		while(cmIter.hasNext()) {
 			ConceptMention cm = (ConceptMention) cmIter.next();
 			if(!cm.getDetectionMethod().equals("Matched")) continue;
-			String norm = cm.getNormTarget();			
+			String norm = cm.getNormTarget();
 			List<String> spans = exclusion.get(norm);
-			if(spans!=null || 
+			if(spans!=null ||
 					((spans=exclusion.get("*"))!=null)) {
 				for(String s : spans) {
 					String[] toks = s.split("\\|");
@@ -425,12 +458,12 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 							|| (cm.getBegin()>begin && cm.getEnd()<=end)) {
 						cmToRemove.add(cm);
 						break;
-					}				
+					}
 				}
-			}			
+			}
 		}
-		
-		for(ConceptMention cm : cmToRemove) 
+
+		for(ConceptMention cm : cmToRemove)
 			cm.removeFromIndexes();
 	}
 }

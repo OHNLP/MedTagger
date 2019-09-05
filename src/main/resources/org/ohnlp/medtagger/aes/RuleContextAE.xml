@@ -5,7 +5,7 @@
   <annotatorImplementationName>org.ohnlp.medtagger.context.RuleContextAnnotator</annotatorImplementationName>
   <analysisEngineMetaData>
     <name>org.ohnlp.medtagger.aes.RuleContextAE</name>
-    <description>This uses Imre Solti's implementation of the combination of negex and context</description>
+    <description>An expanded version of the ConTexT algorithm</description>
     <version>1.0</version>
     <vendor/>
      <typeSystemDescription>
@@ -32,13 +32,5 @@
       <outputsNewCASes>false</outputsNewCASes>
     </operationalProperties>
   </analysisEngineMetaData>
-  
-   <externalResourceDependencies>
-    <externalResourceDependency>
-      <key>context_file</key>
-      <description>External files storing rules</description>
-      <optional>false</optional>
-    </externalResourceDependency>
-    </externalResourceDependencies>
  
 </analysisEngineDescription>

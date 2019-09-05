@@ -23,49 +23,40 @@
 
 package org.ohnlp.medtagger.context.impl;
 
-import java.util.HashMap;
-
 /**
- * Context States
+ * Marks a trigger word
  */
-public enum ConText {
-    // Negation Contexts
-    AFFIRMED("Positive"),
-    NEGATED("Negated"),
-    POSSIBLE("Possible"),
-    UNKNOWN("UNK"),
-    // Temporal Contexts
-    RECENT("Present"),
-    HISTORICAL("Historical"),
-    HYPOTHETICAL("Hypothetical"),
-    PERSONALHISTORICAL("HistoryOf"),
-    FAMILIALHISTORICAL("FamilyHistoryOf"),
-    // Experiencer Contexts
-    EXPERIENCER("Experiencer"),
-    EXPERIENCER_PATIENT("Patient"),
-    EXPERIENCER_OTHER("Other");
-
-
-    private static final HashMap<String, ConText> annFormToContext = new HashMap<>();
-
-    static {
-        for (ConText ctxt : values()) {
-            annFormToContext.put(ctxt.annForm.toLowerCase(), ctxt);
-        }
+public class ConTexTTrigger {
+    public enum TriggerType {
+        /**
+         * Marks the beginning of a context that extends towards the right
+         */
+        START_RIGHT,
+        /**
+         * Marks the beginning of a context that extends towards the left
+         */
+        START_LEFT,
+        /**
+         * Marks the ending of a context
+         */
+        TERMINAL,
+        /**
+         * Marks a pseudo trigger: any triggers that are contained within a pseudo trigger are excluded
+         */
+        PSEUDO
     }
 
-    private final String annForm;
+    /**
+     * The context type to which this pertains
+     */
+    public ConText contextType;
 
-    ConText(String annForm) {
-        this.annForm = annForm;
-    }
+    public int start;
+    public int end;
 
-    public ConText valueFromAnnForm(String name) {
-        return annFormToContext.get(name.toLowerCase());
-    }
-
-    @Override
-    public String toString() {
-        return annForm;
+    public ConTexTTrigger(ConText contextType, int start, int end) {
+        this.contextType = contextType;
+        this.start = start;
+        this.end = end;
     }
 }
