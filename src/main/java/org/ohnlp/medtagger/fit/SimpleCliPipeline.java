@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import me.tongfei.progressbar.ProgressBar;
 import org.apache.uima.UIMAException;
 import org.apache.uima.UIMAFramework;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -30,6 +32,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceManager;
 import org.apache.uima.resource.metadata.ResourceMetaData;
 import org.apache.uima.util.CasCreationUtils;
+import org.apache.uima.util.Progress;
 
 /**
  * Duplicate with SimplePipeline from UIMA fit, to allow CLI callbacks
@@ -60,13 +63,19 @@ public class SimpleCliPipeline {
             CAS cas = CasCreationUtils.createCas(Arrays.asList(reader.getMetaData(), aae.getMetaData()), (Properties)null, resMgr);
             reader.typeSystemInit(cas.getTypeSystem());
 
+            ProgressBar pb = new ProgressBar("Processing documents: ", reader.getProgress()[0].getTotal()); // name, initial max
+
+            pb.start(); // the progress bar starts timing
+
             while(reader.hasNext()) {
                 reader.getNext(cas);
                 aae.process(cas);
                 cas.reset();
+                pb.step();
             }
 
             aae.collectionProcessComplete();
+            pb.stop();
         } finally {
             LifeCycleUtil.destroy(new Resource[]{reader});
             LifeCycleUtil.destroy(new Resource[]{aae});

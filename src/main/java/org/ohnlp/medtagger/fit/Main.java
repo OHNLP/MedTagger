@@ -49,5 +49,4 @@ public class Main {
         SimpleCliPipeline.runPipeline(reader, descMedTaggerTAE, writer);
 
     }
-
 }
