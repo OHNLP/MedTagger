@@ -124,6 +124,7 @@ public class IETabDelimitedWriter extends JCasAnnotator_ImplBase {
 				toprint += "\tsentid=\"" + cm.getSentence().getId()+"\"";
 				toprint += "\tsentence=\"" +cm.getSentence().getCoveredText() +"\"\n";
 		}
+
 		// get concept mention index
 	    FSIterator<? extends Annotation> mIter = jcas.getAnnotationIndex(Match.type).iterator();
 		while (mIter.hasNext()) {

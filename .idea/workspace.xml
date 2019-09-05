@@ -2,29 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe1e156a-785b-43c0-b9dd-93d4a3a1bed6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/output/0001.txt.ann" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/output/0002.txt.ann" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runMedTaggerCPE.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runMedTaggerCPE.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runMedTaggerCVD.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runMedTaggerCVD.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ae/AhoCorasickLookupAnnotator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ae/AhoCorasickLookupAnnotator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/context/RuleContextAnnotator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/context/RuleContextAnnotator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/context/impl/ConText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/context/impl/ConText.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/SimpleCliPipeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/cc/IETabDelimitedWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/cc/IETabDelimitedWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/util/ResourceUtilManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/util/ResourceUtilManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/lvg/LvgLookup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/lvg/LvgLookup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/sectag/RulebasedSectionAnnotator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/sectag/RulebasedSectionAnnotator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/aggregate_analysis_engine/MedTaggerIEAggregateTAE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/aggregate_analysis_engine/MedTaggerIEAggregateTAE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/collection_processing_engine/MedTaggerIECPE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/collection_processing_engine/MedTaggerIECPE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdata/medtaggerietest/pad/input/Test.1" beforeDir="false" afterPath="$PROJECT_DIR$/testdata/medtaggerietest/pad/input/Test.1" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -43,36 +23,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/util/ResourceUtilManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="138" selection-start-line="138" selection-end-line="138" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#9070#9071#0" expanded="true" />
-                <element signature="e#9117#9118#0" expanded="true" />
-                <element signature="e#9274#9275#0" expanded="true" />
-                <element signature="e#9307#9308#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="46" column="8" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+            <state relative-caret-position="482">
+              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,11 +33,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/cc/IETabDelimitedWriter.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/SimpleCliPipeline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="107" column="9" lean-forward="true" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
+            <state relative-caret-position="227">
+              <caret line="52" column="34" lean-forward="true" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
               <folding>
+                <element signature="e#0#5808#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -93,28 +46,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/uima/uimaj-core/2.10.0/uimaj-core-2.10.0.jar!/org/apache/uima/analysis_engine/impl/PrimitiveAnalysisEngine_impl.class">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="250" selection-start-line="250" selection-end-line="250" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/collection_processing_engine/MedTaggerIECPE.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/aggregate_analysis_engine/MedTaggerIEAggregateTAE.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+            <state relative-caret-position="211">
+              <caret line="62" column="37" selection-start-line="62" selection-start-column="37" selection-end-line="62" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -150,6 +88,7 @@
       <find>MedTaggerIEAggregateTAE.xml</find>
       <find>MedTaggerIEAggregateTAE</find>
       <find>log</find>
+      <find>super</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -176,10 +115,11 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/collection_processing_engine/MedTaggerIECPE.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/desc/medtaggeriedesc/aggregate_analysis_engine/MedTaggerIEAggregateTAE.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/util/ResourceUtilManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/cc/IETabDelimitedWriter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/SimpleCliPipeline.java" />
       </list>
     </option>
   </component>
@@ -270,7 +210,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="ohnlp" type="462c0819:PsiDirectoryNode" />
               <item name="medtagger" type="462c0819:PsiDirectoryNode" />
-              <item name="ie" type="462c0819:PsiDirectoryNode" />
+              <item name="cr" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MedTagger" type="b2602c69:ProjectViewProjectNode" />
@@ -280,8 +220,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="ohnlp" type="462c0819:PsiDirectoryNode" />
               <item name="medtagger" type="462c0819:PsiDirectoryNode" />
-              <item name="ie" type="462c0819:PsiDirectoryNode" />
-              <item name="cc" type="462c0819:PsiDirectoryNode" />
+              <item name="fit" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -388,12 +327,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567117921906</updated>
-      <workItem from="1567117923839" duration="25435000" />
+      <workItem from="1567117923839" duration="28180000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25435000" />
+    <option name="totallyTimeSpent" value="28180000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="23" width="1920" height="1177" extended-state="0" />
@@ -404,7 +343,7 @@
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Designer" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.20607029" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.20607029" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Inspection Results" weight="0.32956687" />
       <window_info anchor="bottom" id="Terminal" order="0" />
@@ -415,8 +354,8 @@
       <window_info anchor="bottom" id="Version Control" order="5" />
       <window_info anchor="bottom" id="Spring" order="6" />
       <window_info anchor="bottom" id="Message" order="7" />
-      <window_info anchor="bottom" id="Find" order="8" weight="0.32956687" />
-      <window_info active="true" anchor="bottom" id="Run" order="9" visible="true" weight="0.2881356" />
+      <window_info anchor="bottom" id="Find" order="8" visible="true" weight="0.32956687" />
+      <window_info anchor="bottom" id="Run" order="9" weight="0.2881356" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.3992467" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
@@ -460,13 +399,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/desc/medtaggermldesc/aggregate_analysis_engine/MedTaggerMLAggregateTAE.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/dict/AhoCorasickDict.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -544,13 +476,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="21" column="40" lean-forward="true" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/uima/uimafit-core/2.4.0/uimafit-core-2.4.0.jar!/org/apache/uima/fit/pipeline/SimplePipeline.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
     </entry>
@@ -772,20 +697,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/uima/uimaj-core/2.10.0/uimaj-core-2.10.0.jar!/org/apache/uima/analysis_engine/impl/PrimitiveAnalysisEngine_impl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="46" column="8" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="288">
+          <caret line="250" selection-start-line="250" selection-end-line="250" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/cc/IETabDelimitedWriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+        <state relative-caret-position="375">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -794,8 +716,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/util/ResourceUtilManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
+        <state relative-caret-position="316">
+          <caret line="283" column="4" lean-forward="true" selection-start-line="283" selection-start-column="4" selection-end-line="283" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#9070#9071#0" expanded="true" />
@@ -806,18 +728,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/uima/uimaj-core/2.10.0/uimaj-core-2.10.0.jar!/org/apache/uima/analysis_engine/impl/PrimitiveAnalysisEngine_impl.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/cr/FileSystemReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="250" selection-start-line="250" selection-end-line="250" />
+        <state relative-caret-position="211">
+          <caret line="62" column="37" selection-start-line="62" selection-start-column="37" selection-end-line="62" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/ie/cc/IETabDelimitedWriter.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/uima/uimafit-core/2.4.0/uimafit-core-2.4.0.jar!/org/apache/uima/fit/pipeline/SimplePipeline.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="107" column="9" lean-forward="true" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
+        <state relative-caret-position="321">
+          <caret line="136" column="38" selection-start-line="136" selection-start-column="38" selection-end-line="136" selection-end-column="38" />
           <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/ohnlp/medtagger/fit/SimpleCliPipeline.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="52" column="34" lean-forward="true" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#5808#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>

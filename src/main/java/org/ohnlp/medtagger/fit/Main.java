@@ -46,7 +46,7 @@ public class Main {
                         IETabDelimitedWriter.class,
                         IETabDelimitedWriter.PARAM_OUTPUTDIR, outputDirPath.toString());
 
-        SimplePipeline.runPipeline(reader, descMedTaggerTAE, writer);
+        SimpleCliPipeline.runPipeline(reader, descMedTaggerTAE, writer);
 
     }
 
