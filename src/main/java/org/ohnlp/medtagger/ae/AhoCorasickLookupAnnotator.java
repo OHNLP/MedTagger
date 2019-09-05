@@ -75,8 +75,7 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 		logger.setLevel(Level.DEBUG);
 
 		try {
-			lvg = new LvgLookup(aContext.getResourceFilePath("lvg_dict"),
-					aContext.getResourceFilePath("openclass"));
+			lvg = new LvgLookup(aContext);
 
 			String dict = aContext.getResourceFilePath("dict");
 			btac = new AhoCorasickDict(dict);

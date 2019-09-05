@@ -26,6 +26,7 @@ package org.ohnlp.medtagger.context.impl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -92,7 +93,7 @@ public class ConText {
 	 * @throws FileNotFoundException 
 	 * @throws IOException 
 	 */
-	public ConText(String contextFile) throws FileNotFoundException 
+	public ConText(InputStream contextStream) throws FileNotFoundException
 	{	
 		
 		String regex_PSEUDO = "";
@@ -113,7 +114,8 @@ public class ConText {
 		String regex_HIST_END = "";
 		String regex_HIST_EXP_END = "";
 		String regex_HYPO_EXP_END = "";
-		Scanner sc = new Scanner(new File(contextFile));
+		Scanner sc = new Scanner(contextStream);
+
 		while (sc.hasNextLine()) {
 			String line = sc.nextLine();
 			if(line.startsWith("#")) continue;

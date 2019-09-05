@@ -48,16 +48,6 @@
   </overrides>
 </configurationParameter>
 </configurationParameters>
- <configurationParameterSettings>
-      <nameValuePair>
-        <name>Resource_dir</name>
-        <value>
-          <string>resources/medtaggerieresources/pad</string>
-        </value>
-      </nameValuePair>
-    </configurationParameterSettings>
-    
-
     <flowConstraints>
       <fixedFlow>
           <node>SentenceDetectorAE</node>

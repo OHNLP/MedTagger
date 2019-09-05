@@ -27,6 +27,7 @@ package org.ohnlp.medtagger.sectag;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -169,18 +170,23 @@ public class RulebasedSectionAnnotator extends JCasAnnotator_ImplBase {
 			throws ResourceInitializationException {
 		sectionMap = new HashMap<String, String>();
 		try {
-			lvg  = new LvgLookup(aContext.getResourceFilePath("lvg_dict"),aContext.getResourceFilePath("openclass"));
+			lvg  = new LvgLookup(aContext);
 			
-			BufferedReader br = new BufferedReader(new FileReader(aContext.getResourceFilePath("section_map")));
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(aContext.getResourceAsStream("section_map"),
+							"UTF-8"));
+
 			while(br.ready()){
-				String str=br.readLine();
-				if(str.startsWith("#")) continue;
+				String str = br.readLine();
+				if(str.startsWith("#"))
+					continue;
 				String[] splits = str.split("\t");
 				//in case of ambiguity, use the first one
 				if(!sectionMap.containsKey(lvg.getNorm(splits[0]))){
-				sectionMap.put(lvg.getNorm(splits[0]), splits[1]+"\t"+splits[2]);
+					sectionMap.put(lvg.getNorm(splits[0]), splits[1]+"\t"+splits[2]);
 				}
 			}
+
 			br.close();						
 		} catch (ResourceAccessException e) {
 			e.printStackTrace();

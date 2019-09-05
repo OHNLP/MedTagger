@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ohnlp.medtagger</groupId>
-    <artifactId>MedTagger</artifactId>
+    <artifactId>MedTagger-fit</artifactId>
     <version>1.0.2-SNAPSHOT</version>
-    <description>The MedTagger biomedical information extraction pipeline</description>
+    <description>The MedTagger biomedical information extraction pipeline using UIMA Fit</description>
 
     <build>
         <plugins>
@@ -18,6 +18,33 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.ohnlp.medtagger.fit.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -61,11 +88,11 @@
             <artifactId>opennlp-maxent</artifactId>
             <version>3.0.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.opennlp</groupId>
-            <artifactId>opennlp-tools</artifactId>
-            <version>1.9.0</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.opennlp</groupId>-->
+        <!--            <artifactId>opennlp-tools</artifactId>-->
+        <!--            <version>1.9.0</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.apache.opennlp</groupId>
             <artifactId>opennlp-uima</artifactId>
@@ -96,6 +123,12 @@
             <artifactId>uimaj-tools</artifactId>
             <version>${uimaj.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.uima</groupId>
+            <artifactId>uimafit-core</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -25,6 +25,7 @@ package org.ohnlp.medtagger.lvg;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,7 +46,7 @@ import org.ohnlp.typesystem.type.syntax.WordToken;
 public class LvgLookup extends JCasAnnotator_ImplBase {
 
 	// LOG4J logger based on class name
-	private Logger logger = Logger.getLogger(getClass().getName());
+	private Logger logger = Logger.getLogger("LvgLookup");
      HashMap<String, String> lvgMap;
     HashSet<String> openclass; 
     //private static OpenClassWords pds = new OpenClassWords();
@@ -72,72 +73,120 @@ public class LvgLookup extends JCasAnnotator_ImplBase {
 		Iterator<?> tokenItr = indexes.getAnnotationIndex(WordToken.type).iterator();
 		while (tokenItr.hasNext())
         {
-        	WordToken token = (WordToken) tokenItr.next(); String lower = token.getCoveredText().toLowerCase();
-        	if(openclass.contains(lower)) token.setCanonicalForm(null);
-        	else if(lvgMap.containsKey(lower)) token.setCanonicalForm(lvgMap.get(lower));
-        	else token.setCanonicalForm(lower);
+        	WordToken token = (WordToken) tokenItr.next();
+        	String lower = token.getCoveredText().toLowerCase();
+        	if(openclass.contains(lower)){
+        		token.setCanonicalForm(null);
+        	}
+        	else if(lvgMap.containsKey(lower)){
+        		token.setCanonicalForm(lvgMap.get(lower));
+        	}
+        	else {
+        		token.setCanonicalForm(lower);
+        	}
         }
 
 	}
 	
 	public LvgLookup() {
-		
+
 	}
 	
 	
-	//for the stand alone version
-	public LvgLookup(String dict, String openclassFile) {
-		localInitialize(dict, openclassFile);
+//	//for the stand alone version
+	public LvgLookup(UimaContext aContext) throws ResourceAccessException {
+		localInitialize(aContext.getResourceAsStream("lvg_dict"), aContext.getResourceAsStream("openclass"));
 	}
 
-	public void localInitialize(String dict, String openclassFile) {
-		try {
-			Scanner sc = new Scanner(new File(dict));
-			logger.info("loading LVG condensed dictionary from:" +dict);
-			int count=0;
-			while(sc.hasNextLine()){
-				String line=sc.nextLine();
-				   if(line.startsWith("#")) continue;
-		
-				count++;
-			}
-			sc.close();sc = new Scanner(new File(dict));
-			lvgMap = new HashMap<String, String>(count);
-			while(sc.hasNextLine()){
-				 String line=sc.nextLine();
-			     if(line.startsWith("#")) continue;
-		
-				String[] splits=line.split("\\|");
-				if(splits.length<2) continue;
-				lvgMap.put(splits[0], splits[1]);
-			}
-			sc.close();
-			logger.info("loaded resource, lines=" +count);
-			
-			sc = new Scanner(new File(openclassFile));
-			while(sc.hasNextLine()){
-				     String line=sc.nextLine();
-				     if(line.startsWith("#")) continue;
-				String[] splits=line.split("\\s*,\\s*");
-				openclass = new HashSet<String>(Arrays.asList(splits));
-				break;
-			}
-			sc.close();
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+//	public void localInitialize(String dict, String openclassFile) {
+//		try {
+//			Scanner sc = new Scanner(new File(dict));
+//			logger.info("loading LVG condensed dictionary from:" +dict);
+//			int count=0;
+//			while(sc.hasNextLine()){
+//				String line=sc.nextLine();
+//				   if(line.startsWith("#")) continue;
+//
+//				count++;
+//			}
+//			sc.close();
+//
+//			sc = new Scanner(new File(dict));
+//			lvgMap = new HashMap<>(count);
+//			while(sc.hasNextLine()){
+//				 String line=sc.nextLine();
+//			     if(line.startsWith("#")) continue;
+//
+//				String[] splits=line.split("\\|");
+//				if(splits.length<2) continue;
+//				lvgMap.put(splits[0], splits[1]);
+//			}
+//			sc.close();
+//			logger.info("loaded resource, lines=" +count);
+//
+//			sc = new Scanner(new File(openclassFile));
+//			while(sc.hasNextLine()){
+//				     String line=sc.nextLine();
+//				     if(line.startsWith("#")) continue;
+//				String[] splits=line.split("\\s*,\\s*");
+//				openclass = new HashSet<String>(Arrays.asList(splits));
+//				break;
+//			}
+//			sc.close();
+//
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//	}
+
+	public void localInitialize(InputStream dictStream, InputStream openclassStream) {
+
+		logger.info("loading LVG condensed dictionary from dictStream");
+		int count=0;
+
+		Scanner sc = new Scanner(dictStream);
+		lvgMap = new HashMap<>(count);
+		while(sc.hasNextLine()){
+			String line = sc.nextLine();
+			if(line.startsWith("#"))
+				continue;
+			count++;
+
+			String[] splits=line.split("\\|");
+			if(splits.length < 2)
+				continue;
+			lvgMap.put(splits[0], splits[1]);
 		}
+		sc.close();
+
+		logger.info("loaded resource, lines=" + count);
+
+		sc = new Scanner(openclassStream);
+		while(sc.hasNextLine()){
+			String line=sc.nextLine();
+			if(line.startsWith("#")) continue;
+			String[] splits=line.split("\\s*,\\s*");
+			openclass = new HashSet<String>(Arrays.asList(splits));
+			break;
+		}
+		sc.close();
 	}
-	
+
 
 	@Override
 	public void initialize(UimaContext aContext)
 			throws ResourceInitializationException {
 		super.initialize(aContext);
 		try {
-			String dict = aContext.getResourceFilePath("lvg_dict");
-			String openclassFile = aContext.getResourceFilePath("openclass");
-			localInitialize(dict, openclassFile);
+//			String dict = aContext.getResourceFilePath("lvg_dict");
+//			String openclassFile = aContext.getResourceFilePath("openclass");
+//			localInitialize(dict, openclassFile);
+
+			InputStream dictInStream = aContext.getResourceAsStream("lvg_dict");
+			InputStream openclassFileStream = aContext.getResourceAsStream("openclass");
+
+			localInitialize(dictInStream, openclassFileStream);
+
 		} catch (ResourceAccessException e) {
 			e.printStackTrace();
 		} 

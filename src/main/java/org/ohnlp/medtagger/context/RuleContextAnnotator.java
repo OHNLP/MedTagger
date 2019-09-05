@@ -24,6 +24,7 @@
 package org.ohnlp.medtagger.context;
 
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -44,8 +45,8 @@ import org.ohnlp.medtagger.context.impl.ConText.TemporalityContext;
 
 public class RuleContextAnnotator extends JCasAnnotator_ImplBase {
 
-	ConText conText=null;
-	String contextFile=null;
+	ConText conText = null;
+	InputStream contextStream = null;
 	private String PARAM_CONTEXT_FILE = "context_file";
 	
 	//probable~|~pre~|~poss
@@ -53,17 +54,16 @@ public class RuleContextAnnotator extends JCasAnnotator_ImplBase {
 			throws ResourceInitializationException {
 		super.initialize(aContext);
 		try {
-			contextFile= aContext.getResourceFilePath(PARAM_CONTEXT_FILE);
-			conText = new ConText(contextFile);
-			
+//			contextFile= aContext.getResourceFilePath(PARAM_CONTEXT_FILE);
+			contextStream = aContext.getResourceAsStream(PARAM_CONTEXT_FILE);
+			conText = new ConText(contextStream);
+
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 
-	
-	
 	@Override
 	public void process(JCas jCas) throws AnalysisEngineProcessException {
 		//iterate over sentence
