@@ -1,10 +1,19 @@
-
-Fixes included in MedTagger-1.0.1:
+==Fixes included in MedTagger-1.0.1==
 
 #115 Update MedTagger release to 1.0.1
 #114 Fix capitalization error of POSTaggerAE (was PosTaggerAE) in MedTagger descriptors
 #113 Scanner left open
 #112 Open2OHTokenizer LineSentenceDetector not checking for zero length in splits
 
-
 https://sourceforge.net/p/ohnlp/bugs/
+
+==Fixes in MedTagger-1.0.2==
+Mavenization and JRE8 Requirement
+
+==Updates & Fixes in MedTagger-1.0.3==
+Updates
+1) added assertion patterns in medtaggerresources/context/contextRule.txt
+2) Separated "Hypothetical" from "Possible" (org.ohnlp.medtagger.context.RuleContextAnnotator.java)
+3) A rewrite of the ConText annotator for better performance and expanded functionality
+
+
