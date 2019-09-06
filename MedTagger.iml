@@ -38,7 +38,8 @@
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:3.2.16.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:3.2.16.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: me.tongfei:progressbar:0.5.5" level="project" />
-    <orderEntry type="library" name="Maven: jline:jline:2.12" level="project" />
+    <orderEntry type="library" name="Maven: me.tongfei:progressbar:0.7.4" level="project" />
+    <orderEntry type="library" name="Maven: org.jline:jline:3.11.0" level="project" />
+    <orderEntry type="library" name="Maven: org.fusesource.jansi:jansi:1.18" level="project" />
   </component>
 </module>

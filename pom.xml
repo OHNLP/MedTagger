@@ -6,7 +6,7 @@
 
     <groupId>org.ohnlp.medtagger</groupId>
     <artifactId>MedTagger-fit</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <description>The MedTagger biomedical information extraction pipeline using UIMA Fit</description>
 
     <build>
@@ -131,7 +131,7 @@
         <dependency>
             <groupId>me.tongfei</groupId>
             <artifactId>progressbar</artifactId>
-            <version>0.5.5</version>
+            <version>0.7.4</version>
         </dependency>
     </dependencies>
 

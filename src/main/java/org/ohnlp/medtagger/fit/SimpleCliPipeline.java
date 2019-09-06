@@ -42,31 +42,32 @@ public class SimpleCliPipeline {
      * @throws UIMAException
      * @throws IOException
      */
-    public static void runPipeline(CollectionReaderDescription readerDesc, AnalysisEngineDescription... descs) throws UIMAException, IOException {
+    public static void runPipeline(CollectionReaderDescription readerDesc, AnalysisEngineDescription... descs)
+            throws UIMAException, IOException {
         CollectionReader reader = null;
         AnalysisEngine aae = null;
 
         try {
             ResourceManager resMgr = ResourceManagerFactory.newResourceManager();
-            reader = UIMAFramework.produceCollectionReader(readerDesc, resMgr, (Map)null);
+            reader = UIMAFramework.produceCollectionReader(readerDesc, resMgr, null);
             AnalysisEngineDescription aaeDesc = AnalysisEngineFactory.createEngineDescription(descs);
-            aae = UIMAFramework.produceAnalysisEngine(aaeDesc, resMgr, (Map)null);
-            CAS cas = CasCreationUtils.createCas(Arrays.asList(reader.getMetaData(), aae.getMetaData()), (Properties)null, resMgr);
+            aae = UIMAFramework.produceAnalysisEngine(aaeDesc, resMgr, null);
+            CAS cas = CasCreationUtils.createCas(Arrays.asList(reader.getMetaData(), aae.getMetaData()),
+                    null, resMgr);
             reader.typeSystemInit(cas.getTypeSystem());
 
-            ProgressBar pb = new ProgressBar("Processing documents: ", reader.getProgress()[0].getTotal()); // name, initial max
+            // name, initial max and try with statement for the progress bar
+            try(ProgressBar pb = new ProgressBar(
+                    "Processing documents: ", reader.getProgress()[0].getTotal())) {
+                while (reader.hasNext()) {
+                    reader.getNext(cas);
+                    aae.process(cas);
+                    cas.reset();
+                    pb.step();
+                }
 
-            pb.start(); // the progress bar starts timing
-
-            while(reader.hasNext()) {
-                reader.getNext(cas);
-                aae.process(cas);
-                cas.reset();
-                pb.step();
+                aae.collectionProcessComplete();
             }
-
-            aae.collectionProcessComplete();
-            pb.stop();
         } finally {
             LifeCycleUtil.destroy(new Resource[]{reader});
             LifeCycleUtil.destroy(new Resource[]{aae});
