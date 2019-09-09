@@ -24,7 +24,11 @@
 package org.ohnlp.medtagger.ie.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -63,15 +67,25 @@ public class ResourceUtilManager {
 	HashMap<String, String> hmRuleNormalization = new HashMap<String, String>(); // normalization target in rules
 	HashMap<String, String> hmRuleLocation     = new HashMap<String, String>(); // location of the patterns
 
-
 	public static ResourceUtilManager getInstance() {
 		if(ResourceUtilManager.INSTANCE == null)
 			ResourceUtilManager.INSTANCE = new ResourceUtilManager(RESOURCEDIR);	
 		return ResourceUtilManager.INSTANCE;
 	}
+
+	ClassLoader classLoader = null;
 	
 	public ResourceUtilManager(String resourcedir) {
-		RESOURCEDIR=resourcedir;
+		try {
+			Class cls = Class.forName("org.ohnlp.medtagger.ie.util.ResourceUtilManager");
+			classLoader = cls.getClassLoader();
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}
+
+		// returns the ClassLoader object associated with this Class
+
+		RESOURCEDIR = resourcedir;
 		readResources(readResourcesFiles("norm"), normPattern, "norm");
 		readResources(readResourcesFiles("regexp"), regexpPattern, "regexp");
 		reformatRegExp();
@@ -85,11 +99,19 @@ public class ResourceUtilManager {
 	 */
 	protected HashMap<String, String> readResourcesFiles(String resourceType) {
 
-		HashMap<String, String> hmResources = new HashMap<String, String>();
+		HashMap<String, String> hmResources = new HashMap<>();
 		
 		try{
-			String resourcefile=RESOURCEDIR+"/used_resources.txt";
-			Scanner sc = new Scanner(new File(resourcefile));
+			String resourcefile =  RESOURCEDIR + "/used_resources.txt";
+
+			InputStream inputStream = Files.newInputStream(Paths.get(resourcefile));
+
+			if(inputStream == null){
+				throw new IOException(resourcefile);
+			}
+
+			Scanner sc = new Scanner(inputStream);
+
 	 		while (sc.hasNextLine()) {
 	 			String line = sc.nextLine();
 	 			Pattern paResource = Pattern.compile("\\./"+resourceType+"/resources_"+resourceType+"_"+"(.*?)\\.txt");
@@ -102,6 +124,7 @@ public class ResourceUtilManager {
 	 		}
 	 		sc.close();
 		} catch (IOException e) {
+			// TODO: better Exception handling
 			e.printStackTrace();
 			iv_logger.warn("Failed to read a resource from used_resources.txt.");
 			System.exit(-1);
@@ -115,12 +138,19 @@ public class ResourceUtilManager {
 			
 			for (String resource : hmResources.keySet()) {
 				iv_logger.info("Adding "+resourceType+" from resource: "+resource);
-				Scanner sc = new Scanner(new File(hmResources.get(resource)));
+
+				InputStream inputStream = Files.newInputStream(Paths.get(hmResources.get(resource)));
+
+				if(inputStream == null){
+					throw new IOException(hmResources.get(resource));
+				}
+
+				Scanner sc = new Scanner(inputStream);
 				while (sc.hasNextLine()) {
 					String line = sc.nextLine();
 					if (!line.startsWith("//") && ! line.equals("")) {
 						boolean correctLine = false;
-						iv_logger.info("Reading "+resource+" at line: "+ line);
+						iv_logger.debug("Reading "+resource+" at line: "+ line);
 						for (Object r : findMatches(p, line)) {
 							MatchResult mr = (MatchResult) r;
 							correctLine = true;
@@ -164,7 +194,7 @@ public class ResourceUtilManager {
 								Pattern paVariable = Pattern.compile("%(re[a-zA-Z0-9]*)");
 								for (Object o1 : findMatches(paVariable,rule_extraction)) {
 									MatchResult mr1 = (MatchResult) o1;
-									iv_logger.info("Replacing patterns..."+ mr1.group());
+									iv_logger.debug("Replacing patterns..."+ mr1.group());
 									if (!(hmRegExpEntries.containsKey(mr1.group(1)))) {
 										iv_logger.error("Error creating rule:"+rule_name);
 										iv_logger.error("The pattern may not exist : "+mr1.group(1));
@@ -200,7 +230,6 @@ public class ResourceUtilManager {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
@@ -245,7 +274,7 @@ public class ResourceUtilManager {
 }
 	
 	public static Iterable<MatchResult> findMatches(Pattern pattern, CharSequence s) {
-		List<MatchResult> results = new ArrayList<MatchResult>();
+		List<MatchResult> results = new ArrayList();
 
 		for (Matcher m = pattern.matcher(s); m.find();)
 			results.add(m.toMatchResult());
@@ -254,7 +283,7 @@ public class ResourceUtilManager {
 	}
 	
 	public static List<Pattern> sortByValue(final HashMap<Pattern,String> m) {
-        List<Pattern> keys = new ArrayList<Pattern>();
+        List<Pattern> keys = new ArrayList();
         keys.addAll(m.keySet());
         Collections.sort(keys, new Comparator<Object>() {
         	public int compare(Object o1, Object o2) {

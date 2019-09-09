@@ -31,16 +31,16 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
-import org.apache.uima.collection.CasConsumer_ImplBase;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JFSIndexRepository;
 import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.resource.ResourceProcessException;
 import org.ohnlp.medtagger.ie.type.Match;
 import org.ohnlp.medtagger.type.ConceptMention;
 import org.ohnlp.typesystem.type.structured.Document;
@@ -53,7 +53,7 @@ import org.ohnlp.typesystem.type.textspan.Sentence;
  * @author Hongfang Liu
  *
  */
-public class IETabDelimitedWriter extends CasConsumer_ImplBase {
+public class IETabDelimitedWriter extends JCasAnnotator_ImplBase {
 
 	public static final String PARAM_OUTPUTDIR = "OutputDir";
 
@@ -64,34 +64,16 @@ public class IETabDelimitedWriter extends CasConsumer_ImplBase {
 	/**
 	 * initialize
 	 */
-	public void initialize() throws ResourceInitializationException {
+	public void initialize(UimaContext aContext) throws ResourceInitializationException {
     
 		mDocNum = 0;
-		mOutputDir = new File((String) getConfigParameterValue(PARAM_OUTPUTDIR));
+		mOutputDir = new File((String) aContext.getConfigParameterValue(PARAM_OUTPUTDIR));
 		if (!mOutputDir.exists()) {
 			mOutputDir.mkdirs();
 		} 
 	}
 
-
-	/**
-	 * process
-	 */
-	public void processCas(CAS aCAS) throws ResourceProcessException {
-
-		JCas jcas;
-		try {
-			jcas = aCAS.getJCas();
-		} catch (CASException e) {
-			throw new ResourceProcessException(e);
-		}
-		printAnnotationsInline(jcas);
-	}
-	
-	
-		
-		// print out match and concept mention
-		
+	// print out match and concept mention
 	public void printAnnotationsInline(JCas jcas){
 		JFSIndexRepository indexes = jcas.getJFSIndexRepository();
 	 	FSIterator<TOP> docIterator = indexes.getAllIndexedFS(Document.type);
@@ -116,8 +98,17 @@ public class IETabDelimitedWriter extends CasConsumer_ImplBase {
 	   	// get concept mention index
 	    FSIterator<? extends Annotation> cmIter = jcas.getAnnotationIndex(ConceptMention.type).iterator();
 	    FSIterator<? extends Annotation> senIter = jcas.getAnnotationIndex(Sentence.type).iterator();
-		Sentence metaSen = (Sentence) senIter.next();
+		Sentence metaSen;
+
+		if(senIter.hasNext()) {
+			metaSen = (Sentence) senIter.next();
+		}
+		else{
+			return;
+		}
+
 		String metaSenstr="";
+
 		if(metaSen.getCoveredText().startsWith("[meta")){ metaSenstr=metaSen.getCoveredText();} 
 		while (cmIter.hasNext()) {
 			ConceptMention cm = (ConceptMention) cmIter.next();
@@ -133,6 +124,7 @@ public class IETabDelimitedWriter extends CasConsumer_ImplBase {
 				toprint += "\tsentid=\"" + cm.getSentence().getId()+"\"";
 				toprint += "\tsentence=\"" +cm.getSentence().getCoveredText() +"\"\n";
 		}
+
 		// get concept mention index
 	    FSIterator<? extends Annotation> mIter = jcas.getAnnotationIndex(Match.type).iterator();
 		while (mIter.hasNext()) {
@@ -156,4 +148,8 @@ public class IETabDelimitedWriter extends CasConsumer_ImplBase {
 		}		
 	}
 
+	@Override
+	public void process(JCas jCas) throws AnalysisEngineProcessException {
+		printAnnotationsInline(jCas);
+	}
 }
