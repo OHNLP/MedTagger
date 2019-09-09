@@ -90,6 +90,9 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 		rum = new ResourceUtilManager(resource_dir);
 		deleteAllInsideMatch = (Boolean) aContext
 				.getConfigParameterValue(removeAllSub);
+		if (deleteAllInsideMatch == null) {
+			deleteAllInsideMatch = false;
+		}
 	}
 
 	public void process(JCas jcas) {
@@ -280,7 +283,7 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 	 * @param jcas
 	 */
 	@SuppressWarnings("rawtypes")
-	public void deleteInsideMatch(JCas jcas, Boolean anyNorm) {
+	public void deleteInsideMatch(JCas jcas, boolean anyNorm) {
 		//for Match type
 		Set<Match> toRemove = new HashSet<Match>();
 		FSIterator matIter1 = jcas.getAnnotationIndex(Match.type).iterator();
