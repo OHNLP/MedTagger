@@ -1,0 +1,10 @@
+language: java
+git:
+  quiet: true
+branches:
+  only:
+    - master
+deploy:
+  provider: releases
+  on:
+    tags: true
