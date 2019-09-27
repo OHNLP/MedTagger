@@ -10,6 +10,7 @@
     <description>The MedTagger biomedical information extraction pipeline</description>
 
     <build>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

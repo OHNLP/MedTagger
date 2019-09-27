@@ -4,7 +4,11 @@ git:
 branches:
   only:
     - master
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - ant dist
 deploy:
   provider: releases
+  file: MedTagger.zip
   on:
     tags: true
