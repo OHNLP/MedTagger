@@ -7,12 +7,11 @@ branches:
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   - ant dist
-before_deploy:
-  - git tag ${tagversion}
 deploy:
   provider: releases
   overwrite: true
   api_key:
     secure: dE3wu/mj4290JbKl/9XV3HYVjufALDxQNjAfi0MWOq0ZAzZ+v2/bXj9q7w1dc3jNf50FLk4EWkG7yoW213tYVqcMrUHfr1p3Pm7qpGtDfNMAR9ZisUN3cx1HGXGCXQjA8tANV3rNeMw7YyS52WLZPg724T8HX4pDyyV2Swxw//gYzXNXelGjSMjt2v/1B3QnK66VnAiTzz/zXGv5rJgdu+7BOSLFOq05IpXf/MMUxh0rZ/VTJvV3UxrrcSs1uT0hUi6dAthQPg6uxisQuy+ZIXDJKuRZgbOTqdzrZlCq/V2lA+FNixyowAlko8cVh6V1f6uoG2P7L4QDQN3r/KBdql5pp1X+MB6tqiKkyUwOO6dzGk968Vsn2cU9VRpmqccai2gKUXTgfrvK7GS1JmxKsfWxSRKv/WXkGeD71ixKViRv0fIsgr4gBKHTPRHsbe3QMPW+R4fa2GlCdU0pG/BcFpFe/OTomeiQL+f5h+kwN7F4Nt52hi2+OddCDoVyC++sppEFq8GYgrJBpuFIe+XsqXacNs708qbK4wV7sFGctjQ4LDDh5xpIoiUvNLVt7amdlOaNk/++iM8Pj/pANCb0882LzkoasRFJNtrhdPDRkwKt82oEPJ6J9MQn9WUN3W8tgJ8KPn2/oQP7JkWORKH1C9zlXF6w1tA0uPIijWaAF80=
   file: MedTagger.zip
-  skip_cleanup: true
+  on:
+    tags: true
