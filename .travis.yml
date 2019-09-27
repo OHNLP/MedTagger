@@ -4,6 +4,7 @@ git:
 branches:
   only:
     - master
+    - /v\d+\.\d+[a-z]/
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   - ant dist
