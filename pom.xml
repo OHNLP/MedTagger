@@ -6,7 +6,7 @@
 
     <groupId>org.ohnlp.medtagger</groupId>
     <artifactId>MedTagger</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
     <description>The MedTagger biomedical information extraction pipeline</description>
 
     <build>
@@ -45,14 +45,32 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>set-system-properties</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <property>
+                                    <name>tagversion</name>
+                                    <value>${project.version}</value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
     <properties>
         <uimaj.version>2.10.0</uimaj.version>
         <uimafit.version>2.4.0</uimafit.version>
-
     </properties>
 
     <dependencies>
