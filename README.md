@@ -12,6 +12,11 @@ information extraction based on patterns, and MedTaggerML for machine learning-b
 3. Modify the INPUTDIR, OUTPUTDIR, and RULEDIR variables in `run_medtagger_win.bat` or `run_medtagger_unix_mac.sh`, as appropriate
 4. Run the batch file
 
+# Custom Rulesets
+MedTagger IE Pipelines use a custom ruleset format. An example for peripheral arterial disease
+can be found under the /src/main/resources/medtaggerieresources/pad directory. These resources are what tells MedTagger
+what to do/extract, and this directory is expected as input for the RULEDIR parameter 
+
 # For Developers
 1. Clone this repository
 2. You will need JDK8 or above, Apache Maven, and Apache Ant installed
