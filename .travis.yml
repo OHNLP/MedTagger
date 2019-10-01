@@ -1,12 +1,16 @@
 language: java
 git:
   quiet: true
+env:
+  global:
+    - secure: jvgtG0aiIZQDMvzkJZfejtbvVfY/1Wgr9HGe+WBuklXtrkCJ2Eu21yWE4wJFRWcNg+h6W754fEArn7bi751YIVgz/6Agufb6RGdGeM17PjKffchxVFDQcGJHDIBwB6VeUu0s5rtJ6CrSMwBMw2Nl9AYuxiu8mFj55NqsD0MwFPcDogPWYkJmVnhbyeudNiT48jHeNv64EA/qBax8x/j18HNZa5id9HQnJ6oEAJevsuEKyGSgiZNTxagnEy8m2KakP+5mBm2InwdJKmEsZP3ipfpdOn5C3Y4By8UERalBBhrvtea0EDGZrVZdl5J3z0iPPDDqTcHRG6za5JysurwOpJMbm4rqfhIJAeJKYPB52vEBvebtLjqyk40e0EhCDPQvTIp1Ko/JdLAjF59NPp4g+34ACHxdjnsnuHSCDJ4FpUn9IHpwB7DfBM6k6FhQ4LiOpINRE0tMydXkawr49acFDyJeyORbRybOtNVzlyRpFY+ktFBxNLrZ/G5+z8FVQLuJqckDsQe5pXhMfKldSl6JWW1QZ7IqDtmn0dD0mU7xjsKCgJq/NNpc+Bc4W1y5wIuMrIEZx3+/RO0EEszf1XxsZtwW8/1drGTtN5iPsSjm4cbX3QwTH/9kjLolPP9pqtTlti/APbkVrkCni/wIhsV6hxBzBK5RP8Wts1pMWkpP0iU=
 branches:
   only:
     - master
-    - /v\d+\.\d+[a-z]?(\.\d+[a-z]?)/
+    - /v\d+\.\d+[a-zA-Z-_]+?(\.\d+[a-zA-Z-_]+?)/
 install:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn clean deploy -Pbuild-deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Dtoken=$DEPLOY_KEY
+  - mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   - ant dist
 deploy:
   provider: releases

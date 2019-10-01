@@ -6,11 +6,10 @@
 
     <groupId>org.ohnlp.medtagger</groupId>
     <artifactId>MedTagger</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <description>The MedTagger biomedical information extraction pipeline</description>
 
     <build>
-        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -31,19 +30,6 @@
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -67,6 +53,43 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>build-deploy</id>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub OHNLP MedTagger Maven Packages</name>
+                    <url>https://maven.pkg.github.com/OHNLP/MedTagger</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>build-executable</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <finalName>${artifactId}</finalName>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <properties>
         <uimaj.version>2.10.0</uimaj.version>
