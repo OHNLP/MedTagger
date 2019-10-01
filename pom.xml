@@ -61,7 +61,7 @@
                 <repository>
                     <id>github</id>
                     <name>GitHub OHNLP Maven Packages</name>
-                    <url>https://maven.pkg.github.com/OHNLP/${artifactId}</url>
+                    <url>https://maven.pkg.github.com/OHNLP</url>
                 </repository>
             </distributionManagement>
         </profile>
@@ -71,7 +71,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <build>
-                <finalName>${artifactId}</finalName>
+                <finalName>${project.artifactId}</finalName>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
