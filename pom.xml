@@ -61,7 +61,7 @@
                 <repository>
                     <id>github</id>
                     <name>GitHub OHNLP Maven Packages</name>
-                    <url>https://maven.pkg.github.com/OHNLP</url>
+                    <url>https://maven.pkg.github.com/OHNLP/MedTagger</url>
                 </repository>
             </distributionManagement>
         </profile>
