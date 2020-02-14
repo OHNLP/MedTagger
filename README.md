@@ -7,7 +7,7 @@ It includes three major components: MedTagger for indexing based on dictionaries
 information extraction based on patterns, and MedTaggerML for machine learning-based named entity recognition.
 
 # Installation and Use
-## Video demo: https://vimeo.com/391512276
+#### Video demo: https://vimeo.com/391512276
 1. Download the latest release from https://github.com/OHNLP/MedTagger/releases
 2. Extract the zip file
 3. Modify the INPUTDIR, OUTPUTDIR, and RULEDIR variables in `run_medtagger_win.bat` or `run_medtagger_unix_mac.sh`, as appropriate
