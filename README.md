@@ -26,9 +26,9 @@ information extraction based on patterns, and MedTaggerML for machine learning-b
     RULEDIR="C:\Users\username\Desktop\MedTagger\medtaggerieresources\pad"
 4. Run the batch file
 
-    Mac/linux: ./run_medtagger_unix_mac.sh
+    Mac/linux: run_medtagger_unix_mac.sh
     
-    Windows: .\run_medtagger_win.bat
+    Windows: run_medtagger_win.bat
 
 # Custom Rulesets
 MedTagger IE Pipelines use a custom ruleset format. An example for peripheral arterial disease
