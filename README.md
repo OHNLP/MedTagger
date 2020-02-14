@@ -7,11 +7,12 @@ It includes three major components: MedTagger for indexing based on dictionaries
 information extraction based on patterns, and MedTaggerML for machine learning-based named entity recognition.
 
 # Installation and Use
+## Video demo: https://vimeo.com/391512276
 1. Download the latest release from https://github.com/OHNLP/MedTagger/releases
 2. Extract the zip file
 3. Modify the INPUTDIR, OUTPUTDIR, and RULEDIR variables in `run_medtagger_win.bat` or `run_medtagger_unix_mac.sh`, as appropriate
 4. Run the batch file
-Video demo: https://vimeo.com/391512276
+
 
 # Custom Rulesets
 MedTagger IE Pipelines use a custom ruleset format. An example for peripheral arterial disease
