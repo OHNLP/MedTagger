@@ -11,6 +11,18 @@ information extraction based on patterns, and MedTaggerML for machine learning-b
 1. Download the latest release from https://github.com/OHNLP/MedTagger/releases
 2. Extract the zip file
 3. Modify the INPUTDIR, OUTPUTDIR, and RULEDIR variables in `run_medtagger_win.bat` or `run_medtagger_unix_mac.sh`, as appropriate
+    - INPUT_DIR: full directory path of input folder 
+    - OUTPUT_DIR: full directory path of output folder
+    - RULES_DIR: full directory path of 'Rule' folder
+    Example for Mac:
+    INPUTDIR="/Users/username/Desktop/demo/input"
+    OUTPUTDIR="/Users/username/Desktop/demo/output"
+    RULEDIR="/Users/username/Desktop/MedTagger/medtaggerieresources/pad"
+
+    Example for Windows:
+    INPUTDIR="C:\Users\username\Desktop\input"
+    OUTPUTDIR="C:\Users\username\Desktop\input\output"
+    RULEDIR="C:\Users\username\Desktop/MedTagger/medtaggerieresources/pad"
 4. Run the batch file
 
 
