@@ -25,7 +25,7 @@ information extraction based on patterns, and MedTaggerML for machine learning-b
     OUTPUTDIR="C:\Users\username\Desktop\input\output"
     RULEDIR="C:\Users\username\Desktop\MedTagger\medtaggerieresources\pad"
 4. Run the batch file
-    command line:
+
     Mac/linux: ./run_medtagger_unix_mac.sh
     Windows: ./run_medtagger_win.bat
 
