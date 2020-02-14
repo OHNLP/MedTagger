@@ -14,11 +14,12 @@ information extraction based on patterns, and MedTaggerML for machine learning-b
     - INPUT_DIR: full directory path of input folder 
     - OUTPUT_DIR: full directory path of output folder
     - RULES_DIR: full directory path of 'Rule' folder
+    
     Example for Mac:
     INPUTDIR="/Users/username/Desktop/demo/input"
     OUTPUTDIR="/Users/username/Desktop/demo/output"
     RULEDIR="/Users/username/Desktop/MedTagger/medtaggerieresources/pad"
-
+    
     Example for Windows:
     INPUTDIR="C:\Users\username\Desktop\input"
     OUTPUTDIR="C:\Users\username\Desktop\input\output"
