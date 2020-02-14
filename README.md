@@ -11,6 +11,7 @@ information extraction based on patterns, and MedTaggerML for machine learning-b
 2. Extract the zip file
 3. Modify the INPUTDIR, OUTPUTDIR, and RULEDIR variables in `run_medtagger_win.bat` or `run_medtagger_unix_mac.sh`, as appropriate
 4. Run the batch file
+Video demo: https://vimeo.com/391512276
 
 # Custom Rulesets
 MedTagger IE Pipelines use a custom ruleset format. An example for peripheral arterial disease
