@@ -6,6 +6,11 @@ MedTagger contains a suite of programs that the Mayo Clinic NLP program has deve
 It includes three major components: MedTagger for indexing based on dictionaries, MedTaggerIE for
 information extraction based on patterns, and MedTaggerML for machine learning-based named entity recognition.
 
+# Custom Ruleset Use Case - COVID 19 
+MedTagger IE Pipelines use a custom ruleset format. An example ruleset of Coronavirus Diseases 19 (COVID 19) related symptoms (e.g. dry cough, fever, fatigue) 
+can be found under the `/src/main/resources/medtaggerieresources/covid19` directory. These resources are what tells MedTagger
+what to do/extract, and this directory is expected as input for the RULEDIR parameter 
+
 # Installation and Use
 #### Video demo: https://vimeo.com/392331446
 1. Download the latest release from https://github.com/OHNLP/MedTagger/releases
@@ -17,16 +22,16 @@ information extraction based on patterns, and MedTaggerML for machine learning-b
     
     Example for Mac:
     ```
-    INPUTDIR="/Users/username/Desktop/demo/input"
-    OUTPUTDIR="/Users/username/Desktop/demo/output"
-    RULEDIR="/Users/username/Desktop/MedTagger/medtaggerieresources/pad"
+    INPUTDIR="$YOUR_INPUT_DIRECTORY"
+    OUTPUTDIR="$YOUR_OUTPUT_DIRECTORY"
+    RULEDIR="$YOUR_MEDTAGGER_HOME/medtaggerieresources/covid19"
     ```
     
     Example for Windows:
     ```
-    INPUTDIR="C:\Users\username\Desktop\input"
-    OUTPUTDIR="C:\Users\username\Desktop\input\output"
-    RULEDIR="C:\Users\username\Desktop\MedTagger\medtaggerieresources\pad"
+    INPUTDIR="C:\$YOUR_INPUT_DIRECTORY\input"
+    OUTPUTDIR="C:\$YOUR_OUTPUT_DIRECTORY\output"
+    RULEDIR="C:\YOUR_MEDTAGGER_HOME\medtaggerieresources\covid19"
     ```
     
 4. Run the batch file
@@ -42,10 +47,7 @@ information extraction based on patterns, and MedTaggerML for machine learning-b
     run_medtagger_win.bat
     ```
     
-# Custom Rulesets
-MedTagger IE Pipelines use a custom ruleset format. An example for peripheral arterial disease
-can be found under the `/src/main/resources/medtaggerieresources/pad` directory. These resources are what tells MedTagger
-what to do/extract, and this directory is expected as input for the RULEDIR parameter 
+
 
 # For Developers
 1. Clone this repository
