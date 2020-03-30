@@ -9,7 +9,6 @@ branches:
     - master
     - /v\d+\.\d+[a-zA-Z-_]+?(\.\d+[a-zA-Z-_]+?)/
 install:
-#  - mvn clean deploy -Pbuild-deploy -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Dserver.username=$DEPLOY_USR -Dserver.password=$DEPLOY_TKN
   - mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   - ant dist
 deploy:
