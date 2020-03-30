@@ -1,0 +1,26 @@
+influenza vaccine
+flu vaccine
+influenza vaccination
+flu vaccination
+flu shot
+influenza shot
+influenza laiv
+flu swab
+influenza results
+flu vaccinations
+influenza vaccinations
+flu shots
+influenza immunization
+influenza immunizations
+regex:influenza\s(\S+\s+){0,2}vaccin(e|ation)s?
+influenza high dose
+influenza tiv
+flu tiv
+flu test
+influenza (IM)
+influenza quadrivalent
+Influenza A/B and Respiratory Syncytial Virus, PCR
+Influenza A/B and RSV, PCR
+Influenza A, B, RSV, PCR
+influenza test
+INFLUENZA A AND B AND RSV
