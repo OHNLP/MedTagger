@@ -2,7 +2,7 @@
 
 # MedTagger
 
-MedTagger contains a suite of programs that the Mayo Clinic NLP program has developed in the past three years.
+MedTagger contains a suite of programs that the Mayo Clinic NLP program has developed in 2013.
 It includes three major components: MedTagger for indexing based on dictionaries, MedTaggerIE for
 information extraction based on patterns, and MedTaggerML for machine learning-based named entity recognition.
 
@@ -56,3 +56,9 @@ what to do/extract, and this directory is expected as input for the RULEDIR para
     - Run `mvn clean install`
     - Run `ant dist`
     - A distribution zip will be created at `MedTagger.zip` in the root directory
+    
+   
+# Reference
+Liu H, Bielinski SJ, Sohn S, Murphy S, Wagholikar KB, Jonnalagadda SR, Ravikumar KE, Wu ST, Kullo IJ, Chute CG. An information extraction framework for cohort identification using electronic health records. AMIA Summits on Translational Science Proceedings. 2013;2013:149.
+
+Wen A, Fu S, Moon S, El Wazir M, Rosenbaum A, Kaggal VC, Liu S, Sohn S, Liu H, Fan J. Desiderata for delivering NLP to accelerate healthcare AI advancement and a Mayo Clinic NLP-as-a-service implementation. npj Digital Medicine. 2019 Dec 17;2(1):1-7.
