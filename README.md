@@ -8,7 +8,7 @@ information extraction based on patterns, and MedTaggerML for machine learning-b
 
 # Custom Ruleset Use Case - COVID 19 
 MedTagger IE Pipelines use a custom ruleset format. An example ruleset of Coronavirus Diseases 19 (COVID 19) related symptoms (e.g. dry cough, fever, fatigue) 
-can be found under the `/src/main/resources/medtaggerieresources/covid19` directory. These resources are what tells MedTagger
+can be found [here](https://github.com/OHNLP/MedTagger/tree/master/src/main/resources/medtaggerieresources/covid19) under the `/src/main/resources/medtaggerieresources/covid19` directory. These resources are what tells MedTagger
 what to do/extract, and this directory is expected as input for the RULEDIR parameter 
 
 # Installation and Use
