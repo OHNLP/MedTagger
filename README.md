@@ -12,6 +12,7 @@ can be found [here](https://github.com/OHNLP/MedTagger/tree/master/src/main/reso
 what to do/extract, and this directory is expected as input for the RULEDIR parameter 
 
 # Installation and Use
+#### Live demo for COVID-19 ruleset: http://167.114.144.164/
 #### Video demo: https://vimeo.com/392331446
 1. Download the latest release from https://github.com/OHNLP/MedTagger/releases
 2. Extract the zip file
