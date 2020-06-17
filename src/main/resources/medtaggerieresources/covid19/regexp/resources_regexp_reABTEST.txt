@@ -1,0 +1,4 @@
+SARS-CoV-2 (COVID19) IgG presence 
+SARS-CoV-2 (COVID19) IgM presence
+SARS-CoV-2 (COVID19) IgG positive
+SARS-CoV-2 (COVID19) IgM positive
