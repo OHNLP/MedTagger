@@ -3,3 +3,4 @@ fairly diffuse
 ground glass opacity
 ground-glass opacity
 ground glass shadows
+ground glass shadow
