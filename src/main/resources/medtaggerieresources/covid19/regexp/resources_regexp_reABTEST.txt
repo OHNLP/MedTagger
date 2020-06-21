@@ -1,18 +1,2 @@
-SARS-CoV-2 IgG(\s+\S+){0,3}\s*(presence|present)
-SARS-CoV-2 IgM(\s+\S+){0,3}\s*(presence|present)
-SARS-CoV-2 IgG(\s+\S+){0,3}\s*positive
-SARS-CoV-2 IgM(\s+\S+){0,3}\s*positive
-positive(\s+\S+){0,3}\s*SARS-CoV-2 IgG
-positive(\s+\S+){0,3}\s*SARS-CoV-2 IgM
-COVID19 IgG(\s+\S+){0,3}\s*(presence|present)
-COVID19 IgM(\s+\S+){0,3}\s*(presence|present)
-COVID19 IgG(\s+\S+){0,3}\s*positive
-COVID19 IgM(\s+\S+){0,3}\s*positive
-positive(\s+\S+){0,3}\s*COVID19 IgG
-positive(\s+\S+){0,3}\s*COVID19 IgM
-COVID 19 IgG(\s+\S+){0,3}\s*(presence|present)
-COVID 19 IgM(\s+\S+){0,3}\s*(presence|present)
-COVID 19 IgG(\s+\S+){0,3}\s*positive
-COVID 19 IgM(\s+\S+){0,3}\s*positive
-positive(\s+\S+){0,3}\s*COVID 19 IgG
-positive(\s+\S+){0,3}\s*COVID 19 IgM
+(SARS-CoV-2|COVID19|COVID 19) (IgG|IgM|ab|antibody)(\s+\S+){0,3}\s*(presence|present|positive)
+(presence|present|positive)(\s+\S+){0,3}\s*(SARS-CoV-2|COVID19|COVID 19) (IgG|IgM|ab|antibody)
