@@ -1,6 +1,7 @@
-SARS-CoV-2 (COVID19) RNA presence
-SARS-CoV-2 (COVID19) virus presence
-SARS-CoV-2 (COVID19) test positive
-positive SARS-CoV-2 (COVID19) test
-SARS-CoV-2 (COVID19) virus positive
-positive SARS-CoV-2 (COVID19) virus
+SARS-CoV-2 (RNA|virus|test)(\s+\S+){0,3}\s*(presence|present|positive)
+
+(presence|present|positive)(\s+\S+){0,3}\s*SARS-CoV-2 (RNA|virus|test)
+
+(COVID 19|COVID19) (RNA|virus|test)(\s+\S+){0,3}\s*(presence|present|positive)
+
+(presence|present|positive)(\s+\S+){0,3}\s*(COVID 19|COVID19) (RNA|virus|test)
