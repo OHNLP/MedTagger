@@ -44,7 +44,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 /**
  * An implementation of a MedTagger pipeline as an OHNLP Backbone Transform component
  */
-public class MedTaggerBackboneTransformComponent extends Transform {
+public class MedTaggerBackboneTransform extends Transform {
 
     private String inputField;
     private String resources;

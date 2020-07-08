@@ -18,7 +18,9 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml -s settings.xml -P build-deploy
-
+      env:
+        SECRET_ACTOR: ${{ secrets.SECRET_ACTOR }}
+        SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml -P build-deploy
       env:
