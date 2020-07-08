@@ -139,10 +139,10 @@ public class MedTaggerBackboneTransform extends Transform {
                             .collect(Collectors.joining(" ")));
             ret.put(
                     "section_id",
-                    coveringSectionsMap.get(cm)
+                    Integer.parseInt(coveringSectionsMap.get(cm)
                             .stream()
-                            .map(Annotation::getCoveredText)
-                            .collect(Collectors.joining(" ")));
+                            .map(Segment::getId)
+                            .findFirst().orElse("0")));
             ret.put("nlp_run_dtm", sdf.get().format(new Date()));
             ret.put("certainty", cm.getCertainty());
             ret.put("experiencer", cm.getExperiencer());
