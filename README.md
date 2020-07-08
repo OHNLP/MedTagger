@@ -1,4 +1,4 @@
-![.github/workflows/maven-publish.yml](https://github.com/OHNLP/MedTagger/workflows/.github/workflows/maven-publish.yml/badge.svg)
+![Build](https://github.com/OHNLP/MedTagger/workflows/Build/badge.svg)
 # MedTagger
 
 MedTagger contains a suite of programs that the Mayo Clinic NLP program has developed in 2013.
