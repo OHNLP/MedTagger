@@ -12,3 +12,6 @@ gasp
 rapid breathing
 breathing fast
 fast breathing
+trouble breathing
+breathing difficulty
+abnormal breathing

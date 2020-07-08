@@ -9,3 +9,4 @@ myalgic
 myodynia
 muscle discomfort
 muscular discomfort
+pain in muscle
