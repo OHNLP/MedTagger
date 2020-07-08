@@ -1,4 +1,4 @@
-name: Make a new Release on Tagged Push
+name: Release
 
 on:
   push:
