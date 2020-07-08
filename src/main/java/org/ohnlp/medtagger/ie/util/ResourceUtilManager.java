@@ -98,7 +98,7 @@ public class ResourceUtilManager {
         HashMap<String, Path> hmResources = new HashMap<>();
 
         try {
-            InputStream inputStream = Files.newInputStream(Paths.get(RESOURCEDIR, "used_resources.txt"));
+            InputStream inputStream = Files.newInputStream(Paths.get(RESOURCEDIR).resolve("used_resources.txt"));
 
             if (inputStream == null) {
                 throw new IOException(Paths.get(RESOURCEDIR).resolve( "used_resources.txt").toString() + " could not be loaded!");
