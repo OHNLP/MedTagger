@@ -1,8 +1,6 @@
 on:
   push:
     branches: [ master ]
-  release:
-    types: [created]
 
 jobs:
   build:
@@ -19,7 +17,7 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml -P build-deploy
+      run: mvn -B package --file pom.xml -s settings.xml -P build-deploy
 
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml -P build-deploy

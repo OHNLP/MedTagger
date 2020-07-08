@@ -76,11 +76,7 @@ public class ConTexTSettings {
      *
      * @throws FileNotFoundException
      */
-    public ConTexTSettings(/*String*/Object contextFile, int typeInput, int priority) throws FileNotFoundException {
-        /**
-         * Used to handle priorities of overlapping triggers. Higher order triggers get higher priorities.
-         */
-        //SPM Signature change to allow for alternate input streams
+    public ConTexTSettings(/*String*/Object contextFile, int priority) throws FileNotFoundException {
         Scanner sc;
         String regex_PSEUDO = "";
         String regex_NEG_PRE = "";
@@ -102,19 +98,14 @@ public class ConTexTSettings {
         String regex_HIST_END = "";
         String regex_HIST_EXP_END = "";
         String regex_HYPO_EXP_END = "";
-        //SPM Signature change to allow for alternate input streams: input stream > 0 or file == 0 to be handled
-        if (typeInput == 0) {
-            sc = new Scanner(new File((String) contextFile));
-        } else {
-            sc = new Scanner((InputStream) contextFile);
-        }
+
+        sc = new Scanner((InputStream) contextFile);
 
         Trie.TrieBuilder generalTrie = Trie.builder()
                 .onlyWholeWordsWhiteSpaceSeparated();
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             if (line.startsWith("#")) continue;
-
             if (!(line.startsWith("//"))) {
                 String[] tmp = line.split("~\\|~");
 //                String phrase = tmp[0].replaceAll(" ", "[\\\\s\\\\-]+");

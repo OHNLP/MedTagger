@@ -53,8 +53,9 @@ what to do/extract, and this directory is expected as input for the RULEDIR para
 # For Developers
 1. Clone this repository
 2. You will need JDK8 or above, Apache Maven, and Apache Ant installed
-3. When your modifications are complete, from the project root directory:
-    - Run `mvn clean install`
+3. To access github package repositories for dependency resolution, you will need to generate an appropriate github token with the read:packages permissions, and edit settings.xml appropriately by replacing `${env.SECRET_ACTOR}` with your github username and `${env.SECRET_TOKEN}` with the generated token.
+4. When your modifications are complete, from the project root directory:
+    - Run `mvn clean install -s settings.xml`
     - Run `ant dist`
     - A distribution zip will be created at `MedTagger.zip` in the root directory
     

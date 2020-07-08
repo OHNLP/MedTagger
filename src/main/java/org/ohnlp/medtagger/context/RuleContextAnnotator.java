@@ -65,7 +65,7 @@ public class RuleContextAnnotator extends JCasAnnotator_ImplBase {
         try {
             contextSettings = new LinkedList<>();
             for (int priority : RULE_PRIORITIES) {
-                contextSettings.add(new ConTexTSettings(ConTexTSettings.class.getResourceAsStream("/medtaggerresources/context/contextRule.txt"), 1, priority));
+                contextSettings.add(new ConTexTSettings(ConTexTSettings.class.getResourceAsStream("/medtaggerresources/context/contextRule.txt"), priority));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

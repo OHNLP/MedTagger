@@ -6,8 +6,17 @@
 
     <groupId>org.ohnlp.medtagger</groupId>
     <artifactId>MedTagger</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5-SNAPSHOT</version>
     <description>The MedTagger biomedical information extraction pipeline</description>
+
+
+    <repositories>
+        <repository>
+            <id>backbone-maven</id>
+            <name>OHNLP Backbone Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/OHNLP/Backbone</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -181,6 +190,11 @@
             <groupId>me.tongfei</groupId>
             <artifactId>progressbar</artifactId>
             <version>0.7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ohnlp.backbone</groupId>
+            <artifactId>API</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
