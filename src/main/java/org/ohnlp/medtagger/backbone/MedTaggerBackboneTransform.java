@@ -95,7 +95,7 @@ public class MedTaggerBackboneTransform extends Transform {
         }
 
         @ProcessElement
-        public void processElement(Row input, OutputReceiver<Row> output) {
+        public void processElement(@Element Row input, OutputReceiver<Row> output) {
             // First create the output row schema
             List<Schema.Field> fields = new LinkedList<>(input.getSchema().getFields());
             fields.add(Schema.Field.of("nlp_output_json", Schema.FieldType.STRING));
