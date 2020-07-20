@@ -33,7 +33,11 @@ import org.ohnlp.typesystem.type.textspan.Sentence;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystemAlreadyExistsException;
+import java.nio.file.FileSystems;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -85,7 +89,15 @@ public class MedTaggerBackboneTransform extends Transform {
 
             AnalysisEngineMetaData metadata = aaeDesc.getAnalysisEngineMetaData();
             ConfigurationParameterSettings settings = metadata.getConfigurationParameterSettings();
-            settings.setParameterValue("Resource_dir", Paths.get(MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI()).toString());
+            final URI uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+            Map<String, String> env = new HashMap<>();
+            env.put("create", "true");
+            try {
+                // Ensure it is created, ignore if not
+                FileSystem fs = FileSystems.newFileSystem(uri, env);
+            } catch (FileSystemAlreadyExistsException ignored) {
+            }
+            settings.setParameterValue("Resource_dir", uri.toString());
             metadata.setConfigurationParameterSettings(settings);
 
             this.resMgr = ResourceManagerFactory.newResourceManager();
@@ -131,6 +143,7 @@ public class MedTaggerBackboneTransform extends Transform {
         ) {
             ObjectNode ret = JsonNodeFactory.instance.objectNode();
             ret.put("matched_text", cm.getCoveredText());
+            ret.put("concept_code", cm.getNormTarget());
             ret.put(
                     "matched_sentence",
                     coveringSentenceMap.get(cm)
@@ -139,10 +152,16 @@ public class MedTaggerBackboneTransform extends Transform {
                             .collect(Collectors.joining(" ")));
             ret.put(
                     "section_id",
-                    Integer.parseInt(coveringSectionsMap.get(cm)
+                  coveringSectionsMap.get(cm)
                             .stream()
-                            .map(Segment::getId)
-                            .findFirst().orElse("0")));
+                            .map(s -> {
+                                try {
+                                    return Integer.parseInt(s.getId());
+                                } catch (Throwable t) {
+                                    return -1;
+                                }
+                            })
+                            .findFirst().orElse(0));
             ret.put("nlp_run_dtm", sdf.get().format(new Date()));
             ret.put("certainty", cm.getCertainty());
             ret.put("experiencer", cm.getExperiencer());

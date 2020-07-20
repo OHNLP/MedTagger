@@ -25,6 +25,7 @@ package org.ohnlp.medtagger.ie.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -98,10 +99,10 @@ public class ResourceUtilManager {
         HashMap<String, Path> hmResources = new HashMap<>();
 
         try {
-            InputStream inputStream = Files.newInputStream(Paths.get(RESOURCEDIR).resolve("used_resources.txt"));
+            InputStream inputStream = Files.newInputStream(Paths.get(URI.create(RESOURCEDIR)).resolve("used_resources.txt"));
 
             if (inputStream == null) {
-                throw new IOException(Paths.get(RESOURCEDIR).resolve( "used_resources.txt").toString() + " could not be loaded!");
+                throw new IOException(Paths.get(URI.create(RESOURCEDIR)).resolve( "used_resources.txt").toString() + " could not be loaded!");
             }
 
             Scanner sc = new Scanner(inputStream);
@@ -112,7 +113,7 @@ public class ResourceUtilManager {
                 for (Object r : findMatches(paResource, line)) {
                     MatchResult ro = (MatchResult) r;
                     String foundResource = ro.group(1);
-                    Path pathToResource = Paths.get(RESOURCEDIR).resolve( resourceType).resolve("resources_" + resourceType + "_" + foundResource + ".txt");
+                    Path pathToResource = Paths.get(URI.create(RESOURCEDIR)).resolve( resourceType).resolve("resources_" + resourceType + "_" + foundResource + ".txt");
                     hmResources.put(foundResource, pathToResource);
                 }
             }
