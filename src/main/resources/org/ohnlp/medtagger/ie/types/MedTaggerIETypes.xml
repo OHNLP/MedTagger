@@ -28,35 +28,49 @@
 
 -->
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
- <name>org.ohnlp.medtagger.typesystem.types.MedTaggerIETypes</name>
- <description>This is a Type System that will be used for EDT</description>
-  <version>1.0</version>
-  <vendor>Mayo - NLP</vendor>
-  <imports>
-    <import name="org.ohnlp.medtagger.types.MedTaggerTypes"/>
-  </imports>
-  <types>
-    <typeDescription>
-      <name>org.ohnlp.medtagger.ie.type.Match</name>
-      <description/>
-      <supertypeName>uima.tcas.Annotation</supertypeName>
-      <features>
-        <featureDescription>
-          <name>value</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>foundByRule</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>sentence</name>
-          <description/>
-          <rangeTypeName>org.ohnlp.typesystem.type.textspan.Sentence</rangeTypeName>
-        </featureDescription>
-      </features>
-    </typeDescription>
-  </types>
+    <name>org.ohnlp.medtagger.typesystem.types.MedTaggerIETypes</name>
+    <description>This is a Type System that will be used for EDT</description>
+    <version>1.0</version>
+    <vendor>Mayo - NLP</vendor>
+    <imports>
+        <import name="org.ohnlp.medtagger.types.MedTaggerTypes"/>
+    </imports>
+    <types>
+        <typeDescription>
+            <name>org.ohnlp.medtagger.ie.type.Match</name>
+            <description/>
+            <supertypeName>uima.tcas.Annotation</supertypeName>
+            <features>
+                <featureDescription>
+                    <name>value</name>
+                    <description/>
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                </featureDescription>
+                <featureDescription>
+                    <name>foundByRule</name>
+                    <description/>
+                    <rangeTypeName>uima.cas.String</rangeTypeName>
+                </featureDescription>
+                <featureDescription>
+                    <name>sentence</name>
+                    <description/>
+                    <rangeTypeName>org.ohnlp.typesystem.type.textspan.Sentence</rangeTypeName>
+                </featureDescription>
+            </features>
+        </typeDescription>
+        <typeDescription>
+            <name>org.ohnlp.medtagger.ie.type.metadata.IEDict</name>
+            <description>A metadata annotation storing a dictionary definition to be used to process
+                information extraction tasks for a given document
+            </description>
+            <supertypeName>uima.cas.TOP</supertypeName>
+            <features>
+                <featureDescription>
+                    <name>value</name>
+                    <description/>
+                    <rangeTypeName>uima.cas.ByteArray</rangeTypeName>
+                </featureDescription>
+            </features>
+        </typeDescription>
+    </types>
 </typeSystemDescription>

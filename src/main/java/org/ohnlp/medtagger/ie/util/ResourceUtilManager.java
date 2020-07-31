@@ -25,6 +25,7 @@ package org.ohnlp.medtagger.ie.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -47,12 +48,12 @@ import org.apache.log4j.Logger;
  * Abstract class for all Resource Managers to inherit from. Contains basic
  * functionality such as file system access and some private members.
  */
-public class ResourceUtilManager {
+public class ResourceUtilManager implements Serializable {
 
-    public static String RESOURCEDIR;
-    private static ResourceUtilManager INSTANCE = null;
+    public transient static String RESOURCEDIR;
+    private transient static ResourceUtilManager INSTANCE = null;
 
-    private Logger iv_logger = Logger.getLogger(getClass().getName());
+    private transient Logger iv_logger = Logger.getLogger(getClass().getName());
 
     private Pattern regexpPattern = Pattern.compile("(.*)");
     private Pattern normPattern = Pattern.compile("^(.*?)\t(.*?)$");
@@ -65,22 +66,15 @@ public class ResourceUtilManager {
     HashMap<String, String> hmRuleNormalization = new HashMap<String, String>(); // normalization target in rules
     HashMap<String, String> hmRuleLocation = new HashMap<String, String>(); // location of the patterns
 
+
     public static ResourceUtilManager getInstance() {
         if (ResourceUtilManager.INSTANCE == null)
             ResourceUtilManager.INSTANCE = new ResourceUtilManager(RESOURCEDIR);
         return ResourceUtilManager.INSTANCE;
     }
 
-    ClassLoader classLoader = null;
 
     public ResourceUtilManager(String resourcedir) {
-        try {
-            Class cls = Class.forName("org.ohnlp.medtagger.ie.util.ResourceUtilManager");
-            classLoader = cls.getClassLoader();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
         RESOURCEDIR = resourcedir;
         readResources(readResourcesFiles("norm"), normPattern, "norm");
         readResources(readResourcesFiles("regexp"), regexpPattern, "regexp");
