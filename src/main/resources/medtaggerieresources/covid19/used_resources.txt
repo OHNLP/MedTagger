@@ -1,5 +1,6 @@
 ./context/contextRule.txt
 ./regexp/resources_regexp_reABDOMINALPAIN.txt
+./regexp/resources_regexp_reABTEST.txt
 ./regexp/resources_regexp_reAPPETITELOSS.txt
 ./regexp/resources_regexp_reDIARRHEA.txt
 ./regexp/resources_regexp_reDRYCOUGH.txt
@@ -12,6 +13,7 @@
 ./regexp/resources_regexp_reGROUNDGLASSINFILTRATES.txt
 ./regexp/resources_regexp_reHEADACHE.txt
 ./regexp/resources_regexp_reLYMPHOPENIA.txt
+./regexp/resources_regexp_reMOLETEST.txt
 ./regexp/resources_regexp_reMYALGIA.txt
 ./regexp/resources_regexp_reNASALCONGESTION.txt
 ./regexp/resources_regexp_rePATCHYINFILTRATES.txt
