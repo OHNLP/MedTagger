@@ -30,7 +30,7 @@ public class Main {
 
         System.out.println("Input Dir:\t" + inputDirPath.toAbsolutePath().toString());
         System.out.println("Output Dir:\t" + outputDirPath.toAbsolutePath().toString());
-        System.out.println("IE Rules:\t" + ruleDirPath.toAbsolutePath().toString());
+        System.out.println("IE Rules:\t" + ruleDirPath.toAbsolutePath().toUri().toString());
 
         AnalysisEngineDescription descMedTaggerTAE = createEngineDescription(
                 "desc.medtaggeriedesc.aggregate_analysis_engine.MedTaggerIEAggregateTAE");
@@ -38,7 +38,7 @@ public class Main {
         AnalysisEngineMetaData metadata = descMedTaggerTAE.getAnalysisEngineMetaData();
 
         ConfigurationParameterSettings settings = metadata.getConfigurationParameterSettings();
-        settings.setParameterValue("Resource_dir", ruleDirPath.toString());
+        settings.setParameterValue("Resource_dir", ruleDirPath.toAbsolutePath().toUri().toString());
         metadata.setConfigurationParameterSettings(settings);
 
         AnalysisEngineDescription writer =
