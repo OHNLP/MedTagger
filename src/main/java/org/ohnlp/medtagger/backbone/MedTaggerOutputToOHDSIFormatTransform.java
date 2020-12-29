@@ -8,38 +8,62 @@ import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.values.PCollection;
 import org.apache.beam.sdk.values.Row;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.joda.time.Duration;
 import org.joda.time.Instant;
 import org.ohnlp.backbone.api.Transform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Transforms MedTagger output as produced from {@link MedTaggerBackboneTransform} to an OHDSI-compliant format suitable
  * for the NOTE_NLP table.
  * <p>
- * Note: Assumes that rulesets supply a concept normalization -> OHDSI concept id mapping
+ * Note: Assumes that rulesets supply a concept normalization -> OHDSI concept id mapping in ohdsi_mappings.txt
  */
 public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
     private static ThreadLocal<SimpleDateFormat> sdf = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ssXXX"));
+    private String resources;
+
 
     @Override
-    public void initFromConfig(JsonNode jsonNode) throws ComponentInitializationException {
-        // No initialization necessary
+    public void initFromConfig(JsonNode config) throws ComponentInitializationException {
+        this.resources = config.get("ruleset").asText();
     }
 
     @Override
     public PCollection<Row> expand(PCollection<Row> input) {
         return input.apply(ParDo.of(new DoFn<Row, Row>() {
             private transient ObjectMapper om;
+            private transient Map<String, Integer> ohdsiConceptMap;
 
             @Setup
             public void init() {
                 this.om = new ObjectMapper();
+                this.ohdsiConceptMap = new HashMap<>();
+                try (InputStream resource = MedTaggerOutputToOHDSIFormatTransform.class.getResourceAsStream("/resources/" + resources + "/ohdsi_mappings.txt")) {
+                    List<String> mappings =
+                            new BufferedReader(new InputStreamReader(resource,
+                                    StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
+                    mappings.forEach(s -> {
+                        String[] args = s.trim().split("\\|");
+                        ohdsiConceptMap.put(args[0], Integer.parseInt(args[1]));
+                    });
+                } catch (Throwable e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             @ProcessElement
@@ -50,7 +74,7 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                 fields.add(Schema.Field.of("lexical_variant", Schema.FieldType.STRING));
                 fields.add(Schema.Field.of("snippet", Schema.FieldType.STRING));
                 fields.add(Schema.Field.of("note_nlp_concept_id", Schema.FieldType.INT32));
-                fields.add(Schema.Field.of("note_nlp_source_concept_id", Schema.FieldType.STRING));
+                fields.add(Schema.Field.of("note_nlp_source_concept_id", Schema.FieldType.INT32));
                 fields.add(Schema.Field.of("nlp_datetime", Schema.FieldType.DATETIME));
                 fields.add(Schema.Field.of("term_modifiers", Schema.FieldType.STRING));
                 Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
@@ -63,8 +87,8 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                         .addValue(rawValues.get("section_id").asInt())
                         .addValue(rawValues.get("matched_text").asText())
                         .addValue(rawValues.get("matched_sentence").asText())
-                        .addValue(0) // TODO map concept norms
-                        .addValue(rawValues.get("concept_code").asText())
+                        .addValue(ohdsiConceptMap.getOrDefault(rawValues.get("concept_code").asText(), 0))
+                        .addValue(0)
                         .addValue(new Instant(sdf.get().parse(rawValues.get("nlp_run_dtm").asText()).getTime()))
                         .addValue(
                                 String.format("certainty=%1$s,experiencer=%2$s,status=%3$s",
