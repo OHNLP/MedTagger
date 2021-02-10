@@ -25,6 +25,7 @@
 package org.ohnlp.medtagger.ae;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 			lvg = new LvgLookup(aContext);
 
 			String dict = aContext.getResourceFilePath("dict");
-			btac = new AhoCorasickDict(dict);
+			btac = new AhoCorasickDict(new FileInputStream(dict));
 
 			stop = new HashSet<String>();
 			BufferedReader br = new BufferedReader(new FileReader(

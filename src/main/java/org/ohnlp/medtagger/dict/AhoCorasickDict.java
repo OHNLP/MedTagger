@@ -31,10 +31,7 @@
  */
 
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -63,14 +60,12 @@ public class AhoCorasickDict {
 		root.addChild(FAILLINK, root);
 	}
 
-	public AhoCorasickDict(String dictfile){
+	public AhoCorasickDict(InputStream is){
 		root=new Node(null);
 		root.addChild(FAILLINK, root);
-		iv_logger.info("building aho-corasick trie from: "+dictfile);
 		try{
 			BufferedReader reader = new BufferedReader
-					(new InputStreamReader
-							(new FileInputStream(dictfile)));
+					(new InputStreamReader(is));
 			String line;
 			int count=0;
 			while ((line = reader.readLine()) != null) {
