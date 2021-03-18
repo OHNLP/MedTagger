@@ -98,6 +98,7 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                                         rawValues.get("status").asText()
                                 )
                         )
+                        .addValue(rawValues.get("offset").asInt())
                         .build();
                 output.output(out);
             }
