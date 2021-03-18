@@ -77,6 +77,7 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                 fields.add(Schema.Field.of("note_nlp_source_concept_id", Schema.FieldType.INT32));
                 fields.add(Schema.Field.of("nlp_datetime", Schema.FieldType.DATETIME));
                 fields.add(Schema.Field.of("term_modifiers", Schema.FieldType.STRING));
+                fields.add(Schema.Field.of("offset", Schema.FieldType.INT32));
                 Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
 
                 JsonNode rawValues = om.readTree(input.getString("nlp_output_json"));
