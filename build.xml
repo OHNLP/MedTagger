@@ -36,7 +36,7 @@
     <target name="dist"
             description="generate the distribution" depends="init">
         <copydir src="src/main/resources" dest="${dist}"/>
-        <copy file="target/MedTagger.jar" tofile="${dist}/MedTagger.jar"/>
+        <copy file="target/medTagger.jar" tofile="${dist}/MedTagger.jar"/>
         <zip basedir="${dist}" destfile="MedTagger.zip"/>
         <delete dir="${dist}"/>
     </target>
