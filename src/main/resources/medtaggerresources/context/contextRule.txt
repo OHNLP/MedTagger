@@ -11,7 +11,7 @@ given some brief thought to~|~pre~|~poss~|~1
 never been high enough to cause~|~pre~|~poss~|~1
 regex:\bno (\S+\s+){1,3} (to|that) suggests?\b~|~pre~|~neg~|~2
 // AW added start
-which demonstrates~|~term~|~poss~|~1
+which demonstrates~|~termin~|~poss~|~1
 interested in~|~pre~|~poss~|~1
 etiology indeterminate~|~pseudo~|~poss~|~1
 patient and family~|~pseudo~|~exp~|~1
