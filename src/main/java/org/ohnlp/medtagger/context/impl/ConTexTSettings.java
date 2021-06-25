@@ -153,6 +153,9 @@ public class ConTexTSettings {
                                     generalTriggerDict.computeIfAbsent(phrase, k -> new HashMap<>()).computeIfAbsent(TriggerType.TERMINAL, k -> new HashSet<>()).add(ConText.HYPOTHETICAL);
                                     break;
                                 }
+                                case "poss": {
+                                    generalTriggerDict.computeIfAbsent(phrase, k -> new HashMap<>()).computeIfAbsent(TriggerType.TERMINAL, k -> new HashSet<>()).add(ConText.POSSIBLE);
+                                }
                                 case "exp": {
                                     generalTriggerDict.computeIfAbsent(phrase, k -> new HashMap<>()).computeIfAbsent(TriggerType.TERMINAL, k -> new HashSet<>()).add(ConText.EXPERIENCER);
                                     break;

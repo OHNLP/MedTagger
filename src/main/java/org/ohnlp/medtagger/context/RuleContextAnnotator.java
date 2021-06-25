@@ -356,6 +356,9 @@ public class RuleContextAnnotator extends JCasAnnotator_ImplBase {
             Map<String, Map<ConTexTTrigger.TriggerType, Set<ConText>>> generalDict = prioritySettings.getGeneralTriggerDict();
             values.forEach(e -> {
                 Map<ConTexTTrigger.TriggerType, Set<ConText>> triggers = generalDict.get(e.getKeyword());
+                if (triggers == null) {
+                    throw new IllegalArgumentException("Invalid trigger definition: " + e.getKeyword() + " has no associated mapping");
+                }
                 int start = e.getStart();
                 int end = e.getEnd() + 1;
                 triggers.forEach(((triggerType, conTexts) -> {
