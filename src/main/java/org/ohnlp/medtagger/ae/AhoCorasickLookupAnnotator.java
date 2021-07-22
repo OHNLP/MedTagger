@@ -24,6 +24,27 @@
 
 package org.ohnlp.medtagger.ae;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.JFSIndexRepository;
+import org.apache.uima.resource.ResourceAccessException;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.ohnlp.medtagger.dict.AhoCorasickDict;
+import org.ohnlp.medtagger.lvg.LvgLookup;
+import org.ohnlp.medtagger.type.ConceptMention;
+import org.ohnlp.typesystem.type.syntax.BaseToken;
+import org.ohnlp.typesystem.type.syntax.NumToken;
+import org.ohnlp.typesystem.type.syntax.PunctuationToken;
+import org.ohnlp.typesystem.type.syntax.WordToken;
+import org.ohnlp.typesystem.type.textspan.Segment;
+import org.ohnlp.typesystem.type.textspan.Sentence;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -34,32 +55,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.JFSIndexRepository;
-import org.apache.uima.resource.ResourceAccessException;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.ohnlp.typesystem.type.textspan.Segment;
-import org.ohnlp.typesystem.type.textspan.Sentence;
-import org.ohnlp.typesystem.type.syntax.BaseToken;
-import org.ohnlp.typesystem.type.syntax.NumToken;
-import org.ohnlp.typesystem.type.syntax.PunctuationToken;
-import org.ohnlp.typesystem.type.syntax.WordToken;
-import org.ohnlp.medtagger.dict.AhoCorasickDict;
-import org.ohnlp.medtagger.lvg.LvgLookup;
-import org.ohnlp.medtagger.type.ConceptMention;
-
 /**
  * @author Hongfang Liu
  */
 public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 
 	// LOG4J logger based on class name
-	private Logger logger = Logger.getLogger(getClass().getName());
+	private Logger logger = LogManager.getLogger(getClass().getName());
 	private boolean LONGEST = true;
 
 	// data structure that stores the TRIE
@@ -73,7 +75,7 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 	public void initialize(UimaContext aContext)
 			throws ResourceInitializationException {
 		super.initialize(aContext);
-		logger.setLevel(Level.DEBUG);
+		Configurator.setLevel(logger.getName(), Level.DEBUG);
 
 		try {
 			lvg = new LvgLookup(aContext);

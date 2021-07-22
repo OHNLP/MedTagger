@@ -24,7 +24,8 @@
 package org.ohnlp.medtagger.ie.ae;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.cas.FSIterator;
@@ -60,7 +61,7 @@ public class MedTaggerDynamicIEAnnotator extends JCasAnnotator_ImplBase {
 	//private Boolean hyphen2space = false;
 	private Boolean punct2space = false;
 
-	private Logger iv_logger = Logger.getLogger(getClass().getName());
+	private Logger iv_logger = LogManager.getLogger(getClass().getName());
 
 	public void initialize(UimaContext aContext)
 			throws ResourceInitializationException {

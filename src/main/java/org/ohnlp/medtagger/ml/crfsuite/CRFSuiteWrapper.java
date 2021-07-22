@@ -39,14 +39,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.ohnlp.medtagger.ml.feature.Feature;
 import org.ohnlp.medtagger.ml.util.Executer;
 import org.ohnlp.medtagger.ml.util.PlatformDetection;
 
 
 public class CRFSuiteWrapper {
-  private Logger iv_logger = Logger.getLogger(getClass().getName());
+  private Logger iv_logger = LogManager.getLogger(getClass().getName());
   private File executable;
   
   public CRFSuiteWrapper() throws Exception {

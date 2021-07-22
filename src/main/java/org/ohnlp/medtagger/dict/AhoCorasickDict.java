@@ -39,13 +39,14 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 
 public class AhoCorasickDict {
 
 	// LOG4J logger based on class name
-   private Logger iv_logger = Logger.getLogger(getClass().getName());
+   private Logger iv_logger = LogManager.getLogger(getClass().getName());
 	
 	public static final String FAILLINK="_FAIL_";
 	public static final String SLDELIM="||";

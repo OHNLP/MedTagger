@@ -27,7 +27,8 @@ package org.ohnlp.medtagger.ie.ae;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -42,7 +43,7 @@ import org.ohnlp.typesystem.type.textspan.Sentence;
 
 public class LineSentenceDetector  extends JCasAnnotator_ImplBase {
 
-	private Logger logger = Logger.getLogger(getClass().getName());
+	private Logger logger = LogManager.getLogger(getClass().getName());
 	
 	public static final byte CAPS_UNKNOWN = 0;
 	public static final byte CAPS_NONE = 1;
