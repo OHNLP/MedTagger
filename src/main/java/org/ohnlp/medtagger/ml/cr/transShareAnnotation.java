@@ -35,6 +35,8 @@ import org.xml.sax.helpers.AttributesImpl;
 import org.ohnlp.medtagger.ml.type.shareAnnotation;
 import org.ohnlp.medtagger.ml.type.shareSlot;
 
+import javax.xml.XMLConstants;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.parsers.SAXParser;
 
@@ -52,10 +54,9 @@ public class transShareAnnotation extends DefaultHandler {
 	};
 
 	public transShareAnnotation(String str, JCas jcas) {
-		SAXParserFactory factory = SAXParserFactory.newInstance();
 		mjcas = jcas;
 		try {
-			SAXParser saxParser = factory.newSAXParser();
+			SAXParser saxParser = createSaxParser();
 			saxParser.parse(new ByteArrayInputStream(str.getBytes()), this);
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -63,14 +64,24 @@ public class transShareAnnotation extends DefaultHandler {
 	}
 
 	public transShareAnnotation(File xmlfile, JCas jcas) {
-		SAXParserFactory factory = SAXParserFactory.newInstance();
 		mjcas=jcas;
 		try {
-			SAXParser saxParser = factory.newSAXParser();
+			SAXParser saxParser = createSaxParser();
 			saxParser.parse(xmlfile, this);
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
+	}
+
+	private SAXParser createSaxParser() throws ParserConfigurationException, SAXException {
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+		factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+		factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+		SAXParser saxParser = factory.newSAXParser(); // Noncompliant
+		saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+		saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+		return saxParser;
 	}
 
 	// ===========================================================
