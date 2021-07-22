@@ -28,7 +28,8 @@ import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CasConsumer_ImplBase;
@@ -96,7 +97,7 @@ public class DictConsumer extends CasConsumer_ImplBase {
 		}
 	}
 
-	Logger log = Logger.getLogger(getClass().getName());
+	Logger log = LogManager.getLogger(getClass().getName());
 	@Override
 	public void destroy() {
 		super.destroy();

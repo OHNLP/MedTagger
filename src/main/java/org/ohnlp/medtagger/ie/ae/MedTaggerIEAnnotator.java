@@ -35,7 +35,8 @@ import java.util.Set;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
@@ -78,7 +79,7 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 	//private Boolean hyphen2space = false;
 	private Boolean punct2space = false;
 
-	private Logger iv_logger = Logger.getLogger(getClass().getName());
+	private Logger iv_logger = LogManager.getLogger(getClass().getName());
 
 	public ResourceUtilManager rum;
 

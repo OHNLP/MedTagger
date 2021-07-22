@@ -32,7 +32,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -46,7 +47,7 @@ import org.ohnlp.typesystem.type.syntax.WordToken;
 public class LvgLookup extends JCasAnnotator_ImplBase {
 
 	// LOG4J logger based on class name
-	private Logger logger = Logger.getLogger("LvgLookup");
+	private Logger logger = LogManager.getLogger("LvgLookup");
      HashMap<String, String> lvgMap;
     HashSet<String> openclass; 
     //private static OpenClassWords pds = new OpenClassWords();
