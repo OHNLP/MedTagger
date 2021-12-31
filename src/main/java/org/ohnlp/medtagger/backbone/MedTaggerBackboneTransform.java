@@ -52,11 +52,13 @@ public class MedTaggerBackboneTransform extends Transform {
 
     private String inputField;
     private String resources;
+    private RunMode mode;
 
     @Override
     public void initFromConfig(JsonNode config) throws ComponentInitializationException {
         try {
             this.inputField = config.get("input").asText();
+            this.mode = config.has("mode") ? RunMode.valueOf(config.get("mode").textValue().toUpperCase(Locale.ROOT)) : RunMode.STANDALONE_EMBEDDED;
             this.resources = config.get("ruleset").asText();
         } catch (Throwable t) {
             throw new ComponentInitializationException(t);
@@ -169,5 +171,11 @@ public class MedTaggerBackboneTransform extends Transform {
             ret.put("offset", cm.getBegin());
             return ret;
         }
+    }
+
+    private enum RunMode {
+        OHNLPTK_DEFINED, // Retrieve from web-based middleware server
+        STANDALONE_EMBEDDED, // Embedded IE Ruleset
+        GENERAL_CLINICAL // General Purpose SCT dictionary
     }
 }
