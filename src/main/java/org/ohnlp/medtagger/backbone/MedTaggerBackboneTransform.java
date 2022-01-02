@@ -15,6 +15,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.analysis_engine.metadata.AnalysisEngineMetaData;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
+import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.internal.ResourceManagerFactory;
 import org.apache.uima.fit.util.JCasUtil;
@@ -27,6 +28,8 @@ import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.InvalidXMLException;
 import org.ohnlp.backbone.api.Transform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
+import org.ohnlp.medtagger.context.RuleContextAnnotator;
+import org.ohnlp.medtagger.ie.ae.MedTaggerIEAnnotator;
 import org.ohnlp.medtagger.type.ConceptMention;
 import org.ohnlp.typesystem.type.textspan.Segment;
 import org.ohnlp.typesystem.type.textspan.Sentence;
@@ -67,43 +70,56 @@ public class MedTaggerBackboneTransform extends Transform {
 
     @Override
     public PCollection<Row> expand(PCollection<Row> input) {
-        return input.apply(ParDo.of(new MedTaggerPipelineFunction(this.inputField, this.resources)));
+        return input.apply("MedTagger Concept Extraction",
+                ParDo.of(new MedTaggerPipelineFunction(this.inputField, this.resources, this.mode)));
     }
 
     private static class MedTaggerPipelineFunction extends DoFn<Row, Row> {
         private final String resourceFolder;
         private final String textField;
+        private final RunMode mode;
 
         // UIMA components are not serializable, and thus must be initialized per-executor via the @Setup annotation
         private transient AnalysisEngine aae;
         private transient ResourceManager resMgr;
         private transient CAS cas;
 
-        public MedTaggerPipelineFunction(String textField, String resourceFolder) {
+        public MedTaggerPipelineFunction(String textField, String resourceFolder, RunMode mode) {
             this.textField = textField;
             this.resourceFolder = resourceFolder;
+            this.mode = mode;
         }
 
         @Setup
         public void init() throws IOException, InvalidXMLException, URISyntaxException, ResourceInitializationException {
-            AnalysisEngineDescription aaeDesc = createEngineDescription(
-                    "desc.medtaggeriedesc.aggregate_analysis_engine.MedTaggerIEAggregateTAE");
-
-            AnalysisEngineMetaData metadata = aaeDesc.getAnalysisEngineMetaData();
-            ConfigurationParameterSettings settings = metadata.getConfigurationParameterSettings();
-            final URI uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
-            Map<String, String> env = new HashMap<>();
-            env.put("create", "true");
-            try {
-                // Ensure it is created, ignore if not
-                FileSystem fs = FileSystems.newFileSystem(uri, env);
-            } catch (FileSystemAlreadyExistsException ignored) {
+            AggregateBuilder ae = new AggregateBuilder();
+            // Tokenization, Sentence Splitting, Section Detection, etc.
+            ae.add(createEngineDescription("desc.backbone.aes.PreConceptExtractionAE"));
+            // Add the appropriate NER/normalization component depending on run mode
+            switch (mode) {
+                case OHNLPTK_DEFINED: // Ruleset from a web service
+                    throw new UnsupportedOperationException("Remote Served IE Rulesets not yet implemented");
+                case STANDALONE_EMBEDDED:
+                    final URI uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+                    Map<String, String> env = new HashMap<>();
+                    env.put("create", "true");
+                    try {
+                        // Ensure it is created, ignore if not
+                        FileSystem fs = FileSystems.newFileSystem(uri, env);
+                    } catch (FileSystemAlreadyExistsException ignored) {
+                    }
+                    ae.add(AnalysisEngineFactory.createEngineDescription(MedTaggerIEAnnotator.class, "Resource_dir", uri.toString()));
+                    break;
+                case GENERAL_CLINICAL:
+                    ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE"));
+                    break;
             }
-            settings.setParameterValue("Resource_dir", uri.toString());
-            metadata.setConfigurationParameterSettings(settings);
+
+            // Add Context handling
+            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
 
             this.resMgr = ResourceManagerFactory.newResourceManager();
-            this.aae = UIMAFramework.produceAnalysisEngine(aaeDesc, resMgr, null);
+            this.aae = UIMAFramework.produceAnalysisEngine(ae.createAggregateDescription(), resMgr, null);
             this.cas = CasCreationUtils.createCas(Collections.singletonList(aae.getMetaData()),
                     null, resMgr);
         }

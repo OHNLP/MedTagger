@@ -23,32 +23,21 @@
  *******************************************************************************/
 package org.ohnlp.medtagger.ie.ae;
 
-import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.MatchResult;
-import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.FSIterator;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.JFSIndexRepository;
-import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
-
 import org.ohnlp.medtagger.ie.type.Match;
-import org.ohnlp.medtagger.type.ConceptMention;
 import org.ohnlp.medtagger.ie.util.ResourceUtilManager;
-import org.ohnlp.typesystem.type.structured.Document;
+import org.ohnlp.medtagger.type.ConceptMention;
 import org.ohnlp.typesystem.type.textspan.Sentence;
+
+import java.util.*;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
 
 /**
  * MedTaggerIEAnnotator extracts information based on specified patterns

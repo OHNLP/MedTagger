@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+    <primitive>false</primitive>
+    <delegateAnalysisEngineSpecifiers>
+        <delegateAnalysisEngine key="MedTaggerLookupAE">
+            <import name="org.ohnlp.medtagger.aes.MedTaggerLookupAE"/>
+        </delegateAnalysisEngine>
+    </delegateAnalysisEngineSpecifiers>
+
+    <analysisEngineMetaData>
+        <name>MedTaggerDictionaryLookupAE</name>
+        <description>Aggregate engine for dictionary lookup-based tagging</description>
+        <version>1.0</version>
+        <vendor/>
+
+
+
+        <configurationParameters searchStrategy="language_fallback"/>
+        <configurationParameterSettings/>
+        <flowConstraints>
+            <fixedFlow>
+                <node>MedTaggerLookupAE</node>
+            </fixedFlow>
+        </flowConstraints>
+        <typePriorities>
+            <priorityList>
+                <type>org.ohnlp.typesystem.type.textspan.Segment</type>
+                <type>org.ohnlp.typesystem.type.textspan.Sentence</type>
+                <type>org.ohnlp.typesystem.type.syntax.BaseToken</type>
+            </priorityList>
+        </typePriorities>
+        <fsIndexCollection/>
+        <capabilities>
+            <capability>
+                <inputs/>
+                <outputs/>
+                <languagesSupported/>
+            </capability>
+        </capabilities>
+        <operationalProperties>
+            <modifiesCas>true</modifiesCas>
+            <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+            <outputsNewCASes>false</outputsNewCASes>
+        </operationalProperties>
+    </analysisEngineMetaData>
+
+    <resourceManagerConfiguration>
+        <externalResources>
+            <externalResource>
+                <name>lvg_dict</name>
+                <description/>
+                <fileResourceSpecifier>
+                    <fileUrl>file:medtaggerresources/lvg/LRAGR_2011AB</fileUrl>
+                </fileResourceSpecifier>
+            </externalResource>
+
+            <externalResource>
+                <name>openclass</name>
+                <description/>
+                <fileResourceSpecifier>
+                    <fileUrl>file:medtaggerresources/lvg/openclasswords.txt</fileUrl>
+                </fileResourceSpecifier>
+            </externalResource>
+
+            <externalResource>
+                <name>dict</name>
+                <description/>
+                <fileResourceSpecifier>
+                    <fileUrl>file:medtaggerresources/lookup/MedTagger.lookup.dict</fileUrl>
+                </fileResourceSpecifier>
+            </externalResource>
+
+            <externalResource>
+                <name>abbr</name>
+                <description/>
+                <fileResourceSpecifier>
+                    <fileUrl>file:medtaggerresources/lookup/MedTagger.abbr</fileUrl>
+                </fileResourceSpecifier>
+            </externalResource>
+
+            <externalResource>
+                <name>stop</name>
+                <description/>
+                <fileResourceSpecifier>
+                    <fileUrl>file:medtaggerresources/lookup/stop.615</fileUrl>
+                </fileResourceSpecifier>
+            </externalResource>
+
+
+        </externalResources>
+        <externalResourceBindings>
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/stop</key>
+                <resourceName>stop</resourceName>
+            </externalResourceBinding>
+
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/dict</key>
+                <resourceName>dict</resourceName>
+            </externalResourceBinding>
+
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/lvg_dict</key>
+                <resourceName>lvg_dict</resourceName>
+            </externalResourceBinding>
+
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/abbr</key>
+                <resourceName>abbr</resourceName>
+            </externalResourceBinding>
+
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/openclass</key>
+                <resourceName>openclass</resourceName>
+            </externalResourceBinding>
+        </externalResourceBindings>
+
+
+    </resourceManagerConfiguration>
+</analysisEngineDescription>
