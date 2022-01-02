@@ -23,10 +23,7 @@
  *******************************************************************************/
 package org.ohnlp.medtagger.dict;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -40,6 +37,7 @@ import org.ohnlp.medtagger.type.DictContext;
 
 public class DictCollectionReader extends CollectionReader_ImplBase {
 
+	public static final String PARAM_DICTFILE = "InputFile";
 	private BufferedReader br = null;
 
 	@Override
@@ -76,8 +74,9 @@ public class DictCollectionReader extends CollectionReader_ImplBase {
 
 	@Override
 	public void initialize() throws ResourceInitializationException {
+		File dictFile = new File(((String) getConfigParameterValue(PARAM_DICTFILE)).trim());
 		try {
-			br = new BufferedReader(new FileReader((String) getConfigParameterValue("InputFile")));
+			br = new BufferedReader(new FileReader(dictFile));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

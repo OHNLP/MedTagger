@@ -23,33 +23,43 @@
  *******************************************************************************/
 package org.ohnlp.medtagger.dict;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.CASException;
-import org.apache.uima.collection.CasConsumer_ImplBase;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JFSIndexRepository;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.resource.ResourceProcessException;
 import org.ohnlp.typesystem.type.syntax.BaseToken;
 import org.ohnlp.typesystem.type.syntax.NumToken;
 import org.ohnlp.typesystem.type.syntax.PunctuationToken;
 import org.ohnlp.typesystem.type.syntax.WordToken;
 import org.ohnlp.medtagger.type.DictContext;
 
-public class DictConsumer extends CasConsumer_ImplBase {
+public class DictWriter extends JCasAnnotator_ImplBase {
 
+	public static final String PARAM_DICTOUTPUT = "DictOutput";
 	private PrintWriter pwr = null;
 	private HashSet<String> processed = new HashSet<String>();
-	
-	@Override
-	public void processCas(CAS aCAS) throws ResourceProcessException {
+
+	public void initialize(UimaContext aContext) throws ResourceInitializationException {
+		File dictOutput = new File(((String) aContext.getConfigParameterValue(PARAM_DICTOUTPUT)).trim());
 		try {
-			JFSIndexRepository indexes = aCAS.getJCas().getJFSIndexRepository();
+			pwr = new PrintWriter(dictOutput);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void process(JCas jCas) throws AnalysisEngineProcessException {
+			JFSIndexRepository indexes = jCas.getJFSIndexRepository();
 			Iterator<?> itr = indexes.getAnnotationIndex(BaseToken.type).iterator();
 			String ret="";
 			while (itr.hasNext()){
@@ -82,26 +92,12 @@ public class DictConsumer extends CasConsumer_ImplBase {
 			
 			pwr.println(ret);
 			pwr.flush();
-		} catch (CASException e) {
-			e.printStackTrace();
-		}
 	}
 
-	@Override
-	public void initialize() throws ResourceInitializationException {
-		try {
-			pwr = new PrintWriter((String) getConfigParameterValue("OutputFile"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	Logger log = Logger.getLogger(getClass().getName());
 	@Override
 	public void destroy() {
 		super.destroy();
 		pwr.close();
-		log.info("Finshed printed in the dictionary");
+		System.out.println("Finished printed in the dictionary");
 	}
-
 }
