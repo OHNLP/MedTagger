@@ -1,0 +1,2 @@
+syncope	HP0001279
+fainting spell	HP0001279

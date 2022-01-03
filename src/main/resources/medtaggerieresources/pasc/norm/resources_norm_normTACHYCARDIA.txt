@@ -1,0 +1,7 @@
+elevated heart rate	HP0001649
+fast heart rate	HP0001649
+heart racing	HP0001649
+increased heart rate	HP0001649
+racing heart	HP0001649
+rapid heart beat	HP0001649
+tachycardia	HP0001649

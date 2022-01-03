@@ -1,0 +1,4 @@
+abnormal finger chase test	HP0001310
+abnormal finger-nose-finger test	HP0001310
+dysmetria	HP0001310
+lack of coordination of movement	HP0001310

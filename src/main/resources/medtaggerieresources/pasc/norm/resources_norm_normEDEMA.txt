@@ -1,0 +1,6 @@
+dropsy	HP0000969
+edema	HP0000969
+fluid retention	HP0000969
+hydrops	HP0000969
+oedema	HP0000969
+water retention	HP0000969

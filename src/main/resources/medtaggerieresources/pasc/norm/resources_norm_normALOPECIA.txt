@@ -1,0 +1,2 @@
+alopecia	HP0001596
+hair loss	HP0001596

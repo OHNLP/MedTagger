@@ -1,0 +1,15 @@
+emesis	HP0002013
+throwing up	HP0002013
+vomiting	HP0002013
+throw up    HP0002013
+threw up    HP0002013
+thrown up   HP0002013
+vomited HP0002013
+vomit   HP0002013
+vomits  HP0002013
+throw up    HP0002013
+threw up    HP0002013
+thrown up   HP0002013
+vomited HP0002013
+vomit   HP0002013
+vomits  HP0002013

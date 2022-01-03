@@ -1,0 +1,5 @@
+decreased salivary flow	HP0000217
+dry mouth	HP0000217
+dry mouth syndrome	HP0000217
+reduced salivation	HP0000217
+xerostomia	HP0000217

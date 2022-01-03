@@ -1,0 +1,6 @@
+deglutition disorder	HP0002015
+difficulty swallowing	HP0002015
+dysphagia	HP0002015
+poor swallowing	HP0002015
+swallowing difficulties	HP0002015
+swallowing difficulty	HP0002015

@@ -1,0 +1,14 @@
+elevated blood creatine phosphokinase	HP0003236
+elevated circulating creatine kinase concentration	HP0003236
+elevated circulating creatine phosphokinase	HP0003236
+elevated creatine kinase	HP0003236
+elevated serum cpk	HP0003236
+elevated serum creatine kinase	HP0003236
+elevated serum creatine phosphokinase	HP0003236
+high serum creatine kinase	HP0003236
+increased cpk	HP0003236
+increased creatine kinase	HP0003236
+increased creatine phosphokinase	HP0003236
+increased serum ck	HP0003236
+increased serum creatine kinase	HP0003236
+increased serum creatine phosphokinase	HP0003236

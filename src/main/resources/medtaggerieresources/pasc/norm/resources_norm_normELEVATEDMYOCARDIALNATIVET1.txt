@@ -1,0 +1,2 @@
+elevated myocardial native t1	HP4000006
+prolonged myocardial native t1	HP4000006

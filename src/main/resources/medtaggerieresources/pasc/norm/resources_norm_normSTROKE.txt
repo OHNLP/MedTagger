@@ -1,0 +1,4 @@
+cerebral vascular events	HP0001297
+cerebrovascular accident	HP0001297
+cerebrovascular accidents	HP0001297
+stroke	HP0001297

@@ -1,0 +1,3 @@
+hyperacusis	HP0010780
+loudness intolerance	HP0010780
+sensitivity to noise	HP0010780

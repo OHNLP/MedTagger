@@ -1,0 +1,5 @@
+emotional instability	HP0000712
+emotional lability	HP0000712
+mood alterations	HP0000712
+mood changes	HP0000712
+mood lability	HP0000712

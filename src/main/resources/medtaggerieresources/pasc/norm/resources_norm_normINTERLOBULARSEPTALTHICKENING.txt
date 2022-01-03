@@ -1,0 +1,7 @@
+interlobular lines (pulmonary ct finding)	HP0030879
+interlobular septal thickening	HP0030879
+interlobular septal thickening on pulmonary hrct	HP0030879
+peripheral lines (pulmonary ct finding)	HP0030879
+septal lines (pulmonary ct finding)	HP0030879
+septal thickening (pulmonary ct finding)	HP0030879
+short lines (pumonary ct finding)	HP0030879

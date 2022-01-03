@@ -1,0 +1,5 @@
+episodic fever	HP0001954
+hyperthermia, episodic	HP0001954
+increased body temperature, episodic	HP0001954
+intermittent fever	HP0001954
+recurrent fever	HP0001954

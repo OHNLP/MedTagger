@@ -1,0 +1,3 @@
+auditory hallucinations	HP0008765
+hallucinations of sound	HP0008765
+hearing sounds	HP0008765

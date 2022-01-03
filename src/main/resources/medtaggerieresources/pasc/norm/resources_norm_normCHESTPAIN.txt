@@ -1,0 +1,4 @@
+chest pain	HP0100749
+chest discomfort	HP0100749
+chest pain	HP0100749
+thoracic pain	HP0100749

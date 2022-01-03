@@ -1,0 +1,3 @@
+anosmia	HP0000458
+loss of smell	HP0000458
+lost smell	HP0000458

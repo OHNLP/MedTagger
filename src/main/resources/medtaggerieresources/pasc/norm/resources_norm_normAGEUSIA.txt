@@ -1,0 +1,4 @@
+absent sense of taste	HP0041051
+ageusia	HP0041051
+impaired taste sensation	HP0041051
+lost taste	HP0041051

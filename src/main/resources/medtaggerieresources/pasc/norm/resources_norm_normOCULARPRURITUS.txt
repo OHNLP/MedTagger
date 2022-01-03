@@ -1,0 +1,3 @@
+itchy eyes	HP0033841
+ocular itch	HP0033841
+ocular pruritus	HP0033841

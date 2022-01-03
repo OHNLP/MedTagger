@@ -1,0 +1,3 @@
+airway obstruction	HP0006536
+obstructive lung disease	HP0006536
+pulmonary obstruction	HP0006536

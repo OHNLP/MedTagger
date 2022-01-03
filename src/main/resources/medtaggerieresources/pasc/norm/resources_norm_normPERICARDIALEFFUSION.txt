@@ -1,0 +1,3 @@
+fluid around heart	HP0001698
+pericardial effusion	HP0001698
+pericardial effusions	HP0001698

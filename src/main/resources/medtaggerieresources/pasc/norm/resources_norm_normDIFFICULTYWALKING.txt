@@ -1,0 +1,4 @@
+difficulty walking	HP0002355
+difficulty in walking	HP0002355
+difficulty walking	HP0002355
+walking disability	HP0002355

@@ -1,0 +1,5 @@
+babinski sign	HP0003487
+extensor plantar reflexes	HP0003487
+extensor plantar response	HP0003487
+extensor plantar responses	HP0003487
+positive babinski sign	HP0003487

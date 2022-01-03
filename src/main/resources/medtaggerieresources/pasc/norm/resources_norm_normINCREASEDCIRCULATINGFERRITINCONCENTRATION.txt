@@ -1,0 +1,8 @@
+elevated serum ferritin	HP0003281
+high ferritin level	HP0003281
+hyperferritinaemia	HP0003281
+hyperferritinemia	HP0003281
+increased circulating ferritin concentration	HP0003281
+increased ferritin	HP0003281
+increased plasma ferritin	HP0003281
+increased serum ferritin level	HP0003281

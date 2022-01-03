@@ -1,0 +1,5 @@
+forgetfulness	HP0002354
+memory impairment	HP0002354
+memory loss	HP0002354
+memory problems	HP0002354
+poor memory	HP0002354

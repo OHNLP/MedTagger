@@ -1,0 +1,4 @@
+spasticity	HP0001257
+involuntary muscle stiffness, contraction, or spasm	HP0001257
+muscle spasticity	HP0001257
+muscular spasticity	HP0001257

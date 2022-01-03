@@ -1,0 +1,9 @@
+restrictive deficit on pulmonary function testing	HP0002091
+restrictive deficit on pulmonary function tests	HP0002091
+restrictive lung disease	HP0002091
+restrictive respiratory disease	HP0002091
+restrictive respiratory insufficiency	HP0002091
+restrictive respiratory syndrome	HP0002091
+restrictive ventilatory defect	HP0002091
+spirometric restriction	HP0002091
+stiff lung or chest wall causing decreased lung volume	HP0002091

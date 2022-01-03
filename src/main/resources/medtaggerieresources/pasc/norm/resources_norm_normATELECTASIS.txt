@@ -1,0 +1,3 @@
+atelectasis	HP0100750
+partial or complete collapse of part or entire lung	HP0100750
+pulmonary atelectasis	HP0100750

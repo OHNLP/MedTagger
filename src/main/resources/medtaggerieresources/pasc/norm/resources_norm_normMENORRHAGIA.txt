@@ -1,0 +1,4 @@
+menorrhagia	HP0000132
+abnormally heavy bleeding during menstruation	HP0000132
+abnormally heavy periods	HP0000132
+hypermenorrhea	HP0000132

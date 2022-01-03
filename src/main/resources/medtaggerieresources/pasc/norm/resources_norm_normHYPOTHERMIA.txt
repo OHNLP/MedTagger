@@ -1,0 +1,2 @@
+abnormally low body temperature	HP0002045
+hypothermia	HP0002045

@@ -1,0 +1,3 @@
+decreased taste	HP0000224
+decreased taste sensation	HP0000224
+hypogeusia	HP0000224

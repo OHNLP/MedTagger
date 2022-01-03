@@ -1,0 +1,4 @@
+easily distracted	HP0000736
+poor attention span	HP0000736
+problem paying attention	HP0000736
+short attention span	HP0000736

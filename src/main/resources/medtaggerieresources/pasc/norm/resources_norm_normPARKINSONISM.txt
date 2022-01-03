@@ -1,0 +1,2 @@
+parkinsonian disease	HP0001300
+parkinsonism	HP0001300

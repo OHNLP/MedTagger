@@ -1,0 +1,4 @@
+polyphagia	HP0002591
+hyperphagia	HP0002591
+increased appetite	HP0002591
+voracious appetite	HP0002591

@@ -1,0 +1,2 @@
+low platelet count	HP0001873
+thrombocytopenia	HP0001873

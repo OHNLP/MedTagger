@@ -1,0 +1,3 @@
+impaired procedural memory	HP0033691
+procedural memory deficit	HP0033691
+procedural memory loss	HP0033691

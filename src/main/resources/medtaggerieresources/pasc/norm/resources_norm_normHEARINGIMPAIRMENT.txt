@@ -1,0 +1,6 @@
+deafness	HP0000365
+hearing defect	HP0000365
+hearing impairment	HP0000365
+hearing loss	HP0000365
+hypacusis	HP0000365
+hypoacusis	HP0000365

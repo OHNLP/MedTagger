@@ -1,0 +1,3 @@
+increased circulating interleukin 6	HP0030783
+increased serum il-6	HP0030783
+increased serum interleukin-6	HP0030783

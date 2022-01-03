@@ -1,0 +1,4 @@
+restless legs	HP0012452
+restless legs syndrome	HP0012452
+willis-ekbom disease	HP0012452
+wittmaack-ekbom syndrome	HP0012452

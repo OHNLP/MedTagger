@@ -1,0 +1,6 @@
+elevated circulating creatinine concentration	HP0003259
+elevated creatinine	HP0003259
+elevated serum creatinine	HP0003259
+high blood creatinine level	HP0003259
+increased creatinine	HP0003259
+increased serum creatinine	HP0003259

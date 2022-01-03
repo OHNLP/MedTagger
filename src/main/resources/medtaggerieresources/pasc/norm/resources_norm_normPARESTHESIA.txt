@@ -1,0 +1,4 @@
+paresthesia	HP0003401
+paresthesias	HP0003401
+pins and needles feeling	HP0003401
+tingling	HP0003401

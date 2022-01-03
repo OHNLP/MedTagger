@@ -1,0 +1,3 @@
+centrilobular groundglass opacification	HP0025180
+centrilobular ground-glass opacification on pulmonary hrct	HP0025180
+centrilobular groundglass opacity	HP0025180

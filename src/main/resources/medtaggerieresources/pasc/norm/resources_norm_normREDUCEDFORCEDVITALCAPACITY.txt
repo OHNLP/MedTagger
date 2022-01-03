@@ -1,0 +1,3 @@
+decreased forced vital capacity	HP0032341
+reduced forced vital capacity	HP0032341
+reduced fvc	HP0032341

@@ -1,0 +1,2 @@
+headache	HP0002315
+headaches	HP0002315

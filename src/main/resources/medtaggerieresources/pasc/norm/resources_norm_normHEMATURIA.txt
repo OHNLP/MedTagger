@@ -1,0 +1,3 @@
+hematuria	HP0000790
+blood in urine	HP0000790
+high urine occult blood	HP0000790

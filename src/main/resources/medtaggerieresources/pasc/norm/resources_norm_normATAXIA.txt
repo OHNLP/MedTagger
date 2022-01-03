@@ -1,0 +1,2 @@
+ataxia	HP0001251
+cerebellar ataxia	HP0001251

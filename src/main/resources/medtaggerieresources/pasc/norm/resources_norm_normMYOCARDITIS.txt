@@ -1,0 +1,2 @@
+inflammation of heart muscle	HP0012819
+myocarditis	HP0012819

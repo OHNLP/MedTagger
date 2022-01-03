@@ -1,0 +1,5 @@
+decreased 25-hydroxyvitamin d3	HP0012053
+decreased circulating calcifediol concentration	HP0012053
+low serum 25-hydroxycholecalciferol	HP0012053
+low serum calcidiol	HP0012053
+low serum calcifediol	HP0012053

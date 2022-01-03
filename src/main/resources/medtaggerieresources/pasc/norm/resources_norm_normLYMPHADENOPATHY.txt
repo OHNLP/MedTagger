@@ -1,0 +1,3 @@
+lymphadenopathy	HP0002716
+lymph node hyperplasia	HP0002716
+swollen lymph nodes	HP0002716

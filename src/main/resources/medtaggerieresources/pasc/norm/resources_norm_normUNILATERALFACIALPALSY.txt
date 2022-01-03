@@ -1,0 +1,8 @@
+facial droop	HP0012799
+paralysis of one side of the face	HP0012799
+unilateral facial muscle paralysis	HP0012799
+unilateral facial muscle weakness	HP0012799
+unilateral facial palsy	HP0012799
+unilateral facial paralysis	HP0012799
+unilateral facial weakness	HP0012799
+weakness of one side of the face	HP0012799

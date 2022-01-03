@@ -1,0 +1,2 @@
+loss of weight	HP0001824
+weight loss	HP0001824

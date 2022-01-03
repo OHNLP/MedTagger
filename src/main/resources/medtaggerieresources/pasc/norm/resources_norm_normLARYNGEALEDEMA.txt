@@ -1,0 +1,2 @@
+laryngeal edema	HP0012027
+laryngeal oedema	HP0012027

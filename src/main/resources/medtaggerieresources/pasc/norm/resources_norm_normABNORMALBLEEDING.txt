@@ -1,0 +1,4 @@
+abnormal bleeding	HP0001892
+bleeding diathesis	HP0001892
+bleeding tendency	HP0001892
+hemorrhagic diathesis	HP0001892

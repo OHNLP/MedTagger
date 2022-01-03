@@ -1,0 +1,2 @@
+anaphylactic shock	HP0100845
+anaphylaxis	HP0100845

@@ -1,0 +1,2 @@
+reduced fev1	HP0032342
+reduced forced expiratory volume in one second	HP0032342

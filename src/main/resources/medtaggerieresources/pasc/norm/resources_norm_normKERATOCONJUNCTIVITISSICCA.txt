@@ -1,0 +1,5 @@
+dry eyes	HP0001097
+dry eye syndrome	HP0001097
+keratitis sicca	HP0001097
+keratoconjunctivitis sicca	HP0001097
+xerophthalmia	HP0001097

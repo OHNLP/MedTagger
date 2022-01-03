@@ -1,0 +1,2 @@
+pancreatic inflammation	HP0001733
+pancreatitis	HP0001733

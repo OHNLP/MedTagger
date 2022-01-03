@@ -1,0 +1,4 @@
+chest distress	HP0031352
+chest tightness	HP0031352
+tightness in chest	HP0031352
+tightness of chest	HP0031352

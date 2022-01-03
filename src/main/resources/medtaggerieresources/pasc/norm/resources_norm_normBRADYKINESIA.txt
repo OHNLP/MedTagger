@@ -1,0 +1,3 @@
+bradykinesia	HP0002067
+slow movements	HP0002067
+slowness of movements	HP0002067

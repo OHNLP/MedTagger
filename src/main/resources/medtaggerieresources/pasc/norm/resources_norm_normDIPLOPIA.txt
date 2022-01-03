@@ -1,0 +1,2 @@
+diplopia	HP0000651
+double vision	HP0000651

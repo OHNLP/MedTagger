@@ -1,0 +1,4 @@
+aphasia	HP0002381
+difficulty finding words	HP0002381
+losing words	HP0002381
+loss of words	HP0002381

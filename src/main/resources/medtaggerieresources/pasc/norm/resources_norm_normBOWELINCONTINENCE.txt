@@ -1,0 +1,5 @@
+anal incontinence	HP0002607
+bowel incontinence	HP0002607
+faecal incontinence	HP0002607
+fecal incontinence	HP0002607
+loss of bowel control	HP0002607

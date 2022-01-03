@@ -1,0 +1,2 @@
+neck stiffness	HP0025258
+stiff neck	HP0025258

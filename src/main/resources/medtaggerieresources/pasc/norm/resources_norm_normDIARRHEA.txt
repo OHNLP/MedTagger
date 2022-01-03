@@ -1,0 +1,4 @@
+diarrhea	HP0002014
+diarrhea	HP0002014
+diarrhoea	HP0002014
+watery stool	HP0002014

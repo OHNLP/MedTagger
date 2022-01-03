@@ -1,0 +1,2 @@
+o2 desaturation on exertion	HP0030874
+oxygen desaturation on exertion	HP0030874

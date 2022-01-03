@@ -1,0 +1,4 @@
+epilepsy	HP0001250
+epileptic seizure	HP0001250
+seizure	HP0001250
+seizures	HP0001250

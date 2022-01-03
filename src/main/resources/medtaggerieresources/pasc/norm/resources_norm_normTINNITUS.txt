@@ -1,0 +1,3 @@
+ringing in ears	HP0000360
+ringing in the ears	HP0000360
+tinnitus	HP0000360

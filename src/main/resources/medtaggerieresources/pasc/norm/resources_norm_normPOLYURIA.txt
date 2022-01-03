@@ -1,0 +1,2 @@
+polyuria	HP0000103
+increased urine output	HP0000103

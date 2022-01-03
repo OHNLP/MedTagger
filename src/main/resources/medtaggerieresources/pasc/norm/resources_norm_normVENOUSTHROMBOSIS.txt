@@ -1,0 +1,2 @@
+blood clot in vein	HP0004936
+venous thrombosis	HP0004936

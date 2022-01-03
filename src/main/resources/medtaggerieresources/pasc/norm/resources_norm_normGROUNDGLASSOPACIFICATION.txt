@@ -1,0 +1,4 @@
+ggo	HP0025179
+ground-glass opacification	HP0025179
+ground-glass opacification on pulmonary hrct	HP0025179
+ground glass opacities	HP0025179

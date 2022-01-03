@@ -1,0 +1,3 @@
+elevated circulating d-dimer concentration	HP0033106
+elevated d-dimers	HP0033106
+elevated fibrin degradation fragment concentration	HP0033106

@@ -1,0 +1,2 @@
+impulsive	HP0100710
+impulsivity	HP0100710

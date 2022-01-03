@@ -1,0 +1,4 @@
+fever	HP0001945
+fever	HP0001945
+hyperthermia	HP0001945
+pyrexia	HP0001945

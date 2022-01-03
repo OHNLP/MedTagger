@@ -1,0 +1,8 @@
+diaphoresis	HP0000975
+excessive sweating	HP0000975
+hyperhidrosis	HP0000975
+increased sweating	HP0000975
+profuse sweating	HP0000975
+sweating	HP0000975
+sweating, increased	HP0000975
+sweating profusely	HP0000975

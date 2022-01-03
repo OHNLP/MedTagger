@@ -1,0 +1,2 @@
+hepatitis	HP0012115
+liver inflammation	HP0012115

@@ -1,0 +1,4 @@
+brain fog	HP0033630
+mental clouding	HP0033630
+mental fatigue	HP0033630
+mental fog	HP0033630

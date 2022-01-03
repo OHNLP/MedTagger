@@ -1,0 +1,2 @@
+low-grade fever	HP0011134
+mild fever	HP0011134

@@ -1,0 +1,2 @@
+arthritis	HP0001369
+joint inflammation	HP0001369

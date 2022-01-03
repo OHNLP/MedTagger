@@ -1,0 +1,3 @@
+conjunctivitis	HP0000509
+conjunctivitis, recurrent	HP0000509
+pink eye	HP0000509

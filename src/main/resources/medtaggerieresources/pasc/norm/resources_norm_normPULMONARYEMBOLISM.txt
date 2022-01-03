@@ -1,0 +1,2 @@
+blood clot in artery of lung	HP0002204
+pulmonary embolism	HP0002204

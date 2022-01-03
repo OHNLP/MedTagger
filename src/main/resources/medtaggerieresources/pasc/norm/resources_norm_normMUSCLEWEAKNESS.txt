@@ -1,0 +1,2 @@
+muscle weakness	HP0001324
+muscular weakness	HP0001324

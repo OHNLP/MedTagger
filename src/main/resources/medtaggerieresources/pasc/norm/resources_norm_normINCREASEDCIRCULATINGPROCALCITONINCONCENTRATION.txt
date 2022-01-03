@@ -1,0 +1,2 @@
+increased circulating procalcitonin concentration	HP0032308
+increased circulating procalcitonin level	HP0032308

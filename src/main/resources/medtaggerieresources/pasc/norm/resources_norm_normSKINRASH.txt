@@ -1,0 +1,2 @@
+rash	HP0000988
+skin rash	HP0000988

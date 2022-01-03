@@ -1,0 +1,5 @@
+absolute lymphocyte count decrease	HP0001888
+decreased blood lymphocyte number	HP0001888
+low lymphocyte number	HP0001888
+lymphocytopenia	HP0001888
+lymphopenia	HP0001888

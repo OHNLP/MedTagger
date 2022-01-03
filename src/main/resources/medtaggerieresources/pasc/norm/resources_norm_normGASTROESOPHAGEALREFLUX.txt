@@ -1,0 +1,8 @@
+acid reflux disease	HP0002020
+acid reflux	HP0002020
+gastroesophageal reflux disease	HP0002020
+gastro-esophageal reflux	HP0002020
+gastroesophageal reflux	HP0002020
+gastro-oesophageal reflux	HP0002020
+gerd	HP0002020
+heartburn	HP0002020

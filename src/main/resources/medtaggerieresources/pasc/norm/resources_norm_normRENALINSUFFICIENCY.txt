@@ -1,0 +1,3 @@
+renal failure	HP0000083
+renal failure in adulthood	HP0000083
+renal insufficiency	HP0000083

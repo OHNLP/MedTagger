@@ -1,0 +1,5 @@
+difficulty sleeping	HP0002360
+sleep disturbance	HP0002360
+sleep disturbances	HP0002360
+sleep dysfunction	HP0002360
+trouble sleeping	HP0002360

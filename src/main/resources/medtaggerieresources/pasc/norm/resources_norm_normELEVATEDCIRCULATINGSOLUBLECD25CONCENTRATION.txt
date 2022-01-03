@@ -1,0 +1,2 @@
+elevated circulating interleukin-2 receptor alpha-chain	HP0033833
+elevated circulating soluble cd25 concentration	HP0033833

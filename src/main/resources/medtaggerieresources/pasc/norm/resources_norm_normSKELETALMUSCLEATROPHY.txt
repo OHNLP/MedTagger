@@ -1,0 +1,12 @@
+amyotrophy	HP0003202
+amyotrophy involving the extremities	HP0003202
+muscle atrophy	HP0003202
+muscle atrophy, neurogenic	HP0003202
+muscle degeneration	HP0003202
+muscle hypotrophy	HP0003202
+muscle wasting	HP0003202
+muscular atrophy	HP0003202
+neurogenic muscle atrophy, especially in the lower limbs	HP0003202
+neurogenic muscle atrophy	HP0003202
+neurogenic muscular atrophy	HP0003202
+skeletal muscle atrophy	HP0003202

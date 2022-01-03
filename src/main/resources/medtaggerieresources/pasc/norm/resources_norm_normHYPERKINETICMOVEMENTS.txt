@@ -1,0 +1,4 @@
+hyperkinesia	HP0002487
+hyperkinesis	HP0002487
+hyperkinetic movements	HP0002487
+muscle spasms	HP0002487

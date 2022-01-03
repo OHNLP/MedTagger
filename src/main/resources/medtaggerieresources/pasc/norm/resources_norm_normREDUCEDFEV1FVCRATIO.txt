@@ -1,0 +1,3 @@
+obstructive deficit on pulmonary function test	HP0030877
+obstructive deficit on pulmonary function testing	HP0030877
+reduced fev1/fvc ratio	HP0030877

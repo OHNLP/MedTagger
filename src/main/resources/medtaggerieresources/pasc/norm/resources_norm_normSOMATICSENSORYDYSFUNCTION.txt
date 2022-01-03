@@ -1,0 +1,2 @@
+sensory impairment	HP0003474
+somatic sensory dysfunction	HP0003474

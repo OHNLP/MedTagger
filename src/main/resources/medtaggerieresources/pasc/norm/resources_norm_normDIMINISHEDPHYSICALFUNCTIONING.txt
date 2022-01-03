@@ -1,0 +1,3 @@
+decline in physical functional health	HP0033666
+diminished physical functioning	HP0033666
+diminished physical health	HP0033666

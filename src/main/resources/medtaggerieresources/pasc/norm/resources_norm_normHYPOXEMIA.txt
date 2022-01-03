@@ -1,0 +1,3 @@
+hypoxemia	HP0012418
+hypoxia	HP0012418
+low blood oxygen level	HP0012418
