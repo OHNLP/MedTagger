@@ -185,6 +185,7 @@ public class MedTaggerBackboneTransform extends Transform {
             ret.put("experiencer", cm.getExperiencer());
             ret.put("status", cm.getStatus());
             ret.put("offset", cm.getBegin());
+            ret.put("semgroups", cm.getSemGroup());
             return ret;
         }
     }
