@@ -10,9 +10,7 @@ import org.apache.beam.sdk.values.PCollection;
 import org.apache.beam.sdk.values.Row;
 import org.apache.uima.UIMAFramework;
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.analysis_engine.metadata.AnalysisEngineMetaData;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.factory.AggregateBuilder;
@@ -23,7 +21,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceManager;
-import org.apache.uima.resource.metadata.ConfigurationParameterSettings;
 import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.InvalidXMLException;
 import org.ohnlp.backbone.api.Transform;
@@ -33,7 +30,6 @@ import org.ohnlp.medtagger.ie.ae.MedTaggerIEAnnotator;
 import org.ohnlp.medtagger.type.ConceptMention;
 import org.ohnlp.typesystem.type.textspan.Segment;
 import org.ohnlp.typesystem.type.textspan.Sentence;
-import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -41,7 +37,6 @@ import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystemAlreadyExistsException;
 import java.nio.file.FileSystems;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -61,7 +56,7 @@ public class MedTaggerBackboneTransform extends Transform {
     public void initFromConfig(JsonNode config) throws ComponentInitializationException {
         try {
             this.inputField = config.get("input").asText();
-            this.mode = config.has("mode") ? RunMode.valueOf(config.get("mode").textValue().toUpperCase(Locale.ROOT)) : RunMode.STANDALONE_EMBEDDED;
+            this.mode = config.has("mode") ? RunMode.valueOf(config.get("mode").textValue().toUpperCase(Locale.ROOT)) : RunMode.STANDALONE;
             this.resources = config.get("ruleset").asText();
         } catch (Throwable t) {
             throw new ComponentInitializationException(t);
@@ -99,7 +94,7 @@ public class MedTaggerBackboneTransform extends Transform {
             switch (mode) {
                 case OHNLPTK_DEFINED: // Ruleset from a web service
                     throw new UnsupportedOperationException("Remote Served IE Rulesets not yet implemented");
-                case STANDALONE_EMBEDDED:
+                case STANDALONE:
                     final URI uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
                     Map<String, String> env = new HashMap<>();
                     env.put("create", "true");
@@ -192,7 +187,7 @@ public class MedTaggerBackboneTransform extends Transform {
 
     private enum RunMode {
         OHNLPTK_DEFINED, // Retrieve from web-based middleware server
-        STANDALONE_EMBEDDED, // Embedded IE Ruleset
+        STANDALONE, // Embedded IE Ruleset
         GENERAL_CLINICAL // General Purpose SCT dictionary
     }
 }
