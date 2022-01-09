@@ -24,10 +24,7 @@
 
 package org.ohnlp.medtagger.ae;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -78,12 +75,11 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 		try {
 			lvg = new LvgLookup(aContext);
 
-			String dict = aContext.getResourceFilePath("dict");
-			btac = new AhoCorasickDict(new FileInputStream(dict));
+			btac = new AhoCorasickDict(AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/MedTagger.lookup.dict"));
 
 			stop = new HashSet<String>();
-			BufferedReader br = new BufferedReader(new FileReader(
-					aContext.getResourceFilePath("stop")));
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/stop.615")));
 			while (br.ready()) {
 				String line = br.readLine();
 					  if(line.startsWith("#")) continue;
@@ -93,8 +89,8 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 			br.close();
 
 			abbr = new HashMap<String, String>();
-			br = new BufferedReader(new FileReader(
-					aContext.getResourceFilePath("abbr")));
+			br = new BufferedReader(new InputStreamReader(
+					AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/MedTagger.abbr")));
 			while (br.ready()) {
 				String line = br.readLine();
 				if(line.startsWith("#")) continue;
