@@ -54,9 +54,6 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                     case "NONE": {
                         break;
                     }
-                    case "UMLS": {
-                        throw new UnsupportedOperationException("UMLS<->OHDSI Loading not yet implemented");
-                    }
                     default: {
                         try (InputStream resource = MedTaggerOutputToOHDSIFormatTransform.class.getResourceAsStream("/resources/" + resources + "/ohdsi_mappings.txt")) {
                             List<String> mappings =
