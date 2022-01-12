@@ -103,7 +103,7 @@ public class MedTaggerBackboneTransform extends Transform {
                         FileSystem fs = FileSystems.newFileSystem(uri, env);
                     } catch (FileSystemAlreadyExistsException ignored) {
                     }
-                    ae.add(AnalysisEngineFactory.createEngineDescription(MedTaggerIEAnnotator.class, "Resource_dir", uri.toString()));
+                    ae.add(createEngineDescription("org.ohnlp.medtagger.ie.aes.MedTaggerIEAnnotatorAE", "Resource_dir", uri.toString()));
                     break;
                 case GENERAL_CLINICAL:
                     ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE"));
