@@ -5,6 +5,10 @@ MedTagger contains a suite of programs that the Mayo Clinic NLP program has deve
 It includes three major components: MedTagger for indexing based on dictionaries, MedTaggerIE for
 information extraction based on patterns, and MedTaggerML for machine learning-based named entity recognition.
 
+# Release a dictionary based on MedLex, a corpus-driven semantic lexicon, that maps to OMOP Concept identifiers. 
+MedTagger for indexing is built upon a fast string matching algorithm leveraging lexical normalization. The contextual annotator enables the detection of local context for concept entries detected. The new release of the dictionary maps to the OMOP Concept identifiers. For the detailed information of those concept identifiers, please visit http://athena.ohdsi.org. 
+
+
 # Custom Ruleset Use Case - COVID 19 
 MedTagger IE Pipelines use a custom ruleset format. An example ruleset of Coronavirus Diseases 19 (COVID 19) related symptoms (e.g. dry cough, fever, fatigue) 
 can be found [here](https://github.com/OHNLP/MedTagger/tree/master/src/main/resources/medtaggerieresources/covid19) under the `/src/main/resources/medtaggerieresources/covid19` directory. These resources are what tells MedTagger
