@@ -134,11 +134,14 @@ public class MedTaggerBackboneTransform extends Transform {
                 JCas jcas = cas.getJCas();
                 Map<ConceptMention, Collection<Sentence>> sentenceIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Sentence.class);
                 Map<ConceptMention, Collection<Segment>> sectionIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Segment.class);
+                int runs = 0;
                 for (ConceptMention cm : JCasUtil.select(jcas, ConceptMention.class)) {
+                    runs++;
                     JsonNode json = toJSON(cm, sentenceIdx, sectionIdx);
                     Row out = Row.withSchema(schema).addValues(input.getValues()).addValue(json.toString()).build();
                     output.output(out);
                 }
+                System.out.println("Found " + runs + " NLP Artifacts in Document");
             } catch (AnalysisEngineProcessException | CASException e) {
                 e.printStackTrace();
             }
