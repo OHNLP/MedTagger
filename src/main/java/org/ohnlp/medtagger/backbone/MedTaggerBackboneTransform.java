@@ -125,7 +125,7 @@ public class MedTaggerBackboneTransform extends Transform {
             List<Schema.Field> fields = new LinkedList<>(input.getSchema().getFields());
             fields.add(Schema.Field.of("nlp_output_json", Schema.FieldType.STRING));
             Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
-            String id = input.getString("note_id");
+            int id = input.getInt32("note_id");
             String text = input.getString(this.textField);
             cas.reset();
             cas.setDocumentText(text);
