@@ -125,11 +125,12 @@ public class MedTaggerBackboneTransform extends Transform {
             List<Schema.Field> fields = new LinkedList<>(input.getSchema().getFields());
             fields.add(Schema.Field.of("nlp_output_json", Schema.FieldType.STRING));
             Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
-
+            String id = input.getString("note_id");
             String text = input.getString(this.textField);
             cas.reset();
             cas.setDocumentText(text);
             try {
+                System.out.println("Running NLP on " + id);
                 aae.process(cas);
                 JCas jcas = cas.getJCas();
                 Map<ConceptMention, Collection<Sentence>> sentenceIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Sentence.class);
@@ -141,7 +142,7 @@ public class MedTaggerBackboneTransform extends Transform {
                     Row out = Row.withSchema(schema).addValues(input.getValues()).addValue(json.toString()).build();
                     output.output(out);
                 }
-                System.out.println("Found " + runs + " NLP Artifacts in Document");
+                System.out.println("Found " + runs + " NLP Artifacts in Document "  + id);
             } catch (AnalysisEngineProcessException | CASException e) {
                 e.printStackTrace();
             }
