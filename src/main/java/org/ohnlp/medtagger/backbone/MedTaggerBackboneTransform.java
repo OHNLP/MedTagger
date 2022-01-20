@@ -10,9 +10,7 @@ import org.apache.beam.sdk.values.PCollection;
 import org.apache.beam.sdk.values.Row;
 import org.apache.uima.UIMAFramework;
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.analysis_engine.metadata.AnalysisEngineMetaData;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.factory.AggregateBuilder;
@@ -23,7 +21,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceManager;
-import org.apache.uima.resource.metadata.ConfigurationParameterSettings;
 import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.InvalidXMLException;
 import org.ohnlp.backbone.api.Transform;
@@ -33,7 +30,6 @@ import org.ohnlp.medtagger.ie.ae.MedTaggerIEAnnotator;
 import org.ohnlp.medtagger.type.ConceptMention;
 import org.ohnlp.typesystem.type.textspan.Segment;
 import org.ohnlp.typesystem.type.textspan.Sentence;
-import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -41,7 +37,6 @@ import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystemAlreadyExistsException;
 import java.nio.file.FileSystems;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -61,7 +56,7 @@ public class MedTaggerBackboneTransform extends Transform {
     public void initFromConfig(JsonNode config) throws ComponentInitializationException {
         try {
             this.inputField = config.get("input").asText();
-            this.mode = config.has("mode") ? RunMode.valueOf(config.get("mode").textValue().toUpperCase(Locale.ROOT)) : RunMode.STANDALONE_EMBEDDED;
+            this.mode = config.has("mode") ? RunMode.valueOf(config.get("mode").textValue().toUpperCase(Locale.ROOT)) : RunMode.STANDALONE;
             this.resources = config.get("ruleset").asText();
         } catch (Throwable t) {
             throw new ComponentInitializationException(t);
@@ -99,7 +94,7 @@ public class MedTaggerBackboneTransform extends Transform {
             switch (mode) {
                 case OHNLPTK_DEFINED: // Ruleset from a web service
                     throw new UnsupportedOperationException("Remote Served IE Rulesets not yet implemented");
-                case STANDALONE_EMBEDDED:
+                case STANDALONE:
                     final URI uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
                     Map<String, String> env = new HashMap<>();
                     env.put("create", "true");
@@ -108,7 +103,7 @@ public class MedTaggerBackboneTransform extends Transform {
                         FileSystem fs = FileSystems.newFileSystem(uri, env);
                     } catch (FileSystemAlreadyExistsException ignored) {
                     }
-                    ae.add(AnalysisEngineFactory.createEngineDescription(MedTaggerIEAnnotator.class, "Resource_dir", uri.toString()));
+                    ae.add(createEngineDescription("org.ohnlp.medtagger.ie.aes.MedTaggerIEAnnotatorAE", "Resource_dir", uri.toString()));
                     break;
                 case GENERAL_CLINICAL:
                     ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE"));
@@ -130,20 +125,24 @@ public class MedTaggerBackboneTransform extends Transform {
             List<Schema.Field> fields = new LinkedList<>(input.getSchema().getFields());
             fields.add(Schema.Field.of("nlp_output_json", Schema.FieldType.STRING));
             Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
-
+            int id = input.getInt32("note_id");
             String text = input.getString(this.textField);
             cas.reset();
             cas.setDocumentText(text);
             try {
+                System.out.println("Running NLP on " + id);
                 aae.process(cas);
                 JCas jcas = cas.getJCas();
                 Map<ConceptMention, Collection<Sentence>> sentenceIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Sentence.class);
                 Map<ConceptMention, Collection<Segment>> sectionIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Segment.class);
+                int runs = 0;
                 for (ConceptMention cm : JCasUtil.select(jcas, ConceptMention.class)) {
+                    runs++;
                     JsonNode json = toJSON(cm, sentenceIdx, sectionIdx);
                     Row out = Row.withSchema(schema).addValues(input.getValues()).addValue(json.toString()).build();
                     output.output(out);
                 }
+                System.out.println("Found " + runs + " NLP Artifacts in Document "  + id);
             } catch (AnalysisEngineProcessException | CASException e) {
                 e.printStackTrace();
             }
@@ -185,13 +184,14 @@ public class MedTaggerBackboneTransform extends Transform {
             ret.put("experiencer", cm.getExperiencer());
             ret.put("status", cm.getStatus());
             ret.put("offset", cm.getBegin());
+            ret.put("semgroups", cm.getSemGroup());
             return ret;
         }
     }
 
     private enum RunMode {
         OHNLPTK_DEFINED, // Retrieve from web-based middleware server
-        STANDALONE_EMBEDDED, // Embedded IE Ruleset
+        STANDALONE, // Embedded IE Ruleset
         GENERAL_CLINICAL // General Purpose SCT dictionary
     }
 }

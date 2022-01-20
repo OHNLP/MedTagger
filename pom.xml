@@ -6,7 +6,7 @@
 
     <groupId>org.ohnlp.medtagger</groupId>
     <artifactId>medtagger</artifactId>
-    <version>1.0.14</version>
+    <version>1.0.15</version>
     <description>The MedTagger biomedical information extraction pipeline</description>
 
 

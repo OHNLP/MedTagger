@@ -21,10 +21,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -53,17 +50,26 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
             public void init() {
                 this.om = new ObjectMapper();
                 this.ohdsiConceptMap = new HashMap<>();
-                try (InputStream resource = MedTaggerOutputToOHDSIFormatTransform.class.getResourceAsStream("/resources/" + resources + "/ohdsi_mappings.txt")) {
-                    List<String> mappings =
-                            new BufferedReader(new InputStreamReader(resource,
-                                    StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
-                    mappings.forEach(s -> {
-                        String[] args = s.trim().split("\\|");
-                        ohdsiConceptMap.put(args[0], Integer.parseInt(args[1]));
-                    });
-                } catch (Throwable e) {
-                    throw new RuntimeException(e);
+                switch (resources.toUpperCase(Locale.ROOT)) {
+                    case "NONE": {
+                        break;
+                    }
+                    default: {
+                        try (InputStream resource = MedTaggerOutputToOHDSIFormatTransform.class.getResourceAsStream("/resources/" + resources + "/ohdsi_mappings.txt")) {
+                            List<String> mappings =
+                                    new BufferedReader(new InputStreamReader(resource,
+                                            StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
+                            mappings.forEach(s -> {
+                                String[] args = s.trim().split("\\|");
+                                ohdsiConceptMap.put(args[0], Integer.parseInt(args[1]));
+                            });
+                        } catch (Throwable e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
                 }
+
             }
 
             @ProcessElement
@@ -83,12 +89,34 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                 JsonNode rawValues = om.readTree(input.getString("nlp_output_json"));
 
                 // Now generate an output row
-                Row out = Row.withSchema(schema)
+                Row.Builder rowBuild = Row.withSchema(schema)
                         .addValues(input.getValues())
                         .addValue(rawValues.get("section_id").asInt())
                         .addValue(rawValues.get("matched_text").asText())
-                        .addValue(rawValues.get("matched_sentence").asText())
-                        .addValue(ohdsiConceptMap.getOrDefault(rawValues.get("concept_code").asText(), 0))
+                        .addValue(rawValues.get("matched_sentence").asText());
+                switch (resources.toUpperCase(Locale.ROOT)) {
+                    case "NONE": {
+                        try {
+                            rowBuild = rowBuild.addValue(Integer.valueOf(rawValues.get("concept_code").asText("0")));
+                        } catch (NumberFormatException e) {
+                            throw new IllegalArgumentException("OHDSI requires integer concept codes, value "
+                                    + rawValues.get("concept_code").asText() + " was instead provided with mapping ruleset 'NONE'");
+                        }
+                        break;
+                    }
+                    case "UMLS": {
+                        String conceptCode = rawValues.get("concept_code").asText();
+                        // Only take first portion as CUI, remainder is top freq lexeme in current dict format.
+                        String cui = conceptCode.contains(":") ? conceptCode.split(":")[0].toUpperCase(Locale.ROOT)
+                                : conceptCode.toUpperCase(Locale.ROOT);
+                        int ohdsicid = ohdsiConceptMap.getOrDefault(cui, -99999);
+                        rowBuild = rowBuild.addValue(ohdsicid);
+                    }
+                    default: {
+                        rowBuild = rowBuild.addValue(ohdsiConceptMap.getOrDefault(rawValues.get("concept_code").asText(), 0));
+                    }
+                }
+                Row out = rowBuild
                         .addValue(0)
                         .addValue(new Instant(sdf.get().parse(rawValues.get("nlp_run_dtm").asText()).getTime()))
                         .addValue(
@@ -102,7 +130,9 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                         .build();
                 output.output(out);
             }
+
         }));
     }
+
 
 }
