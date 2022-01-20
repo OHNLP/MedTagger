@@ -1,3 +1,0 @@
-decrease in blood pressure upon standing up	HP0001278
-orthostatic hypotension	HP0001278
-postural hypotension	HP0001278

@@ -1,3 +1,0 @@
-pauses in breathing while sleeping	HP0010535
-sleep apnea	HP0010535
-sleep apnoea	HP0010535

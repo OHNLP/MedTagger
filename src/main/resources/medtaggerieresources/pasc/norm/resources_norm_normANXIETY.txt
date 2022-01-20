@@ -1,4 +1,0 @@
-anxiety disease	HP0000739
-anxiety	HP0000739
-anxiousness	HP0000739
-excessive, persistent worry and fear	HP0000739

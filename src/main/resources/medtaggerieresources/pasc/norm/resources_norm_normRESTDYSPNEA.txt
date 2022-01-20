@@ -1,5 +1,0 @@
-breathlessness at rest	HP0033710
-dyspnea at rest	HP0033710
-dyspnoea at rest	HP0033710
-rest dyspnea	HP0033710
-shortness of breath at rest	HP0033710

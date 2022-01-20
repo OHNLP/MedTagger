@@ -1,5 +1,0 @@
-decreased ability to exercise	HP0003546
-exercise intolerance	HP0003546
-inability to exercise	HP0003546
-low exercise endurance	HP0003546
-poor exercise tolerance	HP0003546

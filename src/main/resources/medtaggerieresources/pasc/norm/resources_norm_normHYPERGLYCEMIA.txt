@@ -1,3 +1,0 @@
-high blood glucose	HP0003074
-high blood sugar	HP0003074
-hyperglycemia	HP0003074

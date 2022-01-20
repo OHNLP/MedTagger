@@ -1,5 +1,0 @@
-broca's aphasia	HP0002427
-expressive aphasia	HP0002427
-loss of expressive speech	HP0002427
-motor aphasia	HP0002427
-non-fluent aphasia	HP0002427

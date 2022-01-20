@@ -1,7 +1,0 @@
-adhd	HP0007018
-attention deficit disorder	HP0007018
-attention deficit	HP0007018
-attention deficit hyperactivity disorder	HP0007018
-attention deficit-hyperactivity disorder	HP0007018
-attention deficits	HP0007018
-childhood attention deficit/hyperactivity disorder	HP0007018

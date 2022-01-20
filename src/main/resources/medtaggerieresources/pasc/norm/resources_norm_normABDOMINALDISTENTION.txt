@@ -1,7 +1,0 @@
-abdominal distention	HP0003270
-abdominal bloating	HP0003270
-abdominal distension	HP0003270
-abdominal swelling	HP0003270
-belly bloating	HP0003270
-bloating	HP0003270
-distended abdomen	HP0003270

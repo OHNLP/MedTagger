@@ -1,3 +1,0 @@
-ear pain	HP0030766
-otalgia	HP0030766
-pain in the ear	HP0030766

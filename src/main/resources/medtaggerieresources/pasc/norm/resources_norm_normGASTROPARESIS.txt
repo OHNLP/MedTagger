@@ -1,2 +1,0 @@
-delayed gastric emptying	HP0002578
-gastroparesis	HP0002578

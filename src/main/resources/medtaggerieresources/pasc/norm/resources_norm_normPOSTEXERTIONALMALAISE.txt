@@ -1,4 +1,0 @@
-exercise-induced fatigue	HP0030973
-exercise-induced malaise	HP0030973
-postexertional fatigue	HP0030973
-postexertional malaise	HP0030973

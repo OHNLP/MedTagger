@@ -1,3 +1,0 @@
-diminished mental health	HP0033667
-mental impairment	HP0033667
-reduced mental health	HP0033667

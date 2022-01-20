@@ -1,2 +1,0 @@
-cough	HP0012735
-coughing	HP0012735

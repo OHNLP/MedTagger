@@ -1,4 +1,0 @@
-intermittent migraine headaches	HP0002076
-migraine headache	HP0002076
-migraine headaches	HP0002076
-migraine	HP0002076

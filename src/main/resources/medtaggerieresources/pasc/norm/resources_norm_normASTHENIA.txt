@@ -1,3 +1,0 @@
-asthenia	HP0025406
-lack of energy and strength	HP0025406
-weakness	HP0025406

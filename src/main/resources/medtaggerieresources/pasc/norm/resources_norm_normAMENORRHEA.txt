@@ -1,2 +1,0 @@
-amenorrhea	HP0000141
-abnormal absence of menstruation	HP0000141

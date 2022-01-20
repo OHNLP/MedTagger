@@ -1,3 +1,0 @@
-hypocalcaemia	HP0002901
-hypocalcemia	HP0002901
-low blood calcium levels	HP0002901

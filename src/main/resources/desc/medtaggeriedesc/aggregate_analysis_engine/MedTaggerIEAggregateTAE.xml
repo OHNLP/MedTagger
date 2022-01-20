@@ -25,6 +25,9 @@
         <delegateAnalysisEngine key="POSTaggerAE">
             <import name="org.ohnlp.opennlp.aes.POSTaggerAE"/>
         </delegateAnalysisEngine>
+        <delegateAnalysisEngine key="MedTaggerLookupAE">
+            <import name="org.ohnlp.medtagger.aes.MedTaggerLookupAE"/>
+        </delegateAnalysisEngine>
         <delegateAnalysisEngine key="MedTaggerIEAnnotatorAE">
             <import name="org.ohnlp.medtagger.ie.aes.MedTaggerIEAnnotatorAE"/>
         </delegateAnalysisEngine>
@@ -48,6 +51,14 @@
                 </overrides>
             </configurationParameter>
         </configurationParameters>
+        <configurationParameterSettings>
+            <nameValuePair>
+                <name>Resource_dir</name>
+                <value>
+                    <string>resources/medtaggerieresources/pasc</string>
+                </value>
+            </nameValuePair>
+        </configurationParameterSettings>
         <flowConstraints>
             <fixedFlow>
                 <node>SentenceDetectorAE</node>
@@ -58,10 +69,17 @@
                 <node>LvgLookupAE</node>
                 <node>RuleSectionAE</node>
                 <node>MedTaggerIEAnnotatorAE</node>
+                <node>MedTaggerLookupAE</node>
                 <node>RuleContextAE</node>
             </fixedFlow>
         </flowConstraints>
-        <typePriorities/>
+      <typePriorities>
+        <priorityList>
+            <type>org.ohnlp.typesystem.type.textspan.Segment</type>
+            <type>org.ohnlp.typesystem.type.textspan.Sentence</type>
+            <type>org.ohnlp.typesystem.type.syntax.BaseToken</type>
+        </priorityList>
+    </typePriorities>
         <fsIndexCollection/>
         <capabilities>
             <capability>
@@ -118,7 +136,7 @@
                 <name>lvg_dict</name>
                 <description/>
                 <fileResourceSpecifier>
-                    <fileUrl>file:medtaggerresources/lvg/LRAGR_2011AB</fileUrl>
+                    <fileUrl>file:medtaggerresources/lvg/LRAGR_2021AB</fileUrl>
                 </fileResourceSpecifier>
             </externalResource>
 
@@ -137,7 +155,29 @@
                     <fileUrl>file:medtaggerresources/lvg/openclasswords.txt</fileUrl>
                 </fileResourceSpecifier>
             </externalResource>
+            <externalResource>
+            <name>dict</name>
+            <description/>
+            <fileResourceSpecifier>
+                <fileUrl>file:medtaggerresources/lookup/pasc.lookup.dict</fileUrl>
+            </fileResourceSpecifier>
+            </externalResource>
 
+            <externalResource>
+                <name>abbr</name>
+                <description/>
+                <fileResourceSpecifier>
+                    <fileUrl>file:medtaggerresources/lookup/OHNLP_ohdsi.abbr</fileUrl>
+                </fileResourceSpecifier>
+            </externalResource>
+
+            <externalResource>
+                <name>stop</name>
+                <description/>
+                <fileResourceSpecifier>
+                    <fileUrl>file:medtaggerresources/lookup/stop.615</fileUrl>
+                </fileResourceSpecifier>
+            </externalResource>
 
             <externalResource>
                 <name>context_file</name>
@@ -183,15 +223,40 @@
                 <key>RuleSectionAE/lvg_dict</key>
                 <resourceName>lvg_dict</resourceName>
             </externalResourceBinding>
+
             <externalResourceBinding>
                 <key>RuleSectionAE/openclass</key>
                 <resourceName>openclass</resourceName>
             </externalResourceBinding>
 
             <externalResourceBinding>
-
                 <key>LvgLookupAE/lvg_dict</key>
                 <resourceName>lvg_dict</resourceName>
+            </externalResourceBinding>
+
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/lvg_dict</key>
+                <resourceName>lvg_dict</resourceName>
+            </externalResourceBinding>
+
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/dict</key>
+                <resourceName>dict</resourceName>
+            </externalResourceBinding>
+
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/stop</key>
+                <resourceName>stop</resourceName>
+            </externalResourceBinding>
+
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/abbr</key>
+                <resourceName>abbr</resourceName>
+            </externalResourceBinding>
+
+            <externalResourceBinding>
+                <key>MedTaggerLookupAE/openclass</key>
+                <resourceName>openclass</resourceName>
             </externalResourceBinding>
 
             <externalResourceBinding>

@@ -1,3 +1,0 @@
-hypoaesthesia	HP0033748
-hypoesthesia	HP0033748
-numbness	HP0033748

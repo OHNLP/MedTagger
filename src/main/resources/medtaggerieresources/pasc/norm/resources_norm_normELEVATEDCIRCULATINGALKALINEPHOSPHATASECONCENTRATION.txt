@@ -1,9 +1,0 @@
-elevated alkaline phosphatase	HP0003155
-elevated alp	HP0003155
-elevated circulating alkaline phosphatase concentration	HP0003155
-greatly elevated alkaline phosphatase	HP0003155
-high serum alkaline phosphatase	HP0003155
-hyperphosphatasemia	HP0003155
-hyperphosphatasia	HP0003155
-increased alkaline phosphatase	HP0003155
-increased serum alkaline phosphatase	HP0003155

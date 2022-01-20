@@ -1,3 +1,0 @@
-fluent aphasia	HP0033848
-receptive aphasia	HP0033848
-wernicke aphasia	HP0033848

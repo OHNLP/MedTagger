@@ -1,5 +1,0 @@
-aspartate aminotransferase increased	HP0031956
-elevated circulating aspartate aminotransferase concentration	HP0031956
-elevated serum aspartate aminotransferase	HP0031956
-elevated serum ast	HP0031956
-elevated serum glutamic oxaloacetic transaminase	HP0031956

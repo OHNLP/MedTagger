@@ -1,3 +1,0 @@
-urinary incontinence	HP0000020
-bladder incontinence	HP0000020
-loss of bladder control	HP0000020

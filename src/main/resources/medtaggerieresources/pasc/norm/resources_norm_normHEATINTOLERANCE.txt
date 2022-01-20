@@ -1,2 +1,0 @@
-heat intolerance	HP0002046
-intolerance to heat and fevers	HP0002046

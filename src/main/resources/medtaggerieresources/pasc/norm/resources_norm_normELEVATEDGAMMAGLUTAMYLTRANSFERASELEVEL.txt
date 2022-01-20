@@ -1,2 +1,0 @@
-elevated gamma-glutamyltransferase level	HP0030948
-elevated serum ggt	HP0030948

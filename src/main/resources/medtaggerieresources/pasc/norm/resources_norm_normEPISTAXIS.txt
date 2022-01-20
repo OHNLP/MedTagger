@@ -1,8 +1,0 @@
-epistaxis	HP0000421
-bloody nose	HP0000421
-frequent nosebleeds	HP0000421
-nasal haemorrhage	HP0000421
-nasal hemorrhage	HP0000421
-nose bleed	HP0000421
-nose bleeding	HP0000421
-nosebleed	HP0000421

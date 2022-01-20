@@ -1,5 +1,0 @@
-aggression	HP0000718
-aggressive behavior	HP0000718
-aggressive behaviour	HP0000718
-aggressiveness	HP0000718
-physical aggression	HP0000718

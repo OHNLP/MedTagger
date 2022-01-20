@@ -1,5 +1,0 @@
-gastrointestinal hemorrhage	HP0002239
-gastrointestinal bleeding	HP0002239
-gastrointestinal haemorrhage	HP0002239
-gi haemorrhage	HP0002239
-gi hemorrhage	HP0002239

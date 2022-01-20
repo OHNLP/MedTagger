@@ -1,3 +1,0 @@
-blindness	HP0000618
-legal blindness	HP0000618
-total vision loss	HP0000618

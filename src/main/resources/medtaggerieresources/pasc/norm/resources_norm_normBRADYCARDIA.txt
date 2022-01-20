@@ -1,3 +1,0 @@
-brachycardia	HP0001662
-bradycardia	HP0001662
-slow heartbeats	HP0001662

@@ -1,4 +1,0 @@
-constipation	HP0002019
-constipation	HP0002019
-costiveness	HP0002019
-dyschezia	HP0002019

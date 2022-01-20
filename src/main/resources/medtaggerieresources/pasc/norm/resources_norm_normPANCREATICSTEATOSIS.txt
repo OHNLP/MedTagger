@@ -1,7 +1,0 @@
-fatty pancreas	HP0033757
-non-alcoholic fatty pancreatic disease	HP0033757
-pancreatic fatty infiltration	HP0033757
-pancreatic fatty replacement	HP0033757
-pancreatic lipomatosis	HP0033757
-pancreatic lipomatous pseudohypertrophy	HP0033757
-pancreatic steatosis	HP0033757

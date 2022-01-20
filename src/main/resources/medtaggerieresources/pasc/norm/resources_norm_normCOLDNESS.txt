@@ -1,5 +1,0 @@
-coldness	HP0033850
-cold skin temperature	HP0033850
-coolness to palpation	HP0033850
-cool skin	HP0033850
-cool skin temperature	HP0033850

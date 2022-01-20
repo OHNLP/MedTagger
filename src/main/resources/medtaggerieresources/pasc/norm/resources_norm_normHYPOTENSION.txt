@@ -1,3 +1,0 @@
-arterial hypotension	HP0002615
-hypotension	HP0002615
-low blood pressure	HP0002615

@@ -1,5 +1,0 @@
-irregular menstruation	HP0000858
-irregular menses	HP0000858
-irregular periods	HP0000858
-menstrual irregularities	HP0000858
-menstrual irregularity	HP0000858

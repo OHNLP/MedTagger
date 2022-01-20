@@ -1,4 +1,0 @@
-heart palpitations	HP0001962
-missed heart beat	HP0001962
-palpitations	HP0001962
-skipped heart beat	HP0001962

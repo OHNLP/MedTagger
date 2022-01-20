@@ -1,3 +1,0 @@
-decreased smell sensation	HP0004409
-hyposmia	HP0004409
-sense of smell impaired	HP0004409

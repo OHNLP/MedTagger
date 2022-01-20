@@ -1,3 +1,0 @@
-hypophosphataemia	HP0002148
-hypophosphatemia	HP0002148
-low blood phosphate level	HP0002148

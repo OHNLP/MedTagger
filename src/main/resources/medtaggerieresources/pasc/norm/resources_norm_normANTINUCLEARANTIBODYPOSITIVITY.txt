@@ -1,5 +1,0 @@
-antinuclear antibodies	HP0003493
-antinuclear antibody positive	HP0003493
-antinuclear antibody positivity	HP0003493
-elevated antinuclear antibody	HP0003493
-serum antinuclear antibody	HP0003493

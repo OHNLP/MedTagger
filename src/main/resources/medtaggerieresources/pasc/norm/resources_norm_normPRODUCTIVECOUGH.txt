@@ -1,3 +1,0 @@
-cough with mucus production	HP0031245
-productive cough	HP0031245
-wet cough	HP0031245

@@ -1,5 +1,0 @@
-altered sense of taste	HP0031249
-dysgeusia	HP0031249
-metallic taste	HP0031249
-metallic taste in mouth	HP0031249
-parageusia	HP0031249

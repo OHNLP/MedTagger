@@ -1,3 +1,0 @@
-loss of vision	HP0000572
-vision loss	HP0000572
-visual loss	HP0000572

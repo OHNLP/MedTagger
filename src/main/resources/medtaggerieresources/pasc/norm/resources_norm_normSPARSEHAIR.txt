@@ -1,8 +1,0 @@
-sparse hair	HP0008070
-decreased hair growth	HP0008070
-decreased hair growth on body	HP0008070
-hypotrichosis	HP0008070
-marked hypotrichosis	HP0008070
-sparse hair	HP0008070
-sparse hair since birth	HP0008070
-thin, sparse hair	HP0008070

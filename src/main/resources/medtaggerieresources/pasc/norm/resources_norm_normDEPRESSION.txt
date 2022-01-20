@@ -1,4 +1,0 @@
-depression	HP0000716
-depression	HP0000716
-depressive disorder	HP0000716
-depressivity	HP0000716

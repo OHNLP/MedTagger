@@ -1,4 +1,0 @@
-dermatographic urticaria	HP0011971
-dermatographism	HP0011971
-dermographism	HP0011971
-skin writing	HP0011971

@@ -1,3 +1,0 @@
-difficulty articulating speech	HP0001260
-dysarthria	HP0001260
-dysarthric speech	HP0001260

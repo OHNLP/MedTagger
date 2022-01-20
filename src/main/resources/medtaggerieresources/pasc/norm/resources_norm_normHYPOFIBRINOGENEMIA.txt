@@ -1,3 +1,0 @@
-hypofibrinogenemia	HP0011900
-low fibrinogen activity	HP0011900
-low fibrinogen level	HP0011900

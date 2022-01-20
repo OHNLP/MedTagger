@@ -1,8 +1,0 @@
-abdominal pain	HP0002027
-abdominal discomfort	HP0002027
-abdominal pain	HP0002027
-gastro pain	HP0002027
-gastrointestinal pain	HP0002027
-pain in stomach	HP0002027
-stomach pain	HP0002027
-upset stomach	HP0002027

@@ -1,3 +1,0 @@
-inflammation of tissues lining lungs and chest	HP0002102
-pleurisy	HP0002102
-pleuritis	HP0002102

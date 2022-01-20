@@ -1,4 +1,0 @@
-dyskinesia	HP0100660
-disorder of involuntary muscle movements	HP0100660
-dyskinesias	HP0100660
-dyskinesis	HP0100660

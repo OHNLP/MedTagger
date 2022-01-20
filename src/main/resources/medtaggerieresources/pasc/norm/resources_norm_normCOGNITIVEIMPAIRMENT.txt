@@ -1,6 +1,0 @@
-abnormality of cognition	HP0100543
-cognitive abnormality	HP0100543
-cognitive defects	HP0100543
-cognitive deficits	HP0100543
-cognitive impairment	HP0100543
-intellectual impairment	HP0100543

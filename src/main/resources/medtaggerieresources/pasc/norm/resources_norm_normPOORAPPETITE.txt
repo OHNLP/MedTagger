@@ -1,4 +1,0 @@
-decreased appetite	HP0004396
-loss of appetite	HP0004396
-no appetite	HP0004396
-poor appetite	HP0004396

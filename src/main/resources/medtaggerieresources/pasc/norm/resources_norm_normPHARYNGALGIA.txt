@@ -1,5 +1,0 @@
-pharyngalgia	HP0033050
-pharyngodynia	HP0033050
-sore throat	HP0033050
-throat discomfort	HP0033050
-throat pain	HP0033050

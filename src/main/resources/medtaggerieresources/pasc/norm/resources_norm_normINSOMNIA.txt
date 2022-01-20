@@ -1,3 +1,0 @@
-difficulty staying or falling asleep	HP0100785
-fragmented sleep	HP0100785
-insomnia	HP0100785

@@ -1,3 +1,0 @@
-hypoglycaemia	HP0001943
-hypoglycemia	HP0001943
-low blood sugar	HP0001943

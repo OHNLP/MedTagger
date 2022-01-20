@@ -1,2 +1,0 @@
-delayed myocardial gadolinium enhancement	HP4000004
-myocardial late gadolinium enhancement	HP4000004

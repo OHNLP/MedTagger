@@ -1,4 +1,0 @@
-myalgia	HP0003326
-muscle ache	HP0003326
-muscle pain	HP0003326
-myalgias	HP0003326

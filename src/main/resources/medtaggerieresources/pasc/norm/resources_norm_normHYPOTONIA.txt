@@ -1,7 +1,0 @@
-central hypotonia	HP0001252
-hypotonia	HP0001252
-low muscle tone	HP0001252
-low or weak muscle tone	HP0001252
-muscle hypotonia	HP0001252
-muscular hypotonia	HP0001252
-peripheral hypotonia	HP0001252

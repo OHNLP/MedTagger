@@ -1,3 +1,0 @@
-hallucination	HP0000738
-hallucinations	HP0000738
-sensory hallucination	HP0000738

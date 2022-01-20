@@ -1,2 +1,0 @@
-enlarged liver	HP0002240
-hepatomegaly	HP0002240

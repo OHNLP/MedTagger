@@ -1,3 +1,0 @@
-vitiligo	HP0001045
-blotchy loss of skin color	HP0001045
-blotchy loss of skin colour	HP0001045

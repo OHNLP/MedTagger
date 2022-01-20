@@ -1,2 +1,0 @@
-muscle rigidity	HP0002063
-rigidity	HP0002063

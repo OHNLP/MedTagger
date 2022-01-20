@@ -1,9 +1,0 @@
-dyspnea	HP0002094
-abnormal breathing	HP0002094
-breathing difficulty	HP0002094
-difficult to breathe	HP0002094
-difficulty breathing	HP0002094
-dyspnoea	HP0002094
-panting	HP0002094
-shortness of breath	HP0002094
-trouble breathing	HP0002094

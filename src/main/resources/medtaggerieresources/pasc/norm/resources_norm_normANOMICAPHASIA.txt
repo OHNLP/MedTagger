@@ -1,6 +1,0 @@
-amnesic aphasia	HP0030784
-amnestic aphasia	HP0030784
-anomia	HP0030784
-anomic aphasia	HP0030784
-nominal aphasia	HP0030784
-word-finding difficulty	HP0030784

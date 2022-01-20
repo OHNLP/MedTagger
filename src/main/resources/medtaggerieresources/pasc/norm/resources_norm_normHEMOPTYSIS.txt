@@ -1,4 +1,0 @@
-coughing up blood	HP0002105
-coughing up blood or blood-stained mucus	HP0002105
-haemoptysis	HP0002105
-hemoptysis	HP0002105

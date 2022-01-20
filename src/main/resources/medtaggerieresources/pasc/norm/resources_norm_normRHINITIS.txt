@@ -1,2 +1,0 @@
-nasal inflammation	HP0012384
-rhinitis	HP0012384

@@ -1,3 +1,0 @@
-dysphonia	HP0001618
-inability to produce voice sounds	HP0001618
-voice change	HP0001618

@@ -1,3 +1,0 @@
-dry cough	HP0031246
-dry coughing	HP0031246
-nonproductive cough	HP0031246

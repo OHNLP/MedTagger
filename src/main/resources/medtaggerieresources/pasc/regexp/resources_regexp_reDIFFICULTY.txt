@@ -1,0 +1,9 @@
+trouble
+difficult\w*
+unable
+challeng\w*
+struggle\w*
+poor
+can\'t
+cannot
+issues?

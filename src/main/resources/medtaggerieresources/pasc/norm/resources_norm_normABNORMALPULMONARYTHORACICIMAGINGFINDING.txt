@@ -1,2 +1,0 @@
-abnormal chest radiograph finding (lung)	HP0031983
-abnormal pulmonary thoracic imaging finding	HP0031983

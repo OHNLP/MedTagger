@@ -1,5 +1,0 @@
-confusion	HP0001289
-confusion	HP0001289
-disorientation	HP0001289
-easily confused	HP0001289
-mental disorientation	HP0001289

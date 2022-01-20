@@ -1,7 +1,0 @@
-blockage of nose	HP0001742
-congestion of nose	HP0001742
-nasal blockage	HP0001742
-nasal congestion	HP0001742
-nasal obstruction	HP0001742
-obstruction of nose	HP0001742
-stuffy nose	HP0001742

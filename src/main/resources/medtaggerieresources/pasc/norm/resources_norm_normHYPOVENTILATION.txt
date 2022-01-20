@@ -1,5 +1,0 @@
-hypoventilation	HP0002791
-alveolar hypoventilation	HP0002791
-respiratory depression	HP0002791
-slow breathing	HP0002791
-under breathing	HP0002791

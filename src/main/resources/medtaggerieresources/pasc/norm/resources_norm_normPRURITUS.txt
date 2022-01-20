@@ -1,5 +1,0 @@
-pruritus	HP0000989
-itching	HP0000989
-itchy skin	HP0000989
-pruritis	HP0000989
-skin itching	HP0000989

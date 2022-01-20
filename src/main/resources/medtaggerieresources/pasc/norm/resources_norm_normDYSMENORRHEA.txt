@@ -1,2 +1,0 @@
-dysmenorrhea	HP0100607
-painful menstruation	HP0100607

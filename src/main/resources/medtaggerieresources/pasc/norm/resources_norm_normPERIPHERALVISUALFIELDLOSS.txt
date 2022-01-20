@@ -1,4 +1,0 @@
-kalnienk vision	HP0007994
-loss of peripheral vision	HP0007994
-peripheral visual field loss	HP0007994
-tunnel vision	HP0007994

@@ -1,3 +1,0 @@
-abnormality of movement	HP0100022
-movement disorder	HP0100022
-unusual movement	HP0100022

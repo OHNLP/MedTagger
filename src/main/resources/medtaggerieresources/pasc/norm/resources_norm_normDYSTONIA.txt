@@ -1,3 +1,0 @@
-dystonia	HP0001332
-dystonic disease	HP0001332
-dystonic movements	HP0001332

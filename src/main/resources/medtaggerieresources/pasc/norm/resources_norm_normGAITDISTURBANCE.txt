@@ -1,7 +1,0 @@
-gait disturbance	HP0001288
-abnormal gait	HP0001288
-abnormal walk	HP0001288
-gait abnormalities	HP0001288
-gait difficulties	HP0001288
-gait disturbances	HP0001288
-impaired gait	HP0001288

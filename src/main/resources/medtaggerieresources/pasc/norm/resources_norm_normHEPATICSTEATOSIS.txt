@@ -1,5 +1,0 @@
-fatty infiltration of liver	HP0001397
-fatty liver	HP0001397
-hepatic steatosis	HP0001397
-liver steatosis	HP0001397
-steatosis	HP0001397

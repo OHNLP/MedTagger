@@ -1,2 +1,0 @@
-peripheral nerve disease	HP0001271
-polyneuropathy	HP0001271

@@ -1,3 +1,0 @@
-nasal discharge	HP0031417
-rhinorrhea	HP0031417
-runny nose	HP0031417

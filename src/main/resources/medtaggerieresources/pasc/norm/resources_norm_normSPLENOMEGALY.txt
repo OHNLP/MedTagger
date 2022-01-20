@@ -1,2 +1,0 @@
-increased spleen size	HP0001744
-splenomegaly	HP0001744

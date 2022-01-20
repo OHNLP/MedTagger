@@ -1,2 +1,0 @@
-bipedal edema	HP0033045
-bipedal oedema	HP0033045

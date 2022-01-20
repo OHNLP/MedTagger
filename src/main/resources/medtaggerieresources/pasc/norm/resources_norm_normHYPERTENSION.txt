@@ -1,4 +1,0 @@
-arterial hypertension	HP0000822
-high blood pressure	HP0000822
-hypertension	HP0000822
-systemic hypertension	HP0000822

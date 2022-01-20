@@ -1,4 +1,0 @@
-fatigue	HP0012378
-fatigue	HP0012378
-tired	HP0012378
-tiredness	HP0012378

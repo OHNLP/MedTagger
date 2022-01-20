@@ -1,2 +1,0 @@
-gastric ulcer	HP0002592
-stomach ulcer	HP0002592

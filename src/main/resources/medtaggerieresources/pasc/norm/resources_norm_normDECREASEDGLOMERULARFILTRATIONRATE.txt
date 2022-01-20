@@ -1,4 +1,0 @@
-decreased gfr	HP0012213
-decreased glomerular filtration rate	HP0012213
-impaired renal creatinine clearance	HP0012213
-reduced creatinine clearance	HP0012213

@@ -1,3 +1,0 @@
-increased respiratory rate or depth of breathing	HP0002789
-polypnea	HP0002789
-tachypnea	HP0002789

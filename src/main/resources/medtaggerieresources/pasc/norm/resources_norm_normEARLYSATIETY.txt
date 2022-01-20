@@ -1,3 +1,0 @@
-early satiety	HP0033842
-feeling full quickly when eating	HP0033842
-not able to finish a normal-sized meal	HP0033842

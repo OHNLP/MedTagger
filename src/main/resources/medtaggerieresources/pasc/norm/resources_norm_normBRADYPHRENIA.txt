@@ -1,5 +1,0 @@
-bradyphrenia	HP0031843
-mental slowness	HP0031843
-slowed thinking	HP0031843
-slowed thoughts	HP0031843
-slowness of thought	HP0031843

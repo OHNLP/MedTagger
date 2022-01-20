@@ -1,4 +1,0 @@
-exertional breathlessness	HP0002875
-exertional dyspnea	HP0002875
-exertional dyspnoea	HP0002875
-shortness of breathing upon physical activity	HP0002875

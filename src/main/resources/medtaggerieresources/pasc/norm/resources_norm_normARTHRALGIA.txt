@@ -1,5 +1,0 @@
-arthralgia	HP0002829
-arthralgias	HP0002829
-arthritic pain	HP0002829
-joint pain	HP0002829
-joint pains	HP0002829

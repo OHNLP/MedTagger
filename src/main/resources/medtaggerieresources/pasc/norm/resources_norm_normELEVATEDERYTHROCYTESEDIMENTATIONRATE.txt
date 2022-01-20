@@ -1,7 +1,0 @@
-elevated erythrocyte sedimentation rate	HP0003565
-elevated esr	HP0003565
-elevated sedimentation rate	HP0003565
-high erythrocyte sedimentation rate	HP0003565
-high esr	HP0003565
-increased erythrocyte sedimentation rate	HP0003565
-raised erythrocyte sedimentation rate	HP0003565

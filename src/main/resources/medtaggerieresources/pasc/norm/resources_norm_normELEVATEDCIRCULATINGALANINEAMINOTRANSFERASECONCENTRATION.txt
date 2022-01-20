@@ -1,5 +1,0 @@
-alanine aminotransferase increased	HP0031964
-elevated circulating alanine aminotransferase concentration	HP0031964
-elevated serum alanine aminotransferase	HP0031964
-elevated serum alt	HP0031964
-elevated serum glutamic-pyruvic transaminase	HP0031964

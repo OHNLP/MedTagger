@@ -1,5 +1,0 @@
-desquamation	HP0040189
-flaking skin	HP0040189
-peeling skin	HP0040189
-scaling skin	HP0040189
-scaly skin	HP0040189

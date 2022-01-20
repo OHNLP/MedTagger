@@ -1,3 +1,0 @@
-dizziness	HP0002321
-dizzy spell	HP0002321
-vertigo	HP0002321

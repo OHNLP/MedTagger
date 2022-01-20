@@ -1,5 +1,0 @@
-olfactory hallucination	HP0033693
-phantom odor	HP0033693
-phantom odour	HP0033693
-phantom smell	HP0033693
-phantosmia	HP0033693

@@ -1,2 +1,0 @@
-limb pain	HP0009763
-pain in extremities	HP0009763

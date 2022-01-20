@@ -1,3 +1,0 @@
-hemorrhage of the eye	HP0011885
-bleeding from the eye	HP0011885
-haemorrhage of the eye	HP0011885

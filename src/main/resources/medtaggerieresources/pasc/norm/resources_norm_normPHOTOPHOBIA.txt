@@ -1,4 +1,0 @@
-extreme sensitivity of the eyes to light	HP0000613
-light hypersensitivity	HP0000613
-photodysphoria	HP0000613
-photophobia	HP0000613
