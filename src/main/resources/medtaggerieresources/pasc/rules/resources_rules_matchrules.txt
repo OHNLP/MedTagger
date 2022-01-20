@@ -13,13 +13,13 @@ RULENAME="cm_TESTNEGATIVE1",REGEXP="(%reCOVIDNEGATIVE).?(for)?.?(sars-cov-2|covi
 RULENAME="cm_LONGHAUL",REGEXP="\b(%reLONGHAUL) (%reCONDITION)s?",LOCATION="NA",NORM="705076"
 
 #Non-restorative Sleep
-RULENAME="cm_NONRESTORATIVESLEEP",REGEXP="\b(%reNONRESTORATIVESLEEP|not( \w+){0,3}.?refresh)\b",LOCATION="NA",NORM="NONRESTORATIVESLEEP"
+RULENAME="cm_NONRESTORATIVESLEEP",REGEXP="\b(%reNONRESTORATIVESLEEP|not( \w+){0,3}.?refresh)\b",LOCATION="NA",NORM="-990000001"
 
 #visual snow syndrome
-RULENAME="cm_VISUALSNOW",REGEXP="\b(visual snow) (%reCONDITION)\b",LOCATION="NA",NORM="VISUALSNOW"
+RULENAME="cm_VISUALSNOW",REGEXP="\b(visual snow) (%reCONDITION)\b",LOCATION="NA",NORM="-990000002"
 
 #Teethchatter
-RULENAME="cm_TEETHCHATTER",REGEXP="teeth chatter",LOCATION="NA",NORM="TEETHCHATTER"
+RULENAME="cm_TEETHCHATTER",REGEXP="teeth chatter",LOCATION="NA",NORM="-990000003"
 
 #Difficulty learning
 RULENAME="cm_DIFFCULTYLEARNING",REGEXP="(%reDIFFICULTY) to (learn|retain|gain) new information",LOCATION="NA",NORM="440382"
@@ -34,7 +34,7 @@ RULENAME="cm_MEMORYPROBLEM",REGEXP="(%reDIFFICULTY)( with| to)?.((word|name)s?.?
 RULENAME="cm_MEMORYPROBLEM1",REGEXP="((word|name)s?.?find\w*|recall\w* information|find\w*\W(name|word)s?|remember\w* conversations?)\W*(%reDIFFICULTY)",LOCATION="NA",NORM="4304008"
 
 #Speech issues
-RULENAME="cm_SPEECHPROBLEM",REGEXP="(speech processing (%reCONDITION)|vocal dysfunction)\b",LOCATION="NA",NORM="SPEECHISSUE"
+RULENAME="cm_SPEECHPROBLEM",REGEXP="(speech processing (%reCONDITION)|vocal dysfunction)\b",LOCATION="NA",NORM="-990000004"
 
 #Sleep issues
 RULENAME="cm_SLEEPPROBLEM",REGEXP="(sleep\w+.quality( is| was| has been)? poor|sleep\w*\W*(\w+)?\W*more|wakes? up in a startle|(%reCONDITION)(\W\w+\W)?.?(asleep|sleeping|sleep))\b",LOCATION="NA",NORM="4115402"
