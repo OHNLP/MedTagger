@@ -75,7 +75,7 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 		try {
 			lvg = new LvgLookup(aContext);
 
-			btac = new AhoCorasickDict(AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/MedTagger.lookup.dict"));
+			btac = new AhoCorasickDict(AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/PASC.lookup.dict"));
 
 			stop = new HashSet<String>();
 			BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -90,7 +90,7 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 
 			abbr = new HashMap<String, String>();
 			br = new BufferedReader(new InputStreamReader(
-					AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/MedTagger.abbr")));
+					AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/OHNLP_ohdsi.abbr")));
 			while (br.ready()) {
 				String line = br.readLine();
 				if(line.startsWith("#")) continue;
