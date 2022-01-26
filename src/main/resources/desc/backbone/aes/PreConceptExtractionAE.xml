@@ -22,9 +22,9 @@
         <delegateAnalysisEngine key="POSTaggerAE">
             <import name="org.ohnlp.opennlp.aes.POSTaggerAE"/>
         </delegateAnalysisEngine>
-        <delegateAnalysisEngine key="LineSentenceDetectorAE">
-            <import name="org.ohnlp.medtagger.aes.LineSentenceDetectorAE"/>
-        </delegateAnalysisEngine>
+<!--        <delegateAnalysisEngine key="LineSentenceDetectorAE">-->
+<!--            <import name="org.ohnlp.medtagger.aes.LineSentenceDetectorAE"/>-->
+<!--        </delegateAnalysisEngine>-->
     </delegateAnalysisEngineSpecifiers>
     <analysisEngineMetaData>
         <name>MedTaggerIEAggregateTAE</name>
@@ -39,7 +39,7 @@
                 <node>TokenizerAE</node>
                 <node>ChunkerAE</node>
                 <node>POSTaggerAE</node>
-                <node>LineSentenceDetectorAE</node>
+<!--                <node>LineSentenceDetectorAE</node>-->
                 <node>LvgLookupAE</node>
                 <node>RuleSectionAE</node>
             </fixedFlow>
