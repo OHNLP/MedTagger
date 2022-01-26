@@ -40,6 +40,11 @@ import org.ohnlp.typesystem.type.textsem.ContextAnnotation;
 import org.ohnlp.typesystem.type.textspan.Sentence;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.MatchResult;
@@ -62,12 +67,21 @@ public class RuleContextAnnotator extends JCasAnnotator_ImplBase {
     @Override
     public void initialize(UimaContext ctxt) throws ResourceInitializationException {
         super.initialize(ctxt);
+        String ruleset = (String) ctxt.getConfigParameterValue("context_ruleset");
+
         try {
+            if (ruleset == null) {
+                ruleset = ConTexTSettings.class.getResource("/medtaggerresources/context/contextRule.txt").toURI().toString();
+            } else {
+                ruleset = Paths.get(URI.create(ruleset)).resolve("context").resolve("contextRule.txt").toUri().toString();
+            }
             contextSettings = new LinkedList<>();
             for (int priority : RULE_PRIORITIES) {
-                contextSettings.add(new ConTexTSettings(ConTexTSettings.class.getResourceAsStream("/medtaggerresources/context/contextRule.txt"), priority));
+                contextSettings.add(new ConTexTSettings(Files.newInputStream(Paths.get(URI.create(ruleset))), priority));
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | URISyntaxException e) {
+            throw new ResourceInitializationException(e);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
