@@ -1,0 +1,6 @@
+impaired taste sensation
+lost taste
+absent sense of taste
+loss of(\s+\S+){0,2}\s*taste
+ageusia
+dysgeusia

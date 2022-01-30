@@ -1,0 +1,19 @@
+loss of appetite
+appetite loss
+no appetite
+anorexia
+food aversion
+low appetite
+Poor (nutrition\w{0,5}|intake|appetite|PO)
+(lack|dicreas|diminish|reduc|decreas)\w{0,5}(\s+\S+){0,2}\s*(appetite|intake|diet)\w{0,5}
+not eating as (much|before)
+rarely eat\w{0,3}
+(appetite|diet|intake)\w{0,5}(\s+\S+){0,2}\s*(diminish|reduc|lack|decreas|dicreas)\w{0,5}
+
+
+//UMN
+less hungry
+
+//UK
+decreased PO intake\w{0,2}
+SOA

@@ -1,0 +1,2 @@
+(SARS-CoV-2|COVID 19|COVID19) (RNA|virus|test)(\s+\S+){0,3}\s*(presence|present|positive)
+(presence|present|positive)(\s+\S+){0,3}\s*(SARS-CoV-2|COVID 19|COVID19) (RNA|virus|test)

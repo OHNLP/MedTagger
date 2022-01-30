@@ -1,0 +1,9 @@
+cough\w{0,5}
+unproductive cough
+non productive cough
+non-productive cough
+nonproductive cough
+cough unproductive
+cough non-productive
+cough non productive
+cough nonproductive

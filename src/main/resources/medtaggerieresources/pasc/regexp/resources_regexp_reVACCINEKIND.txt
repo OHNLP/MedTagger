@@ -1,0 +1,7 @@
+johnson and johnson
+moderna
+pfizer
+covid(\-?19)?
+coronavirus
+
+

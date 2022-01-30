@@ -1,0 +1,13 @@
+abdominal pain
+stomach pain
+gut pain
+pain abdominal
+stomachache
+belly ache
+bellyache
+gastrointestinal pain
+gastro pain
+pain in stomach
+abdominal (discomfort|cramping|tenderness)
+upset stomach
+abd pain

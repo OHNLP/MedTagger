@@ -1,0 +1,9 @@
+headache\w{0,2}
+cephalalgia
+head pain
+pain in head
+head ache
+aching head
+head aching
+migrane
+migraine\w{0,2}

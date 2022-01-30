@@ -1,0 +1,6 @@
+emesis
+throwing up
+throw up
+vomit\w{0,5}
+//UMN
+not(\s+\S+){0,5}\s*keep fluids down

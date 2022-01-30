@@ -1,0 +1,5 @@
+thoratic pain
+chest (pain|discomfort)\w{0,5}
+(tight\w{0,5}|pain)(\s+\S+){0,5}\s*(chest|breath\w{0,5})
+
+

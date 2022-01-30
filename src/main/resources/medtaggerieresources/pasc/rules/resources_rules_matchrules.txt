@@ -1,19 +1,49 @@
+#COVID19 Signs/Symptoms Rules
+
+RULENAME="cm_dyspnea",REGEXP="\b(?i)(%reDYSPNEA)\b",LOCATION="NA",NORM="312437"
+RULENAME="cm_nasalcongestion",REGEXP="\b(?i)(%reNASALCONGESTION)\b",LOCATION="NA",NORM="4334403"
+RULENAME="cm_lossofappetite",REGEXP="\b(?i)(%reAPPETITELOSS)\b",LOCATION="NA",NORM="442165"
+RULENAME="cm_lossofsmell",REGEXP="\b(?i)(%reLOSSOFSMELL)\b",LOCATION="NA",NORM="4185711"
+RULENAME="cm_lossoftaste",REGEXP="\b(?i)(%reLOSSOFTASTE)\b",LOCATION="NA",NORM="4289517"
+RULENAME="cm_hypersomnia",REGEXP="\b(?i)(%reHYPERSOMNIA)\b",LOCATION="NA",NORM="438134"
+RULENAME="cm_cyanosis",REGEXP="\b(?i)(%reCYANOSIS)\b",LOCATION="NA",NORM="438555"
+RULENAME="cm_chestpain",REGEXP="\b(?i)(%reCHESTPAIN)\b",LOCATION="NA",NORM="77670"
+RULENAME="cm_vomiting",REGEXP="\b(?i)(%reVOMITING)\b",LOCATION="NA",NORM="441408"
+RULENAME="cm_chill",REGEXP="\b(?i)(%reCHILL)\b",LOCATION="NA",NORM="434490"
+RULENAME="cm_lymphopenia",REGEXP="\b(?i)(%reLYMPHOPENIA)\b",LOCATION="NA",NORM="441541"
+RULENAME="cm_diarrhea",REGEXP="\b(?i)(%reDIARRHEA)\b",LOCATION="NA",NORM="196523"
+RULENAME="cm_abdominalpain",REGEXP="\b(?i)(%reABDOMINALPAIN)\b",LOCATION="NA",NORM="200219"
+RULENAME="cm_sorethroat",REGEXP="\b(?i)(%reSORETHROAT)\b",LOCATION="NA",NORM="259153"
+RULENAME="cm_headache",REGEXP="\b(?i)(%reHEADACHE)\b",LOCATION="NA",NORM="378253"
+RULENAME="cm_myalgia",REGEXP="\b(?i)(%reMYALGIA)\b",LOCATION="NA",NORM="442752"
+RULENAME="cm_fatigue",REGEXP="\b(?i)(%reFATIGUE)\b",LOCATION="NA",NORM="4087481"
+RULENAME="cm_drycough",REGEXP="\b(?i)(%reCOUGH)\b",LOCATION="NA",NORM="254761"
+RULENAME="cm_fever",REGEXP="\b(?i)(%reFEVER)\b",LOCATION="NA",NORM="434173"
+RULENAME="cm_nausea",REGEXP="\b(?i)(%reNAUSEA)\b",LOCATION="NA",NORM="31967"
+RULENAME="cm_delirium",REGEXP="\b(?i)(%reDELIRIUM)\b",LOCATION="NA",NORM="373995"
+
+
 #COVID Positive
-RULENAME="cm_POSITIVECOVID",REGEXP="(sars.?cov.?2|covid(\-19)?)\W*(swab|(in-home\W)?test|pcr|testing|tested|antibody|antigen)?.?( with | is )?(%reCOVIDPOSITIVE)\b",LOCATION="NA",NORM="45756093"
+RULENAME="cm_POSITIVECOVID",REGEXP="(sars.?cov.?2|covid(\-19)?|coravirus)\W*(swab|(in-home\W)?test|pcr|testing|tested|antibody|antigen)?.?( with | is )?(%reCOVIDPOSITIVE)\b",LOCATION="NA",NORM="45756093"
 RULENAME="cm_POSITIVECOVID1",REGEXP="(%reCOVIDPOSITIVE).?(for|due to)?( in.?home)?.?(sars-cov-2|covid(\-19)?).?",LOCATION="NA",NORM="45756093"
-RULENAME="cm_POSITIVECOVID2",REGEXP="(sars-cov-2|covid(\-19)?).?(\+|%reCOVIDPOSITIVE)",LOCATION="NA",NORM="45756093"
-RULENAME="cm_POSITIVECOVID3",REGEXP="(had|have|has|secondary to|second to) (sars-cov-2|covid(\-19)?)",LOCATION="NA",NORM="45756093"
+RULENAME="cm_POSITIVECOVID2",REGEXP="(sars.?cov.?2|covid(\-19)?).?(\+|%reCOVIDPOSITIVE)",LOCATION="NA",NORM="45756093"
+RULENAME="cm_POSITIVECOVID3",REGEXP="(had|have|has|secondary to|second to)\W*(sars-cov-2|covid(\-?19)?).?(?!vaccin.*)$",LOCATION="NA",NORM="45756093"
 RULENAME="cm_POSITIVECOVID4",REGEXP="\bsars.?(coronavirus|cov).?2\W*(rna(\W*tma)?|pcr\W*rapid)(\W* v\W*)?.?(%reCOVIDPOSITIVE)",LOCATION="NA",NORM="45756093"
 
 #COVID Negative
-RULENAME="cm_TESTNEGATIVE",REGEXP="(sars.?cov.?2|covid(\-19)?).?(swab|test|testing|antibody|antigen|tested)?.?(%reCOVIDNEGATIVE)\b",LOCATION="NA",NORM="702683"
+RULENAME="cm_TESTNEGATIVE",REGEXP="(sars.?cov.?2|covid(\-19)?).?(swab|test|testing|antibody|antigen|tested)?(\W\w+)?.?(%reCOVIDNEGATIVE)\b",LOCATION="NA",NORM="702683"
 RULENAME="cm_TESTNEGATIVE1",REGEXP="(%reCOVIDNEGATIVE).?(for)?.?(sars-cov-2|covid(\-19)?).?",LOCATION="NA",NORM="702683"
 
 #Long Hauler
-RULENAME="cm_LONGHAUL",REGEXP="\b(%reLONGHAUL) (%reCONDITION)s?",LOCATION="NA",NORM="705076"
+RULENAME="cm_LONGHAUL",REGEXP="\b(%reLONGHAUL)\W(%reCONDITION)s?",LOCATION="NA",NORM="705076"
+
+#Vaccination
+RULENAME="cm_VACCINATION",REGEXP="\b(%reVACCINATEDCUE)\W(\w+\W){0,2}(%reVACCINEKIND)\W(vaccin\w*|booster)",LOCATION="NA",NORM="-990000013"
+RULENAME="cm_VACCINATION1",REGEXP="\b(%reVACCINEKIND)\W(vaccin\w*|booster)\W(%reVACCINATEDCUE)",LOCATION="NA",NORM="-990000013"
 
 #Non-restorative Sleep
-RULENAME="cm_NONRESTORATIVESLEEP",REGEXP="\b(%reNONRESTORATIVESLEEP|not( \w+){0,3}.?refresh)\b",LOCATION="NA",NORM="NONRESTORATIVESLEEP"
+RULENAME="cm_NONRESTORATIVESLEEP",REGEXP="\b(%reNONRESTORATIVESLEEP|not( \w+){0,3}.?refresh\w*)\b",LOCATION="NA",NORM="-990000001"
+RULENAME="cm_NONRESTORATIVESLEEP1",REGEXP="\b(not(\s+\S+){0,2}\s*refreshed waking up from sleep|sleep is never refreshing)",LOCATION="NA",NORM="-990000001"
 
 #visual snow syndrome
 RULENAME="cm_VISUALSNOW",REGEXP="\b(visual snow) (%reCONDITION)\b",LOCATION="NA",NORM="VISUALSNOW"
@@ -32,6 +62,7 @@ RULENAME="cm_SMELLPROBLEM3",REGEXP="(%reDIFFICULTY)( with)?.(smell|taste).(and|o
 #Memory issues
 RULENAME="cm_MEMORYPROBLEM",REGEXP="(%reDIFFICULTY)( with| to)?.((word|name)s?.?find\w*|recall\w* information|find\w*\W(name|word)s?|remember\w* conversations?)",LOCATION="NA",NORM="4304008"
 RULENAME="cm_MEMORYPROBLEM1",REGEXP="((word|name)s?.?find\w*|recall\w* information|find\w*\W(name|word)s?|remember\w* conversations?)\W*(%reDIFFICULTY)",LOCATION="NA",NORM="4304008"
+RULENAME="cm_SHORTTERMMEMORY",REGEXP="(%reDIFFICULTY)( with| to)?.(short.?term memory)",LOCATION="NA",NORM="4084412"
 
 #Speech issues
 RULENAME="cm_SPEECHPROBLEM",REGEXP="(speech processing (%reCONDITION)|vocal dysfunction)\b",LOCATION="NA",NORM="SPEECHISSUE"
@@ -41,10 +72,173 @@ RULENAME="cm_SLEEPPROBLEM",REGEXP="(sleep\w+.quality( is| was| has been)? poor|s
 RULENAME="cm_SLEEPPROBLEM1",REGEXP="(%reDIFFICULTY)\W*(stay\w*\W|go\w* back to\W)?(asleep|sleeping|sleep)\b",LOCATION="NA",NORM="4115402"
 
 #Fatigue issues
-RULENAME="cm_FATIGUE",REGEXP="(energy( levels?)( is| are| was)?\W*(drained|worse|decline))\b",LOCATION="NA",NORM="4087481"
+RULENAME="cm_FATIGUE1",REGEXP="(energy( levels?)( is| are| was)?\W*(drained|worse|decline))\b",LOCATION="NA",NORM="4087481"
 
 #Anxiety issues
-RULENAME="cm_ANXIETY",REGEXP="\b(not being able to stop or control worrying)",LOCATION="NA",NORM="441542"
+RULENAME="cm_ANXIETY1",REGEXP="\b(not being able to stop or control worrying)",LOCATION="NA",NORM="441542"
+
+#Orthostatic problems
+RULENAME="cm_ORTHOSTATICPROBLEM",REGEXP="\b(orthostatic problem\w{0,1})",LOCATION="NA",NORM="3655887"
+
+#urination problem
+RULENAME="cm_URINATIONINCREASE",REGEXP="\b(increased urination)",LOCATION="NA",NORM="37397686"
+RULENAME="cm_URINATIONINCOMPLETE",REGEXP="\b(incomplete urinary emptying)",LOCATION="NA",NORM="4091805"
+
+#Noise sensitivity
+RULENAME="cm_NOISESENSITIVITY",REGEXP="\b(hypersensitivity to certain noises)",LOCATION="NA",NORM="378163"
+
+#Thrush
+RULENAME="cm_THRUSH",REGEXP="\b(thrush)",LOCATION="NA",NORM="4001993"
+
+#Chest tightness
+RULENAME="cm_CHESTTIGHTNESS",REGEXP="\b(chest(\s+\S+){0,2}\s*tightness)",LOCATION="NA",NORM="4034235"
+
+#Abnormal lab - cortisol
+RULENAME="cm_CORTISOL",REGEXP="\b((elevated|increased) serum cortisol level)",LOCATION="NA",NORM="4035828"
+
+#Ear problem
+RULENAME="cm_EARPRESSURE",REGEXP="\b(ear pressure)",LOCATION="NA",NORM="4036969"
+RULENAME="cm_EARPOPPING",REGEXP="\b(ear popping)",LOCATION="NA",NORM="4037308"
+
+
+#Sleep wake disorder
+RULENAME="cm_SLEEPWAKEDISORDER",REGEXP="\b((not be able|difficulty)(\s+\S+){0,2}\s*get\w{0,5} back to sleep|wak\w{0,5} up suddenly)",LOCATION="NA",NORM="40388965"
+
+#Sleep disorder
+RULENAME="cm_SLEEPDISORDER",REGEXP="\b(impaired(\s+\S+){0,2}\s*ability to sleep|intense desire to sleep|issues with falling asleep|worse sleep|sleep quality is poor|falling asleep is difficult)",LOCATION="NA",NORM="435524"
+
+#Oxygen desaturation
+RULENAME="cm_OXYGENDESATURATION",REGEXP="\b(desaturation\w?(\s+\S+){0,2}\s*oxygen|oxygen saturation\w?(\s+\S+){0,2}\s*drop)",LOCATION="NA",NORM="4042079"
+
+#Word finding difficulty
+RULENAME="cm_WORDFINDING",REGEXP="\b(word finding difficutly|difficulty in word finding)",LOCATION="NA",NORM="4047125"
+
+#Abnormal bowel movement
+RULENAME="cm_ABNORMALBOWEL",REGEXP="\b(alternat\w{0,5} bowel habits|irregular bowel movement\w{0,1})",LOCATION="NA",NORM="4047125"
+
+#Fatigue
+RULENAME="cm_FATIGUEADD",REGEXP="\b(body feels super heavy|feeling run down|hard to get up and get going|heavy sensation|energy is drained easily)",LOCATION="NA",NORM="4087481"
+
+#Food aversion
+RULENAME="cm_FOODAVERSION",REGEXP="\b(food aversion\w{0,1})",LOCATION="NA",NORM="4091955"
+
+#Vivid dream
+RULENAME="cm_VIVIDDREAM",REGEXP="\b(dreams more frequently and that sometime very detailed and vivid)",LOCATION="NA",NORM="4092272"
+
+#Distractibility
+RULENAME="cm_DISTRACTIBILITY",REGEXP="\b(distractibility)",LOCATION="NA",NORM="4101994"
+
+#Sigh
+RULENAME="cm_SIGH",REGEXP="\b(spontaneous sighing)",LOCATION="NA",NORM="4114513"
+
+#Coordination issue
+RULENAME="cm_SIGH",REGEXP="\b((balance|coordination) issue\w{0,1}|literally imbalances)",LOCATION="NA",NORM="4114624"
+
+#Difficulty driving
+RULENAME="cm_DIFFICULTYDRIVING",REGEXP="\b(difficulty driving)",LOCATION="NA",NORM="4114931"
+
+#Malodorous bowel movements
+RULENAME="cm_MALODOROUSBOWEL",REGEXP="\b(malodorous bowel movements)",LOCATION="NA",NORM="4115700"
+
+
+#Lymph node enlargement
+RULENAME="cm_LYMPHNODEENLARGE1",REGEXP="\b(enlargement(\s+\S+){0,4}\s*submandibular(\s+\S+){0,2}\s*lymph nodes)",LOCATION="NA",NORM="4130204"
+RULENAME="cm_LYMPHNODEENLARGE2",REGEXP="\b(enlargement(\s+\S+){0,4}\s*submental(\s+\S+){0,2}\s*lymph nodes)",LOCATION="NA",NORM="4131922"
+
+#Facial swell
+RULENAME="cm_FACIALSWELL",REGEXP="\b(facial venous distension)",LOCATION="NA",NORM="4133326"
+
+#Prescyncope
+RULENAME="cm_PRESCYNCOPE",REGEXP="\b(prescyncope)",LOCATION="NA",NORM="4142895"
+
+#GI related symptoms
+RULENAME="cm_GISYMPTOM",REGEXP="\b(gi related symptom\w{0,1})",LOCATION="NA",NORM="4147190"
+
+#Brain fog
+RULENAME="cm_BRAINFOG",REGEXP="\b(bobble.? head)",LOCATION="NA",NORM="4164633"
+
+#Menstrual cycle change
+RULENAME="cm_MENSTRUALCHANGE",REGEXP="\b(change in menstrual cycle)",LOCATION="NA",NORM="4171394"
+
+#Smell issue
+RULENAME="cm_SMELLISSUE",REGEXP="\b(cannot smell anything)",LOCATION="NA",NORM="4185711"
+
+#Feeling sweaty
+RULENAME="cm_FEELINGSWEATY",REGEXP="\b(feeling sweaty)",LOCATION="NA",NORM="4200839"
+
+#Fibrillation
+RULENAME="cm_FIBRILLATION",REGEXP="\b(fibrillation)",LOCATION="NA",NORM="4226399"
+
+#Concentration problem
+RULENAME="cm_CONCENTRATIONPROBLEM",REGEXP="\b(problems with concentration|(cannot|can\'t|difficulty)(\s+\S+){0,2}\s*(focus|multi.?task|attention|concentrat)\w{0,5})",LOCATION="NA",NORM="4318665"
+
+#Difficulty initiating sleep
+RULENAME="cm_DIFFICULTYINITIATESLEEP",REGEXP="\b(difficulty(\s+\S+){0,2}\s*initiating sleep)",LOCATION="NA",NORM="4243368"
+
+#Airflow issue
+RULENAME="cm_AIRFLOWISSUE",REGEXP="\b(airflow restriction)",LOCATION="NA",NORM="4245492"
+
+#Abnormal heart rate
+RULENAME="cm_ABNORMALHEARTRATE",REGEXP="\b(heart rate(\s+\S+){0,1}\s*(does shoot|jumped|go) up|labile heart rate\w{0,1}|elevated hr)",LOCATION="NA",NORM="4245492"
+
+#Dyspnea
+RULENAME="cm_DYSPNEA",REGEXP="\b((cannot catch|getting out of|difficulty catching)(\s+\S+){0,1}\s*breath)",LOCATION="NA",NORM="4263848"
+
+#Vision issue
+RULENAME="cm_VISIONISSUE",REGEXP="\b(issues(\s+\S+){0,2}\s*vision)",LOCATION="NA",NORM="4265433"
+
+#Difficulty maintaining sleep
+RULENAME="cm_DIFFICULTMAINTAINSLEEP",REGEXP="\b(difficulty maintaining sleep)",LOCATION="NA",NORM="4282607"
+
+#Difficulty with processing sequences
+RULENAME="cm_DIFFICULTYSEQUENCE",REGEXP="\b(difficulty with processing sequences)",LOCATION="NA",NORM="4297400"
+
+#Memory issue
+RULENAME="cm_VISIONISSUE",REGEXP="\b(decline in memory|issues remembering|memory (concern|issue)\w{0,1})",LOCATION="NA",NORM="4265433"
+
+#Lack of sleep
+RULENAME="cm_LACKSLEEP",REGEXP="\b(lack of sleep)",LOCATION="NA",NORM="4305303"
+
+#Nose obstruction
+RULENAME="cm_NOSEOBSTRUCTION",REGEXP="\b(nose(\s+\S+){0,2}\s*block\w{0,5})",LOCATION="NA",NORM="4334403"
+
+#Taste change
+RULENAME="cm_TASTECHANGE",REGEXP="\b((metallic|bitter) taste)",LOCATION="NA",NORM="436235"
+
+#Cognitive impairment
+RULENAME="cm_COGNITIVEIMPAIR",REGEXP="\b(cognitive issue|decreased(\s+\S+){0,2}\s*cognitive)",LOCATION="NA",NORM="443432"
+
+#Tachydysrhythmia
+RULENAME="cm_TACHYDYSRHYTHMIA",REGEXP="\b(tachydysrhythmia)",LOCATION="NA",NORM="44784217"
+
+#Parosmia
+RULENAME="cm_PAROSMIA",REGEXP="\b((paranosmia|parosmia)\w{0,1})",LOCATION="NA",NORM="46270715"
+
+#Autonomic insufficiency
+RULENAME="cm_AUTONOMIC",REGEXP="\b(autonomic insufficiency)",LOCATION="NA",NORM="-990000005"
+
+#Debilitating retro-orbital pressure
+RULENAME="cm_RETROPRESSURE",REGEXP="\b(debilitating retro.?orbital pressure)",LOCATION="NA",NORM="-990000006"
+
+#Decreased tactile sensitivity
+RULENAME="cm_DECREASEDTACTILE",REGEXP="\b(decreased tactile sensitivity)",LOCATION="NA",NORM="-990000007"
+
+#Energy levels wax and wane
+RULENAME="cm_ENERGYUNSTABLE",REGEXP="\b(energy levels wax and wane)",LOCATION="NA",NORM="-990000008"
+
+#Increased mucus in bowels
+RULENAME="cm_MUCUS",REGEXP="\b(increased mucus in(\s+\S+){0,2}\s*bowels)",LOCATION="NA",NORM="-990000009"
+
+#Low DLCO
+RULENAME="cm_LOWDLCO",REGEXP="\b(low dlco)",LOCATION="NA",NORM="-990000010"
+
+#Stomach is growling
+RULENAME="cm_STOMACHGROW",REGEXP="\b(stomach(\s+\S+){0,2}\s*growling)",LOCATION="NA",NORM="-990000011"
+
+#Executive function
+RULENAME="cm_EXECUTIVEFUNCTION",REGEXP="\b(struggl\w{0,3}(\s+\S+){0,8}\s*tasks(\s+\S+){0,8}\s*able to do before)",LOCATION="NA",NORM="-990000012"
+
 
 #Remove Rule
-RULENAME="cm_rem1",REGEXP="(post.covid.|long.haul\w+).(clinic|care team|care clinic|classes|provider|education)",LOCATION="NA",NORM="REMOVE"
+RULENAME="cm_LONGHAUL_excl",REGEXP="(post.covid.|long.haul\w+).(clinic|care team|care clinic|classes|provider|education)",LOCATION="NA",NORM="REMOVE"
+RULENAME="cm_DYSPNEA_excl",REGEXP="(plan of care|centers for disease control symptom based strategy|advised to continue to monitor symptoms|self monitor your symptoms at home)\b",LOCATION="NA",NORM="REMOVE"

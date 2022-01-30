@@ -1,0 +1,12 @@
+myalgia\w{0,2}
+muscle pain
+muscle pains
+muscle ache
+muscle aches
+muscular aching
+muscular pain
+myalgic
+myodynia
+musc\w{0,5} discomfort
+pain in muscle
+body ache\w{0,3}

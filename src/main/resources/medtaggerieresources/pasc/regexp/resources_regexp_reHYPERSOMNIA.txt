@@ -1,0 +1,7 @@
+inability to wake
+inability to stay awake
+hypersomnia
+sleepiness
+sleepy
+#UMN; UK
+not(\s+\S+){0,5}\s*wak\w{0,5} up

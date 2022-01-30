@@ -1,0 +1,2 @@
+(SARS-CoV-2|COVID19|COVID 19) (IgG|IgM|ab|antibody)(\s+\S+){0,3}\s*(presence|present|positive)
+(presence|present|positive)(\s+\S+){0,3}\s*(SARS-CoV-2|COVID19|COVID 19) (IgG|IgM|ab|antibody)

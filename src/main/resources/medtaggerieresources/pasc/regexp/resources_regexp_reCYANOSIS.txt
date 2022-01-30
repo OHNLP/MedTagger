@@ -1,0 +1,8 @@
+blue discoloration
+blue color(\s+\S+){0,3}\s*(face|lips)
+acrocyanosis
+cyanosis
+
+#UMN, add words between
+bluish(\s+\S+){0,5}\s*lips  
+bluish(\s+\S+){0,5}\s*face

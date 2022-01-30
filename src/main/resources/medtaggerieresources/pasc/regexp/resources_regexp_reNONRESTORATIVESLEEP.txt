@@ -1,3 +1,3 @@
-un.?refreshing sleep
+un.?refresh\w*\Wsleep
 non.?restorative sleep
 sleep.?(\w+)?.?unrefreshing

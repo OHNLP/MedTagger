@@ -1,0 +1,24 @@
+fever\w{0,5}
+high temperature
+high body temperature
+hyperthermia
+elevated temperature
+elevated body temperature
+febrile
+febris
+pyrexia
+pyrexial
+37\.\s*(5|6|7|8|9|10)(\s+\S+){0,2}\s*(temp|temperature|\°C)
+(38|39|4)\.(0|1|2|3|4|5|6|7|8|9)(\s+\S+){0,2}\s*(temp|temperature|\°C)
+(temp|temperature|\°C|Tmax)(\W)?(\s+\S+){0,2}\s*37\.(5|6|7|8|9)
+(temp|temperature|\°C|Tmax)(\W)?(\s+\S+){0,2}\s*(38|39|40)\.(0|1|2|3|4|5|6|7|8|9)?
+(100|101|102|103|104|105)(\.)?(0|1|2|3|4|5|6|7|8|9)?\s*F
+
+
+//UMN
+(temp|temperature)(\s+\S+){0,2}\s*(100|101|102|103|104|105)(\.)?(0|1|2|3|4|5|6|7|8|9)?
+
+//UK
+(100|101|102|103|104|105|106|107|108)(\.)?(0|1|2|3|4|5|6|7|8|9)?\s*(F|fever)
+(fever|Tmax)(\W)?(\s+\S+){0,5}\s*(100|101|102|103|104|105|106|107|108)(\.)?(0|1|2|3|4|5|6|7|8|9)?
+

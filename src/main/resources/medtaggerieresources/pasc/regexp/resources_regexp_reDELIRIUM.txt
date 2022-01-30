@@ -1,0 +1,8 @@
+delirium
+Mental status continues to wax and wane
+//disoriented
+unable to stay alert
+confus\w{0,5}
+
+//UK
+deilirium

@@ -1730,8 +1730,6 @@ acg|ACG|4191001|Condition|2
 ach|ACH|19037624|Drug|2
 ach|ACH|4017491|Measurement|2
 ach|ACH|4311402|Condition|2
-ache|AChE|4336534|Measurement|2
-ache|ACHE|4336534|Measurement|2
 acl|ACLS|4329096|Procedure|2
 acm|ACM|4099094|Condition|2
 acm|ACM|4160043|Condition|2
@@ -5920,7 +5918,6 @@ vm|VM|4237618|Observation|2
 vnb|VNB|1343346|Drug|2
 vnf|VNF|743670|Drug|2
 vn|VN|437496|Condition|2
-vomit|vomits|4096715|Condition|2
 vpb|VPB|4089462|Condition|2
 vpb|vpbs|4089462|Condition|2
 vpc|VPC|4089462|Condition|2

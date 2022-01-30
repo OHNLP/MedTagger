@@ -1,0 +1,10 @@
+sore throat\w{0,2}
+throat soreness
+throat pain
+pharyngeal pain
+pharyngeal discomfort
+pharynx pain
+pharynx discomfort
+throat discomfort
+difficulty swallowing
+scratchy throat\s{0,2}

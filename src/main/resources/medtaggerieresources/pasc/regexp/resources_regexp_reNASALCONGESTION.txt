@@ -1,0 +1,17 @@
+blocked nose
+congested nose
+nose block
+
+
+runny nose
+running nose
+
+(block|obstruct|congest|stuff)\w{0,5}(\s+\S+){0,5}\s*(nose|nasal)
+
+(nasal|nose)(\s+\S+){0,5}\s*(block|obstruct|congest|stuff)\w{0,5}
+
+rhinorrhea
+nasal discharge
+
+
+(left|right)(\s+\S+){0,3}\s*(obstruction|congestion)

@@ -1,0 +1,27 @@
+dyspnea
+sob
+respiratory difficulty
+breathing difficulties
+pant\w{0,5}
+hyperpnea
+gasp\w{0,5}
+breathing fast
+(fast|trouble|abnormal|increas\w{0,5}|rapid|difficult\w{0,2}|short\w{0,5})(\s+\S+){0,5}\s*breath\w{0,5}
+breathing difficulty
+feel(\s+\S+){0,3}\s*suffocat\w{0,5}
+suffocat\w{0,5}(\s+\S+){0,5}\s*feel\w{0,5}
+oob
+sob
+orthopnea
+tachypne\w{0,4}
+catch breath
+poor inspiratory effort
+wheez\w{0,5}
+
+
+//UMN
+WOB
+breathing issue\w{0,3}
+
+//UK
+shortness of air
