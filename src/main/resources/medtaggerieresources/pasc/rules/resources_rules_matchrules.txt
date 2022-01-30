@@ -46,10 +46,10 @@ RULENAME="cm_NONRESTORATIVESLEEP",REGEXP="\b(%reNONRESTORATIVESLEEP|not( \w+){0,
 RULENAME="cm_NONRESTORATIVESLEEP1",REGEXP="\b(not(\s+\S+){0,2}\s*refreshed waking up from sleep|sleep is never refreshing)",LOCATION="NA",NORM="-990000001"
 
 #visual snow syndrome
-RULENAME="cm_VISUALSNOW",REGEXP="\b(visual snow) (%reCONDITION)\b",LOCATION="NA",NORM="VISUALSNOW"
+RULENAME="cm_VISUALSNOW",REGEXP="\b(visual snow) (%reCONDITION)\b",LOCATION="NA",NORM="-990000002"
 
 #Teethchatter
-RULENAME="cm_TEETHCHATTER",REGEXP="teeth chatter",LOCATION="NA",NORM="TEETHCHATTER"
+RULENAME="cm_TEETHCHATTER",REGEXP="teeth chatter",LOCATION="NA",NORM="-990000003"
 
 #Difficulty learning
 RULENAME="cm_DIFFCULTYLEARNING",REGEXP="(%reDIFFICULTY) to (learn|retain|gain) new information",LOCATION="NA",NORM="440382"
@@ -65,7 +65,7 @@ RULENAME="cm_MEMORYPROBLEM1",REGEXP="((word|name)s?.?find\w*|recall\w* informati
 RULENAME="cm_SHORTTERMMEMORY",REGEXP="(%reDIFFICULTY)( with| to)?.(short.?term memory)",LOCATION="NA",NORM="4084412"
 
 #Speech issues
-RULENAME="cm_SPEECHPROBLEM",REGEXP="(speech processing (%reCONDITION)|vocal dysfunction)\b",LOCATION="NA",NORM="SPEECHISSUE"
+RULENAME="cm_SPEECHPROBLEM",REGEXP="(speech processing (%reCONDITION)|vocal dysfunction)\b",LOCATION="NA",NORM="-990000004"
 
 #Sleep issues
 RULENAME="cm_SLEEPPROBLEM",REGEXP="(sleep\w+.quality( is| was| has been)? poor|sleep\w*\W*(\w+)?\W*more|wakes? up in a startle|(%reCONDITION)(\W\w+\W)?.?(asleep|sleeping|sleep))\b",LOCATION="NA",NORM="4115402"
