@@ -2,8 +2,7 @@ name: Build
 
 on:
   push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+*'
+    branches: [ master ]
 
 jobs:
   build:
@@ -24,7 +23,3 @@ jobs:
       env:
         SECRET_ACTOR: ${{ secrets.SECRET_ACTOR }}
         SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/githubdeploysettings/settings.xml -P build-deploy
-      env:
-        GITHUB_TOKEN: ${{ github.token }}

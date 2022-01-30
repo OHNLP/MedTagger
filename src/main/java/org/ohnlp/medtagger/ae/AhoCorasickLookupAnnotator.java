@@ -1,30 +1,34 @@
 /*******************************************************************************
- * Copyright: (c)  2013  Mayo Foundation for Medical Education and 
+ * Copyright: (c)  2013  Mayo Foundation for Medical Education and
  *  Research (MFMER). All rights reserved. MAYO, MAYO CLINIC, and the
  *  triple-shield Mayo logo are trademarks and service marks of MFMER.
- *  
- *  Except as contained in the copyright notice above, or as used to identify 
+ *
+ *  Except as contained in the copyright notice above, or as used to identify
  *  MFMER as the author of this software, the trade names, trademarks, service
  *  marks, or product names of the copyright holder shall not be used in
  *  advertising, promotion or otherwise in connection with this software without
  *  prior written authorization of the copyright holder.
- *   
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- *   
- *  http://www.apache.org/licenses/LICENSE-2.0 
- *   
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and 
- *  limitations under the License. 
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
  *******************************************************************************/
 
 package org.ohnlp.medtagger.ae;
 
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -55,178 +59,194 @@ import org.ohnlp.medtagger.type.ConceptMention;
  */
 public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 
-	// LOG4J logger based on class name
-	private Logger logger = Logger.getLogger(getClass().getName());
-	private boolean LONGEST = true;
+    // LOG4J logger based on class name
+    private Logger logger = Logger.getLogger(getClass().getName());
+    private boolean LONGEST = true;
 
-	// data structure that stores the TRIE
-	AhoCorasickDict btac;
-	HashSet<String> stop;
-	HashMap<String, String> abbr;
-	// add the path in resources
-	LvgLookup lvg;
+    // data structure that stores the TRIE
+    AhoCorasickDict btac;
+    HashSet<String> stop;
+    HashMap<String, String> abbr;
+    // add the path in resources
+    LvgLookup lvg;
 
-	@Override
-	public void initialize(UimaContext aContext)
-			throws ResourceInitializationException {
-		super.initialize(aContext);
-		logger.setLevel(Level.DEBUG);
+    @Override
+    public void initialize(UimaContext aContext)
+            throws ResourceInitializationException {
+        super.initialize(aContext);
+        logger.setLevel(Level.DEBUG);
 
-		try {
-			lvg = new LvgLookup(aContext);
-
-			btac = new AhoCorasickDict(AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/MedTagger.lookup.dict"));
-
-			stop = new HashSet<String>();
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/stop.615")));
-			while (br.ready()) {
-				String line = br.readLine();
-					  if(line.startsWith("#")) continue;
-				stop.add(lvg.getNorm(line.substring(line.indexOf('\t') + 1,
-						line.indexOf('|'))));
+        try {
+            lvg = new LvgLookup(aContext);
+            String dictfile = (String) aContext
+                    .getConfigParameterValue("dict_file");
+            if (dictfile == null) {
+                dictfile = AhoCorasickLookupAnnotator.class.getResource("/medtaggerresources/lookup/PASC.lookup.dict")
+						.toURI().toString();
+            }
+            btac = new AhoCorasickDict(Files.newInputStream(Paths.get(URI.create(dictfile))));
+			String stpfile = (String) aContext
+					.getConfigParameterValue("stop_file");
+			if (stpfile == null) {
+				stpfile = AhoCorasickLookupAnnotator.class.getResource("/medtaggerresources/lookup/stop.615")
+						.toURI().toString();
 			}
-			br.close();
+            stop = new HashSet<String>();
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    Files.newInputStream(Paths.get(URI.create(stpfile)))
+            ));
+            while (br.ready()) {
+                String line = br.readLine();
+                if (line.startsWith("#")) continue;
+                stop.add(lvg.getNorm(line.substring(line.indexOf('\t') + 1,
+                        line.indexOf('|'))));
+            }
+            br.close();
 
-			abbr = new HashMap<String, String>();
-			br = new BufferedReader(new InputStreamReader(
-					AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/MedTagger.abbr")));
-			while (br.ready()) {
-				String line = br.readLine();
-				if(line.startsWith("#")) continue;
-				
-				// add even those not in stop word list
-				// abbr.add(line.substring(0, line.indexOf('|')));
-				abbr.put(line.split("\\|")[0], line.split("\\|")[1]);
+            abbr = new HashMap<String, String>();
+            String abrfile = (String) aContext
+                    .getConfigParameterValue("abbr_file");
+			if (abrfile == null) {
+				abrfile = AhoCorasickLookupAnnotator.class.getResource("/medtaggerresources/lookup/OHNLP_ohdsi.abbr")
+						.toURI().toString();
 			}
-			br.close();
+            br = new BufferedReader(new InputStreamReader(
+                    Files.newInputStream(Paths.get(URI.create(abrfile)))
+            ));
+            while (br.ready()) {
+                String line = br.readLine();
+                if (line.startsWith("#")) continue;
 
-		} catch (ResourceAccessException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+                // add even those not in stop word list
+                // abbr.add(line.substring(0, line.indexOf('|')));
+                abbr.put(line.split("\\|")[0], line.split("\\|")[1]);
+            }
+            br.close();
 
-	}
+        } catch (ResourceAccessException | IOException | URISyntaxException e) {
+            throw new ResourceInitializationException(e);
+        }
 
-	@Override
-	public void process(JCas jCas) throws AnalysisEngineProcessException {
-		JFSIndexRepository indexes = jCas.getJFSIndexRepository();
-		Iterator<?> segItr = indexes.getAnnotationIndex(Segment.type)
-				.iterator();
-		while (segItr.hasNext()) {
-			Segment seg = (Segment) segItr.next();
+    }
 
-			Iterator<?> sentItr = indexes.getAnnotationIndex(Sentence.type)
-					.subiterator(seg);
-			while (sentItr.hasNext()) {
-				ArrayList<String> normTokens = new ArrayList<String>();
-				HashMap<Integer, Integer> begins = new HashMap<Integer, Integer>();
-				HashMap<Integer, Integer> ends = new HashMap<Integer, Integer>();
+    @Override
+    public void process(JCas jCas) throws AnalysisEngineProcessException {
+        JFSIndexRepository indexes = jCas.getJFSIndexRepository();
+        Iterator<?> segItr = indexes.getAnnotationIndex(Segment.type)
+                .iterator();
+        while (segItr.hasNext()) {
+            Segment seg = (Segment) segItr.next();
 
-				Sentence sent = (Sentence) sentItr.next();
-				int b = sent.getBegin();
-				int e = sent.getEnd();
+            Iterator<?> sentItr = indexes.getAnnotationIndex(Sentence.type)
+                    .subiterator(seg);
+            while (sentItr.hasNext()) {
+                ArrayList<String> normTokens = new ArrayList<String>();
+                HashMap<Integer, Integer> begins = new HashMap<Integer, Integer>();
+                HashMap<Integer, Integer> ends = new HashMap<Integer, Integer>();
 
-				// TODO: do we care only about word tokens, or do we worry about
-				// contractions, symbols, punctuations and numbers too?
-				Iterator<?> tokenItr = indexes.getAnnotationIndex(
-						BaseToken.type).subiterator(sent);
+                Sentence sent = (Sentence) sentItr.next();
+                int b = sent.getBegin();
+                int e = sent.getEnd();
 
-				while (tokenItr.hasNext()) {
-					BaseToken token = (BaseToken) tokenItr.next();
+                // TODO: do we care only about word tokens, or do we worry about
+                // contractions, symbols, punctuations and numbers too?
+                Iterator<?> tokenItr = indexes.getAnnotationIndex(
+                        BaseToken.type).subiterator(sent);
 
-					if (token instanceof WordToken) {
-						if (((WordToken) token).getCanonicalForm() == null)
-							continue;
-						normTokens.add(((WordToken) token).getCanonicalForm());
-						// storing the begins and ends for future use
-						begins.put(normTokens.size() - 1, token.getBegin());
-						ends.put(normTokens.size() - 1, token.getEnd());
-					}
-					if (token instanceof NumToken) {
-						normTokens.add(token.getCoveredText());
-						// storing the begins and ends for future use
-						begins.put(normTokens.size() - 1, token.getBegin());
-						ends.put(normTokens.size() - 1, token.getEnd());
-					}
-					 if(token instanceof PunctuationToken){
-						String tktext=token.getCoveredText();
-						if(tktext.equals(">") ||tktext.equals("<") || tktext.equals("=")){
-							normTokens.add(token.getCoveredText());
-							// storing the begins and ends for future use
-							begins.put(normTokens.size() - 1, token.getBegin());
-							ends.put(normTokens.size() - 1, token.getEnd());
-					
-						}
-					} 
-				}
+                while (tokenItr.hasNext()) {
+                    BaseToken token = (BaseToken) tokenItr.next();
 
-				String[] tokens = normTokens.toArray(new String[0]);
-				ArrayList<Vector<String>> tags = new ArrayList<Vector<String>>(
-						tokens.length);
-				for (int i = 0; i < tokens.length; i++) {
-					tags.add(new Vector<String>());
-				}
+                    if (token instanceof WordToken) {
+                        if (((WordToken) token).getCanonicalForm() == null)
+                            continue;
+                        normTokens.add(((WordToken) token).getCanonicalForm());
+                        // storing the begins and ends for future use
+                        begins.put(normTokens.size() - 1, token.getBegin());
+                        ends.put(normTokens.size() - 1, token.getEnd());
+                    }
+                    if (token instanceof NumToken) {
+                        normTokens.add(token.getCoveredText());
+                        // storing the begins and ends for future use
+                        begins.put(normTokens.size() - 1, token.getBegin());
+                        ends.put(normTokens.size() - 1, token.getEnd());
+                    }
+                    if (token instanceof PunctuationToken) {
+                        String tktext = token.getCoveredText();
+                        if (tktext.equals(">") || tktext.equals("<") || tktext.equals("=")) {
+                            normTokens.add(token.getCoveredText());
+                            // storing the begins and ends for future use
+                            begins.put(normTokens.size() - 1, token.getBegin());
+                            ends.put(normTokens.size() - 1, token.getEnd());
 
-				// TODO: debug this later
-				if (tokens.length > 200)
-					continue;
+                        }
+                    }
+                }
 
-				// debugging
-				// logger.debug(btac.root.phrase);
-				btac.find(tokens, 0, btac.root, tags);
+                String[] tokens = normTokens.toArray(new String[0]);
+                ArrayList<Vector<String>> tags = new ArrayList<Vector<String>>(
+                        tokens.length);
+                for (int i = 0; i < tokens.length; i++) {
+                    tags.add(new Vector<String>());
+                }
 
-				// loading stuff into CAS
-				for (int count = 0; count < tags.size(); count++) {
-					for (int lcount = 0; lcount < tags.get(count).size(); lcount++) {
-						if (LONGEST && lcount != tags.get(count).size() - 1)
-							continue;
+                // TODO: debug this later
+                if (tokens.length > 200)
+                    continue;
 
-						String con = tags.get(count).get(lcount);
-						int size = Integer.parseInt(con.substring(0,
-								con.indexOf(":")));
-						int begin = begins.get(count);
-						int end = ends.get(count + size - 1);
-						String code = con.substring(con.lastIndexOf(":") + 1);
+                // debugging
+                // logger.debug(btac.root.phrase);
+                btac.find(tokens, 0, btac.root, tags);
 
-						String[] multiples = code.split("\\|\\|");
-						for (int multiple = 0; multiple < multiples.length; multiple++) {
-							String[] splits = multiples[multiple].split("\\|");
+                // loading stuff into CAS
+                for (int count = 0; count < tags.size(); count++) {
+                    for (int lcount = 0; lcount < tags.get(count).size(); lcount++) {
+                        if (LONGEST && lcount != tags.get(count).size() - 1)
+                            continue;
 
-							String text = sent.getCoveredText().substring(
-									begin - b, end - b);
-							if (stop.contains(lvg.getNorm(text))
-									&& !abbr.containsKey(splits[0]))
-								continue;
+                        String con = tags.get(count).get(lcount);
+                        int size = Integer.parseInt(con.substring(0,
+                                con.indexOf(":")));
+                        int begin = begins.get(count);
+                        int end = ends.get(count + size - 1);
+                        String code = con.substring(con.lastIndexOf(":") + 1);
 
-							if (abbr.containsKey(lvg.getNorm(text))
-									&& (!abbr.get(lvg.getNorm(text)).equals(
-											text) || (begin - b > 0 && !sent
-											.getCoveredText()
-											.substring(begin - b - 1, begin - b)
-											.equals(" "))))
-								continue;
+                        String[] multiples = code.split("\\|\\|");
+                        for (int multiple = 0; multiple < multiples.length; multiple++) {
+                            String[] splits = multiples[multiple].split("\\|");
 
-			              		ConceptMention neAnnot = new ConceptMention(
-										jCas, begin, end);
-			              		neAnnot.setNormTarget(splits[1]);
-								neAnnot.setSemGroup(splits[2]);
-								neAnnot.setDetectionMethod("DictionaryLookup");
-								neAnnot.setSentence(sent);
-								neAnnot.addToIndexes();
-							}
+                            String text = sent.getCoveredText().substring(
+                                    begin - b, end - b);
+                            if (stop.contains(lvg.getNorm(text))
+                                    && !abbr.containsKey(splits[0]))
+                                continue;
 
-							if (LONGEST && lcount == tags.get(count).size() - 1) {
-								count = count + size - 1;
-								break;
-							}
-						}
+                            if (abbr.containsKey(lvg.getNorm(text))
+                                    && (!abbr.get(lvg.getNorm(text)).equals(
+                                    text) || (begin - b > 0 && !sent
+                                    .getCoveredText()
+                                    .substring(begin - b - 1, begin - b)
+                                    .equals(" "))))
+                                continue;
 
-					}
-				}
-			}
-		}
+                            ConceptMention neAnnot = new ConceptMention(
+                                    jCas, begin, end);
+                            neAnnot.setNormTarget(splits[1]);
+                            neAnnot.setSemGroup(splits[2]);
+                            neAnnot.setDetectionMethod("DictionaryLookup");
+                            neAnnot.setSentence(sent);
+                            neAnnot.addToIndexes();
+                        }
 
-	}
+                        if (LONGEST && lcount == tags.get(count).size() - 1) {
+                            count = count + size - 1;
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+}
 

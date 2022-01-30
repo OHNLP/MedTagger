@@ -91,11 +91,12 @@ public class MedTaggerBackboneTransform extends Transform {
             // Tokenization, Sentence Splitting, Section Detection, etc.
             ae.add(createEngineDescription("desc.backbone.aes.PreConceptExtractionAE"));
             // Add the appropriate NER/normalization component depending on run mode
+            URI uri = null;
             switch (mode) {
                 case OHNLPTK_DEFINED: // Ruleset from a web service
                     throw new UnsupportedOperationException("Remote Served IE Rulesets not yet implemented");
                 case STANDALONE:
-                    final URI uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+                    uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
                     Map<String, String> env = new HashMap<>();
                     env.put("create", "true");
                     try {
@@ -111,7 +112,11 @@ public class MedTaggerBackboneTransform extends Transform {
             }
 
             // Add Context handling
-            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+            if (uri != null) {
+                ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", uri.toString()));
+            } else {
+                ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+            }
 
             this.resMgr = ResourceManagerFactory.newResourceManager();
             this.aae = UIMAFramework.produceAnalysisEngine(ae.createAggregateDescription(), resMgr, null);

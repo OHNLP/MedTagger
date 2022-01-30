@@ -39,7 +39,36 @@
         <vendor/>
 
 
-        <configurationParameters searchStrategy="language_fallback"/>
+        <configurationParameters searchStrategy="language_fallback">
+            <configurationParameter>
+                <name>abbr_file</name>
+                <type>String</type>
+                <multiValued>false</multiValued>
+                <mandatory>false</mandatory>
+                <overrides>
+                    <parameter>MedTaggerLookupAE/abbr_file</parameter>
+                </overrides>
+            </configurationParameter>
+            <configurationParameter>
+                <name>stop_file</name>
+                <type>String</type>
+                <multiValued>false</multiValued>
+                <mandatory>false</mandatory>
+                <overrides>
+                    <parameter>MedTaggerLookupAE/stop_file</parameter>
+                </overrides>
+            </configurationParameter>
+            <configurationParameter>
+                <name>dict_file</name>
+                <type>String</type>
+                <multiValued>false</multiValued>
+                <mandatory>false</mandatory>
+                <overrides>
+                    <parameter>MedTaggerLookupAE/dict_File</parameter>
+                </overrides>
+            </configurationParameter>
+        </configurationParameters>
+
         <configurationParameterSettings/>
         <flowConstraints>
             <fixedFlow>
