@@ -41,10 +41,14 @@ import org.ohnlp.typesystem.type.textspan.Sentence;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.spi.FileSystemProvider;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.MatchResult;
@@ -68,21 +72,19 @@ public class RuleContextAnnotator extends JCasAnnotator_ImplBase {
     public void initialize(UimaContext ctxt) throws ResourceInitializationException {
         super.initialize(ctxt);
         String ruleset = (String) ctxt.getConfigParameterValue("context_ruleset");
-
+        InputStream is  = null;
         try {
             if (ruleset == null) {
-                ruleset = ConTexTSettings.class.getResource("/medtaggerresources/context/contextRule.txt").toURI().toString();
+                is = ConTexTSettings.class.getResourceAsStream("/medtaggerresources/context/contextRule.txt");
             } else {
-                ruleset = Paths.get(URI.create(ruleset)).resolve("context").resolve("contextRule.txt").toUri().toString();
+                is = Files.newInputStream(Paths.get(URI.create(ruleset)).resolve("context").resolve("contextRule.txt"));
             }
             contextSettings = new LinkedList<>();
             for (int priority : RULE_PRIORITIES) {
-                contextSettings.add(new ConTexTSettings(Files.newInputStream(Paths.get(URI.create(ruleset))), priority));
+                contextSettings.add(new ConTexTSettings(is, priority));
             }
-        } catch (FileNotFoundException | URISyntaxException e) {
-            throw new ResourceInitializationException(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ResourceInitializationException(e);
         }
     }
 

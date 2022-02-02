@@ -80,21 +80,22 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
             lvg = new LvgLookup(aContext);
             String dictfile = (String) aContext
                     .getConfigParameterValue("dict_file");
+            InputStream is;
             if (dictfile == null) {
-                dictfile = AhoCorasickLookupAnnotator.class.getResource("/medtaggerresources/lookup/PASC.lookup.dict")
-						.toURI().toString();
+                is = AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/PASC.lookup.dict");
+            } else {
+                is = Files.newInputStream(Paths.get(URI.create(dictfile)));
             }
-            btac = new AhoCorasickDict(Files.newInputStream(Paths.get(URI.create(dictfile))));
+            btac = new AhoCorasickDict(is);
 			String stpfile = (String) aContext
 					.getConfigParameterValue("stop_file");
 			if (stpfile == null) {
-				stpfile = AhoCorasickLookupAnnotator.class.getResource("/medtaggerresources/lookup/stop.615")
-						.toURI().toString();
-			}
+				is = AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/stop.615");
+			} else {
+                is = Files.newInputStream(Paths.get(URI.create(stpfile)));
+            }
             stop = new HashSet<String>();
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    Files.newInputStream(Paths.get(URI.create(stpfile)))
-            ));
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
             while (br.ready()) {
                 String line = br.readLine();
                 if (line.startsWith("#")) continue;
@@ -107,12 +108,11 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
             String abrfile = (String) aContext
                     .getConfigParameterValue("abbr_file");
 			if (abrfile == null) {
-				abrfile = AhoCorasickLookupAnnotator.class.getResource("/medtaggerresources/lookup/OHNLP_ohdsi.abbr")
-						.toURI().toString();
-			}
-            br = new BufferedReader(new InputStreamReader(
-                    Files.newInputStream(Paths.get(URI.create(abrfile)))
-            ));
+				is = AhoCorasickLookupAnnotator.class.getResourceAsStream("/medtaggerresources/lookup/OHNLP_ohdsi.abbr");
+			} else {
+                is =  Files.newInputStream(Paths.get(URI.create(abrfile)));
+            }
+            br = new BufferedReader(new InputStreamReader(is));
             while (br.ready()) {
                 String line = br.readLine();
                 if (line.startsWith("#")) continue;
@@ -123,7 +123,7 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
             }
             br.close();
 
-        } catch (ResourceAccessException | IOException | URISyntaxException e) {
+        } catch (ResourceAccessException | IOException e) {
             throw new ResourceInitializationException(e);
         }
 
