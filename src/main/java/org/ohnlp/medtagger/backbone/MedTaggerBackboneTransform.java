@@ -25,6 +25,7 @@ import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.InvalidXMLException;
 import org.ohnlp.backbone.api.Transform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
+import org.ohnlp.medtagger.ae.AhoCorasickLookupAnnotator;
 import org.ohnlp.medtagger.context.RuleContextAnnotator;
 import org.ohnlp.medtagger.ie.ae.MedTaggerIEAnnotator;
 import org.ohnlp.medtagger.type.ConceptMention;
@@ -95,7 +96,7 @@ public class MedTaggerBackboneTransform extends Transform {
             switch (mode) {
                 case OHNLPTK_DEFINED: // Ruleset from a web service
                     throw new UnsupportedOperationException("Remote Served IE Rulesets not yet implemented");
-                case STANDALONE:
+                case STANDALONE: case STANDALONE_IE_ONLY: {
                     uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
                     Map<String, String> env = new HashMap<>();
                     env.put("create", "true");
@@ -106,6 +107,41 @@ public class MedTaggerBackboneTransform extends Transform {
                     }
                     ae.add(createEngineDescription("org.ohnlp.medtagger.ie.aes.MedTaggerIEAnnotatorAE", "Resource_dir", uri.toString()));
                     break;
+                }
+                case STANDALONE_DICT_ONLY: {
+                    uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+                    Map<String, String> env = new HashMap<>();
+                    env.put("create", "true");
+                    try {
+                        // Ensure it is created, ignore if not
+                        FileSystem fs = FileSystems.newFileSystem(uri, env);
+                    } catch (FileSystemAlreadyExistsException ignored) {
+                    }
+                    ae.add(createEngineDescription(AhoCorasickLookupAnnotator.class, "dict_file", uri.toString()));
+                    break;
+                }
+                case STANDALONE_DICT_AND_IE: {
+                    String[] parsed = this.resourceFolder.split("\\|");
+                    uri = MedTaggerPipelineFunction.class.getResource("/resources/" + parsed[0]).toURI();
+                    URI dictURI = null;
+                    if (parsed.length > 1) {
+                        dictURI = MedTaggerPipelineFunction.class.getResource("/resources/" + parsed[1]).toURI();
+                    }
+                    Map<String, String> env = new HashMap<>();
+                    env.put("create", "true");
+                    try {
+                        // Ensure it is created, ignore if not
+                        FileSystem fs = FileSystems.newFileSystem(uri, env);
+                    } catch (FileSystemAlreadyExistsException ignored) {
+                    }
+                    ae.add(createEngineDescription("org.ohnlp.medtagger.ie.aes.MedTaggerIEAnnotatorAE", "Resource_dir", uri.toString()));
+                    if (dictURI != null) {
+                        ae.add(createEngineDescription(AhoCorasickLookupAnnotator.class, "dict_file", dictURI.toString()));
+                    } else {
+                        ae.add(createEngineDescription(AhoCorasickLookupAnnotator.class));
+                    }
+                    break;
+                }
                 case GENERAL_CLINICAL:
                     ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE"));
                     break;
@@ -196,7 +232,10 @@ public class MedTaggerBackboneTransform extends Transform {
 
     private enum RunMode {
         OHNLPTK_DEFINED, // Retrieve from web-based middleware server
-        STANDALONE, // Embedded IE Ruleset
+        STANDALONE, // Embedded IE Ruleset (Legacy)
+        STANDALONE_IE_ONLY,
+        STANDALONE_DICT_ONLY,
+        STANDALONE_DICT_AND_IE,
         GENERAL_CLINICAL // General Purpose SCT dictionary
     }
 }
