@@ -136,9 +136,9 @@ public class MedTaggerBackboneTransform extends Transform {
                     }
                     ae.add(createEngineDescription("org.ohnlp.medtagger.ie.aes.MedTaggerIEAnnotatorAE", "Resource_dir", uri.toString()));
                     if (dictURI != null) {
-                        ae.add(createEngineDescription(AhoCorasickLookupAnnotator.class, "dict_file", dictURI.toString()));
+                        ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE", "dict_file", dictURI.toString()));
                     } else {
-                        ae.add(createEngineDescription(AhoCorasickLookupAnnotator.class));
+                        ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE"));
                     }
                     break;
                 }

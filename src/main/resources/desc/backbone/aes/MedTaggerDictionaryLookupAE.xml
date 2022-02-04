@@ -13,10 +13,35 @@
         <description>Aggregate engine for dictionary lookup-based tagging</description>
         <version>1.0</version>
         <vendor/>
-
-
-
-        <configurationParameters searchStrategy="language_fallback"/>
+        <configurationParameters searchStrategy="language_fallback">
+            <configurationParameter>
+                <name>dict_file</name>
+                <type>String</type>
+                <multiValued>false</multiValued>
+                <mandatory>false</mandatory>
+                <overrides>
+                    <param>MedTaggerLookupAE/dict_file</param>
+                </overrides>
+            </configurationParameter>
+            <configurationParameter>
+                <name>abbr_file</name>
+                <type>String</type>
+                <multiValued>false</multiValued>
+                <mandatory>false</mandatory>
+                <overrides>
+                    <param>MedTaggerLookupAE/abbr_file</param>
+                </overrides>
+            </configurationParameter>
+            <configurationParameter>
+                <name>stop_file</name>
+                <type>String</type>
+                <multiValued>false</multiValued>
+                <mandatory>false</mandatory>
+                <overrides>
+                    <param>MedTaggerLookupAE/stop_file</param>
+                </overrides>
+            </configurationParameter>
+        </configurationParameters>
         <configurationParameterSettings/>
         <flowConstraints>
             <fixedFlow>
