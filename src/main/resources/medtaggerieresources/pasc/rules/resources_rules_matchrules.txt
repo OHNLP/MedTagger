@@ -238,7 +238,6 @@ RULENAME="cm_STOMACHGROW",REGEXP="\b(stomach(\s+\S+){0,2}\s*growling)",LOCATION=
 #Executive function
 RULENAME="cm_EXECUTIVEFUNCTION",REGEXP="\b(struggl\w{0,3}(\s+\S+){0,8}\s*tasks(\s+\S+){0,8}\s*able to do before)",LOCATION="NA",NORM="-990000012"
 
-
 #Remove Rule
-RULENAME="cm_LONGHAUL_excl",REGEXP="(post.covid.|long.haul\w+).(clinic|care team|care clinic|classes|provider|education)",LOCATION="NA",NORM="REMOVE"
-RULENAME="cm_DYSPNEA_excl",REGEXP="(plan of care|centers for disease control symptom based strategy|advised to continue to monitor symptoms|self monitor your symptoms at home)\b",LOCATION="NA",NORM="REMOVE"
+RULENAME="rem_LONGHAUL_excl",REGEXP="(post.covid.|long.haul\w+).(clinic|care team|care clinic|classes|provider|education)",LOCATION="NA",NORM="REMOVE"
+RULENAME="rem_DYSPNEA_excl",REGEXP="(plan of care|centers for disease control symptom based strategy|advised to continue to monitor symptoms|self monitor your symptoms at home)\b",LOCATION="NA",NORM="REMOVE"
