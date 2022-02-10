@@ -263,10 +263,37 @@ public class ResourceUtilManager implements Serializable {
     public static Iterable<MatchResult> findMatches(Pattern pattern, CharSequence s) {
         List<MatchResult> results = new ArrayList();
 
-        for (Matcher m = pattern.matcher(s); m.find(); )
+        for (Matcher m = pattern.matcher(new InterruptCheckingCharSequence(s)); m.find(); )
             results.add(m.toMatchResult());
 
         return results;
+    }
+
+    private static class InterruptCheckingCharSequence implements CharSequence {
+        CharSequence inner;
+        public InterruptCheckingCharSequence(CharSequence inner) {
+            this.inner = inner;
+        }
+
+        public char charAt(int index) {
+            if (Thread.currentThread().isInterrupted()) {
+                throw new RuntimeException("Thread Interrupted during Regex Match");
+            } else {
+                return this.inner.charAt(index);
+            }
+        }
+
+        public int length() {
+            return this.inner.length();
+        }
+
+        public CharSequence subSequence(int start, int end) {
+            return new InterruptCheckingCharSequence(this.inner.subSequence(start, end));
+        }
+
+        public String toString() {
+            return this.inner.toString();
+        }
     }
 
     public static List<Pattern> sortByValue(final HashMap<Pattern, String> m) {

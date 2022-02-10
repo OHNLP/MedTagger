@@ -40,6 +40,7 @@ import java.nio.file.FileSystemAlreadyExistsException;
 import java.nio.file.FileSystems;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -96,7 +97,8 @@ public class MedTaggerBackboneTransform extends Transform {
             switch (mode) {
                 case OHNLPTK_DEFINED: // Ruleset from a web service
                     throw new UnsupportedOperationException("Remote Served IE Rulesets not yet implemented");
-                case STANDALONE: case STANDALONE_IE_ONLY: {
+                case STANDALONE:
+                case STANDALONE_IE_ONLY: {
                     uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
                     Map<String, String> env = new HashMap<>();
                     env.put("create", "true");
@@ -170,22 +172,35 @@ public class MedTaggerBackboneTransform extends Transform {
             String text = input.getString(this.textField);
             cas.reset();
             cas.setDocumentText(text);
-            try {
-                System.out.println("Running NLP on " + id);
-                aae.process(cas);
-                JCas jcas = cas.getJCas();
-                Map<ConceptMention, Collection<Sentence>> sentenceIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Sentence.class);
-                Map<ConceptMention, Collection<Segment>> sectionIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Segment.class);
-                int runs = 0;
-                for (ConceptMention cm : JCasUtil.select(jcas, ConceptMention.class)) {
-                    runs++;
-                    JsonNode json = toJSON(cm, sentenceIdx, sectionIdx);
-                    Row out = Row.withSchema(schema).addValues(input.getValues()).addValue(json.toString()).build();
-                    output.output(out);
+            final CAS casRef = cas; // a final reference for cross-ref access
+            System.out.println("Running NLP on " + id);
+            // Run NLP in a separate thread so that we can interrupt it if it takes too long
+            ExecutorService nlpExecutor = Executors.newSingleThreadExecutor();
+            Thread t = new Thread(() -> {
+                try {
+                    aae.process(casRef);
+                    JCas jcas = casRef.getJCas();
+                    Map<ConceptMention, Collection<Sentence>> sentenceIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Sentence.class);
+                    Map<ConceptMention, Collection<Segment>> sectionIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Segment.class);
+                    int runs = 0;
+                    for (ConceptMention cm : JCasUtil.select(jcas, ConceptMention.class)) {
+                        runs++;
+                        JsonNode json = toJSON(cm, sentenceIdx, sectionIdx);
+                        Row out = Row.withSchema(schema).addValues(input.getValues()).addValue(json.toString()).build();
+                        output.output(out);
+                    }
+                    System.out.println("Found " + runs + " NLP Artifacts in Document " + id);
+                } catch (AnalysisEngineProcessException | CASException e) {
+                    throw new RuntimeException(e);
                 }
-                System.out.println("Found " + runs + " NLP Artifacts in Document "  + id);
-            } catch (AnalysisEngineProcessException | CASException e) {
-                e.printStackTrace();
+            });
+            Future<?> nlpRunFuture = nlpExecutor.submit(t);
+            try {
+                nlpRunFuture.get(30000, TimeUnit.MILLISECONDS);
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                System.out.println("Skipping document " + id + " due to NLP run taking longer than 30 seconds");
+                t.interrupt();
+
             }
         }
 
@@ -210,7 +225,7 @@ public class MedTaggerBackboneTransform extends Transform {
                             .collect(Collectors.joining(" ")));
             ret.put(
                     "section_id",
-                  coveringSectionsMap.get(cm)
+                    coveringSectionsMap.get(cm)
                             .stream()
                             .map(s -> {
                                 try {
