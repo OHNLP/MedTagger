@@ -175,32 +175,42 @@ public class MedTaggerBackboneTransform extends Transform {
             final CAS casRef = cas; // a final reference for cross-ref access
             System.out.println("Running NLP on " + id);
             // Run NLP in a separate thread so that we can interrupt it if it takes too long
+            // We create a new executor service instead of sharing it in case interrupt fails
             ExecutorService nlpExecutor = Executors.newSingleThreadExecutor();
-            Thread t = new Thread(() -> {
+            FutureTask<Throwable> future = new FutureTask<>(() -> {
                 try {
                     aae.process(casRef);
-                    JCas jcas = casRef.getJCas();
-                    Map<ConceptMention, Collection<Sentence>> sentenceIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Sentence.class);
-                    Map<ConceptMention, Collection<Segment>> sectionIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Segment.class);
-                    int runs = 0;
-                    for (ConceptMention cm : JCasUtil.select(jcas, ConceptMention.class)) {
-                        runs++;
-                        JsonNode json = toJSON(cm, sentenceIdx, sectionIdx);
-                        Row out = Row.withSchema(schema).addValues(input.getValues()).addValue(json.toString()).build();
-                        output.output(out);
-                    }
-                    System.out.println("Found " + runs + " NLP Artifacts in Document " + id);
-                } catch (AnalysisEngineProcessException | CASException e) {
-                    throw new RuntimeException(e);
+                    return null;
+                } catch (AnalysisEngineProcessException e) {
+                    return e;
                 }
             });
-            Future<?> nlpRunFuture = nlpExecutor.submit(t);
+            nlpExecutor.submit(future);
             try {
-                nlpRunFuture.get(30000, TimeUnit.MILLISECONDS);
+                Throwable t = future.get(30000, TimeUnit.MILLISECONDS);
+                if (t != null) {
+                    throw new RuntimeException(t);
+                }
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 System.out.println("Skipping document " + id + " due to NLP run taking longer than 30 seconds");
-                t.interrupt();
-
+                future.cancel(true);
+                nlpExecutor.shutdownNow();
+                return;
+            }
+            try {
+                JCas jcas = casRef.getJCas();
+                Map<ConceptMention, Collection<Sentence>> sentenceIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Sentence.class);
+                Map<ConceptMention, Collection<Segment>> sectionIdx = JCasUtil.indexCovering(jcas, ConceptMention.class, Segment.class);
+                int runs = 0;
+                for (ConceptMention cm : JCasUtil.select(jcas, ConceptMention.class)) {
+                    runs++;
+                    JsonNode json = toJSON(cm, sentenceIdx, sectionIdx);
+                    Row out = Row.withSchema(schema).addValues(input.getValues()).addValue(json.toString()).build();
+                    output.output(out);
+                }
+                System.out.println("Found " + runs + " NLP Artifacts in Document " + id);
+            } catch (CASException e) {
+                throw new RuntimeException(e);
             }
         }
 
