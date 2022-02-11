@@ -111,7 +111,7 @@ RULENAME="cm_SLEEPDISORDER",REGEXP="\b(impaired(\s+\S+){0,2}\s*ability to sleep|
 RULENAME="cm_OXYGENDESATURATION",REGEXP="\b(desaturation\w?(\s+\S+){0,2}\s*oxygen|oxygen saturation\w?(\s+\S+){0,2}\s*drop)",LOCATION="NA",NORM="4042079"
 
 #Word finding difficulty
-RULENAME="cm_WORDFINDING",REGEXP="\b(word finding difficutly|difficulty in word finding)",LOCATION="NA",NORM="4047125"
+RULENAME="cm_WORDFINDING",REGEXP="\b(word finding difficutly|difficulty in word finding)",LOCATION="NA",NORM="4304008"
 
 #Abnormal bowel movement
 RULENAME="cm_ABNORMALBOWEL",REGEXP="\b(alternat\w{0,5} bowel habits|irregular bowel movement\w{0,1})",LOCATION="NA",NORM="4047125"
@@ -179,7 +179,7 @@ RULENAME="cm_DIFFICULTYINITIATESLEEP",REGEXP="\b(difficulty(\s+\S+){0,2}\s*initi
 RULENAME="cm_AIRFLOWISSUE",REGEXP="\b(airflow restriction)",LOCATION="NA",NORM="4245492"
 
 #Abnormal heart rate
-RULENAME="cm_ABNORMALHEARTRATE",REGEXP="\b(heart rate(\s+\S+){0,1}\s*(does shoot|jumped|go) up|labile heart rate\w{0,1}|elevated hr)",LOCATION="NA",NORM="4245492"
+RULENAME="cm_ABNORMALHEARTRATE",REGEXP="\b(heart rate(\s+\S+){0,1}\s*(does shoot|jumped|go) up|labile heart rate\w{0,1}|elevated hr)",LOCATION="NA",NORM="4262561"
 
 #Dyspnea
 RULENAME="cm_DYSPNEA",REGEXP="\b((cannot catch|getting out of|difficulty catching)(\s+\S+){0,1}\s*breath)",LOCATION="NA",NORM="4263848"

@@ -6,7 +6,7 @@ pant\w{0,5}
 hyperpnea
 gasp\w{0,5}
 breathing fast
-(fast|trouble|abnormal|increas\w{0,5}|rapid|difficult\w{0,2}|short\w{0,5})(\s+\S+){0,5}\s*breath\w{0,5}
+(fast|trouble|abnormal|increas\w{0,5}|rapid|difficult\w{0,2}|short\w{0,5})(\s+\S+){0,2}\s*breath\w{0,5}
 breathing difficulty
 feel(\s+\S+){0,3}\s*suffocat\w{0,5}
 suffocat\w{0,5}(\s+\S+){0,5}\s*feel\w{0,5}
