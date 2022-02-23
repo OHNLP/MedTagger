@@ -27,7 +27,6 @@ import org.ohnlp.backbone.api.Transform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
 import org.ohnlp.medtagger.ae.AhoCorasickLookupAnnotator;
 import org.ohnlp.medtagger.context.RuleContextAnnotator;
-import org.ohnlp.medtagger.ie.ae.MedTaggerIEAnnotator;
 import org.ohnlp.medtagger.type.ConceptMention;
 import org.ohnlp.typesystem.type.textspan.Segment;
 import org.ohnlp.typesystem.type.textspan.Sentence;
@@ -53,6 +52,7 @@ public class MedTaggerBackboneTransform extends Transform {
     private String inputField;
     private String resources;
     private RunMode mode;
+    private String noteIdField;
 
     @Override
     public void initFromConfig(JsonNode config) throws ComponentInitializationException {
@@ -60,6 +60,7 @@ public class MedTaggerBackboneTransform extends Transform {
             this.inputField = config.get("input").asText();
             this.mode = config.has("mode") ? RunMode.valueOf(config.get("mode").textValue().toUpperCase(Locale.ROOT)) : RunMode.STANDALONE;
             this.resources = config.get("ruleset").asText();
+            this.noteIdField = config.has("identifier_col") ? config.get("identifier_col").asText() : "note_id";
         } catch (Throwable t) {
             throw new ComponentInitializationException(t);
         }
@@ -68,23 +69,25 @@ public class MedTaggerBackboneTransform extends Transform {
     @Override
     public PCollection<Row> expand(PCollection<Row> input) {
         return input.apply("MedTagger Concept Extraction",
-                ParDo.of(new MedTaggerPipelineFunction(this.inputField, this.resources, this.mode)));
+                ParDo.of(new MedTaggerPipelineFunction(this.inputField, this.resources, this.mode, this.noteIdField)));
     }
 
     private static class MedTaggerPipelineFunction extends DoFn<Row, Row> {
         private final String resourceFolder;
         private final String textField;
         private final RunMode mode;
+        private final String noteIdField;
 
         // UIMA components are not serializable, and thus must be initialized per-executor via the @Setup annotation
         private transient AnalysisEngine aae;
         private transient ResourceManager resMgr;
         private transient CAS cas;
 
-        public MedTaggerPipelineFunction(String textField, String resourceFolder, RunMode mode) {
+        public MedTaggerPipelineFunction(String textField, String resourceFolder, RunMode mode, String noteIdField) {
             this.textField = textField;
             this.resourceFolder = resourceFolder;
             this.mode = mode;
+            this.noteIdField = noteIdField;
         }
 
         @Setup
@@ -168,7 +171,7 @@ public class MedTaggerBackboneTransform extends Transform {
             List<Schema.Field> fields = new LinkedList<>(input.getSchema().getFields());
             fields.add(Schema.Field.of("nlp_output_json", Schema.FieldType.STRING));
             Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
-            Object id = input.getBaseValue("note_id");
+            Object id = input.getBaseValue(this.noteIdField);
             String text = input.getString(this.textField);
             cas.reset();
             cas.setDocumentText(text);
