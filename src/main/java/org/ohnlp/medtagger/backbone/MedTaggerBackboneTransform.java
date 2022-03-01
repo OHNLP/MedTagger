@@ -173,7 +173,17 @@ public class MedTaggerBackboneTransform extends Transform {
             Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
             Object id = input.getBaseValue(this.noteIdField);
             String text = input.getString(this.textField);
-            cas.reset();
+            try {
+                cas.reset();
+            } catch (Throwable t) {
+                // CAS reset failed, just create a whole new one
+                try {
+                    this.cas = CasCreationUtils.createCas(Collections.singletonList(aae.getMetaData()),
+                            null, resMgr);
+                } catch (ResourceInitializationException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             cas.setDocumentText(text);
             final CAS casRef = cas; // a final reference for cross-ref access
             System.out.println("Running NLP on " + id);
@@ -199,6 +209,12 @@ public class MedTaggerBackboneTransform extends Transform {
                 future.cancel(true);
                 nlpExecutor.shutdownNow();
                 return;
+            } catch (Throwable t) {
+                System.out.println("Skipping document " + id + " due to error. Note that this may be expected if NLP run " +
+                        "takes longer than a certain amount of time and it short circuits");
+                t.printStackTrace();
+                future.cancel(true);
+                nlpExecutor.shutdownNow();
             }
             try {
                 JCas jcas = casRef.getJCas();
