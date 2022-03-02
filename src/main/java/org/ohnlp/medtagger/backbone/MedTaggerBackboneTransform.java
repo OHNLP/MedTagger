@@ -215,6 +215,7 @@ public class MedTaggerBackboneTransform extends Transform {
                 t.printStackTrace();
                 future.cancel(true);
                 nlpExecutor.shutdownNow();
+                return;
             }
             try {
                 JCas jcas = casRef.getJCas();
