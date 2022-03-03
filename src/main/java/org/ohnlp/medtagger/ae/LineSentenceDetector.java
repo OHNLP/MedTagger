@@ -160,31 +160,31 @@ public class LineSentenceDetector  extends JCasAnnotator_ImplBase {
 		}
 
 		JFSIndexRepository indexes1 = jCas.getJFSIndexRepository();		
-		
-		for(int i=0; i<sentList.size(); i++){
-			Sentence sent=(Sentence) sentList.get(i);
-			Iterator<?> nlItr = indexes1.getAnnotationIndex(NewlineToken.type).subiterator(sent);
-			ArrayList <NewlineToken> nlList=new ArrayList<NewlineToken>();
-			while (nlItr.hasNext()) {
-				   NewlineToken bt= (NewlineToken) nlItr.next();
-				   nlList.add(bt);				
-				}
-			int spos=sent.getBegin();
-			for(int j=0; j<nlList.size(); j++){
-				NewlineToken bt=(NewlineToken) nlList.get(j);
-				if(bt.getBegin()<sent.getEnd()){
-					newsentList.add(new Sentence(jCas,spos,bt.getBegin()));
-				}
-				spos=bt.getEnd();
-			}
-			if(spos < sent.getEnd()) newsentList.add(new Sentence(jCas, spos, sent.getEnd()));
-			sent.removeFromIndexes(jCas);
-		}
-		
-		for(int i=0; i<newsentList.size(); i++){
-			Sentence sent=(Sentence) newsentList.get(i);
-			sent.addToIndexes(jCas);
-		}
+//
+//		for(int i=0; i<sentList.size(); i++){
+//			Sentence sent=(Sentence) sentList.get(i);
+//			Iterator<?> nlItr = indexes1.getAnnotationIndex(NewlineToken.type).subiterator(sent);
+//			ArrayList <NewlineToken> nlList=new ArrayList<NewlineToken>();
+//			while (nlItr.hasNext()) {
+//				   NewlineToken bt= (NewlineToken) nlItr.next();
+//				   nlList.add(bt);
+//				}
+//			int spos=sent.getBegin();
+//			for(int j=0; j<nlList.size(); j++){
+//				NewlineToken bt=(NewlineToken) nlList.get(j);
+//				if(bt.getBegin()<sent.getEnd()){
+//					newsentList.add(new Sentence(jCas,spos,bt.getBegin()));
+//				}
+//				spos=bt.getEnd();
+//			}
+//			if(spos < sent.getEnd()) newsentList.add(new Sentence(jCas, spos, sent.getEnd()));
+//			sent.removeFromIndexes(jCas);
+//		}
+//
+//		for(int i=0; i<newsentList.size(); i++){
+//			Sentence sent=(Sentence) newsentList.get(i);
+//			sent.addToIndexes(jCas);
+//		}
 		}
 	
 			 
