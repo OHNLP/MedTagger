@@ -39,7 +39,7 @@
                 <node>TokenizerAE</node>
                 <node>ChunkerAE</node>
                 <node>POSTaggerAE</node>
-<!--                <node>LineSentenceDetectorAE</node>-->
+                <node>LineSentenceDetectorAE</node>
                 <node>LvgLookupAE</node>
                 <node>RuleSectionAE</node>
             </fixedFlow>
