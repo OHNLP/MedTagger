@@ -234,8 +234,6 @@ public class MedTaggerBackboneTransform extends Transform {
             }
         }
 
-        private static ThreadLocal<SimpleDateFormat> sdf = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ssXXX"));
-
         /*
          * Utility method that converts a concept mention to a JSON
          */
@@ -265,7 +263,6 @@ public class MedTaggerBackboneTransform extends Transform {
                                 }
                             })
                             .findFirst().orElse(0));
-            ret.put("nlp_run_dtm", sdf.get().format(new Date()));
             ret.put("certainty", cm.getCertainty());
             ret.put("experiencer", cm.getExperiencer());
             ret.put("status", cm.getStatus());
