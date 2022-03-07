@@ -107,7 +107,13 @@ public class ConTexTSettings {
             String line = sc.nextLine();
             if (line.startsWith("#")) continue;
             if (!(line.startsWith("//"))) {
+                if (line.trim().length() == 0) {
+                    continue;
+                }
                 String[] tmp = line.split("~\\|~");
+                if (tmp.length < 4) {
+                    continue;
+                }
 //                String phrase = tmp[0].replaceAll(" ", "[\\\\s\\\\-]+");
                 String phrase = tmp[0].trim();
                 boolean isRegex = phrase.startsWith("regex:");
