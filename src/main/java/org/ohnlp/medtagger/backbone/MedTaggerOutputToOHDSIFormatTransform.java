@@ -8,14 +8,11 @@ import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.values.PCollection;
 import org.apache.beam.sdk.values.Row;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.joda.time.Duration;
 import org.joda.time.Instant;
 import org.ohnlp.backbone.api.Transform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -45,9 +42,16 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
         return input.apply(ParDo.of(new DoFn<Row, Row>() {
             private transient ObjectMapper om;
             private transient Map<String, Integer> ohdsiConceptMap;
+            private transient String version;
 
             @Setup
             public void init() {
+                this.version = new BufferedReader(
+                        new InputStreamReader(
+                                Objects.requireNonNull(MedTaggerOutputToOHDSIFormatTransform.class
+                                        .getResourceAsStream("/medtagger-version.txt")),
+                                StandardCharsets.UTF_8))
+                        .lines().collect(Collectors.joining(" ")).trim();
                 this.om = new ObjectMapper();
                 this.ohdsiConceptMap = new HashMap<>();
                 switch (resources.toUpperCase(Locale.ROOT)) {
@@ -84,6 +88,7 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                 fields.add(Schema.Field.of("nlp_datetime", Schema.FieldType.DATETIME));
                 fields.add(Schema.Field.of("term_modifiers", Schema.FieldType.STRING));
                 fields.add(Schema.Field.of("offset", Schema.FieldType.INT32));
+                fields.add(Schema.Field.of("nlp_system", Schema.FieldType.STRING));
                 Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
 
                 JsonNode rawValues = om.readTree(input.getString("nlp_output_json"));
@@ -127,6 +132,7 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                                 )
                         )
                         .addValue(rawValues.get("offset").asInt())
+                        .addValue(version.trim())
                         .build();
                 output.output(out);
             }

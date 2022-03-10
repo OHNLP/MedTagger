@@ -1,0 +1,1 @@
+MedTagger v${project.version}
