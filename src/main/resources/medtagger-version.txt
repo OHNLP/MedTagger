@@ -1,1 +1,1 @@
-MedTagger v${project.version}
+OHNLP Toolkit v${project.version}
