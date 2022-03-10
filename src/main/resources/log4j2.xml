@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="stderr" target="SYSTEM_ERR">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <ThresholdFilter level="WARN"/>
+        </Console>
+
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <Filters>
+                <ThresholdFilter level="TRACE"/>
+                <LevelRangeFilter minLevel="TRACE" maxLevel="INFO"/>
+            </Filters>
+        </Console>
+    </Appenders>
+
+
+    <Loggers>
+        <Logger name="org.apache.spark" level="WARM"/>
+        <Logger name="org.apache.spark.util" level="ERROR"/>
+        <Root level="INFO">
+            <AppenderRef ref="stdout"/>
+            <AppenderRef ref="stderr"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -23,10 +23,11 @@
  *******************************************************************************/
 package org.ohnlp.medtagger.ie.ae;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.cas.FSIterator;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -67,7 +68,7 @@ public class MedTaggerIEAnnotator extends JCasAnnotator_ImplBase {
 	//private Boolean hyphen2space = false;
 	private Boolean punct2space = false;
 
-	private Logger iv_logger = Logger.getLogger(getClass().getName());
+	private Logger iv_logger = LogManager.getLogger(getClass().getName());
 
 	public ResourceUtilManager rum;
 

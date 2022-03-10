@@ -1,32 +1,52 @@
 /*******************************************************************************
- * Copyright: (c)  2013  Mayo Foundation for Medical Education and
+ * Copyright: (c)  2013  Mayo Foundation for Medical Education and 
  *  Research (MFMER). All rights reserved. MAYO, MAYO CLINIC, and the
  *  triple-shield Mayo logo are trademarks and service marks of MFMER.
- *
- *  Except as contained in the copyright notice above, or as used to identify
+ *  
+ *  Except as contained in the copyright notice above, or as used to identify 
  *  MFMER as the author of this software, the trade names, trademarks, service
  *  marks, or product names of the copyright holder shall not be used in
  *  advertising, promotion or otherwise in connection with this software without
  *  prior written authorization of the copyright holder.
- *
+ *   
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
+ *   
+ *  http://www.apache.org/licenses/LICENSE-2.0 
+ *   
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ *  See the License for the specific language governing permissions and 
+ *  limitations under the License. 
  *******************************************************************************/
 
 package org.ohnlp.medtagger.ae;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.JFSIndexRepository;
+import org.apache.uima.resource.ResourceAccessException;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.ohnlp.medtagger.dict.AhoCorasickDict;
+import org.ohnlp.medtagger.lvg.LvgLookup;
+import org.ohnlp.medtagger.type.ConceptMention;
+import org.ohnlp.typesystem.type.syntax.BaseToken;
+import org.ohnlp.typesystem.type.syntax.NumToken;
+import org.ohnlp.typesystem.type.syntax.PunctuationToken;
+import org.ohnlp.typesystem.type.syntax.WordToken;
+import org.ohnlp.typesystem.type.textspan.Segment;
+import org.ohnlp.typesystem.type.textspan.Sentence;
+
 import java.io.*;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -35,33 +55,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.JFSIndexRepository;
-import org.apache.uima.resource.ResourceAccessException;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.ohnlp.typesystem.type.textspan.Segment;
-import org.ohnlp.typesystem.type.textspan.Sentence;
-import org.ohnlp.typesystem.type.syntax.BaseToken;
-import org.ohnlp.typesystem.type.syntax.NumToken;
-import org.ohnlp.typesystem.type.syntax.PunctuationToken;
-import org.ohnlp.typesystem.type.syntax.WordToken;
-import org.ohnlp.medtagger.dict.AhoCorasickDict;
-import org.ohnlp.medtagger.lvg.LvgLookup;
-import org.ohnlp.medtagger.type.ConceptMention;
-
 /**
  * @author Hongfang Liu
  */
 public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 
-    // LOG4J logger based on class name
-    private Logger logger = Logger.getLogger(getClass().getName());
-    private boolean LONGEST = true;
+	// LOG4J logger based on class name
+	private Logger logger = LogManager.getLogger(getClass().getName());
+	private boolean LONGEST = true;
 
     // data structure that stores the TRIE
     AhoCorasickDict btac;
@@ -70,11 +71,11 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
     // add the path in resources
     LvgLookup lvg;
 
-    @Override
-    public void initialize(UimaContext aContext)
-            throws ResourceInitializationException {
-        super.initialize(aContext);
-        logger.setLevel(Level.DEBUG);
+	@Override
+	public void initialize(UimaContext aContext)
+			throws ResourceInitializationException {
+		super.initialize(aContext);
+		Configurator.setLevel(logger.getName(), Level.DEBUG);
 
         try {
             lvg = new LvgLookup(aContext);

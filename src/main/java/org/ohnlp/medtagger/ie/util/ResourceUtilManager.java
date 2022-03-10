@@ -41,7 +41,8 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 
 /**
@@ -53,7 +54,7 @@ public class ResourceUtilManager implements Serializable {
     public transient static String RESOURCEDIR;
     private transient static ResourceUtilManager INSTANCE = null;
 
-    private transient Logger iv_logger = Logger.getLogger(getClass().getName());
+    private transient Logger iv_logger = LogManager.getLogger(getClass().getName());
 
     private Pattern regexpPattern = Pattern.compile("(.*)");
     private Pattern normPattern = Pattern.compile("^(.*?)\t(.*?)$");
