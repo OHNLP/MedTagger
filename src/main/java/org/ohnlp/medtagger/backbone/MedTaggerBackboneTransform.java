@@ -210,7 +210,7 @@ public class MedTaggerBackboneTransform extends Transform {
             });
             nlpExecutor.submit(future);
             try {
-                Throwable t = future.get(30000, TimeUnit.MILLISECONDS);
+                Throwable t = future.get(25000, TimeUnit.MILLISECONDS);
                 if (t != null) {
                     throw new RuntimeException(t);
                 }
