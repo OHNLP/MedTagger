@@ -10,14 +10,6 @@
     <description>The MedTagger biomedical information extraction pipeline</description>
 
 
-    <repositories>
-        <repository>
-            <id>backbone-maven</id>
-            <name>OHNLP Backbone Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/OHNLP/Backbone</url>
-        </repository>
-    </repositories>
-
     <build>
         <plugins>
             <plugin>
@@ -141,6 +133,8 @@
     <properties>
         <uimaj.version>2.10.0</uimaj.version>
         <uimafit.version>2.5.0</uimafit.version>
+        <spark.version>3.1.2</spark.version>
+        <scala.version>2.12</scala.version>
     </properties>
 
     <dependencies>
@@ -235,9 +229,9 @@
             <version>0.7.4</version>
         </dependency>
         <dependency>
-            <groupId>org.ohnlp.backbone</groupId>
-            <artifactId>API</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${scala.version}</artifactId>
+            <version>${spark.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
