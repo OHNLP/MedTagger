@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ohnlp.medtagger</groupId>
-    <artifactId>medtagger</artifactId>
+    <artifactId>medtagger-spark</artifactId>
     <version>1.0.37</version>
     <description>The MedTagger biomedical information extraction pipeline</description>
 
