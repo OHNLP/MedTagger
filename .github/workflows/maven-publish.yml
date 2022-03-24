@@ -3,7 +3,7 @@ name: Publish to Maven Packages
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+*(-SPARK)?'
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
 
 jobs:
   build:
