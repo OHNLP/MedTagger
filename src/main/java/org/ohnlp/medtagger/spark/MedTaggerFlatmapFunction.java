@@ -55,24 +55,26 @@ public class MedTaggerFlatmapFunction implements FlatMapFunction<Iterator<Row>, 
     private static ThreadLocal<SimpleDateFormat> sdf = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ssXXX"));
 
     private transient static final ReentrantLock INIT_MUTEX_LOCK = new ReentrantLock();
+    private final String conf;
+    private final String conf2;
 
-    private String resourceFolder;
-    private String textField;
-    private RunMode mode;
-    private String noteIdField;
+    private transient String resourceFolder;
+    private transient String textField;
+    private transient RunMode mode;
+    private transient String noteIdField;
 
     // UIMA components are not serializable, and thus must be initialized per-executor via the @Setup annotation
     private transient AnalysisEngine aae;
     private transient ResourceManager resMgr;
     private transient CAS cas;
-    private ObjectMapper om;
-    private HashMap<String, Integer> ohdsiConceptMap;
-    private String version;
-    private String resources;
+    private transient ObjectMapper om;
+    private transient HashMap<String, Integer> ohdsiConceptMap;
+    private transient String version;
+    private transient String resources;
 
     public MedTaggerFlatmapFunction(String conf, String conf2) throws InvalidXMLException, IOException, ResourceInitializationException, URISyntaxException {
-        initMedTaggerConf(conf);
-        initOHDSIMapperConf(conf2);
+        this.conf = conf;
+        this.conf2 = conf2;
     }
 
     private void initMedTaggerConf(String conf) throws InvalidXMLException, IOException, ResourceInitializationException, URISyntaxException {
@@ -94,7 +96,7 @@ public class MedTaggerFlatmapFunction implements FlatMapFunction<Iterator<Row>, 
                     throw new UnsupportedOperationException("Remote Served IE Rulesets not yet implemented");
                 case STANDALONE:
                 case STANDALONE_IE_ONLY: {
-                    uri = MedTaggerFlatmapFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+                    uri = MedTaggerFlatmapFunction.class.getResource("/medtaggerieresources/" + this.resourceFolder).toURI();
                     Map<String, String> env = new HashMap<>();
                     env.put("create", "true");
                     try {
@@ -106,7 +108,7 @@ public class MedTaggerFlatmapFunction implements FlatMapFunction<Iterator<Row>, 
                     break;
                 }
                 case STANDALONE_DICT_ONLY: {
-                    uri = MedTaggerFlatmapFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+                    uri = MedTaggerFlatmapFunction.class.getResource("/medtaggerieresources/" + this.resourceFolder).toURI();
                     Map<String, String> env = new HashMap<>();
                     env.put("create", "true");
                     try {
@@ -119,10 +121,10 @@ public class MedTaggerFlatmapFunction implements FlatMapFunction<Iterator<Row>, 
                 }
                 case STANDALONE_DICT_AND_IE: {
                     String[] parsed = this.resourceFolder.split("\\|");
-                    uri = MedTaggerFlatmapFunction.class.getResource("/resources/" + parsed[0]).toURI();
+                    uri = MedTaggerFlatmapFunction.class.getResource("/medtaggerieresources/" + parsed[0]).toURI();
                     URI dictURI = null;
                     if (parsed.length > 1) {
-                        dictURI = MedTaggerFlatmapFunction.class.getResource("/resources/" + parsed[1]).toURI();
+                        dictURI = MedTaggerFlatmapFunction.class.getResource("/medtaggerieresources/" + parsed[1]).toURI();
                     }
                     Map<String, String> env = new HashMap<>();
                     env.put("create", "true");
@@ -176,7 +178,7 @@ public class MedTaggerFlatmapFunction implements FlatMapFunction<Iterator<Row>, 
                 break;
             }
             default: {
-                try (InputStream resource = MedTaggerFlatmapFunction.class.getResourceAsStream("/resources/" + resources + "/ohdsi_mappings.txt")) {
+                try (InputStream resource = MedTaggerFlatmapFunction.class.getResourceAsStream("/medtaggerieresources/" + resources + "/ohdsi_mappings.txt")) {
                     List<String> mappings =
                             new BufferedReader(new InputStreamReader(resource, "UTF-8")).lines().collect(Collectors.toList());
                     mappings.forEach(s -> {
@@ -193,7 +195,10 @@ public class MedTaggerFlatmapFunction implements FlatMapFunction<Iterator<Row>, 
 
     @Override
     public Iterator<Row> call(Iterator<Row> rows) throws Exception {
-
+        if (this.cas == null) {
+            initMedTaggerConf(conf);
+            initOHDSIMapperConf(conf2);
+        }
         Iterable<Row> inputIterable = () -> rows;
 
         Stream<Row> stream = StreamSupport.stream(inputIterable.spliterator(), false).flatMap(nextDoc -> {
