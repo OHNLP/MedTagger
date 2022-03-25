@@ -39,10 +39,19 @@ import java.net.URISyntaxException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystemAlreadyExistsException;
 import java.nio.file.FileSystems;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
@@ -306,7 +315,7 @@ public class MedTaggerFlatmapFunction implements FlatMapFunction<Iterator<Row>, 
                             }
                         })
                         .findFirst().orElse(0));
-        ret.put("nlp_run_dtm", sdf.get().format(new Date()));
+        ret.put("nlp_run_dtm", sdf.get().format(new Date(System.currentTimeMillis())));
         ret.put("certainty", cm.getCertainty());
         ret.put("experiencer", cm.getExperiencer());
         ret.put("status", cm.getStatus());
