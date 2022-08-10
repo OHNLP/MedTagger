@@ -154,7 +154,7 @@ public class MedTaggerBackboneTransform extends Transform {
                 }
 
                 // Add Context handling
-                if (uri != null) {
+                if (uri != null && mode != RunMode.STANDALONE_DICT_ONLY) {
                     ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", uri.toString()));
                 } else {
                     ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
