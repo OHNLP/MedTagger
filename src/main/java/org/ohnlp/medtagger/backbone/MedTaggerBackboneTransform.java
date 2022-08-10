@@ -123,7 +123,7 @@ public class MedTaggerBackboneTransform extends Transform {
                         uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
                         Map<String, String> env = new HashMap<>();
                         env.put("create", "true");
-                        ae.add(createEngineDescription(AhoCorasickLookupAnnotator.class, "dict_file", uri.toString()));
+                        ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE", "dict_file", uri.toString()));
                         break;
                     }
                     case STANDALONE_DICT_AND_IE: {
