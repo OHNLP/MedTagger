@@ -123,11 +123,6 @@ public class MedTaggerBackboneTransform extends Transform {
                         uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
                         Map<String, String> env = new HashMap<>();
                         env.put("create", "true");
-                        try {
-                            // Ensure it is created, ignore if not
-                            FileSystem fs = FileSystems.newFileSystem(uri, env);
-                        } catch (FileSystemAlreadyExistsException ignored) {
-                        }
                         ae.add(createEngineDescription(AhoCorasickLookupAnnotator.class, "dict_file", uri.toString()));
                         break;
                     }
