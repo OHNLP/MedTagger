@@ -24,6 +24,10 @@
 
 package org.ohnlp.medtagger.ae;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -57,6 +61,7 @@ import java.util.Vector;
 public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 
 	// LOG4J logger based on class name
+	private Logger logger = LogManager.getLogger(getClass().getName());
 	private boolean LONGEST = true;
 
     // data structure that stores the TRIE
@@ -70,6 +75,7 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 	public void initialize(UimaContext aContext)
 			throws ResourceInitializationException {
 		super.initialize(aContext);
+		Configurator.setLevel(logger.getName(), Level.DEBUG);
 
         try {
             lvg = new LvgLookup(aContext);
