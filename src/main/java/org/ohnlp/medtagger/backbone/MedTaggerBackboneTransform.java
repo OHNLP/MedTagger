@@ -120,10 +120,8 @@ public class MedTaggerBackboneTransform extends Transform {
                         break;
                     }
                     case STANDALONE_DICT_ONLY: {
-                        uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
-                        Map<String, String> env = new HashMap<>();
-                        env.put("create", "true");
-                        ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE", "dict_file", uri.toString()));
+                        URI localUI = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+                        ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE", "dict_file", localUI.toString()));
                         break;
                     }
                     case STANDALONE_DICT_AND_IE: {
