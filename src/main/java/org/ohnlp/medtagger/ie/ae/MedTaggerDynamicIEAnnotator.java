@@ -24,8 +24,7 @@
 package org.ohnlp.medtagger.ie.ae;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.apache.uima.UIMAFramework;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.cas.FSIterator;
@@ -33,6 +32,8 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
 import org.ohnlp.medtagger.ie.type.Match;
 import org.ohnlp.medtagger.ie.type.metadata.IEDict;
 import org.ohnlp.medtagger.ie.util.ResourceUtilManager;
@@ -61,7 +62,7 @@ public class MedTaggerDynamicIEAnnotator extends JCasAnnotator_ImplBase {
 	//private Boolean hyphen2space = false;
 	private Boolean punct2space = false;
 
-	private Logger iv_logger = LogManager.getLogger(getClass().getName());
+	private Logger iv_logger = UIMAFramework.getLogger(getClass());
 
 	public void initialize(UimaContext aContext)
 			throws ResourceInitializationException {
@@ -173,14 +174,14 @@ public class MedTaggerDynamicIEAnnotator extends JCasAnnotator_ImplBase {
 							"[\n\\s]+", " ");
 					if (!(rum.getHmNormEntry(mr.group(1))
 							.containsKey(partToReplace))) {
-						iv_logger.warn("Problem associated with Function"
+						iv_logger.log(Level.WARNING, "Problem associated with Function"
 								+ ((MatchResult) mr).group(1)
 								+ " and/or Regular Expression" + partToReplace);
 					}
 					tonormalize = tonormalize.replace(mr.group(), (String) rum
 							.getHmNormEntry(mr.group(1)).get(partToReplace));
 				} else {
-					iv_logger.warn("Nothing to normalize in " + mr.group(1));
+					iv_logger.log(Level.WARNING, "Nothing to normalize in " + mr.group(1));
 
 					tonormalize = tonormalize.replace(mr.group(), "");
 				}

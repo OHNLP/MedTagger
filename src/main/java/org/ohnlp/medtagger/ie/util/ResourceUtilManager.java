@@ -23,6 +23,10 @@
  *******************************************************************************/
 package org.ohnlp.medtagger.ie.util;
 
+import org.apache.uima.UIMAFramework;
+import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -41,9 +45,6 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
-
 
 /**
  * Abstract class for all Resource Managers to inherit from. Contains basic
@@ -54,7 +55,7 @@ public class ResourceUtilManager implements Serializable {
     public transient static String RESOURCEDIR;
     private transient static ResourceUtilManager INSTANCE = null;
 
-    private transient Logger iv_logger = LogManager.getLogger(getClass().getName());
+    private transient Logger iv_logger = UIMAFramework.getLogger(getClass());
 
     private Pattern regexpPattern = Pattern.compile("(.*)");
     private Pattern normPattern = Pattern.compile("^(.*?)\t(.*?)$");
@@ -116,7 +117,7 @@ public class ResourceUtilManager implements Serializable {
         } catch (IOException e) {
             // TODO: better Exception handling
             e.printStackTrace();
-            iv_logger.warn("Failed to read a resource from used_resources.txt.");
+            iv_logger.log(Level.WARNING, "Failed to read a resource from used_resources.txt.");
             System.exit(-1);
         }
         return hmResources;
@@ -127,7 +128,7 @@ public class ResourceUtilManager implements Serializable {
         try {
 
             for (String resource : hmResources.keySet()) {
-                iv_logger.info("Adding " + resourceType + " from resource: " + resource);
+                iv_logger.log(Level.INFO, "Adding " + resourceType + " from resource: " + resource);
 
                 InputStream inputStream = Files.newInputStream(hmResources.get(resource));
 
@@ -140,7 +141,7 @@ public class ResourceUtilManager implements Serializable {
                     String line = sc.nextLine();
                     if (!line.startsWith("//") && !line.equals("")) {
                         boolean correctLine = false;
-                        iv_logger.debug("Reading " + resource + " at line: " + line);
+                        iv_logger.log(Level.INFO,  "Reading " + resource + " at line: " + line);
                         for (Object r : findMatches(p, line)) {
                             MatchResult mr = (MatchResult) r;
                             correctLine = true;
@@ -184,10 +185,10 @@ public class ResourceUtilManager implements Serializable {
                                 Pattern paVariable = Pattern.compile("%(re[a-zA-Z0-9]*)");
                                 for (Object o1 : findMatches(paVariable, rule_extraction)) {
                                     MatchResult mr1 = (MatchResult) o1;
-                                    iv_logger.debug("Replacing patterns..." + mr1.group());
+                                    iv_logger.log(Level.INFO, "Replacing patterns..." + mr1.group());
                                     if (!(hmRegExpEntries.containsKey(mr1.group(1)))) {
-                                        iv_logger.error("Error creating rule:" + rule_name);
-                                        iv_logger.error("The pattern may not exist : " + mr1.group(1));
+                                        iv_logger.log(Level.SEVERE,  "Error creating rule:" + rule_name);
+                                        iv_logger.log(Level.SEVERE,  "The pattern may not exist : " + mr1.group(1));
                                         System.exit(-1);
                                     }
                                     rule_extraction = rule_extraction.replaceAll("%" + mr1.group(1), getRegExp(mr1.group(1)));
@@ -197,7 +198,7 @@ public class ResourceUtilManager implements Serializable {
                                 try {
                                     pattern = Pattern.compile(rule_extraction);
                                 } catch (java.util.regex.PatternSyntaxException e) {
-                                    iv_logger.error("Cannot compile pattern in " + rule_name + ": " + rule_extraction);
+                                    iv_logger.log(Level.SEVERE,  "Cannot compile pattern in " + rule_name + ": " + rule_extraction);
                                     e.printStackTrace();
                                     System.exit(-1);
                                 }
@@ -209,7 +210,7 @@ public class ResourceUtilManager implements Serializable {
                                 }
                             }
                             if ((correctLine == false) && (!(line.matches("")))) {
-                                iv_logger.error("Cannot read one of the lines of " + resource + " at Line: " + line);
+                                iv_logger.log(Level.SEVERE,  "Cannot read one of the lines of " + resource + " at Line: " + line);
                             }
                         }
                     }

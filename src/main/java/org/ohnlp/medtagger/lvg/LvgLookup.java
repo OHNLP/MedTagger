@@ -23,17 +23,7 @@
  *******************************************************************************/
 package org.ohnlp.medtagger.lvg;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Scanner;
-
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.apache.uima.UIMAFramework;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -41,13 +31,16 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JFSIndexRepository;
 import org.apache.uima.resource.ResourceAccessException;
 import org.apache.uima.resource.ResourceInitializationException;
-
+import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
 import org.ohnlp.typesystem.type.syntax.WordToken;
+
+import java.io.InputStream;
+import java.util.*;
 
 public class LvgLookup extends JCasAnnotator_ImplBase {
 
-	// LOG4J logger based on class name
-	private Logger logger = LogManager.getLogger("LvgLookup");
+	private Logger logger = UIMAFramework.getLogger(LvgLookup.class);
      HashMap<String, String> lvgMap;
     HashSet<String> openclass; 
     //private static OpenClassWords pds = new OpenClassWords();
@@ -142,7 +135,7 @@ public class LvgLookup extends JCasAnnotator_ImplBase {
 
 	public void localInitialize(InputStream dictStream, InputStream openclassStream) {
 
-		logger.info("loading LVG condensed dictionary from dictStream");
+		logger.log(Level.INFO, "loading LVG condensed dictionary from dictStream");
 		int count=0;
 
 		Scanner sc = new Scanner(dictStream);
@@ -160,7 +153,7 @@ public class LvgLookup extends JCasAnnotator_ImplBase {
 		}
 		sc.close();
 
-		logger.info("loaded resource, lines=" + count);
+		logger.log(Level.INFO, "loaded resource, lines=" + count);
 
 		sc = new Scanner(openclassStream);
 		while(sc.hasNextLine()){

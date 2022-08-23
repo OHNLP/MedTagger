@@ -31,6 +31,10 @@
  */
 
 
+import org.apache.uima.UIMAFramework;
+import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,14 +43,11 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.Vector;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 
 public class AhoCorasickDict {
 
-	// LOG4J logger based on class name
-   private Logger iv_logger = LogManager.getLogger(getClass().getName());
+   private Logger iv_logger = UIMAFramework.getLogger(getClass());
 	
 	public static final String FAILLINK="_FAIL_";
 	public static final String SLDELIM="||";
@@ -71,7 +72,7 @@ public class AhoCorasickDict {
 			int count=0;
 			while ((line = reader.readLine()) != null) {
 				count++;
-				if(count%100000==0) iv_logger.info(count);
+				if(count%100000==0) iv_logger.log(Level.INFO,  count + "");
 				int index=line.indexOf(DICTDATADELIM);
 				if(index>=0){
 					String key=line.substring(0, index);
@@ -81,7 +82,7 @@ public class AhoCorasickDict {
 			}
 			reader.close();
 			faillinking();
-			iv_logger.info("built aho-corasick trie. "+ count +" terms");
+			iv_logger.log(Level.INFO,  "built aho-corasick trie. "+ count +" terms");
 		}
 		catch (IOException ioe){
 			ioe.printStackTrace();			

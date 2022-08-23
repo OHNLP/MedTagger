@@ -56,7 +56,6 @@ import java.util.Vector;
  */
 public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
 
-	// LOG4J logger based on class name
 	private boolean LONGEST = true;
 
     // data structure that stores the TRIE
