@@ -120,15 +120,8 @@ public class MedTaggerBackboneTransform extends Transform {
                         break;
                     }
                     case STANDALONE_DICT_ONLY: {
-                        uri = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
-                        Map<String, String> env = new HashMap<>();
-                        env.put("create", "true");
-                        try {
-                            // Ensure it is created, ignore if not
-                            FileSystem fs = FileSystems.newFileSystem(uri, env);
-                        } catch (FileSystemAlreadyExistsException ignored) {
-                        }
-                        ae.add(createEngineDescription(AhoCorasickLookupAnnotator.class, "dict_file", uri.toString()));
+                        URI localUI = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+                        ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE", "dict_file", localUI.toString()));
                         break;
                     }
                     case STANDALONE_DICT_AND_IE: {
@@ -159,7 +152,7 @@ public class MedTaggerBackboneTransform extends Transform {
                 }
 
                 // Add Context handling
-                if (uri != null) {
+                if (uri != null && mode != RunMode.STANDALONE_DICT_ONLY) {
                     ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", uri.toString()));
                 } else {
                     ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
