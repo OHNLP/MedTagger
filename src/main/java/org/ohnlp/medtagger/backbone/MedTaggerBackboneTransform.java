@@ -55,6 +55,7 @@ public class MedTaggerBackboneTransform extends Transform {
     private String resources;
     private RunMode mode;
     private String noteIdField;
+    private Schema outputSchema;
 
     @Override
     public void initFromConfig(JsonNode config) throws ComponentInitializationException {
@@ -69,9 +70,17 @@ public class MedTaggerBackboneTransform extends Transform {
     }
 
     @Override
+    public Schema calculateOutputSchema(Schema schema) {
+        List<Schema.Field> fields = new ArrayList<>(schema.getFields());
+        fields.add(Schema.Field.of("nlp_output_json", Schema.FieldType.STRING));
+        this.outputSchema = Schema.of(fields.toArray(new Schema.Field[0]));
+        return this.outputSchema;
+    }
+
+    @Override
     public PCollection<Row> expand(PCollection<Row> input) {
         return input.apply("MedTagger Concept Extraction",
-                ParDo.of(new MedTaggerPipelineFunction(this.inputField, this.resources, this.mode, this.noteIdField)));
+                ParDo.of(new MedTaggerPipelineFunction(this.inputField, this.resources, this.mode, this.noteIdField, this.outputSchema)));
     }
 
     private static class MedTaggerPipelineFunction extends DoFn<Row, Row> {
@@ -81,17 +90,19 @@ public class MedTaggerBackboneTransform extends Transform {
         private final String textField;
         private final RunMode mode;
         private final String noteIdField;
+        private final Schema outputSchema;
 
         // UIMA components are not serializable, and thus must be initialized per-executor via the @Setup annotation
         private transient AnalysisEngine aae;
         private transient ResourceManager resMgr;
         private transient CAS cas;
 
-        public MedTaggerPipelineFunction(String textField, String resourceFolder, RunMode mode, String noteIdField) {
+        public MedTaggerPipelineFunction(String textField, String resourceFolder, RunMode mode, String noteIdField, Schema outputSchema) {
             this.textField = textField;
             this.resourceFolder = resourceFolder;
             this.mode = mode;
             this.noteIdField = noteIdField;
+            this.outputSchema = outputSchema;
         }
 
         @Setup
@@ -170,10 +181,6 @@ public class MedTaggerBackboneTransform extends Transform {
 
         @ProcessElement
         public void processElement(@Element Row input, OutputReceiver<Row> output) {
-            // First create the output row schema
-            List<Schema.Field> fields = new LinkedList<>(input.getSchema().getFields());
-            fields.add(Schema.Field.of("nlp_output_json", Schema.FieldType.STRING));
-            Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
             Object id = input.getBaseValue(this.noteIdField);
             String text = input.getString(this.textField);
             try {
@@ -228,7 +235,7 @@ public class MedTaggerBackboneTransform extends Transform {
                 for (ConceptMention cm : JCasUtil.select(jcas, ConceptMention.class)) {
                     runs++;
                     JsonNode json = toJSON(cm, sentenceIdx, sectionIdx);
-                    Row out = Row.withSchema(schema).addValues(input.getValues()).addValue(json.toString()).build();
+                    Row out = Row.withSchema(outputSchema).addValues(input.getValues()).addValue(json.toString()).build();
                     output.output(out);
                 }
                 System.out.println("Found " + runs + " NLP Artifacts in Document " + id);

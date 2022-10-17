@@ -30,11 +30,28 @@ import java.util.stream.Collectors;
 public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
     private static ThreadLocal<SimpleDateFormat> sdf = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ssXXX"));
     private String resources;
+    private Schema schema;
 
 
     @Override
     public void initFromConfig(JsonNode config) throws ComponentInitializationException {
         this.resources = config.get("ruleset").asText();
+    }
+
+    @Override
+    public Schema calculateOutputSchema(Schema schema) {
+        List<Schema.Field> fields = new LinkedList<>(schema.getFields());
+        fields.add(Schema.Field.of("section_concept_id", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("lexical_variant", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("snippet", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("note_nlp_concept_id", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("note_nlp_source_concept_id", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("nlp_datetime", Schema.FieldType.DATETIME));
+        fields.add(Schema.Field.of("term_modifiers", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("offset", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("nlp_system", Schema.FieldType.STRING));
+        this.schema = Schema.of(fields.toArray(new Schema.Field[0]));
+        return this.schema;
     }
 
     @Override
@@ -79,18 +96,6 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
             @ProcessElement
             public void processElement(@Element Row input, OutputReceiver<Row> output) throws JsonProcessingException, ParseException {
                 // First transform row schemas
-                List<Schema.Field> fields = new LinkedList<>(input.getSchema().getFields());
-                fields.add(Schema.Field.of("section_concept_id", Schema.FieldType.INT32));
-                fields.add(Schema.Field.of("lexical_variant", Schema.FieldType.STRING));
-                fields.add(Schema.Field.of("snippet", Schema.FieldType.STRING));
-                fields.add(Schema.Field.of("note_nlp_concept_id", Schema.FieldType.INT32));
-                fields.add(Schema.Field.of("note_nlp_source_concept_id", Schema.FieldType.INT32));
-                fields.add(Schema.Field.of("nlp_datetime", Schema.FieldType.DATETIME));
-                fields.add(Schema.Field.of("term_modifiers", Schema.FieldType.STRING));
-                fields.add(Schema.Field.of("offset", Schema.FieldType.INT32));
-                fields.add(Schema.Field.of("nlp_system", Schema.FieldType.STRING));
-                Schema schema = Schema.of(fields.toArray(new Schema.Field[0]));
-
                 JsonNode rawValues = om.readTree(input.getString("nlp_output_json"));
 
                 // Now generate an output row
