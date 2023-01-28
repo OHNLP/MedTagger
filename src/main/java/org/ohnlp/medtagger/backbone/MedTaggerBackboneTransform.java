@@ -81,7 +81,7 @@ public class MedTaggerBackboneTransform extends Transform {
         fields.add(Schema.Field.of("medtagger_experiencer", Schema.FieldType.STRING));
         fields.add(Schema.Field.of("medtagger_status", Schema.FieldType.STRING));
         fields.add(Schema.Field.of("medtagger_offset", Schema.FieldType.INT32));
-        fields.add(Schema.Field.of("medtagger_semgroups", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("medtagger_semgroups", Schema.FieldType.STRING).withNullable(true));
         this.outputSchema = Schema.of(fields.toArray(new Schema.Field[0]));
         return this.outputSchema;
     }
