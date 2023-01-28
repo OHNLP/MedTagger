@@ -95,27 +95,25 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
 
             @ProcessElement
             public void processElement(@Element Row input, OutputReceiver<Row> output) throws JsonProcessingException, ParseException {
-                // First transform row schemas
-                JsonNode rawValues = om.readTree(input.getString("nlp_output_json"));
 
-                // Now generate an output row
+                // Generate an output row
                 Row.Builder rowBuild = Row.withSchema(schema)
                         .addValues(input.getValues())
-                        .addValue(rawValues.get("section_id").asInt())
-                        .addValue(rawValues.get("matched_text").asText())
-                        .addValue(rawValues.get("matched_sentence").asText());
+                        .addValue(input.getInt32("medtagger_section_id"))
+                        .addValue(input.getString("medtagger_matched_text"))
+                        .addValue(input.getString("medtagger_matched_sentence"));
                 switch (resources.toUpperCase(Locale.ROOT)) {
                     case "NONE": {
                         try {
-                            rowBuild = rowBuild.addValue(Integer.valueOf(rawValues.get("concept_code").asText("0")));
+                            rowBuild = rowBuild.addValue(Integer.valueOf(Optional.ofNullable(input.getString("medtagger_concept_code")).orElse("0")));
                         } catch (NumberFormatException e) {
                             throw new IllegalArgumentException("OHDSI requires integer concept codes, value "
-                                    + rawValues.get("concept_code").asText() + " was instead provided with mapping ruleset 'NONE'");
+                                    + input.getString("medtagger_concept_code") + " was instead provided with mapping ruleset 'NONE'");
                         }
                         break;
                     }
                     case "UMLS": {
-                        String conceptCode = rawValues.get("concept_code").asText();
+                        String conceptCode = input.getString("medtagger_concept_code");
                         // Only take first portion as CUI, remainder is top freq lexeme in current dict format.
                         String cui = conceptCode.contains(":") ? conceptCode.split(":")[0].toUpperCase(Locale.ROOT)
                                 : conceptCode.toUpperCase(Locale.ROOT);
@@ -123,20 +121,20 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                         rowBuild = rowBuild.addValue(ohdsicid);
                     }
                     default: {
-                        rowBuild = rowBuild.addValue(ohdsiConceptMap.getOrDefault(rawValues.get("concept_code").asText(), 0));
+                        rowBuild = rowBuild.addValue(ohdsiConceptMap.getOrDefault(input.getString("medtagger_concept_code"), 0));
                     }
                 }
                 Row out = rowBuild
                         .addValue(0)
-                        .addValue(new Instant(sdf.get().parse(rawValues.get("nlp_run_dtm").asText()).getTime()))
+                        .addValue(input.getDateTime("medtagger_nlp_run_dtm"))
                         .addValue(
                                 String.format("certainty=%1$s,experiencer=%2$s,status=%3$s",
-                                        rawValues.get("certainty").asText(),
-                                        rawValues.get("experiencer").asText(),
-                                        rawValues.get("status").asText()
+                                        input.getString("medtagger_certainty"),
+                                        input.getString("medtagger_experiencer"),
+                                        input.getString("medtagger_status")
                                 )
                         )
-                        .addValue(rawValues.get("offset").asInt())
+                        .addValue(input.getInt32("medtagger_offset"))
                         .addValue(version.trim())
                         .build();
                 output.output(out);
