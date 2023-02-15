@@ -72,16 +72,16 @@ public class MedTaggerBackboneTransform extends Transform {
     @Override
     public Schema calculateOutputSchema(Schema schema) {
         List<Schema.Field> fields = new ArrayList<>(schema.getFields());
-        fields.add(Schema.Field.of("medtagger_matched_text", Schema.FieldType.STRING));
-        fields.add(Schema.Field.of("medtagger_concept_code", Schema.FieldType.STRING));
-        fields.add(Schema.Field.of("medtagger_matched_sentence", Schema.FieldType.STRING));
-        fields.add(Schema.Field.of("medtagger_section_id", Schema.FieldType.INT32));
-        fields.add(Schema.Field.of("medtagger_nlp_run_dtm", Schema.FieldType.DATETIME));
-        fields.add(Schema.Field.of("medtagger_certainty", Schema.FieldType.STRING));
-        fields.add(Schema.Field.of("medtagger_experiencer", Schema.FieldType.STRING));
-        fields.add(Schema.Field.of("medtagger_status", Schema.FieldType.STRING));
-        fields.add(Schema.Field.of("medtagger_offset", Schema.FieldType.INT32));
-        fields.add(Schema.Field.of("medtagger_semgroups", Schema.FieldType.STRING).withNullable(true));
+        fields.add(Schema.Field.of("matched_text", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("concept_code", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("matched_sentence", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("section_id", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("nlp_run_dtm", Schema.FieldType.DATETIME));
+        fields.add(Schema.Field.of("certainty", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("experiencer", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("status", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("offset", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("semgroups", Schema.FieldType.STRING).withNullable(true));
         this.outputSchema = Schema.of(fields.toArray(new Schema.Field[0]));
         return this.outputSchema;
     }

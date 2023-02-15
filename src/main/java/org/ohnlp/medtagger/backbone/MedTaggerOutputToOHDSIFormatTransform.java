@@ -99,21 +99,21 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                 // Generate an output row
                 Row.Builder rowBuild = Row.withSchema(schema)
                         .addValues(input.getValues())
-                        .addValue(input.getInt32("medtagger_section_id"))
-                        .addValue(input.getString("medtagger_matched_text"))
-                        .addValue(input.getString("medtagger_matched_sentence"));
+                        .addValue(input.getInt32("section_id"))
+                        .addValue(input.getString("matched_text"))
+                        .addValue(input.getString("matched_sentence"));
                 switch (resources.toUpperCase(Locale.ROOT)) {
                     case "NONE": {
                         try {
-                            rowBuild = rowBuild.addValue(Integer.valueOf(Optional.ofNullable(input.getString("medtagger_concept_code")).orElse("0")));
+                            rowBuild = rowBuild.addValue(Integer.valueOf(Optional.ofNullable(input.getString("concept_code")).orElse("0")));
                         } catch (NumberFormatException e) {
                             throw new IllegalArgumentException("OHDSI requires integer concept codes, value "
-                                    + input.getString("medtagger_concept_code") + " was instead provided with mapping ruleset 'NONE'");
+                                    + input.getString("concept_code") + " was instead provided with mapping ruleset 'NONE'");
                         }
                         break;
                     }
                     case "UMLS": {
-                        String conceptCode = input.getString("medtagger_concept_code");
+                        String conceptCode = input.getString("concept_code");
                         // Only take first portion as CUI, remainder is top freq lexeme in current dict format.
                         String cui = conceptCode.contains(":") ? conceptCode.split(":")[0].toUpperCase(Locale.ROOT)
                                 : conceptCode.toUpperCase(Locale.ROOT);
@@ -121,20 +121,20 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                         rowBuild = rowBuild.addValue(ohdsicid);
                     }
                     default: {
-                        rowBuild = rowBuild.addValue(ohdsiConceptMap.getOrDefault(input.getString("medtagger_concept_code"), 0));
+                        rowBuild = rowBuild.addValue(ohdsiConceptMap.getOrDefault(input.getString("concept_code"), 0));
                     }
                 }
                 Row out = rowBuild
                         .addValue(0)
-                        .addValue(input.getDateTime("medtagger_nlp_run_dtm"))
+                        .addValue(input.getDateTime("nlp_run_dtm"))
                         .addValue(
                                 String.format("certainty=%1$s,experiencer=%2$s,status=%3$s",
-                                        input.getString("medtagger_certainty"),
-                                        input.getString("medtagger_experiencer"),
-                                        input.getString("medtagger_status")
+                                        input.getString("certainty"),
+                                        input.getString("experiencer"),
+                                        input.getString("status")
                                 )
                         )
-                        .addValue(input.getInt32("medtagger_offset"))
+                        .addValue(input.getInt32("offset"))
                         .addValue(version.trim())
                         .build();
                 output.output(out);
