@@ -81,6 +81,7 @@ public class MedTaggerBackboneTransform extends Transform {
         fields.add(Schema.Field.of("experiencer", Schema.FieldType.STRING));
         fields.add(Schema.Field.of("status", Schema.FieldType.STRING));
         fields.add(Schema.Field.of("offset", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("sent_offset", Schema.FieldType.INT32));
         fields.add(Schema.Field.of("semgroups", Schema.FieldType.STRING).withNullable(true));
         fields.add(Schema.Field.of("sentid", Schema.FieldType.STRING).withNullable(true));
         this.outputSchema = Schema.of(fields.toArray(new Schema.Field[0]));
@@ -287,6 +288,7 @@ public class MedTaggerBackboneTransform extends Transform {
             ret.add(cm.getExperiencer());
             ret.add(cm.getStatus());
             ret.add(cm.getBegin());
+            ret.add(cm.getSentence().getBegin());
             ret.add(cm.getSemGroup());
             ret.add(cm.getSentence().getId());
             return ret;
