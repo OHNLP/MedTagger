@@ -225,6 +225,7 @@ public class MedTaggerBackboneTransform extends Transform {
                 if (t != null) {
                     throw new RuntimeException(t);
                 }
+                nlpExecutor.shutdownNow();
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 System.out.println("Skipping document " + id + " due to NLP run taking longer than 30 seconds");
                 future.cancel(true);
