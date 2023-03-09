@@ -10,6 +10,9 @@ import org.apache.beam.sdk.values.PCollection;
 import org.apache.beam.sdk.values.Row;
 import org.joda.time.Instant;
 import org.ohnlp.backbone.api.Transform;
+import org.ohnlp.backbone.api.annotations.ComponentDescription;
+import org.ohnlp.backbone.api.annotations.ConfigurationProperty;
+import org.ohnlp.backbone.api.components.OneToOneTransform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
 
 import java.io.BufferedReader;
@@ -27,16 +30,20 @@ import java.util.stream.Collectors;
  * <p>
  * Note: Assumes that rulesets supply a concept normalization -> OHDSI concept id mapping in ohdsi_mappings.txt
  */
-public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
+@ComponentDescription(
+        name = "MedTagger to OHDSI CDM Format Transform",
+        desc = "Converts MedTagger Output into one complaint with the OHDSI OMOP CDM note_nlp table",
+        requires = {"org.ohnlp.medtagger.backbone.MedTaggerBackboneTransform"}
+)
+public class MedTaggerOutputToOHDSIFormatTransform extends OneToOneTransform {
     private static ThreadLocal<SimpleDateFormat> sdf = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ssXXX"));
+
+    @ConfigurationProperty(
+            path = "ruleset",
+            desc = "The ruleset folder containing a ohdsi_mappings.txt to map output concepts to OHDSI Athena concept codes, or NONE if output already in Athena concept code format"
+    )
     private String resources;
     private Schema schema;
-
-
-    @Override
-    public void initFromConfig(JsonNode config) throws ComponentInitializationException {
-        this.resources = config.get("ruleset").asText();
-    }
 
     @Override
     public Schema calculateOutputSchema(Schema schema) {
@@ -144,4 +151,8 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
     }
 
 
+    @Override
+    public void init() throws ComponentInitializationException {
+
+    }
 }

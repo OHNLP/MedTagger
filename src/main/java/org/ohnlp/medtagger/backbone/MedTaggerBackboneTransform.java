@@ -1,8 +1,5 @@
 package org.ohnlp.medtagger.backbone;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.beam.sdk.schemas.Schema;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
@@ -24,7 +21,9 @@ import org.apache.uima.resource.ResourceManager;
 import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.InvalidXMLException;
 import org.joda.time.Instant;
-import org.ohnlp.backbone.api.Transform;
+import org.ohnlp.backbone.api.annotations.ComponentDescription;
+import org.ohnlp.backbone.api.annotations.ConfigurationProperty;
+import org.ohnlp.backbone.api.components.OneToOneTransform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
 import org.ohnlp.medtagger.context.RuleContextAnnotator;
 import org.ohnlp.medtagger.type.ConceptMention;
@@ -48,25 +47,54 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 /**
  * An implementation of a MedTagger pipeline as an OHNLP Backbone Transform component
  */
-public class MedTaggerBackboneTransform extends Transform {
+@ComponentDescription(
+        name = "MedTagger NLP",
+        desc = "Executes a MedTagger IE or Dictionary-Based Ruleset as a Backbone Component"
+)
+public class MedTaggerBackboneTransform extends OneToOneTransform {
 
+    @ConfigurationProperty(
+            path = "input",
+            desc = "Column to use as input"
+    )
     private String inputField;
+
+    @ConfigurationProperty(
+            path = "mode",
+            desc = "Whether to use IE or dictionary-based rulesets, or both, or retrieve from web. Defaults to STANDALONE_IE_ONLY",
+            required = false
+    )
+    private RunMode mode = RunMode.STANDALONE_IE_ONLY;
+    @ConfigurationProperty(
+            path = "ruleset",
+            desc = "The ruleset definition as located within the resources folder, or the dictionary name, " +
+                    "or resources folder|dictionary name if both, or URL if in web mode"
+    )
     private String resources;
-    private RunMode mode;
-    private String noteIdField;
+    @ConfigurationProperty(
+            path = "identifier_col",
+            desc = "The column to use as a note identifier. Defaults to note_id",
+            required = false
+    )
+    private String noteIdField = "note_id";
     private Schema outputSchema;
     private boolean outputJSON;
 
     @Override
-    public void initFromConfig(JsonNode config) throws ComponentInitializationException {
-        try {
-            this.inputField = config.get("input").asText();
-            this.mode = config.has("mode") ? RunMode.valueOf(config.get("mode").textValue().toUpperCase(Locale.ROOT)) : RunMode.STANDALONE;
-            this.resources = config.get("ruleset").asText();
-            this.noteIdField = config.has("identifier_col") ? config.get("identifier_col").asText() : "note_id";
-        } catch (Throwable t) {
-            throw new ComponentInitializationException(t);
-        }
+    public void init() throws ComponentInitializationException {
+    }
+
+    @Override
+    public boolean hasRequiredColumns() {
+        return true;
+    }
+
+    @Override
+    public Schema getRequiredColumns() {
+        return Schema.of(
+                Schema.Field.of(this.noteIdField, Schema.FieldType.STRING),
+                Schema.Field.of(this.inputField, Schema.FieldType.STRING)
+        );
     }
 
     @Override
