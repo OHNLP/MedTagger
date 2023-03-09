@@ -85,12 +85,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     }
 
     @Override
-    public boolean hasRequiredColumns() {
-        return true;
-    }
-
-    @Override
-    public Schema getRequiredColumns() {
+    public Schema getRequiredColumns(String inputTag) {
         return Schema.of(
                 Schema.Field.of(this.noteIdField, Schema.FieldType.STRING),
                 Schema.Field.of(this.inputField, Schema.FieldType.STRING)

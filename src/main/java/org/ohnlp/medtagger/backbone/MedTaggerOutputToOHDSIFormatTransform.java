@@ -62,6 +62,21 @@ public class MedTaggerOutputToOHDSIFormatTransform extends OneToOneTransform {
     }
 
     @Override
+    public Schema getRequiredColumns(String inputTag) {
+        return Schema.of(
+                Schema.Field.of("nlp_run_dtm", Schema.FieldType.DATETIME),
+                Schema.Field.of("certainty", Schema.FieldType.STRING),
+                Schema.Field.of("experiencer", Schema.FieldType.STRING),
+                Schema.Field.of("status", Schema.FieldType.STRING),
+                Schema.Field.of("offset", Schema.FieldType.INT32),
+                Schema.Field.of("concept_code", Schema.FieldType.STRING),
+                Schema.Field.of("section_id", Schema.FieldType.INT32),
+                Schema.Field.of("matched_text", Schema.FieldType.STRING),
+                Schema.Field.of("matched_sentence", Schema.FieldType.STRING)
+        );
+    }
+
+    @Override
     public PCollection<Row> expand(PCollection<Row> input) {
         return input.apply(ParDo.of(new DoFn<Row, Row>() {
             private transient ObjectMapper om;
