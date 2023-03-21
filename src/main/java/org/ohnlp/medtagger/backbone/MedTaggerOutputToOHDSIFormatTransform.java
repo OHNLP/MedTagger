@@ -128,7 +128,7 @@ public class MedTaggerOutputToOHDSIFormatTransform extends OneToOneTransform {
                             } else {
                                 return Stream.of(input.getValue(f.getName()));
                             }
-                        }))
+                        }).collect(Collectors.toList()))
                         .addValue(input.getInt32("section_id"))
                         .addValue(input.getString("matched_text"))
                         .addValue(input.getString("matched_sentence"));
