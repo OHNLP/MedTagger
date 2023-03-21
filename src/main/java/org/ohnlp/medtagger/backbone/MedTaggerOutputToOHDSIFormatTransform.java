@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Transforms MedTagger output as produced from {@link MedTaggerBackboneTransform} to an OHDSI-compliant format suitable
@@ -41,6 +42,7 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
     @Override
     public Schema calculateOutputSchema(Schema schema) {
         List<Schema.Field> fields = new LinkedList<>(schema.getFields());
+        fields.removeIf(f -> f.getName().toLowerCase(Locale.ROOT).equals("offset"));
         fields.add(Schema.Field.of("section_concept_id", Schema.FieldType.INT32));
         fields.add(Schema.Field.of("lexical_variant", Schema.FieldType.STRING));
         fields.add(Schema.Field.of("snippet", Schema.FieldType.STRING));
@@ -100,7 +102,13 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
 
                 // Now generate an output row
                 Row.Builder rowBuild = Row.withSchema(schema)
-                        .addValues(input.getValues())
+                        .addValues(input.getSchema().getFields().stream().flatMap(f -> {
+                            if (f.getName().equalsIgnoreCase("offset")) {
+                                return Stream.empty();
+                            } else {
+                                return input.getValue(f.getName());
+                            }
+                        }))
                         .addValue(rawValues.get("section_id").asInt())
                         .addValue(rawValues.get("matched_text").asText())
                         .addValue(rawValues.get("matched_sentence").asText());
