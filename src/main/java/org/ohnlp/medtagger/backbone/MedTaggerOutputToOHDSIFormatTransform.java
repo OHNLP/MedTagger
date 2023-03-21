@@ -126,7 +126,7 @@ public class MedTaggerOutputToOHDSIFormatTransform extends OneToOneTransform {
                             if (f.getName().equalsIgnoreCase("offset")) {
                                 return Stream.empty();
                             } else {
-                                return Stream.of(input.getValue(f.getName()));
+                                return Stream.of((Object)input.getValue(f.getName()));
                             }
                         }).collect(Collectors.toList()))
                         .addValue(input.getInt32("section_id"))
