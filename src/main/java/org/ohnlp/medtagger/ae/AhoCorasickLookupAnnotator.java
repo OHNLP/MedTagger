@@ -202,9 +202,10 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
                                 con.indexOf(":")));
                         int begin = begins.get(count);
                         int end = ends.get(count + size - 1);
-                        String code = con.substring(con.lastIndexOf(":") + 1);
-
+                        String code = con.substring(con.indexOf(":") + 2);
                         String[] multiples = code.split("\\|\\|");
+                        String concept_code = null;
+                        String sem_group = null;
                         for (int multiple = 0; multiple < multiples.length; multiple++) {
                             String[] splits = multiples[multiple].split("\\|");
 
@@ -222,10 +223,18 @@ public class AhoCorasickLookupAnnotator extends JCasAnnotator_ImplBase {
                                     .equals(" "))))
                                 continue;
 
+                            concept_code = splits.length > 1 ? splits[1] : concept_code;
+                            sem_group = splits.length > 2 ? splits[2] : "";
+
+                            if (concept_code == null) {
+                                System.out.println("Null concept code: " + con);
+                                continue;
+                            }
+
                             ConceptMention neAnnot = new ConceptMention(
                                     jCas, begin, end);
-                            neAnnot.setNormTarget(splits[1]);
-                            neAnnot.setSemGroup(splits[2]);
+                            neAnnot.setNormTarget(concept_code);
+                            neAnnot.setSemGroup(sem_group);
                             neAnnot.setDetectionMethod("DictionaryLookup");
                             neAnnot.setSentence(sent);
                             neAnnot.addToIndexes();

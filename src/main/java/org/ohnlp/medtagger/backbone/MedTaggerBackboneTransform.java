@@ -1,8 +1,5 @@
 package org.ohnlp.medtagger.backbone;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.beam.sdk.schemas.Schema;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
@@ -23,9 +20,11 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceManager;
 import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.InvalidXMLException;
-import org.ohnlp.backbone.api.Transform;
+import org.joda.time.Instant;
+import org.ohnlp.backbone.api.annotations.ComponentDescription;
+import org.ohnlp.backbone.api.annotations.ConfigurationProperty;
+import org.ohnlp.backbone.api.components.OneToOneTransform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
-import org.ohnlp.medtagger.ae.AhoCorasickLookupAnnotator;
 import org.ohnlp.medtagger.context.RuleContextAnnotator;
 import org.ohnlp.medtagger.type.ConceptMention;
 import org.ohnlp.typesystem.type.textspan.Segment;
@@ -40,7 +39,6 @@ import java.nio.file.FileSystems;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
@@ -49,30 +47,66 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 /**
  * An implementation of a MedTagger pipeline as an OHNLP Backbone Transform component
  */
-public class MedTaggerBackboneTransform extends Transform {
+@ComponentDescription(
+        name = "MedTagger NLP",
+        desc = "Executes a MedTagger IE or Dictionary-Based Ruleset as a Backbone Component"
+)
+public class MedTaggerBackboneTransform extends OneToOneTransform {
 
+    @ConfigurationProperty(
+            path = "input",
+            desc = "Column to use as input"
+    )
     private String inputField;
+
+    @ConfigurationProperty(
+            path = "mode",
+            desc = "Whether to use IE or dictionary-based rulesets, or both, or retrieve from web. Defaults to STANDALONE_IE_ONLY",
+            required = false
+    )
+    private RunMode mode = RunMode.STANDALONE_IE_ONLY;
+    @ConfigurationProperty(
+            path = "ruleset",
+            desc = "The ruleset definition as located within the resources folder, or the dictionary name, " +
+                    "or resources folder|dictionary name if both, or URL if in web mode"
+    )
     private String resources;
-    private RunMode mode;
-    private String noteIdField;
+    @ConfigurationProperty(
+            path = "identifier_col",
+            desc = "The column to use as a note identifier. Defaults to note_id",
+            required = false
+    )
+    private String noteIdField = "note_id";
     private Schema outputSchema;
+    private boolean outputJSON;
 
     @Override
-    public void initFromConfig(JsonNode config) throws ComponentInitializationException {
-        try {
-            this.inputField = config.get("input").asText();
-            this.mode = config.has("mode") ? RunMode.valueOf(config.get("mode").textValue().toUpperCase(Locale.ROOT)) : RunMode.STANDALONE;
-            this.resources = config.get("ruleset").asText();
-            this.noteIdField = config.has("identifier_col") ? config.get("identifier_col").asText() : "note_id";
-        } catch (Throwable t) {
-            throw new ComponentInitializationException(t);
-        }
+    public void init() throws ComponentInitializationException {
+    }
+
+    @Override
+    public Schema getRequiredColumns(String inputTag) {
+        return Schema.of(
+                Schema.Field.of(this.noteIdField, Schema.FieldType.STRING),
+                Schema.Field.of(this.inputField, Schema.FieldType.STRING)
+        );
     }
 
     @Override
     public Schema calculateOutputSchema(Schema schema) {
         List<Schema.Field> fields = new ArrayList<>(schema.getFields());
-        fields.add(Schema.Field.of("nlp_output_json", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("matched_text", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("concept_code", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("matched_sentence", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("section_id", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("nlp_run_dtm", Schema.FieldType.DATETIME));
+        fields.add(Schema.Field.of("certainty", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("experiencer", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("status", Schema.FieldType.STRING));
+        fields.add(Schema.Field.of("offset", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("sent_offset", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("semgroups", Schema.FieldType.STRING).withNullable(true));
+        fields.add(Schema.Field.of("sentid", Schema.FieldType.STRING).withNullable(true));
         this.outputSchema = Schema.of(fields.toArray(new Schema.Field[0]));
         return this.outputSchema;
     }
@@ -214,6 +248,7 @@ public class MedTaggerBackboneTransform extends Transform {
                 if (t != null) {
                     throw new RuntimeException(t);
                 }
+                nlpExecutor.shutdownNow();
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 System.out.println("Skipping document " + id + " due to NLP run taking longer than 30 seconds");
                 future.cancel(true);
@@ -234,8 +269,8 @@ public class MedTaggerBackboneTransform extends Transform {
                 int runs = 0;
                 for (ConceptMention cm : JCasUtil.select(jcas, ConceptMention.class)) {
                     runs++;
-                    JsonNode json = toJSON(cm, sentenceIdx, sectionIdx);
-                    Row out = Row.withSchema(outputSchema).addValues(input.getValues()).addValue(json.toString()).build();
+                    List<Object> values = toRowObjects(cm, sentenceIdx, sectionIdx);
+                    Row out = Row.withSchema(outputSchema).addValues(input.getValues()).addValues(values).build();
                     output.output(out);
                 }
                 System.out.println("Found " + runs + " NLP Artifacts in Document " + id);
@@ -247,40 +282,39 @@ public class MedTaggerBackboneTransform extends Transform {
         private static ThreadLocal<SimpleDateFormat> sdf = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ssXXX"));
 
         /*
-         * Utility method that converts a concept mention to a JSON
+         * Utility method that converts a concept mention to a list of Objects conforming with the Schema
          */
-        private static JsonNode toJSON(
+
+        private static List<Object> toRowObjects(
                 ConceptMention cm,
                 Map<ConceptMention, Collection<Sentence>> coveringSentenceMap,
                 Map<ConceptMention, Collection<Segment>> coveringSectionsMap
         ) {
-            ObjectNode ret = JsonNodeFactory.instance.objectNode();
-            ret.put("matched_text", cm.getCoveredText());
-            ret.put("concept_code", cm.getNormTarget());
-            ret.put(
-                    "matched_sentence",
-                    coveringSentenceMap.get(cm)
-                            .stream()
-                            .map(Annotation::getCoveredText)
-                            .collect(Collectors.joining(" ")));
-            ret.put(
-                    "section_id",
-                    coveringSectionsMap.get(cm)
-                            .stream()
-                            .map(s -> {
-                                try {
-                                    return Integer.parseInt(s.getId());
-                                } catch (Throwable t) {
-                                    return -1;
-                                }
-                            })
-                            .findFirst().orElse(0));
-            ret.put("nlp_run_dtm", sdf.get().format(new Date()));
-            ret.put("certainty", cm.getCertainty());
-            ret.put("experiencer", cm.getExperiencer());
-            ret.put("status", cm.getStatus());
-            ret.put("offset", cm.getBegin());
-            ret.put("semgroups", cm.getSemGroup());
+            List<Object> ret = new ArrayList<>();
+            ret.add(cm.getCoveredText());
+            ret.add(cm.getNormTarget());
+            ret.add(coveringSentenceMap.get(cm)
+                    .stream()
+                    .map(Annotation::getCoveredText)
+                    .collect(Collectors.joining(" ")));
+            ret.add(coveringSectionsMap.get(cm)
+                    .stream()
+                    .map(s -> {
+                        try {
+                            return Integer.parseInt(s.getId());
+                        } catch (Throwable t) {
+                            return -1;
+                        }
+                    })
+                    .findFirst().orElse(0));
+            ret.add(new Instant(new Date()));
+            ret.add(cm.getCertainty());
+            ret.add(cm.getExperiencer());
+            ret.add(cm.getStatus());
+            ret.add(cm.getBegin());
+            ret.add(cm.getSentence().getBegin());
+            ret.add(cm.getSemGroup());
+            ret.add(cm.getSentence().getId());
             return ret;
         }
     }

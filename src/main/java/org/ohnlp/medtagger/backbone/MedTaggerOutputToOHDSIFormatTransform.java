@@ -10,6 +10,9 @@ import org.apache.beam.sdk.values.PCollection;
 import org.apache.beam.sdk.values.Row;
 import org.joda.time.Instant;
 import org.ohnlp.backbone.api.Transform;
+import org.ohnlp.backbone.api.annotations.ComponentDescription;
+import org.ohnlp.backbone.api.annotations.ConfigurationProperty;
+import org.ohnlp.backbone.api.components.OneToOneTransform;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
 
 import java.io.BufferedReader;
@@ -20,7 +23,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Transforms MedTagger output as produced from {@link MedTaggerBackboneTransform} to an OHDSI-compliant format suitable
@@ -28,21 +30,24 @@ import java.util.stream.Stream;
  * <p>
  * Note: Assumes that rulesets supply a concept normalization -> OHDSI concept id mapping in ohdsi_mappings.txt
  */
-public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
+@ComponentDescription(
+        name = "MedTagger to OHDSI CDM Format Transform",
+        desc = "Converts MedTagger Output into one complaint with the OHDSI OMOP CDM note_nlp table",
+        requires = {"org.ohnlp.medtagger.backbone.MedTaggerBackboneTransform"}
+)
+public class MedTaggerOutputToOHDSIFormatTransform extends OneToOneTransform {
     private static ThreadLocal<SimpleDateFormat> sdf = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ssXXX"));
+
+    @ConfigurationProperty(
+            path = "ruleset",
+            desc = "The ruleset folder containing a ohdsi_mappings.txt to map output concepts to OHDSI Athena concept codes, or NONE if output already in Athena concept code format"
+    )
     private String resources;
     private Schema schema;
-
-
-    @Override
-    public void initFromConfig(JsonNode config) throws ComponentInitializationException {
-        this.resources = config.get("ruleset").asText();
-    }
 
     @Override
     public Schema calculateOutputSchema(Schema schema) {
         List<Schema.Field> fields = new LinkedList<>(schema.getFields());
-        fields.removeIf(f -> f.getName().toLowerCase(Locale.ROOT).equals("offset"));
         fields.add(Schema.Field.of("section_concept_id", Schema.FieldType.INT32));
         fields.add(Schema.Field.of("lexical_variant", Schema.FieldType.STRING));
         fields.add(Schema.Field.of("snippet", Schema.FieldType.STRING));
@@ -54,6 +59,21 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
         fields.add(Schema.Field.of("nlp_system", Schema.FieldType.STRING));
         this.schema = Schema.of(fields.toArray(new Schema.Field[0]));
         return this.schema;
+    }
+
+    @Override
+    public Schema getRequiredColumns(String inputTag) {
+        return Schema.of(
+                Schema.Field.of("nlp_run_dtm", Schema.FieldType.DATETIME),
+                Schema.Field.of("certainty", Schema.FieldType.STRING),
+                Schema.Field.of("experiencer", Schema.FieldType.STRING),
+                Schema.Field.of("status", Schema.FieldType.STRING),
+                Schema.Field.of("offset", Schema.FieldType.INT32),
+                Schema.Field.of("concept_code", Schema.FieldType.STRING),
+                Schema.Field.of("section_id", Schema.FieldType.INT32),
+                Schema.Field.of("matched_text", Schema.FieldType.STRING),
+                Schema.Field.of("matched_sentence", Schema.FieldType.STRING)
+        );
     }
 
     @Override
@@ -97,33 +117,25 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
 
             @ProcessElement
             public void processElement(@Element Row input, OutputReceiver<Row> output) throws JsonProcessingException, ParseException {
-                // First transform row schemas
-                JsonNode rawValues = om.readTree(input.getString("nlp_output_json"));
 
-                // Now generate an output row
+                // Generate an output row
                 Row.Builder rowBuild = Row.withSchema(schema)
-                        .addValues(input.getSchema().getFields().stream().flatMap(f -> {
-                            if (f.getName().equalsIgnoreCase("offset")) {
-                                return Stream.empty();
-                            } else {
-                                return input.getValue(f.getName());
-                            }
-                        }))
-                        .addValue(rawValues.get("section_id").asInt())
-                        .addValue(rawValues.get("matched_text").asText())
-                        .addValue(rawValues.get("matched_sentence").asText());
+                        .addValues(input.getValues())
+                        .addValue(input.getInt32("section_id"))
+                        .addValue(input.getString("matched_text"))
+                        .addValue(input.getString("matched_sentence"));
                 switch (resources.toUpperCase(Locale.ROOT)) {
                     case "NONE": {
                         try {
-                            rowBuild = rowBuild.addValue(Integer.valueOf(rawValues.get("concept_code").asText("0")));
+                            rowBuild = rowBuild.addValue(Integer.valueOf(Optional.ofNullable(input.getString("concept_code")).orElse("0")));
                         } catch (NumberFormatException e) {
                             throw new IllegalArgumentException("OHDSI requires integer concept codes, value "
-                                    + rawValues.get("concept_code").asText() + " was instead provided with mapping ruleset 'NONE'");
+                                    + input.getString("concept_code") + " was instead provided with mapping ruleset 'NONE'");
                         }
                         break;
                     }
                     case "UMLS": {
-                        String conceptCode = rawValues.get("concept_code").asText();
+                        String conceptCode = input.getString("concept_code");
                         // Only take first portion as CUI, remainder is top freq lexeme in current dict format.
                         String cui = conceptCode.contains(":") ? conceptCode.split(":")[0].toUpperCase(Locale.ROOT)
                                 : conceptCode.toUpperCase(Locale.ROOT);
@@ -131,20 +143,20 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
                         rowBuild = rowBuild.addValue(ohdsicid);
                     }
                     default: {
-                        rowBuild = rowBuild.addValue(ohdsiConceptMap.getOrDefault(rawValues.get("concept_code").asText(), 0));
+                        rowBuild = rowBuild.addValue(ohdsiConceptMap.getOrDefault(input.getString("concept_code"), 0));
                     }
                 }
                 Row out = rowBuild
                         .addValue(0)
-                        .addValue(new Instant(sdf.get().parse(rawValues.get("nlp_run_dtm").asText()).getTime()))
+                        .addValue(input.getDateTime("nlp_run_dtm"))
                         .addValue(
                                 String.format("certainty=%1$s,experiencer=%2$s,status=%3$s",
-                                        rawValues.get("certainty").asText(),
-                                        rawValues.get("experiencer").asText(),
-                                        rawValues.get("status").asText()
+                                        input.getString("certainty"),
+                                        input.getString("experiencer"),
+                                        input.getString("status")
                                 )
                         )
-                        .addValue(rawValues.get("offset").asInt())
+                        .addValue(input.getInt32("offset"))
                         .addValue(version.trim())
                         .build();
                 output.output(out);
@@ -154,4 +166,8 @@ public class MedTaggerOutputToOHDSIFormatTransform extends Transform {
     }
 
 
+    @Override
+    public void init() throws ComponentInitializationException {
+
+    }
 }
