@@ -55,7 +55,8 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
 
     @ConfigurationProperty(
             path = "input",
-            desc = "Column to use as input"
+            desc = "Column to use as input",
+            isInputColumn = true
     )
     private String inputField;
 
@@ -74,7 +75,8 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     @ConfigurationProperty(
             path = "identifier_col",
             desc = "The column to use as a note identifier. Defaults to note_id",
-            required = false
+            required = false,
+            isInputColumn = true
     )
     private String noteIdField = "note_id";
     private Schema outputSchema;

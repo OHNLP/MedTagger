@@ -1,0 +1,9 @@
+{
+  "name": "MedTagger Information Extraction NLP Pipeline",
+  "desc": "Runs Symbolic Information Extraction and Context Detection using the MedTagger NLP Engine",
+  "repo": "https://github.com/OHNLP/MedTagger",
+  "packages": [
+    "org.ohnlp.medtagger.backbone"
+  ],
+  "version": "${version}"
+}
