@@ -54,7 +54,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 )
 public class MedTaggerBackboneTransform extends OneToOneTransform {
 
-    private static final InputColumn NOTE_ID_COLUMN_DEF = new InputColumn();
+    private static final InputColumn NOTE_ID_COLUMN_DEF;
 
     @ConfigurationProperty(
             path = "input",
@@ -84,6 +84,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     private boolean outputJSON;
 
     static {
+        NOTE_ID_COLUMN_DEF = new InputColumn();
         NOTE_ID_COLUMN_DEF.setSourceColumnName("note_id");
         NOTE_ID_COLUMN_DEF.setSourceTag("*");
     }
