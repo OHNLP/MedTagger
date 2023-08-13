@@ -24,6 +24,7 @@ import org.joda.time.Instant;
 import org.ohnlp.backbone.api.annotations.ComponentDescription;
 import org.ohnlp.backbone.api.annotations.ConfigurationProperty;
 import org.ohnlp.backbone.api.components.OneToOneTransform;
+import org.ohnlp.backbone.api.config.InputColumn;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
 import org.ohnlp.medtagger.context.RuleContextAnnotator;
 import org.ohnlp.medtagger.type.ConceptMention;
@@ -53,12 +54,13 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 )
 public class MedTaggerBackboneTransform extends OneToOneTransform {
 
+    private static final InputColumn NOTE_ID_COLUMN_DEF = new InputColumn();
+
     @ConfigurationProperty(
             path = "input",
-            desc = "Column to use as input",
-            isInputColumn = true
+            desc = "Column to use as input"
     )
-    private String inputField;
+    private InputColumn inputField;
 
     @ConfigurationProperty(
             path = "mode",
@@ -75,12 +77,16 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     @ConfigurationProperty(
             path = "identifier_col",
             desc = "The column to use as a note identifier. Defaults to note_id",
-            required = false,
-            isInputColumn = true
+            required = false
     )
-    private String noteIdField = "note_id";
+    private InputColumn noteIdField = NOTE_ID_COLUMN_DEF;
     private Schema outputSchema;
     private boolean outputJSON;
+
+    static {
+        NOTE_ID_COLUMN_DEF.setSourceColumnName("note_id");
+        NOTE_ID_COLUMN_DEF.setSourceTag("*");
+    }
 
     @Override
     public void init() throws ComponentInitializationException {
@@ -89,8 +95,8 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     @Override
     public Schema getRequiredColumns(String inputTag) {
         return Schema.of(
-                Schema.Field.of(this.noteIdField, Schema.FieldType.STRING),
-                Schema.Field.of(this.inputField, Schema.FieldType.STRING)
+                Schema.Field.of(this.noteIdField.getSourceColumnName(), Schema.FieldType.STRING),
+                Schema.Field.of(this.inputField.getSourceColumnName(), Schema.FieldType.STRING)
         );
     }
 
@@ -116,7 +122,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     @Override
     public PCollection<Row> expand(PCollection<Row> input) {
         return input.apply("MedTagger Concept Extraction",
-                ParDo.of(new MedTaggerPipelineFunction(this.inputField, this.resources, this.mode, this.noteIdField, this.outputSchema)));
+                ParDo.of(new MedTaggerPipelineFunction(this.inputField.getSourceColumnName(), this.resources, this.mode, this.noteIdField.getSourceColumnName(), this.outputSchema)));
     }
 
     private static class MedTaggerPipelineFunction extends DoFn<Row, Row> {
