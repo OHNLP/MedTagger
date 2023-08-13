@@ -168,6 +168,13 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                     }
                     case STANDALONE_DICT_ONLY: {
                         URI localUI = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+                        Map<String, String> env = new HashMap<>();
+                        env.put("create", "true");
+                        try {
+                            // Ensure it is created, ignore if not
+                            FileSystem fs = FileSystems.newFileSystem(localUI, env);
+                        } catch (FileSystemAlreadyExistsException ignored) {
+                        }
                         ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE", "dict_file", localUI.toString()));
                         break;
                     }
