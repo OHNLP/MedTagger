@@ -77,7 +77,13 @@ public class RuleContextAnnotator extends JCasAnnotator_ImplBase {
             if (ruleset == null) {
                 is = ConTexTSettings.class.getResourceAsStream("/medtaggerresources/context/contextRule.txt");
             } else {
-                is = Files.newInputStream(Paths.get(URI.create(ruleset)).resolve("context").resolve("contextRule.txt"));
+                if (ruleset.endsWith("contextRule.txt")) {
+                    // is an explicit file mention
+                    is = Files.newInputStream(Paths.get(URI.create(ruleset)));
+                } else {
+                    // is a ruleset dir
+                    is = Files.newInputStream(Paths.get(URI.create(ruleset)).resolve("context").resolve("contextRule.txt"));
+                }
             }
             contextSettings = new LinkedList<>();
             for (int priority : RULE_PRIORITIES) {

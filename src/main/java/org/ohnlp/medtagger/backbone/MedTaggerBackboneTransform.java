@@ -12,6 +12,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
+import org.apache.uima.fit.factory.ExternalResourceFactory;
 import org.apache.uima.fit.internal.ResourceManagerFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -34,9 +35,7 @@ import org.ohnlp.typesystem.type.textspan.Sentence;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystemAlreadyExistsException;
-import java.nio.file.FileSystems;
+import java.nio.file.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
@@ -80,6 +79,20 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
             required = false
     )
     private InputColumn noteIdField = NOTE_ID_COLUMN_DEF;
+    @ConfigurationProperty(
+            path = "ruleset_context",
+            desc = "Path to context definition file (contextRule.txt) relative to the resources folder, or \"DEFAULT\" " +
+                    "to use Ruleset-Supplied if present, otherwise Global Defaults. " ,
+            required = false
+    )
+    private String customContext = "DEFAULT";
+    @ConfigurationProperty(
+            path = "sectag",
+            desc = "Path to section tagging definition relative to the resources folder. " +
+                    "Can also use \"DEFAULT\" for SecTag defaults" ,
+            required = false
+    )
+    private String secTag = "DEFAULT";
     private Schema outputSchema;
     private boolean outputJSON;
 
@@ -123,7 +136,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     @Override
     public PCollection<Row> expand(PCollection<Row> input) {
         return input.apply("MedTagger Concept Extraction",
-                ParDo.of(new MedTaggerPipelineFunction(this.inputField.getSourceColumnName(), this.resources, this.mode, this.noteIdField.getSourceColumnName(), this.outputSchema)));
+                ParDo.of(new MedTaggerPipelineFunction(this.inputField.getSourceColumnName(), this.resources, this.mode, this.noteIdField.getSourceColumnName(), this.customContext, this.secTag, this.outputSchema)));
     }
 
     private static class MedTaggerPipelineFunction extends DoFn<Row, Row> {
@@ -134,17 +147,21 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
         private final RunMode mode;
         private final String noteIdField;
         private final Schema outputSchema;
+        private final String context;
+        private final String secTag;
 
         // UIMA components are not serializable, and thus must be initialized per-executor via the @Setup annotation
         private transient AnalysisEngine aae;
         private transient ResourceManager resMgr;
         private transient CAS cas;
 
-        public MedTaggerPipelineFunction(String textField, String resourceFolder, RunMode mode, String noteIdField, Schema outputSchema) {
+        public MedTaggerPipelineFunction(String textField, String resourceFolder, RunMode mode, String noteIdField, String context, String secTag, Schema outputSchema) {
             this.textField = textField;
             this.resourceFolder = resourceFolder;
             this.mode = mode;
             this.noteIdField = noteIdField;
+            this.context = context;
+            this.secTag = secTag;
             this.outputSchema = outputSchema;
         }
 
@@ -154,7 +171,22 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                 INIT_MUTEX_LOCK.lock();
                 AggregateBuilder ae = new AggregateBuilder();
                 // Tokenization, Sentence Splitting, Section Detection, etc.
-                ae.add(createEngineDescription("desc.backbone.aes.PreConceptExtractionAE"));
+                if (this.secTag.equalsIgnoreCase("DEFAULT")) {
+                    ae.add(createEngineDescription("desc.backbone.aes.PreConceptExtractionAE"));
+                } else {
+                    URI secTag = MedTaggerPipelineFunction.class.getResource("/resources/" + this.secTag).toURI();
+                    Map<String, String> env = new HashMap<>();
+                    env.put("create", "true");
+                    try {
+                        // Ensure it is created, ignore if not
+                        FileSystem fs = FileSystems.newFileSystem(secTag, env);
+                    } catch (FileSystemAlreadyExistsException ignored) {
+                    }
+                    ae.add(createEngineDescription("desc.backbone.aes.PreConceptExtractionAE",
+                            "section_map",
+                            secTag.toString()
+                            ));
+                }
                 // Add the appropriate NER/normalization component depending on run mode
                 URI uri = null;
                 switch (mode) {
@@ -213,10 +245,42 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                 }
 
                 // Add Context handling
-                if (uri != null && mode != RunMode.STANDALONE_DICT_ONLY) {
-                    ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", uri.toString()));
+                if (uri != null && !mode.equals(RunMode.STANDALONE_DICT_ONLY) && !mode.equals(RunMode.GENERAL_CLINICAL)) {
+                    if (this.context.equalsIgnoreCase("DEFAULT")) {
+                        if (Files.exists(Paths.get(uri).resolve("context").resolve("contextRule.txt"))) {
+                            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", uri.toString()));
+                        } else {
+                            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+                        }
+                    } else {
+                        URI contextURI = MedTaggerPipelineFunction.class.getResource("/resources/" + context).toURI();
+                        Map<String, String> env = new HashMap<>();
+                        env.put("create", "true");
+                        try {
+                            // Ensure it is created, ignore if not
+                            FileSystem fs = FileSystems.newFileSystem(contextURI, env);
+                        } catch (FileSystemAlreadyExistsException ignored) {
+                        }
+                        ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", contextURI.toString()));
+                    }
                 } else {
-                    ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+                    if (mode.equals(RunMode.STANDALONE_DICT_ONLY) || mode.equals(RunMode.STANDALONE_DICT_ONLY)) {
+                        if (this.context.equalsIgnoreCase("DEFAULT")) {
+                            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+                        } else {
+                            URI contextURI = MedTaggerPipelineFunction.class.getResource("/resources/" + context).toURI();
+                            Map<String, String> env = new HashMap<>();
+                            env.put("create", "true");
+                            try {
+                                // Ensure it is created, ignore if not
+                                FileSystem fs = FileSystems.newFileSystem(contextURI, env);
+                            } catch (FileSystemAlreadyExistsException ignored) {
+                            }
+                            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", contextURI.toString()));
+                        }
+                    } else {
+                        ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+                    }
                 }
 
                 this.resMgr = ResourceManagerFactory.newResourceManager();

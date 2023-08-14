@@ -24,14 +24,12 @@
 
 package org.ohnlp.medtagger.sectag;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.io.*;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
@@ -43,6 +41,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 //import org.ohnlp.medtagger.type.ConceptMention;
 
+import org.ohnlp.medtagger.context.impl.ConTexTSettings;
 import org.ohnlp.typesystem.type.textspan.Segment;
 import org.ohnlp.typesystem.type.textspan.Sentence;
 import org.ohnlp.medtagger.lvg.LvgLookup;
@@ -171,10 +170,34 @@ public class RulebasedSectionAnnotator extends JCasAnnotator_ImplBase {
 		sectionMap = new HashMap<String, String>();
 		try {
 			lvg  = new LvgLookup(aContext);
-			
-			BufferedReader br = new BufferedReader(
-					new InputStreamReader(aContext.getResourceAsStream("section_map"),
-							"UTF-8"));
+
+			String ruleset = (String) aContext.getConfigParameterValue("sectag_ruleset");
+			InputStream is  = null;
+			try {
+				if (ruleset == null) {
+					is = ConTexTSettings.class.getResourceAsStream("/medtaggerresources/sectag/SecTag.section.txt");
+				} else {
+					if (ruleset.endsWith(".txt")) {
+						// is an explicit file mention
+						is = Files.newInputStream(Paths.get(URI.create(ruleset)));
+					} else {
+						// is a ruleset dir
+						is = Files.newInputStream(Paths.get(URI.create(ruleset)).resolve("Sections.txt"));
+					}
+				}
+			} catch (IOException e) {
+				throw new ResourceInitializationException(e);
+			}
+			BufferedReader br;
+			if (is == null) {
+				// Just in case/legacy
+				br = new BufferedReader(
+						new InputStreamReader(aContext.getResourceAsStream("section_map"),
+								"UTF-8"));
+			} else {
+				br = new BufferedReader(
+						new InputStreamReader(is, StandardCharsets.UTF_8));
+			}
 
 			while(br.ready()){
 				String str = br.readLine();
