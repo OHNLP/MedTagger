@@ -381,7 +381,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                     .stream()
                     .map(s -> {
                         try {
-                            return Integer.parseInt(s.getId());
+                            return Integer.parseInt(s.getId().split(":")[0]);
                         } catch (Throwable t) {
                             return -1;
                         }
