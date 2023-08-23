@@ -12,6 +12,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
+import org.apache.uima.fit.factory.ExternalResourceFactory;
 import org.apache.uima.fit.internal.ResourceManagerFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -24,6 +25,7 @@ import org.joda.time.Instant;
 import org.ohnlp.backbone.api.annotations.ComponentDescription;
 import org.ohnlp.backbone.api.annotations.ConfigurationProperty;
 import org.ohnlp.backbone.api.components.OneToOneTransform;
+import org.ohnlp.backbone.api.config.InputColumn;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
 import org.ohnlp.medtagger.context.RuleContextAnnotator;
 import org.ohnlp.medtagger.type.ConceptMention;
@@ -33,9 +35,7 @@ import org.ohnlp.typesystem.type.textspan.Sentence;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystemAlreadyExistsException;
-import java.nio.file.FileSystems;
+import java.nio.file.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
@@ -53,12 +53,13 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 )
 public class MedTaggerBackboneTransform extends OneToOneTransform {
 
+    private static final InputColumn NOTE_ID_COLUMN_DEF;
+
     @ConfigurationProperty(
             path = "input",
-            desc = "Column to use as input",
-            isInputColumn = true
+            desc = "Column to use as input"
     )
-    private String inputField;
+    private InputColumn inputField;
 
     @ConfigurationProperty(
             path = "mode",
@@ -75,12 +76,31 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     @ConfigurationProperty(
             path = "identifier_col",
             desc = "The column to use as a note identifier. Defaults to note_id",
-            required = false,
-            isInputColumn = true
+            required = false
     )
-    private String noteIdField = "note_id";
+    private InputColumn noteIdField = NOTE_ID_COLUMN_DEF;
+    @ConfigurationProperty(
+            path = "ruleset_context",
+            desc = "Path to context definition file (contextRule.txt) relative to the resources folder, or \"DEFAULT\" " +
+                    "to use Ruleset-Supplied if present, otherwise Global Defaults. " ,
+            required = false
+    )
+    private String customContext = "DEFAULT";
+    @ConfigurationProperty(
+            path = "sectag",
+            desc = "Path to section tagging definition relative to the resources folder. " +
+                    "Can also use \"DEFAULT\" for SecTag defaults" ,
+            required = false
+    )
+    private String secTag = "DEFAULT";
     private Schema outputSchema;
     private boolean outputJSON;
+
+    static {
+        NOTE_ID_COLUMN_DEF = new InputColumn();
+        NOTE_ID_COLUMN_DEF.setSourceColumnName("note_id");
+        NOTE_ID_COLUMN_DEF.setSourceTag("*");
+    }
 
     @Override
     public void init() throws ComponentInitializationException {
@@ -89,8 +109,8 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     @Override
     public Schema getRequiredColumns(String inputTag) {
         return Schema.of(
-                Schema.Field.of(this.noteIdField, Schema.FieldType.STRING),
-                Schema.Field.of(this.inputField, Schema.FieldType.STRING)
+                Schema.Field.of(this.noteIdField.getSourceColumnName(), Schema.FieldType.STRING),
+                Schema.Field.of(this.inputField.getSourceColumnName(), Schema.FieldType.STRING)
         );
     }
 
@@ -116,7 +136,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     @Override
     public PCollection<Row> expand(PCollection<Row> input) {
         return input.apply("MedTagger Concept Extraction",
-                ParDo.of(new MedTaggerPipelineFunction(this.inputField, this.resources, this.mode, this.noteIdField, this.outputSchema)));
+                ParDo.of(new MedTaggerPipelineFunction(this.inputField.getSourceColumnName(), this.resources, this.mode, this.noteIdField.getSourceColumnName(), this.customContext, this.secTag, this.outputSchema)));
     }
 
     private static class MedTaggerPipelineFunction extends DoFn<Row, Row> {
@@ -127,17 +147,21 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
         private final RunMode mode;
         private final String noteIdField;
         private final Schema outputSchema;
+        private final String context;
+        private final String secTag;
 
         // UIMA components are not serializable, and thus must be initialized per-executor via the @Setup annotation
         private transient AnalysisEngine aae;
         private transient ResourceManager resMgr;
         private transient CAS cas;
 
-        public MedTaggerPipelineFunction(String textField, String resourceFolder, RunMode mode, String noteIdField, Schema outputSchema) {
+        public MedTaggerPipelineFunction(String textField, String resourceFolder, RunMode mode, String noteIdField, String context, String secTag, Schema outputSchema) {
             this.textField = textField;
             this.resourceFolder = resourceFolder;
             this.mode = mode;
             this.noteIdField = noteIdField;
+            this.context = context;
+            this.secTag = secTag;
             this.outputSchema = outputSchema;
         }
 
@@ -147,7 +171,22 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                 INIT_MUTEX_LOCK.lock();
                 AggregateBuilder ae = new AggregateBuilder();
                 // Tokenization, Sentence Splitting, Section Detection, etc.
-                ae.add(createEngineDescription("desc.backbone.aes.PreConceptExtractionAE"));
+                if (this.secTag.equalsIgnoreCase("DEFAULT")) {
+                    ae.add(createEngineDescription("desc.backbone.aes.PreConceptExtractionAE"));
+                } else {
+                    URI secTag = MedTaggerPipelineFunction.class.getResource("/resources/" + this.secTag).toURI();
+                    Map<String, String> env = new HashMap<>();
+                    env.put("create", "true");
+                    try {
+                        // Ensure it is created, ignore if not
+                        FileSystem fs = FileSystems.newFileSystem(secTag, env);
+                    } catch (FileSystemAlreadyExistsException ignored) {
+                    }
+                    ae.add(createEngineDescription("desc.backbone.aes.PreConceptExtractionAE",
+                            "section_map",
+                            secTag.toString()
+                            ));
+                }
                 // Add the appropriate NER/normalization component depending on run mode
                 URI uri = null;
                 switch (mode) {
@@ -168,6 +207,13 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                     }
                     case STANDALONE_DICT_ONLY: {
                         URI localUI = MedTaggerPipelineFunction.class.getResource("/resources/" + this.resourceFolder).toURI();
+                        Map<String, String> env = new HashMap<>();
+                        env.put("create", "true");
+                        try {
+                            // Ensure it is created, ignore if not
+                            FileSystem fs = FileSystems.newFileSystem(localUI, env);
+                        } catch (FileSystemAlreadyExistsException ignored) {
+                        }
                         ae.add(createEngineDescription("desc.backbone.aes.MedTaggerDictionaryLookupAE", "dict_file", localUI.toString()));
                         break;
                     }
@@ -199,10 +245,42 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                 }
 
                 // Add Context handling
-                if (uri != null && mode != RunMode.STANDALONE_DICT_ONLY) {
-                    ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", uri.toString()));
+                if (uri != null && !mode.equals(RunMode.STANDALONE_DICT_ONLY) && !mode.equals(RunMode.GENERAL_CLINICAL)) {
+                    if (this.context.equalsIgnoreCase("DEFAULT")) {
+                        if (Files.exists(Paths.get(uri).resolve("context").resolve("contextRule.txt"))) {
+                            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", uri.toString()));
+                        } else {
+                            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+                        }
+                    } else {
+                        URI contextURI = MedTaggerPipelineFunction.class.getResource("/resources/" + context).toURI();
+                        Map<String, String> env = new HashMap<>();
+                        env.put("create", "true");
+                        try {
+                            // Ensure it is created, ignore if not
+                            FileSystem fs = FileSystems.newFileSystem(contextURI, env);
+                        } catch (FileSystemAlreadyExistsException ignored) {
+                        }
+                        ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", contextURI.toString()));
+                    }
                 } else {
-                    ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+                    if (mode.equals(RunMode.STANDALONE_DICT_ONLY) || mode.equals(RunMode.STANDALONE_DICT_ONLY)) {
+                        if (this.context.equalsIgnoreCase("DEFAULT")) {
+                            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+                        } else {
+                            URI contextURI = MedTaggerPipelineFunction.class.getResource("/resources/" + context).toURI();
+                            Map<String, String> env = new HashMap<>();
+                            env.put("create", "true");
+                            try {
+                                // Ensure it is created, ignore if not
+                                FileSystem fs = FileSystems.newFileSystem(contextURI, env);
+                            } catch (FileSystemAlreadyExistsException ignored) {
+                            }
+                            ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", contextURI.toString()));
+                        }
+                    } else {
+                        ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
+                    }
                 }
 
                 this.resMgr = ResourceManagerFactory.newResourceManager();
@@ -303,7 +381,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                     .stream()
                     .map(s -> {
                         try {
-                            return Integer.parseInt(s.getId());
+                            return Integer.parseInt(s.getId().split(":")[0]);
                         } catch (Throwable t) {
                             return -1;
                         }

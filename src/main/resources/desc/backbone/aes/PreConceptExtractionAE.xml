@@ -104,7 +104,7 @@
                 <name>section_map</name>
                 <description/>
                 <fileResourceSpecifier>
-                    <fileUrl>file:medtaggerieresources/pad/Radiology_Section</fileUrl>
+                    <fileUrl>file:medtaggerresources/sectag/SecTag.section.txt</fileUrl>
                 </fileResourceSpecifier>
             </externalResource>
 
