@@ -26,10 +26,14 @@
         Apache ANT Buildfile for creating MedTagger releases, to be run after maven
     </description>
     <property name="dist" location="dist"/>
+    <property name="dist_backbone" location="dist"/>
 
     <target name="init">
         <!-- Create the build directory structure used by compile -->
         <mkdir dir="${dist}"/>
+        <mkdir dir="${dist_backbone}"/>
+        <mkdir dir="${dist_backbone}/modules"/>
+        <mkdir dir="${dist_backbone}/resources"/>
     </target>
 
 
@@ -39,5 +43,9 @@
         <copy file="target/medtagger.jar" tofile="${dist}/MedTagger.jar"/>
         <zip basedir="${dist}" destfile="MedTagger.zip"/>
         <delete dir="${dist}"/>
+        <copy file="target/medtagger.jar" tofile="${dist_backbone}/modules/MedTagger.jar"/>
+        <copydir src="src/main/resources/medtaggerieresources" dest="${dist_backbone}/resources"/>
+        <zip basedir="${dist_backbone}" destfile="MedTaggerForBackbone.zip"/>
+        <delete dir="${dist_backbone}"/>
     </target>
 </project>
