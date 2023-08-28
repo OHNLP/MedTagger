@@ -6,7 +6,7 @@
 
     <groupId>org.ohnlp.medtagger</groupId>
     <artifactId>medtagger</artifactId>
-    <version>1.0.65</version>
+    <version>1.0.66</version>
     <description>The MedTagger biomedical information extraction pipeline</description>
 
 
@@ -143,7 +143,7 @@
     <properties>
         <uimaj.version>2.10.0</uimaj.version>
         <uimafit.version>2.5.0</uimafit.version>
-        <backbone.version>3.0.7</backbone.version>
+        <backbone.version>3.0.10</backbone.version>
     </properties>
 
     <dependencies>
