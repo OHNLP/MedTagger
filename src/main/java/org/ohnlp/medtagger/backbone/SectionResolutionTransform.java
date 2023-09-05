@@ -36,7 +36,7 @@ public class SectionResolutionTransform extends OneToOneTransform {
             path="threshold",
             desc="Minimum number of distinct documents containing header candidate for inclusion"
     )
-    public int threshold;
+    public Integer threshold;
 
     @Override
     public Schema calculateOutputSchema(Schema schema) {
