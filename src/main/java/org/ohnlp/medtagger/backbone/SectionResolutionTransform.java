@@ -50,10 +50,11 @@ public class SectionResolutionTransform extends OneToOneTransform {
         Schema returnSchema = Schema.of(
                 Schema.Field.of("header", Schema.FieldType.STRING),
                 Schema.Field.of("count", Schema.FieldType.INT32));
+        String col = noteText.getSourceColumnName();
         return input.apply("Extract Header Candidates", ParDo.of(new DoFn<Row, KV<String, Integer>>() {
             @ProcessElement
             public void process(ProcessContext pc) {
-                String raw = pc.element().getString(noteText.getSourceColumnName());
+                String raw = pc.element().getString(col);
                 if (raw == null) {
                     return;
                 }
