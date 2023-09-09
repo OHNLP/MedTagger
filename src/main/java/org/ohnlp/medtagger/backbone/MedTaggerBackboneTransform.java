@@ -264,7 +264,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                         ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class, "context_ruleset", contextURI.toString()));
                     }
                 } else {
-                    if (mode.equals(RunMode.STANDALONE_DICT_ONLY) || mode.equals(RunMode.STANDALONE_DICT_ONLY)) {
+                    if (mode.equals(RunMode.STANDALONE_DICT_ONLY) || mode.equals(RunMode.GENERAL_CLINICAL)) {
                         if (this.context.equalsIgnoreCase("DEFAULT")) {
                             ae.add(AnalysisEngineFactory.createEngineDescription(RuleContextAnnotator.class));
                         } else {

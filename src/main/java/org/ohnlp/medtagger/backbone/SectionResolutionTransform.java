@@ -62,6 +62,9 @@ public class SectionResolutionTransform extends OneToOneTransform {
                 // First, split by newlines
                 Arrays.stream(raw.split("\\r?\\n")).forEach(s -> {
                     // Now split by colon and add first part to candidates
+                    if (s.trim().length() == 0) {
+                        return;
+                    }
                     String cand = s.split(":")[0].trim();
                     if (cand.length() > 0) {
                         // And output
