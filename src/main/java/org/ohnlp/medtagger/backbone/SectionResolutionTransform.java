@@ -65,10 +65,13 @@ public class SectionResolutionTransform extends OneToOneTransform {
                     if (s.trim().length() == 0) {
                         return;
                     }
-                    String cand = s.split(":")[0].trim();
-                    if (cand.length() > 0) {
-                        // And output
-                        pc.output(KV.of(cand, 1));
+                    String[] parsed = s.split(":");
+                    if (parsed.length > 0) {
+                        String cand = parsed[0].trim();
+                        if (cand.length() > 0) {
+                            // And output
+                            pc.output(KV.of(cand, 1));
+                        }
                     }
                 });
 
