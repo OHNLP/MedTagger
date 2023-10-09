@@ -140,7 +140,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
     }
 
     private static class MedTaggerPipelineFunction extends DoFn<Row, Row> {
-        private transient static final ReentrantLock INIT_MUTEX_LOCK = new ReentrantLock();
+//        private transient static final ReentrantLock INIT_MUTEX_LOCK = new ReentrantLock();
 
         private final String resourceFolder;
         private final String textField;
@@ -168,7 +168,6 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
         @Setup
         public void init() throws IOException, InvalidXMLException, URISyntaxException, ResourceInitializationException {
             try {
-                INIT_MUTEX_LOCK.lock();
                 AggregateBuilder ae = new AggregateBuilder();
                 // Tokenization, Sentence Splitting, Section Detection, etc.
                 if (this.secTag.equalsIgnoreCase("DEFAULT")) {
@@ -288,7 +287,6 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
                 this.cas = CasCreationUtils.createCas(Collections.singletonList(aae.getMetaData()),
                         null, resMgr);
             } finally {
-                INIT_MUTEX_LOCK.unlock();
             }
 
         }
