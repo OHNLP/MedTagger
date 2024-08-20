@@ -8,7 +8,7 @@ import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.metadata.ConfigurationParameterSettings;
 import org.ohnlp.medtagger.cr.FileSystemReader;
-import org.ohnlp.medtagger.ie.cc.IETabDelimitedWriter;
+import org.ohnlp.medtagger.ie.cc.MedTatorWriter;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,8 +43,8 @@ public class Main {
 
         AnalysisEngineDescription writer =
                 AnalysisEngineFactory.createEngineDescription(
-                        IETabDelimitedWriter.class,
-                        IETabDelimitedWriter.PARAM_OUTPUTDIR, outputDirPath.toString());
+                        MedTatorWriter.class,
+                       MedTatorWriter.PARAM_OUTPUTDIR, outputDirPath.toString());
 
         SimpleCliPipeline.runPipeline(reader, descMedTaggerTAE, writer);
 
