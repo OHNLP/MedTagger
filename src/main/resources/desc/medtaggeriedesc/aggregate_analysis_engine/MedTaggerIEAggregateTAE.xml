@@ -140,13 +140,6 @@
                 </fileResourceSpecifier>
             </externalResource>
 
-            <externalResource>
-                <name>section_map</name>
-                <description/>
-                <fileResourceSpecifier>
-                    <fileUrl>file:medtaggerieresources/pad/Radiology_Section</fileUrl>
-                </fileResourceSpecifier>
-            </externalResource>
 
             <externalResource>
                 <name>openclass</name>
