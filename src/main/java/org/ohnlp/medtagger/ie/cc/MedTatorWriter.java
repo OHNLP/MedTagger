@@ -139,6 +139,7 @@ public class MedTatorWriter extends JCasAnnotator_ImplBase {
 			tagElement.setAttribute("status", cm.getStatus());
 			tagElement.setAttribute("experiencer", cm.getExperiencer());
 			tagElement.setAttribute("semG", cm.getSemGroup());
+			tagElement.setAttribute("section", cm.getSentence().getSegment().getId() );
 			tagElement.setAttribute("normTarget", cm.getNormTarget());
 			tagsElement.appendChild(tagElement);
 			tagid++;
