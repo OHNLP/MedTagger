@@ -27,7 +27,7 @@ public class Main {
         Path ruleDirPath = Paths.get(args[2]);
         Path sectionPath = null;
         if (args.length > 3) {
-            sectionPath = Paths.get(args[4]);
+            sectionPath = Paths.get(args[3]);
         }
 
         CollectionReaderDescription reader =
