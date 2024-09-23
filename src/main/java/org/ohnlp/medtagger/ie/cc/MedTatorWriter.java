@@ -155,7 +155,7 @@ public class MedTatorWriter extends JCasAnnotator_ImplBase {
         }
     }
 
-	private static void writeXml(org.w3c.dom.Document doc,
+	public static void writeXml(org.w3c.dom.Document doc,
 								 OutputStream output)
 			throws TransformerException {
 
