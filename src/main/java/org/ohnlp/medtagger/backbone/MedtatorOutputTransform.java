@@ -46,6 +46,12 @@ public class MedtatorOutputTransform extends LoadFromMany {
     private String workingDir;
 
     @ConfigurationProperty(
+            path = "taskName",
+            desc = "Task Name (the Schema Definition Name for MedTator)"
+    )
+    private String taskName;
+
+    @ConfigurationProperty(
             path = "note_id_raw_col",
             desc = "The input column to use containing the note identifier from the raw text collection"
     )
@@ -159,7 +165,7 @@ public class MedtatorOutputTransform extends LoadFromMany {
                         Iterable<Row> anns = input.getRow("lhs").getIterable("annotations");
                         String rawText = input.getRow("rhs").getString(note_text_raw_col.getSourceColumnName());
                         Document doc = db.newDocument();
-                        org.w3c.dom.Element rootElement = doc.createElement("MedTagger");
+                        org.w3c.dom.Element rootElement = doc.createElement(taskName);
                         doc.appendChild(rootElement);
                         Node cdata = doc.createCDATASection(rawText);
                         org.w3c.dom.Element textElement = doc.createElement("TEXT");
