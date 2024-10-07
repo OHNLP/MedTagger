@@ -125,13 +125,18 @@ public class RulebasedSectionAnnotator extends JCasAnnotator_ImplBase {
 	private Segment SecIndicator(Sentence sen, JCas jcas) {
 		String str=sen.getCoveredText();
 		Segment cSeg=null;
-		int pos=str.indexOf(":");
-		String secStr;
-		if(pos < 0 || pos >=100)
-			secStr=str;
-		else {
-			secStr=str.substring(0,pos);
-		}
+		int pos = -1;
+		int colonPos=str.indexOf(":");
+		int senPos = pos= str.indexOf("\n");
+		if (colonPos == -1) {
+			pos = senPos;
+		} else if (senPos == -1) {
+			pos = colonPos;
+		} else {
+			pos = Math.min(senPos, colonPos);
+		};
+		if(pos < 0 || pos >=100) return null;
+		String secStr = str.substring(0, pos);
 		if(sectionMap.containsKey(lvg.getNorm(secStr))){
 			sen.removeFromIndexes(jcas);
 		    String cSegment=sectionMap.get(lvg.getNorm(secStr));
