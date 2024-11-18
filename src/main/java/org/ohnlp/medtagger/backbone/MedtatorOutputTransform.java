@@ -14,6 +14,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.UnknownKeyFor;
 import org.ohnlp.backbone.api.annotations.ComponentDescription;
 import org.ohnlp.backbone.api.annotations.ConfigurationProperty;
+import org.ohnlp.backbone.api.annotations.InputColumnProperty;
 import org.ohnlp.backbone.api.components.LoadFromMany;
 import org.ohnlp.backbone.api.config.InputColumn;
 import org.ohnlp.backbone.api.exceptions.ComponentInitializationException;
@@ -55,11 +56,17 @@ public class MedtatorOutputTransform extends LoadFromMany {
             path = "note_id_raw_col",
             desc = "The input column to use containing the note identifier from the raw text collection"
     )
+    @InputColumnProperty(
+            sourceTags = {"Raw Text"}
+    )
     private InputColumn note_identifer_raw_col;
 
     @ConfigurationProperty(
             path = "note_text_raw_col",
             desc = "The input column to use containing the note text from the annotated entities"
+    )
+    @InputColumnProperty(
+            sourceTags = {"Entity Annotations"}
     )
     private InputColumn note_text_raw_col;
 
@@ -67,17 +74,26 @@ public class MedtatorOutputTransform extends LoadFromMany {
             path = "note_id_ann_col",
             desc = "The input column to use containing the note identifier from the annotated entities"
     )
+    @InputColumnProperty(
+            sourceTags = {"Entity Annotations"}
+    )
     private InputColumn note_identifer_ann_col;
 
     @ConfigurationProperty(
             path = "note_ann_start_col",
             desc = "The input column to use containing the annotation start index from the annotated entities"
     )
+    @InputColumnProperty(
+            sourceTags = {"Entity Annotations"}
+    )
     private InputColumn ann_start_ann_col;
 
     @ConfigurationProperty(
             path = "note_ann_end_col",
             desc = "The input column to use containing the annotation end index from the annotated entities"
+    )
+    @InputColumnProperty(
+            sourceTags = {"Entity Annotations"}
     )
     private InputColumn ann_end_ann_col;
 
@@ -86,6 +102,9 @@ public class MedtatorOutputTransform extends LoadFromMany {
             desc = "The input column to use containing the annotation type from the annotated entities. " +
                     "Defaults to \"ConceptMention\" if left blank",
             required = false
+    )
+    @InputColumnProperty(
+            sourceTags = {"Entity Annotations"}
     )
     private InputColumn ann_type_col;
 
