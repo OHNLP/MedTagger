@@ -126,6 +126,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
         fields.add(Schema.Field.of("experiencer", Schema.FieldType.STRING));
         fields.add(Schema.Field.of("status", Schema.FieldType.STRING));
         fields.add(Schema.Field.of("offset", Schema.FieldType.INT32));
+        fields.add(Schema.Field.of("offset_end", Schema.FieldType.INT32));
         fields.add(Schema.Field.of("sent_offset", Schema.FieldType.INT32));
         fields.add(Schema.Field.of("semgroups", Schema.FieldType.STRING).withNullable(true));
         fields.add(Schema.Field.of("sentid", Schema.FieldType.STRING).withNullable(true));
@@ -390,6 +391,7 @@ public class MedTaggerBackboneTransform extends OneToOneTransform {
             ret.add(cm.getExperiencer());
             ret.add(cm.getStatus());
             ret.add(cm.getBegin());
+            ret.add(cm.getEnd());
             ret.add(cm.getSentence().getBegin());
             ret.add(cm.getSemGroup());
             ret.add(cm.getSentence().getId());
