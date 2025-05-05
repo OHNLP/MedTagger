@@ -193,8 +193,18 @@ public class MedtatorOutputTransform extends LoadFromMany {
                         org.w3c.dom.Element tagsElement = doc.createElement("TAGS");
                         int tagId = 0;
                         for (Row ann : anns) {
-                            int start = Integer.valueOf(ann.getValue(ann_start_ann_col.getSourceColumnName()));
-                            int end = Integer.valueOf(ann.getValue(ann_end_ann_col.getSourceColumnName()));
+                            Integer start = null;
+                            Integer end = null;
+                            if (ann.getSchema().getField(ann_start_ann_col.getSourceColumnName()).getType().typesEqual(Schema.FieldType.STRING)) {
+                                start = Integer.valueOf(ann.getString(ann_start_ann_col.getSourceColumnName()));
+                            } else {
+                                start = ann.getInt32(ann_start_ann_col.getSourceColumnName());
+                            }
+                            if (ann.getSchema().getField(ann_end_ann_col.getSourceColumnName()).getType().typesEqual(Schema.FieldType.STRING)) {
+                                end = Integer.valueOf(ann.getString(ann_end_ann_col.getSourceColumnName()));
+                            } else {
+                                end = ann.getInt32(ann_end_ann_col.getSourceColumnName());
+                            }
                             String type = "CM";
                             if (ann_type_col != null) {
                                 type = ann.getString(ann_type_col.getSourceColumnName());
